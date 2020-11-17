@@ -1,19 +1,22 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authenticate_user!, only: [:index, :show]
   def index
-    @events = Event.all
+    @events = policy_scope(Event)
   end
 
   def show
   end
 
   def new
+    authorize current_user
     @event = Event.new
   end
 
   def create
     @organization = Organization.find(params[:organization_id])
     @event = Event.new(event_params)
+    authorize @event
     @event.organization = @organization
     @event.owner = current_user
     if @event.save
@@ -43,6 +46,7 @@ class EventsController < ApplicationController
 
   def set_event
     @event = Event.find(params[:id])
+    authorize @event
   end
 
   def event_params
