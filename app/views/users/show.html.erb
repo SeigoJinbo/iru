@@ -1,21 +1,49 @@
 <div class="page">
-	<div class="user-banner">
-		<%#= image_tag @user.photo, :alttext, class:"user-avatar" %>
-		<div class="user-banner-text">
-			<h1><%= @user.nickname %>'s Profile</h1>
-			<p><%= @user.description %></p>
-		</div>
-	</div>
-	<div class="user-sections">
-		<div class="user-dashboard">
-			<div class="upcoming-events">
+	<div class="page-box">
+
+	<%# User banner %>
+		<div class="user-banner">
+			<%#= image_tag @user.photo, :alttext, class:"user-avatar" %>
+			<div class="user-banner-text">
+				<h1><%= @user.nickname %>'s Profile</h1>
+				<p><%= @user.description %></p>
+				<div class="btn btn-primary">A button</div>
 			</div>
-			<div class="pending-events"></div>
 		</div>
-		<div class="user-profile">
-			<div class="history"></div>
-			<div class="interests"></div>
-			<%# <div class="badges"></div> %>
+
+		<div class="user-sections">
+			
+			<%# User Dashboard %>
+			<div class="user-dashboard">
+				<div class="upcoming-events">
+					<h3>Upcoming Events</h3>
+					<div class="user-box"></div>
+				</div>
+				<div class="pending-events">
+					<h3>Pending Events</h3>
+					<div class="user-box"></div>
+				</div>
+			</div>
+
+			<div class="user-profile">
+			<%# Volunteering History %>
+				<div class="history">
+					<h3>Volunteering History</h3>
+					<div class="user-box">
+						<% @user.events_as_owner.each do |event| %>
+							<li>
+							<h6><%= event.title %> with <%= event.organization.name %></h6>
+							<% if event.description %>
+								<p><%= event.description.truncate(50, separator: ' ') %></p>
+							<% end %>
+							</li>
+						<% end %>
+					</div>
+				</div>
+				<%# Interests etc. %>
+				<%# <div class="interests"></div> %>
+				<%# <div class="badges"></div> %>
+			</div>
 		</div>
 	</div>
 </div>

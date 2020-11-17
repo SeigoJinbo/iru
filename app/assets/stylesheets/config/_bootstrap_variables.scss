@@ -10,9 +10,9 @@ $body-bg:                 $light-gray;
 $font-size-base: 1rem;
 
 // Colors
-$body-color: $gray;
-$primary:    $blue;
-$success:    $green;
+$body-color: $gunmetal;
+$primary:    $grapefruit;
+$success:    $maize;
 $info:       $yellow;
 $danger:     $red;
 $warning:    $orange;
@@ -23,3 +23,10 @@ $border-radius-lg: 2px;
 $border-radius-sm: 2px;
 
 // Override other variables below!
+
+//Link colours
+$link-color: $primary !default;
+$link-decoration: underline !default;
+$link-shade-percentage: 20% !default;
+$link-hover-color: shift-color($link-color, $link-shade-percentage) !default;
+$link-hover-decoration: null !default;
