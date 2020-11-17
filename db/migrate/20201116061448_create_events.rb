@@ -9,8 +9,8 @@ class CreateEvents < ActiveRecord::Migration[6.0]
       t.integer :positions
       t.integer :dates, array: true
       t.boolean :ongoing
-      t.date :start_time
-      t.date :end_time
+      t.datetime :start_time
+      t.datetime :end_time
 
       t.timestamps
     end
