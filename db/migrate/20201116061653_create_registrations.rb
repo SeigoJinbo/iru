@@ -3,8 +3,8 @@ class CreateRegistrations < ActiveRecord::Migration[6.0]
     create_table :registrations do |t|
       t.references :user, null: false, foreign_key: true
       t.references :event, null: false, foreign_key: true
-      t.date :start_time
-      t.date :end_time
+      t.datetime :start_time
+      t.datetime :end_time
       t.string :status
 
       t.timestamps
