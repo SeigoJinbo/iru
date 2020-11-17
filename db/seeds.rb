@@ -1,4 +1,5 @@
 require 'faker'
+require "open-uri"
 
 ADDRESSES = [
   "2-9-8 Setagaya-ku, Tokyo",
@@ -22,10 +23,7 @@ ADDRESSES = [
   "Kamimeguro Elementary School, Meguro City, Tokyo 153-0051",
   "2-8-17, Meguro City, Tokyo 153-0052"]
 
-
 ROLES = ['leader', 'member', 'member', 'member']
-
-
 
 Enrollment.destroy_all
 Event.destroy_all
@@ -33,6 +31,7 @@ Membership.destroy_all
 User.destroy_all
 Organization.destroy_all
 
+puts "creating users"
 
 seigo = User.create!(
   first_name: "Seigo",
@@ -65,15 +64,21 @@ password: "123456")
     email: Faker::Internet.email,
     password: "123456",
     description: Faker::Hipster.paragraph,
-    gender: Faker::Gender.binary_type,
-
+    gender: Faker::Gender.binary_type
   )
 end
 
+puts "attaching users photos"
+User.all.each do |user|
+  user_avatar = URI.open('https://i.imgur.com/PxgXkTX.png')
+  user_banner = URI.open('https://i.imgur.com/nwaLuxT.jpg')
+  user.photos.attach(io: user_avatar, filename: 'user_avatar.png', content_type: 'image/png')
+  user.photos.attach(io: user_banner, filename: 'user_banner.jpg', content_type: 'image/jpg')
+end
+
+
 puts "creating organization"
 we_love_trees = Organization.create!(name: "We love trees")
-
-
 
 ADDRESSES.each do |address|
   Organization.create!(
@@ -96,6 +101,15 @@ Organization.all.each do |organization|
     role: 'leader'
   )
 end
+
+puts "attaching org photos"
+Organization.all.each do |org|
+  org_logo = URI.open('https://i.imgur.com/LrBo4bK.png')
+  org_banner = URI.open('https://i.imgur.com/qqvHVOz.jpg')
+  org.photos.attach(io: org_logo, filename: 'org_logo.png', content_type: 'image/png')
+  org.photos.attach(io: org_banner, filename: 'org_banner.jpg', content_type: 'image/jpg')
+end
+
 
 CATEGORIES = ["volunteer", "donate", "fundraise"]
 DAYS = ["Monday", "Tuesday", "Wednesday", "Thrusday", "Friday", "Saturday", "Sunday"]
@@ -141,8 +155,16 @@ Organization.all.each do |organization|
   )
 end
 
-60.times do
 
+
+puts "attaching event photo"
+Event.all.each do |event|
+  event_photo = URI.open('https://i.imgur.com/SaCQrAE.jpg')
+  Event.first.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+end
+
+
+60.times do
   Enrollment.create!(
     status: 'pending',
     user: User.all.sample,
