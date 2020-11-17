@@ -25,7 +25,6 @@ class UsersController < ApplicationController
   end
 
 	def set_user
-    @user = Vinyl.find(params[:id])
-    authorize current_user
+    @user = User.find(params[:id])
   end
 end

@@ -1,1 +1,21 @@
-s
+<div class="page">
+	<div class="user-banner">
+		<%#= image_tag @user.photo, :alttext, class:"user-avatar" %>
+		<div class="user-banner-text">
+			<h1><%= @user.nickname %>'s Profile</h1>
+			<p><%= @user.description %></p>
+		</div>
+	</div>
+	<div class="user-sections">
+		<div class="user-dashboard">
+			<div class="upcoming-events">
+			</div>
+			<div class="pending-events"></div>
+		</div>
+		<div class="user-profile">
+			<div class="history"></div>
+			<div class="interests"></div>
+			<%# <div class="badges"></div> %>
+		</div>
+	</div>
+</div>
