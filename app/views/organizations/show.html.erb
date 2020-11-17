@@ -33,12 +33,13 @@
           <li>End Time: <%= event.end_time.strftime("%d of %B, %Y") %></li>
         <% end %>
       </ul>
-      <div class="enroll-form">
+      <div class="enroll-section">
         <% if user_signed_in? %>
           <% if event.owner == current_user %>
-            <%= link_to "Edit", event_path(event), class: 'btn btn-primary long-btn' %>
-            <%= link_to "Delete", edit_event_path(event), class: 'btn btn-primary long-btn', method: :delete, data: { confirm: "Delete #{@event.title}?" } %>
+            <%= link_to "Edit", event_path(event), class: 'btn btn-primary' %>
+            <%= link_to "Delete", edit_event_path(event), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete #{@event.title}?" } %>
           <% else %>
+            <button id="enroll-btn" type="button" class="btn btn-primary">Enroll!</button>
             <div id="enroll-form">
               <p>Select the volunteering time:</p>
               <%= simple_form_for [event, @enrollment] do |f| %>
