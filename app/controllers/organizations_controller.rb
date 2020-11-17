@@ -5,8 +5,21 @@ class OrganizationsController < ApplicationController
     @organizations = policy_scope(Organization)
   end
 
-  def show
+  def map
+    authorize current_user
+    @organizations = Organization.all
+    @markers = {}
+    @markers[:user] = { lat: current_user.latitude, lng: current_user.longitude }
+    @markers[:organization] = @organizations.geocoded.map do |organization|
+      {
+        lat: organization.latitude,
+        lng: organization.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { organization: organization })
+      }
+    end
+  end
 
+  def show
   end
 
   def new
@@ -49,5 +62,4 @@ class OrganizationsController < ApplicationController
   def organization_params
     params.require(:organization).permit(:name, :email, :address, :latitude, :longitude)
   end
-
 end

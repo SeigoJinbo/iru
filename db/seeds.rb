@@ -1,7 +1,30 @@
 require 'faker'
 
-ADDRESSES = ["9-8, Ikejiri 2-chome, Setagaya-ku, Tokyo", "2 Chome-7 Koyamadai, 品川区 Tokyo 142-0061", "1 Chome-31-1 Nishigotanda, Shinagawa City, Tokyo 141-0031", "4 Chome-1-1 Shimomeguro, Meguro City, Tokyo 153-0064", "3 Chome-6-6 Nishigotanda, Shinagawa City, Tokyo 141-0031", "2-4-36 Meguro, Meguro City, Tokyo 153-0063", "6 Chome-6-19 Nishigotanda, Shinagawa City, Tokyo 141-0031", "2 Chome-11-2 Higashigotanda, Shinagawa City, Tokyo 141-0022", "3 Chome-9-1 Koyama, Shinagawa City, Tokyo 142-0062", "4 Chome-6-6 Meguro, Meguro City, Tokyo 153-0063", "2 Chome-14-1 Kamimeguro, Meguro City, Tokyo 153-0051", "17-5 Sarugakucho, Shibuya City, Tokyo 150-0033", "1 Chome-3-20 Kamimeguro, Meguro City, Tokyo 153-0051", "4 Chome-33-12 Kamimeguro, Meguro City, Tokyo 153-0051", "3 Chome-6-8 Higashiyama, Meguro City, Tokyo 153-0043", "5 Chome-21-9 Shirokanedai, Minato City, Tokyo 108-0071", "3 Chome-39-5 Ebisu, Shibuya City, Tokyo 150-0013", "4 Chome-3-1 Hiroo, Shibuya City, Tokyo 150-0012", "5 Chome-6-22 Kamimeguro, Meguro City, Tokyo 153-0051", "2 Chome-8-17 Yutenji, Meguro City, Tokyo 153-0052"]
+ADDRESSES = [
+  "2-9-8 Setagaya-ku, Tokyo",
+  "Koyamadai, Shinagawa Tokyo 142-0061",
+  "1 Chome-31-1 Nishigotanda, Shinagawa City, Tokyo 141-0031",
+  "1-31-1, Shinagawa City, Tokyo 141-0031",
+  "3-6-6, Shinagawa City, Tokyo 141-0031",
+  "2-4-36 Meguro, Meguro City, Tokyo 153-0063",
+  "6-6-19, Shinagawa City, Tokyo 141-0031",
+  "2-11-2 Shinagawa City, Tokyo 141-0022",
+  "3-9-1, Shinagawa City, Tokyo 142-0062",
+  "4-6-6 Meguro, Meguro City, Tokyo 153-0063",
+  "2-14-1 Kamimeguro, Meguro City, Tokyo 153-0051",
+  "Sarugakucho, Shibuya City, Tokyo 150-0033",
+  "1-3-20, Meguro City, Tokyo 153-0051",
+  "Kamimeguro, Tokyo 153-0051",
+  "3-6-8, Meguro City, Tokyo 153-0043",
+  "5-21-9, Minato City, Tokyo 108-0071",
+  "3-39-5 Ebisu, Shibuya City, Tokyo 150-0013",
+  "4-3-1 Hiroo, Shibuya City, Tokyo 150-0012",
+  "Kamimeguro Elementary School, Meguro City, Tokyo 153-0051",
+  "2-8-17, Meguro City, Tokyo 153-0052"]
+
+
 ROLES = ['leader', 'member', 'member', 'member']
+
 
 
 Enrollment.destroy_all

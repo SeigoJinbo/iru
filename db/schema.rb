@@ -71,18 +71,6 @@ ActiveRecord::Schema.define(version: 2020_11_17_022050) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "registrations", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "event_id", null: false
-    t.datetime "start_time"
-    t.datetime "end_time"
-    t.string "status"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["event_id"], name: "index_registrations_on_event_id"
-    t.index ["user_id"], name: "index_registrations_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -110,6 +98,4 @@ ActiveRecord::Schema.define(version: 2020_11_17_022050) do
   add_foreign_key "events", "users"
   add_foreign_key "memberships", "organizations"
   add_foreign_key "memberships", "users"
-  add_foreign_key "registrations", "events"
-  add_foreign_key "registrations", "users"
 end
