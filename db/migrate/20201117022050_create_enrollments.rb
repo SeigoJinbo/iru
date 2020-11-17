@@ -1,10 +1,10 @@
-class CreateRegistrations < ActiveRecord::Migration[6.0]
+class CreateEnrollments < ActiveRecord::Migration[6.0]
   def change
-    create_table :registrations do |t|
+    create_table :enrollments do |t|
       t.references :user, null: false, foreign_key: true
       t.references :event, null: false, foreign_key: true
-      t.datetime :start_time
-      t.datetime :end_time
+      t.date :start_time
+      t.date :end_time
       t.string :status
 
       t.timestamps
