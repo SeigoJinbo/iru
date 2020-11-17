@@ -41,6 +41,4 @@ class EnrollmentsController < ApplicationController
   def set_enrollment
     @enrollment = Enrollment.find(params[:id])
   end
-
-
 end
