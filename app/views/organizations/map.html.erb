@@ -1,0 +1,7 @@
+map.html.erb
+<div id="map"
+     style="width: 100%; height: 600px;"
+     data-markers="<%= @markers[:organization].to_json %>"
+     data-user="<%= @markers[:user].to_json %>"
+     data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+</div>
