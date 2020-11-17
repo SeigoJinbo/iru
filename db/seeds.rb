@@ -4,7 +4,7 @@ ADDRESSES = ["9-8, Ikejiri 2-chome, Setagaya-ku, Tokyo", "2 Chome-7 Koyamadai, å
 ROLES = ['leader', 'member', 'member', 'member']
 
 
-Registration.destroy_all
+Enrollment.destroy_all
 Event.destroy_all
 Membership.destroy_all
 User.destroy_all
@@ -20,17 +20,17 @@ seigo = User.create!(
   password: "123456",
   description: "wutup",
   gender: "male"
-  )
+)
 
 yuping = User.create!(
   first_name: "Yuping",
   email: "yuping@iru.com",
-  password: "123456")
+password: "123456")
 
 liz = User.create!(
   first_name: "Liz",
   email: "liz@iru.com",
-  password: "123456")
+password: "123456")
 
 
 50.times do
@@ -44,7 +44,7 @@ liz = User.create!(
     description: Faker::Hipster.paragraph,
     gender: Faker::Gender.binary_type,
 
-    )
+  )
 end
 
 puts "creating organization"
@@ -54,16 +54,16 @@ we_love_trees = Organization.create!(name: "We love trees")
 
 ADDRESSES.each do |address|
   Organization.create!(
-      email: Faker::Internet.email,
-      name: Faker::Dessert.topping,
-      address: address,
-      description: Faker::Hipster.paragraph,
-      establishment_year: rand(1960..2020).to_s,
-      phone_number: Faker::PhoneNumber.cell_phone_in_e164,
-      hp_url: Faker::Internet.email,
-      twitter_url: Faker::Internet.email,
-      insta_url: Faker::Internet.email
-    )
+    email: Faker::Internet.email,
+    name: Faker::Dessert.topping,
+    address: address,
+    description: Faker::Hipster.paragraph,
+    establishment_year: rand(1960..2020).to_s,
+    phone_number: Faker::PhoneNumber.cell_phone_in_e164,
+    hp_url: Faker::Internet.email,
+    twitter_url: Faker::Internet.email,
+    insta_url: Faker::Internet.email
+  )
 end
 
 Organization.all.each do |organization|
@@ -71,7 +71,7 @@ Organization.all.each do |organization|
     organization: organization,
     user: User.all.sample,
     role: 'leader'
-    )
+  )
 end
 
 CATEGORIES = ["volunteer", "donate", "fundraise"]
@@ -103,7 +103,7 @@ Organization.all.each do |organization|
       end_time: Time.now + rand(100000..1000000),
       organization: organization,
       owner: organization.users.first
-      )
+    )
   end
   Event.create!(
     title: Faker::Movie.title,
@@ -115,22 +115,22 @@ Organization.all.each do |organization|
     end_time: Time.now + rand(100000..1000000),
     organization: organization,
     owner: organization.users.first
-    )
+  )
 end
 
 60.times do
 
-  Registration.create!(
+  Enrollment.create!(
     status: 'pending',
     user: User.all.sample,
     event: Event.all.sample,
     start_time: Time.now + rand(10000..100000),
     end_time: Time.now + rand(100000..1000000)
-    )
+  )
 end
 
-puts "creating registration"
-registration = Registration.new
-registration.user = liz
-registration.event = event
-registration.save
+puts "creating enrollment"
+enrollment = Enrollment.new
+enrollment.user = liz
+enrollment.event = event
+enrollment.save
