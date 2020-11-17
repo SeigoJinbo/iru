@@ -24,8 +24,8 @@ ActiveRecord::Schema.define(version: 2020_11_16_061730) do
     t.integer "positions"
     t.integer "dates", array: true
     t.boolean "ongoing"
-    t.date "start_time"
-    t.date "end_time"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["organization_id"], name: "index_events_on_organization_id"
@@ -62,8 +62,8 @@ ActiveRecord::Schema.define(version: 2020_11_16_061730) do
   create_table "registrations", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "event_id", null: false
-    t.date "start_time"
-    t.date "end_time"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
