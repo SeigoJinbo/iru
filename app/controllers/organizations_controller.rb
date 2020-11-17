@@ -17,7 +17,7 @@ class OrganizationsController < ApplicationController
     Membership.create(
       organization: @organization,
       user: current_user
-      )
+    )
     if @organization.save
       redirect_to organization_path(@organization)
     else
@@ -43,7 +43,7 @@ class OrganizationsController < ApplicationController
   end
 
   def organization_params
-    params.require(:organization).permit(:name, :email, :address, :latitude, :longitude)
+    params.require(:organization).permit(:name, :email, :address, :latitude, :longitude, photos: [])
   end
 
 end
