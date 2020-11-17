@@ -20,7 +20,6 @@ class EnrollmentsController < ApplicationController
   end
 
   def update
-    @enrollment = Enrollment.find(params[:id])
     authorize @enrollment
     if @enrollment.update(enrollment_params)
       redirect_to user_path
@@ -28,7 +27,6 @@ class EnrollmentsController < ApplicationController
   end
 
   def destroy
-    @enrollment = enrollment.find(params[:id])
     authorize @enrollment
     @enrollment.destroy
     redirect_to user_path
@@ -36,8 +34,12 @@ class EnrollmentsController < ApplicationController
 
   private
 
-  def set_enrollment
+  def enrollment_params
     params.require(:enrollment).permit(:user_id, :event_id, :start_time, :end_time, :status)
+  end
+
+  def set_enrollment
+    @enrollment = Enrollment.find(params[:id])
   end
 
 
