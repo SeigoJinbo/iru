@@ -2,7 +2,7 @@ class EnrollmentsController < ApplicationController
   before_action :set_enrollment, only: [:update, :destroy]
   def new
     @enrollment = Enrollment.new
-    @event = Event.find(params[event_id])
+    @event = Event.find(params[:event_id])
     authorize @enrollment
   end
 
