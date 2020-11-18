@@ -41,7 +41,8 @@ seigo = User.create!(
   email: "seigo@iru.com",
   password: "123456",
   description: "wutup",
-  gender: "male"
+  gender: "male",
+  admin: true
 )
 
 yuping = User.create!(
@@ -50,7 +51,9 @@ yuping = User.create!(
   password: "123456",
   address: "meguro tokyo Japan",
   nickname: "Yup",
-  gender: "female")
+  gender: "female",
+  admin: true
+  )
 
 liz = User.create!(
   first_name: "Liz",
@@ -58,7 +61,9 @@ liz = User.create!(
   password: "123456",
   address: "meguro tokyo Japan",
   nickname: "Beth",
-  gender: "female")
+  gender: "female",
+  admin: true
+  )
 
 
 50.times do
