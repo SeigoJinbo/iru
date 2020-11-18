@@ -13,4 +13,12 @@ class Enrollment < ApplicationRecord
       errors.add(:end_time, "must be after the start time")
     end
   end
+
+  def approve!
+    @status = 'Approved'
+  end
+
+  def decline!
+    @status = 'Declined'
+  end
 end

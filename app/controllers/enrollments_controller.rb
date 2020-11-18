@@ -23,14 +23,14 @@ class EnrollmentsController < ApplicationController
   def update
     authorize @enrollment
     if @enrollment.update(enrollment_params)
-      redirect_to user_path
+      redirect_to organization_path(@enrollment.event.organization)
     end
   end
 
   def destroy
     authorize @enrollment
     @enrollment.destroy
-    redirect_to user_path
+    redirect_to organization_path(@enrollment.event.organization)
   end
 
   private

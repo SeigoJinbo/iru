@@ -19,10 +19,14 @@
 					<h3>Upcoming Events</h3>
 					<div class="user-box"></div>
 				</div>
-				<div class="pending-events">
-					<h3>Pending Events</h3>
-					<div class="user-box"></div>
-				</div>
+
+        <% if current_user.events_as_owner.any? %>
+  				<div class="pending-events">
+  					<h3>Pending Enrollments</h3>
+  					<div class="user-box"></div>
+  				</div>
+        <% end %>
+
 			</div>
 
 			<div class="user-profile">
