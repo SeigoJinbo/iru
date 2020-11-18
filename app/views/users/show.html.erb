@@ -3,16 +3,16 @@
 
 	<%# User banner %>
 		<div class="user-banner">
-			<%#= image_tag @user.photo, :alttext, class:"user-avatar" %>
+			<%= cl_image_tag User.first.photos.second.key, height: 400, width: 800, crop: :fill, class: "user-banner-image" %>
+			<%= cl_image_tag User.first.photos.first.key, height: 100, width: 100, crop: :fill, class: "user-avatar" %>
 			<div class="user-banner-text">
-				<h1><%= @user.nickname %>'s Profile</h1>
+				<h1><span class="maize-text"><%= @user.nickname %>'s</span> Profile</h1>
 				<p><%= @user.description %></p>
 				<div class="btn btn-primary">A button</div>
 			</div>
 		</div>
 
 		<div class="user-sections">
-			
 			<%# User Dashboard %>
 			<div class="user-dashboard">
 				<div class="upcoming-events">
