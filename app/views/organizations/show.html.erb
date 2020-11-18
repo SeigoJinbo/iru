@@ -1,4 +1,5 @@
 <% day_of_the_week = ["Monday", "Tuesday", "Wednesday", "Thrusday", "Friday", "Saturday", "Sunday"] %>
+members of this org
 <div class="page">
   <div class="page-box">
     <h1><%= @organization.name %></h1>
@@ -42,6 +43,9 @@
     </div>
     <br>
     <h2>Events</h2>
+    <% if @organization.users.include?(current_user) %>
+      <%= link_to "Create a new event", new_organization_event_path(@organization), class: 'btn btn-primary' %>
+    <% end %>
     <% @organization.events.each do |event| %>
       <h4><%= event.title %></h4>
       <ul>

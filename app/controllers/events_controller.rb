@@ -11,6 +11,7 @@ class EventsController < ApplicationController
   def new
     authorize current_user
     @event = Event.new
+    @organization = Organization.find(params[:organization_id])
   end
 
   def create
@@ -20,7 +21,7 @@ class EventsController < ApplicationController
     @event.organization = @organization
     @event.owner = current_user
     if @event.save
-      redirect_to organization_path(event.organization)
+      redirect_to organization_path(@event.organization)
     else
       render :new
     end
@@ -50,6 +51,6 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:organization, :user, :category, :title, :description, :ongoing, :start_time, :end_time, :positions, :photo)
+    params.require(:event).permit(:organization, :user, :category, :title, :description, :ongoing, :start_time, :end_time, :positions, :photo, dates: [])
   end
 end

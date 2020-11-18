@@ -167,7 +167,7 @@ Organization.all.each do |organization|
       description: Faker::Hipster.paragraph,
       positions: rand(3..10),
       ongoing: true,
-      dates: [1, 2, 3, 4, 5, 6, 7].sample(rand(1..7)).sort,
+      dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
       start_time: Time.now + rand(10000..100000),
       end_time: Time.now + rand(100000..1000000),
       organization: organization,
