@@ -14,7 +14,11 @@ class OrganizationsController < ApplicationController
 
   def map
     authorize current_user
-    @organizations = Organization.all
+    if params[:query].present?
+      @organizations = Organization.all.tagged_with((params[:query]))
+    else
+      @organizations = Organization.all
+    end
     @markers = {}
     @markers[:user] = { lat: current_user.latitude, lng: current_user.longitude }
     @markers[:organization] = @organizations.geocoded.map do |organization|
