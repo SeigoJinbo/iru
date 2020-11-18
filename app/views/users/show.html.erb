@@ -32,6 +32,7 @@
 					<div class="user-box">
 						<% @user.events_as_owner.each do |event| %>
 							<li>
+							<%= cl_image_tag Event.first.photo.key, height: 300, width: 400, crop: :fill %>
 							<h6><%= event.title %> with <%= event.organization.name %></h6>
 							<% if event.description %>
 								<p><%= event.description.truncate(50, separator: ' ') %></p>
