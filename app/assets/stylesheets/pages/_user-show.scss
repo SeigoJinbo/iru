@@ -53,17 +53,32 @@
 }
 
 .user-box {
-	background-color: #eff2e3;
+	background-color: $darker-ivory;
 	border-radius: 24px;
 	padding: 24px;
 	// margin-bottom: 16px;
-	li {
-		list-style: none;
+}
+
+.history-card {
+	list-style: none;
+	background-color: $beige;
+	width: 240px;
+	height: 320px;
+	margin: 16px;
+	padding: 24px;
+	.history-card-contents {
+
+	}
+	.event-pic {
+		height: 100px;
+		width: 200px;
+		margin-bottom: 4px;
 	}
 }
-// .user-banner-container {
-// 	position: relative
-// }
+
+#history-box {
+	display: flex;
+}
 
 .user-banner-image {
 	width: 100%;

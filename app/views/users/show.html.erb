@@ -34,17 +34,22 @@
 			<%# Volunteering History %>
 				<div class="organizations">
 					<h3>My Organizations</h3>
+						<div class="user-box"></div>
 				</div>
 				<div class="history">
 					<h3>Volunteering History</h3>
-					<div class="user-box">
+					<div class="user-box" id="history-box">
 						<% @user.events_as_owner.each do |event| %>
-							<li>
-							<%= cl_image_tag Event.first.photo.key, height: 300, width: 400, crop: :fill %>
-							<h6><%= event.title %> with <%= event.organization.name %></h6>
-							<% if event.description %>
-								<p><%= event.description.truncate(50, separator: ' ') %></p>
-							<% end %>
+							<li class="history-card">
+								<div class="history-card-contents">
+									<div class="event-pic" style="background-image: url(<%= cl_image_path Event.first.photo.key, height: 300, width: 400, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+									</div>
+									<h5><%= event.title %> with <%= link_to event.organization.name, organization_path(event.organization) %></h5>
+									<% if event.description %>
+										<p><%= event.description.truncate(50, separator: ' ') %></p>
+									<% end %>
+									<p><%= event.start_time %></p>
+								</div>
 							</li>
 						<% end %>
 					</div>
