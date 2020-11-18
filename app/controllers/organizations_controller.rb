@@ -5,6 +5,10 @@ class OrganizationsController < ApplicationController
     @organizations = policy_scope(Organization)
   end
 
+  def show
+    @enrollment = Enrollment.new
+  end
+
   def map
     authorize current_user
     @organizations = Organization.all
@@ -17,9 +21,6 @@ class OrganizationsController < ApplicationController
         infoWindow: render_to_string(partial: "info_window", locals: { organization: organization })
       }
     end
-  end
-
-  def show
   end
 
   def new

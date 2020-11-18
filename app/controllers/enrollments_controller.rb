@@ -7,15 +7,16 @@ class EnrollmentsController < ApplicationController
   end
 
   def create
-    @enrollment = enrollment.new(enrollment_params)
+    @enrollment = Enrollment.new(enrollment_params)
     @event = Event.find(params[:event_id])
     @enrollment.user = current_user
     @enrollment.event = @event
+    @organization = @event.organization
     authorize @enrollment
     if @enrollment.save
-      redirect_to user_path
+      redirect_to user_path(current_user)
     else
-      render "events/show"
+      render "organizations/show"
     end
   end
 

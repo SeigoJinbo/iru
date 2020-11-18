@@ -16,5 +16,4 @@ class OrganizationPolicy < ApplicationPolicy
   def update?
     @user == current_user
   end
-
 end
