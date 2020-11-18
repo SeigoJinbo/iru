@@ -21,8 +21,8 @@ ADDRESSES = [
   "3-39-5 Ebisu, Shibuya City, Tokyo 150-0013",
   "4-3-1 Hiroo, Shibuya City, Tokyo 150-0012",
   "Kamimeguro Elementary School, Meguro City, Tokyo 153-0051",
-  "2-8-17, Meguro City, Tokyo 153-0052"
-]
+  "2-8-17, Meguro City, Tokyo 153-0052"]
+
 ROLES = ['leader', 'member', 'member', 'member']
 
 Enrollment.destroy_all

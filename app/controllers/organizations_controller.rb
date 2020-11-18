@@ -9,6 +9,20 @@ class OrganizationsController < ApplicationController
     @enrollment = Enrollment.new
   end
 
+  def map
+    authorize current_user
+    @organizations = Organization.all
+    @markers = {}
+    @markers[:user] = { lat: current_user.latitude, lng: current_user.longitude }
+    @markers[:organization] = @organizations.geocoded.map do |organization|
+      {
+        lat: organization.latitude,
+        lng: organization.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { organization: organization })
+      }
+    end
+  end
+
   def new
     authorize current_user
     @organization = Organization.new
