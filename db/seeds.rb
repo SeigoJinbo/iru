@@ -21,7 +21,7 @@ ADDRESSES = [
   "3-39-5 Ebisu, Shibuya City, Tokyo 150-0013",
   "4-3-1 Hiroo, Shibuya City, Tokyo 150-0012",
   "Kamimeguro Elementary School, Meguro City, Tokyo 153-0051",
-  "2-8-17, Meguro City, Tokyo 153-0052"]
+"2-8-17, Meguro City, Tokyo 153-0052"]
 
 ROLES = ['leader', 'member', 'member', 'member']
 
@@ -135,7 +135,7 @@ Organization.all.each do |organization|
       description: Faker::Hipster.paragraph,
       positions: rand(3..10),
       ongoing: true,
-      dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)),
+      dates: [1, 2, 3, 4, 5, 6, 7].sample(rand(1..7)).sort,
       start_time: Time.now + rand(10000..100000),
       end_time: Time.now + rand(100000..1000000),
       organization: organization,
@@ -160,7 +160,7 @@ end
 puts "attaching event photo"
 Event.all.each do |event|
   event_photo = URI.open('https://i.imgur.com/SaCQrAE.jpg')
-  Event.first.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+  event.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
 end
 
 
