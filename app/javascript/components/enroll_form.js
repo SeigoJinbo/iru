@@ -1,15 +1,19 @@
 const showEnrollForm = () => {
-  const enrollBtn = document.querySelector("#enroll-btn");
-  const enrollForm = document.querySelector("#enroll-form");
-  if (enrollForm) {
-    enrollBtn.addEventListener("click", (event) => {
+  const enrollForm = document.querySelectorAll(".enroll-form")
+  const enrollBtn = document.querySelectorAll(".enroll-btn").forEach(item => {
+    item.addEventListener("click", (event) => {
       // Do something (callback)
       console.log("test")
       event.preventDefault();
-      enrollForm.style.display = "block";
+
+      enrollForm.forEach(item => {
+      item.style.display = "block";
+      });
+
       event.currentTarget.style.display = "none";
     });
-  }
+  });
 };
+
 
 export { showEnrollForm };
