@@ -26,6 +26,7 @@ gem 'redis', '~> 4.0'
 # gem 'image_processing', '~> 1.2'
 
 #added
+gem 'acts-as-taggable-on', '~> 6.0'
 gem 'faker'
 gem 'pundit'
 gem 'geocoder'
