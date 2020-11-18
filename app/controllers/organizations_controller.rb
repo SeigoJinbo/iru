@@ -7,6 +7,9 @@ class OrganizationsController < ApplicationController
 
   def show
     @enrollment = Enrollment.new
+    # @events = @organization.events.select do |event|
+    #   event.status = "Accepted"
+    # end
   end
 
   def map
