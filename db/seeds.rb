@@ -61,7 +61,7 @@ liz = User.create!(
   password: "123456",
   address: "meguro tokyo Japan",
   nickname: "Beth",
-  gender: "female"
+  gender: "female",
   admin: true
   )
 
