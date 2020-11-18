@@ -25,10 +25,15 @@ ADDRESSES = [
 
 ROLES = ['leader', 'member', 'member', 'member']
 
+puts "destroying enrollments"
 Enrollment.destroy_all
+puts "destroying events"
 Event.destroy_all
+puts "destroying memberships"
 Membership.destroy_all
+puts "destroying users"
 User.destroy_all
+puts "destroying organizations"
 Organization.destroy_all
 
 puts "creating users"
@@ -37,25 +42,38 @@ seigo = User.create!(
   first_name: "Seigo",
   last_name: "Jinbo",
   nickname: "Sei",
-  address: "meguro",
+  address: "meguro tokyo Japan",
   email: "seigo@iru.com",
   password: "123456",
-  description: "wutup",
-  gender: "male"
+  description: "wutup. I love trees, man.",
+  gender: "male",
+  admin: true
 )
 
 yuping = User.create!(
   first_name: "Yuping",
   email: "yuping@iru.com",
-password: "123456")
+  password: "123456",
+  address: "meguro tokyo Japan",
+	nickname: "Not Yup",
+	description: "Do you guys want some eggrolls?",
+  gender: "female",
+  admin: true
+  )
 
 liz = User.create!(
   first_name: "Liz",
   email: "liz@iru.com",
-password: "123456")
+  password: "123456",
+  address: "meguro tokyo Japan",
+	nickname: "Defs Not Beth",
+	description: "I have way too much shit.",
+  gender: "female",
+  admin: true
+  )
 
 
-50.times do
+25.times do
   User.create!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
@@ -76,12 +94,25 @@ User.all.each do |user|
   user.photos.attach(io: user_banner, filename: 'user_banner.jpg', content_type: 'image/jpg')
 end
 
+puts "creating organizations"
+we_love_trees = Organization.create!(
+	name: "We love trees",
+	email: "trees@welovetrees.com",
+	address: "Meguro Station, Tokyo, Japan",
+	description: "Save the trees.",
+	establishment_year: "2020",
+	phone_number: "08077633849",
+	hp_url: "http://welovetrees.com",
+	twitter_url: "http://twitter.com/trees",
+	insta_url: "http://instagram.com/welovetrees",
+	tag_list: "Environment/Agricultre"
+	)
 
-puts "creating organization"
-we_love_trees = Organization.create!(name: "We love trees")
+TAGS = ["Animals/Wildlife", "Children/Youth", "Disasters", "Education", "Environment/Agriculture", "Health", "Women", "Seniors/Disabilities", "Other"]
 
 ADDRESSES.each do |address|
-  Organization.create!(
+	tag = TAGS.sample
+  org = Organization.create!(
     email: Faker::Internet.email,
     name: Faker::Dessert.topping,
     address: address,
@@ -90,8 +121,10 @@ ADDRESSES.each do |address|
     phone_number: Faker::PhoneNumber.cell_phone_in_e164,
     hp_url: Faker::Internet.email,
     twitter_url: Faker::Internet.email,
-    insta_url: Faker::Internet.email
-  )
+		insta_url: Faker::Internet.email,
+		tag_list: tag
+	)
+	org.tag_list.add(tag)
 end
 
 Organization.all.each do |organization|
@@ -109,7 +142,6 @@ Organization.all.each do |org|
   org.photos.attach(io: org_logo, filename: 'org_logo.png', content_type: 'image/png')
   org.photos.attach(io: org_banner, filename: 'org_banner.jpg', content_type: 'image/jpg')
 end
-
 
 CATEGORIES = ["volunteer", "donate", "fundraise"]
 DAYS = ["Monday", "Tuesday", "Wednesday", "Thrusday", "Friday", "Saturday", "Sunday"]
@@ -155,14 +187,11 @@ Organization.all.each do |organization|
   )
 end
 
-
-
 puts "attaching event photo"
 Event.all.each do |event|
   event_photo = URI.open('https://i.imgur.com/SaCQrAE.jpg')
   event.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
 end
-
 
 60.times do
   Enrollment.create!(

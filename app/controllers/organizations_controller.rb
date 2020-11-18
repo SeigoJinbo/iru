@@ -7,11 +7,18 @@ class OrganizationsController < ApplicationController
 
   def show
     @enrollment = Enrollment.new
+    # @events = @organization.events.select do |event|
+    #   event.status = "Accepted"
+    # end
   end
 
   def map
     authorize current_user
-    @organizations = Organization.all
+    if params[:query].present?
+      @organizations = Organization.all.tagged_with((params[:query]))
+    else
+      @organizations = Organization.all
+    end
     @markers = {}
     @markers[:user] = { lat: current_user.latitude, lng: current_user.longitude }
     @markers[:organization] = @organizations.geocoded.map do |organization|
@@ -61,6 +68,6 @@ class OrganizationsController < ApplicationController
   end
 
   def organization_params
-    params.require(:organization).permit(:name, :email, :address, :latitude, :longitude, photos: [])
+    params.require(:organization).permit(:name, :email, :address, :latitude, :longitude, photos: [], tag_list: [])
   end
 end
