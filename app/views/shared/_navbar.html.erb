@@ -15,36 +15,36 @@
           <%= link_to "Notifications", "#", height: 100, width: 100, crop: :fill, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
           <div class="dropdown-menu dropdown-menu-pending" aria-labelledby="navbarDropdown">
 
-
+            <!-- Pending Enrollment Dropdown-->
             <div data-controller>
-
             <% if current_user.events_as_owner.any? %>
               <% current_user.events_as_owner.each do |event| %>
                 <div class="d-flex">
-                  <h5><%= link_to event.title, organization_path(event.organization) %></h5>
                   <% event.enrollments.each do |enrollment| %>
-                    <div>
-                    <%= link_to user_path(enrollment.user) do  %>
-                      <p><%= enrollment.user.nickname %></p>
-                      <%= cl_image_tag enrollment.user.photos.first.key, height: 40, width: 40, crop: :fill %>
+                    <% if enrollment.status == 'pending' %>
+                      <h5><%= link_to event.title, organization_path(event.organization) %></h5>
+                      <div>
+                        <%= link_to user_path(enrollment.user) do  %>
+                          <p><%= enrollment.user.nickname %></p>
+                          <%= cl_image_tag enrollment.user.photos.first.key, height: 40, width: 40, crop: :fill %>
+                        <% end %>
+                        <p><%= enrollment.start_time %></p>
+                        <p><%= enrollment.end_time %></p>
+                        <%= enrollment.status %>
+                        <%= simple_form_for(enrollment, remote: :true) do |f| %>
+                          <%= f.input :status, as: :hidden, input_html: { value: "Approved" } %>
+                          <div class="m-1"><%= f.submit 'Approve', class: 'btn btn-primary'%></div>
+                        <% end %>
+                        <%= simple_form_for(enrollment, remote: :true) do |f| %>
+                          <%= f.input :status, as: :hidden, input_html: { value: "Declined" } %>
+                          <div class="m-1"><%= f.submit 'Decline', class: 'btn btn-primary'%></div>
+                        <% end %>
+                      </div>
                     <% end %>
-                      <p><%= enrollment.start_time %></p>
-                      <p><%= enrollment.end_time %></p>
-                      <%= enrollment.status %>
-                      <%= simple_form_for(enrollment, remote: :true) do |f| %>
-                        <%= f.input :status, as: :hidden, input_html: { value: "Approved" } %>
-                        <div class="m-1"><%= f.submit 'Approve', class: 'btn btn-primary'%></div>
-                      <% end %>
-                      <%= simple_form_for(enrollment, remote: :true) do |f| %>
-                        <%= f.input :status, as: :hidden, input_html: { value: "Declined" } %>
-                        <div class="m-1"><%= f.submit 'Decline', class: 'btn btn-primary'%></div>
-                      <% end %>
-                    </div>
                   <% end %>
                 </div>
               <% end %>
             <% end %>
-
           </div>
 
 
@@ -55,7 +55,7 @@
           <%= link_to "Community", "/map", class: "nav-link" %>
         </li>
 
-
+        <!-- Organization Dropdown -->
         <li class="nav-item dropdown">
           <%= cl_image_tag 'image', height: 100, width: 100, crop: :fill, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
