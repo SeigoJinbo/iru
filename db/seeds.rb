@@ -105,7 +105,7 @@ we_love_trees = Organization.create!(
 	hp_url: "http://welovetrees.com",
 	twitter_url: "http://twitter.com/trees",
 	insta_url: "http://instagram.com/welovetrees",
-	tag_list: "Environment/Agricultre"
+	tag_list: "Environment/Agriculture"
 	)
 
 TAGS = ["Animals/Wildlife", "Children/Youth", "Disasters", "Education", "Environment/Agriculture", "Health", "Women", "Seniors/Disabilities", "Other"]
