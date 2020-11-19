@@ -143,7 +143,7 @@ Organization.all.each do |org|
   org.photos.attach(io: org_banner, filename: 'org_banner.jpg', content_type: 'image/jpg')
 end
 
-CATEGORIES = ["volunteer", "donate", "fundraise"]
+CATEGORIES = ["Volunteer", "Donate", "Fundraise"]
 DAYS = ["Monday", "Tuesday", "Wednesday", "Thrusday", "Friday", "Saturday", "Sunday"]
 
 puts "creating membership"
@@ -195,7 +195,7 @@ end
 
 60.times do
   Enrollment.create!(
-    status: 'pending',
+    status: 'Pending',
     user: User.all.sample,
     event: Event.all.sample,
     start_time: Time.now + rand(10000..100000),
