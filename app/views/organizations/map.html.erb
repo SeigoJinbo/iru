@@ -8,19 +8,25 @@
        <h2>HEADER</h2>
 
     <div class="map-box">
-      <div>
+      <div class="map-form">
+        <div>
         <%= form_with url: map_path, method: :get, local: true do |f|%>
           <%= text_field_tag :query,
           params[:query],
           class: "form-control",
           placeholder: "filter" %>
-          <div class="index-submit"><%= submit_tag "Search", class: "btn btn-primary" %></div>
+        </div>
+          <div class="index-submit"><%= submit_tag "Filter", class: "btn btn-primary" %></div>
         <% end %>
       </div>
 
       <div>
         <% @organizations.each do |organization| %>
-          <p><%= link_to organization.name, organization_path(organization) %></p>
+          <div class="map-form-results border-bottom pb-1">
+          <h5><%= link_to organization.name, organization_path(organization) %></h5>
+          <%= cl_image_tag organization.photos.first.key, height: 40, width: 40, crop: :fill %>
+          <%= organization.tag_list %>
+          </div>
         <% end %>
       </div>
 

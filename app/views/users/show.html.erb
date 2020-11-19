@@ -4,7 +4,7 @@
 	<%# User banner, avatar, description %>
 		<div class="user-banner" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0)), url(<%= cl_image_path @user.photos.second.key, height: 400, width: 1200, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
 			<div class="user-banner-items">
-				<%= cl_image_tag User.first.photos.first.key, height: 100, width: 100, crop: :fill, class: "user-avatar" %>
+				<%= cl_image_tag @user.photos.first.key, height: 100, width: 100, crop: :fill, class: "user-avatar" %>
 				<div class="user-banner-text ml-3">
 					<h1><span class="maize-text"><%= @user.nickname %>'s</span> Profile</h1>
 					<p><%= @user.gender %>, 30 years old</p>
@@ -23,7 +23,7 @@
 						<% @user.events.each do |event| %>
 							<li class="ivory-card">
 								<div class="ivory-card-contents">
-									<div class="ivory-card-pic" style="background-image: url(<%= cl_image_path Event.first.photo.key, height: 300, width: 400, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+									<div class="ivory-card-pic" style="background-image: url(<%= cl_image_path event.photo.key, height: 300, width: 400, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
 									</div>
 									<h5><%= event.title.truncate(25, separator: ' ') %> with <%= link_to event.organization.name, organization_path(event.organization) %></h5>
 									<% if event.description %>
@@ -71,7 +71,7 @@
 						<% @user.events_as_owner.each do |event| %>
 							<li class="ivory-card">
 								<div class="ivory-card-contents">
-									<div class="event-pic" style="background-image: url(<%= cl_image_path event.photo.key, height: 300, width: 400, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+									<div class="ivory-card-pic" style="background-image: url(<%= cl_image_path event.photo.key, height: 300, width: 400, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
 									</div>
 									<h5><%= event.title %> with <%= link_to event.organization.name, organization_path(event.organization) %></h5>
 									<% if event.description %>
