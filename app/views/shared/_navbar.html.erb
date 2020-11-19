@@ -47,17 +47,17 @@
             <% end %>
           </div>
 
-
         <li class="nav-item active">
-          <%= link_to "Home", "/", class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Community", "/map", class: "nav-link" %>
+          <%= link_to map_path, class: "nav-link" do %>
+						<i class="fas fa-map-marked-alt"></i>
+					<% end %>
         </li>
 
         <!-- Organization Dropdown -->
         <li class="nav-item dropdown">
-          <%= cl_image_tag 'image', height: 100, width: 100, crop: :fill, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+					<%= link_to "#", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false do %>
+						<i class="fas fa-hands-helping"></i>
+					<% end %>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <% current_user.organizations.each do |organization| %>
               <%= link_to organization_path(organization), class: "dropdown-item" do%>
