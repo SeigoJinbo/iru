@@ -55,7 +55,8 @@
 	background-color: $darker-ivory;
 	border-radius: 24px;
 	padding: 24px;
-	display: flex;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
 	// margin-bottom: 16px;
 }
 
@@ -72,9 +73,6 @@
 	height: 320px;
 	margin: 16px;
 	padding: 24px;
-	.ivory-card-contents {
-
-	}
 	.ivory-card-pic {
 		height: 100px;
 		width: 200px;
@@ -87,6 +85,8 @@
 	background-size: cover;
 }
 
-.user-sections {
-	padding: 48px;
+.events {
+	padding-top: 48px;
+	padding-left: 48px;
+	padding-right: 48px;
 }
