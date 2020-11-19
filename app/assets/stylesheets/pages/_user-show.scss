@@ -36,7 +36,6 @@
 
 
 .user-banner {
-	margin-bottom: 16px;
 	border-radius: 24px 24px 0 0;
 	height: 400px;
 	display: flex;
@@ -56,28 +55,31 @@
 	background-color: $darker-ivory;
 	border-radius: 24px;
 	padding: 24px;
+	display: flex;
 	// margin-bottom: 16px;
 }
 
-.history-card {
+.user-profile {
+	padding-left: 48px;
+	padding-right: 48px;
+	padding-bottom: 48px;
+}
+
+.ivory-card {
 	list-style: none;
 	background-color: $beige;
 	width: 240px;
 	height: 320px;
 	margin: 16px;
 	padding: 24px;
-	.history-card-contents {
+	.ivory-card-contents {
 
 	}
-	.event-pic {
+	.ivory-card-pic {
 		height: 100px;
 		width: 200px;
 		margin-bottom: 4px;
 	}
-}
-
-#history-box {
-	display: flex;
 }
 
 .user-banner-image {
