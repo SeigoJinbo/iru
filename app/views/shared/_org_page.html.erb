@@ -4,35 +4,23 @@
   <div class="org-banner-items">
     <%= cl_image_tag @organization.photos.first.key, height: 100, width: 100, crop: :fill, class: "org-avatar" %>
     <div class="org-banner-text ml-3">
-      <h1><span class="maize-text"><%= @organization.name %>'s</span> Profile</h1>
+      <h1><span class="maize-text"><%= @organization.name %> </span> since <%= @organization.establishment_year %></h1>
       <p><span class="ivory-text"><%= @organization.description %></span></p>
+      <i class="fas fa-map-marker-alt icon"></i> <span class="ivory-text"><%= @organization.address %></span>
+      <i class="fas fa-phone icon"></i><span class="ivory-text"><%= @organization.phone_number %></span>
+      <div class="hp-links">
+        <i class="fas fa-home"></i>
+        <i class="fab fa-facebook-square"></i>
+        <i class="fab fa-twitter-square"></i>
+        <i class="fab fa-instagram-square"></i>
+      </div>
       <% if @organization.users.include?(current_user) %>
-        <div class="btn btn-primary">Edit Description</div>
+        <div class="btn btn-primary edit-btn">Edit Profile</div>
       <% end %>
     </div>
   </div>
 </div>
 <div class="org-sections">
-  <%# Org-info %>
-  <div class="org-info">
-    <h3>Orgnization Info</h3>
-    <div class="round-box">
-      <ul>
-        <li>Adress: <%= @organization.address %></li>
-        <li>Email: <%= @organization.email %></li>
-        <li>Phone Number: <%= @organization.phone_number %></li>
-        <li>Establishment Year: <%= @organization.establishment_year %></li>
-        <li>HP Url: <%= @organization.hp_url %></li>
-        <li>FB Url: <%= @organization.fb_url %></li>
-        <li>Twitter Url: <%= @organization.twitter_url %></li>
-        <li>Insta Url: <%= @organization.insta_url %></li>
-      </ul>
-        <% if @organization.users.include?(current_user) %>
-          <div class="btn btn-primary">Edit</div>
-        <% end %>
-    </div>
-  </div>
-  <br>
   <h2>Events</h2>
   <% @organization.events.each do |event| %>
     <h4><%= event.title %></h4>

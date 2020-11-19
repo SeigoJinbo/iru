@@ -16,6 +16,11 @@
     display: flex;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
   }
+  position: relative;
+}
+.org-banner-text {
+  width: 880px;
+
 }
 .org-sections {
   padding: 48px;
@@ -24,5 +29,26 @@
   background-color: $darker-ivory;
   border-radius: 24px;
   padding: 24px;
-
+}
+.event-title {
+  display: flex;
+  justify-content: space-between;
+}
+.enrollment-avatar {
+  border-radius: 50%;
+}
+.hp-links {
+  font-size: 30px;
+  position: absolute;
+  right: 48px;
+  bottom: 36px;
+  color: $ivory;
+}
+.icon {
+  color: #FECE63;
+}
+.edit-btn {
+  position: absolute;
+  right: 48px;
+  top: 36px;
 }
