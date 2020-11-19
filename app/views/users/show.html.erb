@@ -25,7 +25,7 @@
 						<% @user.events.each do |event| %>
 							<li class="ivory-card">
 								<div class="ivory-card-contents">
-									<div class="ivory-card-pic" style="background-image: url(<%= cl_image_path Event.first.photo.key, height: 300, width: 400, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+									<div class="ivory-card-pic" style="background-image: url(<%= cl_image_path event.photo.key, height: 300, width: 400, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
 									</div>
 									<h5><%= event.title.truncate(25, separator: ' ') %> with <%= link_to event.organization.name, organization_path(event.organization) %></h5>
 									<% if event.description %>
@@ -74,7 +74,7 @@
 
 							<li class="ivory-card">
 								<div class="ivory-card-contents">
-									<div class="event-pic" style="background-image: url(<%= cl_image_path enrollment.event.photo.key, height: 300, width: 400, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+									<div class="ivory-card-pic" style="background-image: url(<%= cl_image_path enrollment.event.photo.key, height: 300, width: 400, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
 									</div>
 									<h5><%= enrollment.event.title %> with <%= link_to enrollment.event.organization.name, organization_path(enrollment.event.organization) %></h5>
 									<% if enrollmentevent.description %>
