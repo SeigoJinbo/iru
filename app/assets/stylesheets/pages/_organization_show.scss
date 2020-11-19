@@ -1,3 +1,28 @@
 .enroll-form {
   display: none;
 }
+.org-banner {
+  margin-bottom: 16px;
+  border-radius: 24px 24px 0 0;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  .org-avatar {
+    border-radius: 50%;
+    border: 4px solid white;
+  }
+  .org-banner-items {
+    padding-left: 48px;
+    display: flex;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  }
+}
+.org-sections {
+  padding: 48px;
+}
+.round-box {
+  background-color: $darker-ivory;
+  border-radius: 24px;
+  padding: 24px;
+
+}

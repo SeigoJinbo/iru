@@ -14,5 +14,4 @@ const showEnrollForm = () => {
   });
 };
 
-
 export { showEnrollForm };
