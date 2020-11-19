@@ -32,7 +32,6 @@ import { initMapbox } from '../plugins/init_mapbox';
 // import { initSelect2 } from '../components/init_select2';
 import { showEnrollForm } from '../components/enroll_form';
 import { ongoingFormCondition } from '../components/event_new';
-import { initUpdateNavbarOnScroll } from '../components/navbar';
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
@@ -40,5 +39,4 @@ document.addEventListener('turbolinks:load', () => {
   showEnrollForm();
   initMapbox();
   ongoingFormCondition();
-	initUpdateNavbarOnScroll();
 });
