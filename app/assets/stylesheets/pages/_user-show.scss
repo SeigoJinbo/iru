@@ -7,7 +7,7 @@
 
 .page {
 	background-color: $sage;
-	height: calc(100vh);
+	height: calc(100vh - 66px);
 	overflow: auto;
 }
 .page-box {
