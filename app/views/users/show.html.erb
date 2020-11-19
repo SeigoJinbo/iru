@@ -1,7 +1,7 @@
 <div class="page">
 	<div class="page-box">
 
-	<%# User banner %>
+	<%# User banner, avatar, description %>
 		<div class="user-banner" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0)), url(<%= cl_image_path @user.photos.second.key, height: 400, width: 1200, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
 			<div class="user-banner-items">
 				<%= cl_image_tag User.first.photos.first.key, height: 100, width: 100, crop: :fill, class: "user-avatar" %>
@@ -18,7 +18,7 @@
 			<%# User Dashboard %>
 			<% if current_user == @user %>
 				<div class="events">
-					<h3>Events</h3>
+					<h3>My Events</h3>
 					<div class="user-box">
 						<% @user.events.each do |event| %>
 							<li class="ivory-card">
@@ -44,20 +44,34 @@
 			</div>
 
 			<div class="user-profile">
-			<%# Volunteering History %>
+			<%# Organizations %>
 				<div class="organizations">
+				<% if current_user == @user %>
 					<h3>My Organizations</h3>
+				<% else %>
+					<h3><%= @user.nickname %>'s Organizations</h3>
+				<% end %>
 						<div class="user-box">
-						
+							<% @user.organizations.each do |organization| %>
+								<li class="ivory-card">
+								<div class="ivory-card-contents">
+									<div class="ivory-card-pic" style="background-image: url(<%= cl_image_path organization.photos.first.key, height: 300, width: 400, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+									</div>
+									<h5><%= link_to organization.name, organization_path(organization) %></h5>
+									<h6><%= organization.tag_list %></h6>
+										<p><%= organization.description.truncate(90, separator: ' ') %></p>
+								</div>
+							</li>
+							<% end %>
 						</div>
 				</div>
 				<div class="history">
 					<h3>Volunteering History</h3>
 					<div class="user-box" id="history-box">
 						<% @user.events_as_owner.each do |event| %>
-							<li class="history-card">
-								<div class="history-card-contents">
-									<div class="event-pic" style="background-image: url(<%= cl_image_path Event.first.photo.key, height: 300, width: 400, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+							<li class="ivory-card">
+								<div class="ivory-card-contents">
+									<div class="event-pic" style="background-image: url(<%= cl_image_path event.photo.key, height: 300, width: 400, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
 									</div>
 									<h5><%= event.title %> with <%= link_to event.organization.name, organization_path(event.organization) %></h5>
 									<% if event.description %>
