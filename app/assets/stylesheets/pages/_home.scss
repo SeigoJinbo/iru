@@ -1,9 +1,18 @@
 // Specific CSS for your home-page
-
 .home-banner {
-  height: 500px;
+	height: 500px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
   h1 {
-    font-size: 80px;
-    color: white;
-  }
+		font-size: 96px;
+		text-align: center;
+    color: $ivory;
+	}
+	h2 {
+		color: $ivory;
+	}
+	.home-button {
+		text-align: center;
+	}
 }
