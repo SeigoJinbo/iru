@@ -4,7 +4,7 @@
 	<%# User banner %>
 		<div class="user-banner" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0)), url(<%= cl_image_path @user.photos.second.key, height: 400, width: 1200, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
 			<div class="user-banner-items">
-				<%= cl_image_tag User.first.photos.first.key, height: 100, width: 100, crop: :fill, class: "user-avatar" %>
+				<%= cl_image_tag @user.photos.first.key, height: 100, width: 100, crop: :fill, class: "user-avatar" %>
 				<div class="user-banner-text ml-3">
 					<h1><span class="maize-text"><%= @user.nickname %>'s</span> Profile</h1>
 					<p><span class="ivory-text"><%= @user.description %></span></p>

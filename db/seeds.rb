@@ -38,42 +38,10 @@ Organization.destroy_all
 
 puts "creating users"
 
-seigo = User.create!(
-  first_name: "Seigo",
-  last_name: "Jinbo",
-  nickname: "Sei",
-  address: "meguro tokyo Japan",
-  email: "seigo@iru.com",
-  password: "123456",
-  description: "BURN IT ALL DOWN. VIVA LA RESISTANCE!",
-  gender: "male",
-  admin: true
-)
-
-yuping = User.create!(
-  first_name: "Yuping",
-  email: "yuping@iru.com",
-  password: "123456",
-  address: "meguro tokyo Japan",
-	nickname: "Not Yup",
-	description: "Do you guys want some eggrolls?",
-  gender: "female",
-  admin: true
-  )
-
-liz = User.create!(
-  first_name: "Liz",
-  email: "liz@iru.com",
-  password: "123456",
-  address: "meguro tokyo Japan",
-	nickname: "Defs Not Beth",
-	description: "I have way too much shit.",
-  gender: "female",
-  admin: true
-  )
 
 
-25.times do
+
+5.times do
   User.create!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
@@ -94,6 +62,39 @@ User.all.each do |user|
   user.photos.attach(io: user_banner, filename: 'user_banner.jpg', content_type: 'image/jpg')
 end
 
+seigo = User.create!(
+  first_name: "Seigo",
+  last_name: "Jinbo",
+  nickname: "Sei",
+  address: "meguro tokyo Japan",
+  email: "seigo@iru.com",
+  password: "123456",
+  description: "BURN IT ALL DOWN. VIVA LA RESISTANCE!",
+  gender: "male",
+  admin: true
+)
+
+yuping = User.create!(
+  first_name: "Yuping",
+  email: "yuping@iru.com",
+  password: "123456",
+  address: "meguro tokyo Japan",
+  nickname: "Not Yup",
+  description: "Do you guys want some eggrolls?",
+  gender: "female",
+  admin: true
+  )
+
+liz = User.create!(
+  first_name: "Liz",
+  email: "liz@iru.com",
+  password: "123456",
+  address: "meguro tokyo Japan",
+  nickname: "Defs Not Beth",
+  description: "I have way too much shit.",
+  gender: "female",
+  admin: true
+  )
 
 puts "creating organizations"
 we_love_trees = Organization.create!(
@@ -194,11 +195,6 @@ end
   )
 end
 
-puts "creating enrollment"
-enrollment = Enrollment.new
-enrollment.user = liz
-enrollment.event = event
-enrollment.save
 
 
 #USERS
@@ -210,7 +206,7 @@ liz.photos.attach(io: user_banner, filename: 'user_banner.jpg', content_type: 'i
 liz.save
 
 user_avatar = URI.open('https://ca.slack-edge.com/T02NE0241-U01BP13R1CL-aa72532c73d4-512')
-user_banner = URI.open('hhttps://www.selectvacationproperties.com/wp-content/uploads/2020/02/AdobeStock_265268314.jpeg')
+user_banner = URI.open('https://images.pexels.com/photos/315998/pexels-photo-315998.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')
 yuping.photos.attach(io: user_avatar, filename: 'user_avatar.png', content_type: 'image/png')
 yuping.photos.attach(io: user_banner, filename: 'user_banner.jpg', content_type: 'image/jpg')
 yuping.save
@@ -240,7 +236,7 @@ puts "attaching photos to we love trees"
 org_logo = URI.open('https://images.pexels.com/photos/9198/nature-sky-twilight-grass-9198.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')
 org_banner = URI.open('https://images.pexels.com/photos/957024/forest-trees-perspective-bright-957024.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')
 we_love_trees.photos.attach(io: org_logo, filename: 'org_logo.png', content_type: 'image/png')
-we_love_trees.attach(io: org_banner, filename: 'org_banner.jpg', content_type: 'image/jpg')
+we_love_trees.photos.attach(io: org_banner, filename: 'org_banner.jpg', content_type: 'image/jpg')
 
 puts "assigning we love trees to seigo"
 membership = Membership.new
@@ -267,3 +263,10 @@ event = Event.create!(
 puts "attaching photo to plant a tree"
 event_photo = URI.open('https://www.eco.ca/wp-content/uploads/corporation-of-tomorrow.png')
 event.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+
+puts "creating enrollment"
+enrollment = Enrollment.new
+enrollment.user = liz
+enrollment.event = event
+enrollment.save
+
