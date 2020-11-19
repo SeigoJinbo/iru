@@ -21,7 +21,7 @@
               <% current_user.events_as_owner.each do |event| %>
                 <div class="d-flex">
                   <% event.enrollments.each do |enrollment| %>
-                    <% if enrollment.status == 'pending' %>
+                    <% if enrollment.status == 'Pending' %>
                       <h5><%= link_to event.title, organization_path(event.organization) %></h5>
                       <div>
                         <%= link_to user_path(enrollment.user) do  %>

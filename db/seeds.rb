@@ -105,7 +105,7 @@ we_love_trees = Organization.create!(
 	hp_url: "http://welovetrees.com",
 	twitter_url: "http://twitter.com/trees",
 	insta_url: "http://instagram.com/welovetrees",
-	tag_list: "Environment/Agricultre"
+	tag_list: "Environment/Agriculture"
 	)
 
 TAGS = ["Animals/Wildlife", "Children/Youth", "Disasters", "Education", "Environment/Agriculture", "Health", "Women", "Seniors/Disabilities", "Other"]
@@ -143,7 +143,7 @@ Organization.all.each do |org|
   org.photos.attach(io: org_banner, filename: 'org_banner.jpg', content_type: 'image/jpg')
 end
 
-CATEGORIES = ["volunteer", "donate", "fundraise"]
+CATEGORIES = ["Volunteer", "Donate", "Fundraise"]
 DAYS = ["Monday", "Tuesday", "Wednesday", "Thrusday", "Friday", "Saturday", "Sunday"]
 
 puts "creating membership"
@@ -195,7 +195,7 @@ end
 
 60.times do
   Enrollment.create!(
-    status: 'pending',
+    status: 'Pending',
     user: User.all.sample,
     event: Event.all.sample,
     start_time: Time.now + rand(10000..100000),
