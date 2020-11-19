@@ -87,6 +87,50 @@ members of this org
         </div>
       </div>
       <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+				<h2>Events</h2>
+          <% if @organization.users.include?(current_user) %>
+            <%= link_to "Create a new event", new_organization_event_path(@organization), class: 'btn btn-primary' %>
+          <% end %>
+          <% @organization.events.each do |event| %>
+            <h4><%= event.title %></h4>
+            <div class="round-box">
+              <ul>
+                <li><%= event.description %></li>
+                <li>positions: <%= event.positions %> ppl</li>
+                <% if event.dates.present? %>
+                  <li>Every <% event.dates.each do |date| %>
+                      <%= day_of_the_week[date] %>
+                    <% end %></li>
+                  <li>Start Time: <%= event.start_time.strftime("%k:%M") %></li>
+                  <li>End Time: <%= event.end_time.strftime("%k:%M") %></li>
+                <% else %>
+                  <li>Start Time: <%= event.start_time.strftime("%d of %B, %Y") %></li>
+                  <li>End Time: <%= event.end_time.strftime("%d of %B, %Y") %></li>
+                <% end %>
+              </ul>
+              <div class="enroll-section">
+                <% if user_signed_in? %>
+                  <% if event.owner == current_user || current_user.admin %>
+                    <%= link_to "Edit", event_path(event), class: 'btn btn-primary' %>
+                    <%= link_to "Delete", event_path(event), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete #{event.title}?" } %>
+                  <% end %>
+                  <% if event.owner != current_user || current_user.admin %>
+                    <button class="enroll-btn btn btn-primary" type="button">Enroll!</button>
+                    <div class="enroll-form">
+                      <p>Select the volunteering time:</p>
+                      <%= simple_form_for [event, @enrollment] do |f| %>
+                        <%= f.input :start_time, as: :datetime, html5: true %>
+                        <%= f.input :end_time, as: :datetime, html5: true %>
+                        <%= f.button :submit, class: "btn btn-primary" %>
+                      <% end %>
+                    </div>
+                  <% end %>
+                <% else %>
+                  <%= link_to "Sign in to enroll", new_user_session_path, class: "btn btn-primary" %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
       </div>
       <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
         <% @organization.events.each do |event| %>
