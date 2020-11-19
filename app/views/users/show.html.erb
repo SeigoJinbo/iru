@@ -7,6 +7,7 @@
 				<%= cl_image_tag User.first.photos.first.key, height: 100, width: 100, crop: :fill, class: "user-avatar" %>
 				<div class="user-banner-text ml-3">
 					<h1><span class="maize-text"><%= @user.nickname %>'s</span> Profile</h1>
+					<p><%= @user.gender %>, 30 years old</p>
 					<p><span class="ivory-text"><%= @user.description %></span></p>
 					<div class="btn btn-primary">A button</div>
 				</div>
@@ -15,26 +16,40 @@
 
 		<div class="user-sections">
 			<%# User Dashboard %>
-			<div class="user-dashboard">
-				<div class="upcoming-events">
-					<h3>Upcoming Events</h3>
-					<div class="user-box"></div>
+			<% if current_user == @user %>
+				<div class="events">
+					<h3>Events</h3>
+					<div class="user-box">
+						<% @user.events.each do |event| %>
+							<li class="ivory-card">
+								<div class="ivory-card-contents">
+									<div class="ivory-card-pic" style="background-image: url(<%= cl_image_path Event.first.photo.key, height: 300, width: 400, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+									</div>
+									<h5><%= event.title.truncate(25, separator: ' ') %> with <%= link_to event.organization.name, organization_path(event.organization) %></h5>
+									<% if event.description %>
+										<p><%= event.description.truncate(50, separator: ' ') %></p>
+									<% end %>
+									<p><% event.enrollments.each do |enrollment| %>
+										<% if enrollment.user_id == @user.id %>
+											<h6><%= enrollment.status %></h6>
+										<% end %>
+									<% end %>
+									</p>
+								</div>
+							</li>
+						<% end %>
+					</div>
 				</div>
-
-        <% if current_user.events_as_owner.any? %>
-  				<div class="pending-events">
-  					<h3>Pending Enrollments</h3>
-  					<div class="user-box"></div>
-  				</div>
-        <% end %>
-
+			<% end %>
 			</div>
 
 			<div class="user-profile">
 			<%# Volunteering History %>
 				<div class="organizations">
 					<h3>My Organizations</h3>
-						<div class="user-box"></div>
+						<div class="user-box">
+						
+						</div>
 				</div>
 				<div class="history">
 					<h3>Volunteering History</h3>
@@ -48,7 +63,6 @@
 									<% if event.description %>
 										<p><%= event.description.truncate(50, separator: ' ') %></p>
 									<% end %>
-									<p><%= event.start_time %></p>
 								</div>
 							</li>
 						<% end %>
@@ -57,6 +71,7 @@
 				<%# Interests etc. %>
 				<%# <div class="interests"></div> %>
 				<%# <div class="badges"></div> %>
+				</div>
 			</div>
 		</div>
 	</div>
