@@ -68,17 +68,19 @@
 				<div class="history">
 					<h3>Volunteering History</h3>
 					<div class="user-box" id="history-box">
-						<% @user.events_as_owner.each do |event| %>
+						<% @past_enrollments.each do |enrollment| %>
+
 							<li class="ivory-card">
 								<div class="ivory-card-contents">
-									<div class="event-pic" style="background-image: url(<%= cl_image_path event.photo.key, height: 300, width: 400, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+									<div class="event-pic" style="background-image: url(<%= cl_image_path enrollment.event.photo.key, height: 300, width: 400, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
 									</div>
-									<h5><%= event.title %> with <%= link_to event.organization.name, organization_path(event.organization) %></h5>
-									<% if event.description %>
-										<p><%= event.description.truncate(50, separator: ' ') %></p>
+									<h5><%= enrollment.event.title %> with <%= link_to enrollment.event.organization.name, organization_path(enrollment.event.organization) %></h5>
+									<% if enrollmentevent.description %>
+										<p><%= enrollment.event.description.truncate(50, separator: ' ') %></p>
 									<% end %>
 								</div>
 							</li>
+
 						<% end %>
 					</div>
 				</div>
