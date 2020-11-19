@@ -45,7 +45,7 @@ seigo = User.create!(
   address: "meguro tokyo Japan",
   email: "seigo@iru.com",
   password: "123456",
-  description: "wutup. I love trees, man.",
+  description: "BURN IT ALL DOWN. VIVA LA RESISTANCE!",
   gender: "male",
   admin: true
 )
@@ -93,6 +93,7 @@ User.all.each do |user|
   user.photos.attach(io: user_avatar, filename: 'user_avatar.png', content_type: 'image/png')
   user.photos.attach(io: user_banner, filename: 'user_banner.jpg', content_type: 'image/jpg')
 end
+
 
 puts "creating organizations"
 we_love_trees = Organization.create!(
@@ -143,20 +144,10 @@ Organization.all.each do |org|
   org.photos.attach(io: org_banner, filename: 'org_banner.jpg', content_type: 'image/jpg')
 end
 
-CATEGORIES = ["volunteer", "donate", "fundraise"]
+CATEGORIES = ["Volunteer", "Donate", "Fundraise"]
 DAYS = ["Monday", "Tuesday", "Wednesday", "Thrusday", "Friday", "Saturday", "Sunday"]
 
-puts "creating membership"
-membership = Membership.new
-membership.user = seigo
-membership.organization = we_love_trees
-membership.save
 
-puts "creating event"
-event = Event.create(title: "Plant a tree")
-event.organization = we_love_trees
-event.owner = seigo
-event.save
 
 
 Organization.all.each do |organization|
@@ -208,3 +199,71 @@ enrollment = Enrollment.new
 enrollment.user = liz
 enrollment.event = event
 enrollment.save
+
+
+#USERS
+
+user_avatar = URI.open('https://ca.slack-edge.com/T02NE0241-U01BGPC1Z0S-de16e0810ab9-512')
+user_banner = URI.open('https://images.pexels.com/photos/5726296/pexels-photo-5726296.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')
+liz.photos.attach(io: user_avatar, filename: 'user_avatar.png', content_type: 'image/png')
+liz.photos.attach(io: user_banner, filename: 'user_banner.jpg', content_type: 'image/jpg')
+liz.save
+
+user_avatar = URI.open('https://ca.slack-edge.com/T02NE0241-U01BP13R1CL-aa72532c73d4-512')
+user_banner = URI.open('hhttps://www.selectvacationproperties.com/wp-content/uploads/2020/02/AdobeStock_265268314.jpeg')
+yuping.photos.attach(io: user_avatar, filename: 'user_avatar.png', content_type: 'image/png')
+yuping.photos.attach(io: user_banner, filename: 'user_banner.jpg', content_type: 'image/jpg')
+yuping.save
+
+user_avatar = URI.open('https://www.aboutmanchester.co.uk/wp-content/uploads/2017/11/IMG_2409.jpg')
+user_banner = URI.open('https://miro.medium.com/max/1400/1*nkARDRVDJaB9bKN0Po53-g.jpeg')
+seigo.photos.attach(io: user_avatar, filename: 'user_avatar.png', content_type: 'image/png')
+seigo.photos.attach(io: user_banner, filename: 'user_banner.jpg', content_type: 'image/jpg')
+seigo.save
+
+
+#ORGANIZATION
+puts "creating we love trees"
+we_love_trees = Organization.create!(
+  name: "We love trees",
+  email: "trees@welovetrees.com",
+  address: "Meguro Station, Tokyo, Japan",
+  description: "Save the trees.",
+  establishment_year: "2020",
+  phone_number: "08077633849",
+  hp_url: "http://welovetrees.com",
+  twitter_url: "http://twitter.com/trees",
+  insta_url: "http://instagram.com/welovetrees",
+  tag_list: "Environment/Agriculture"
+  )
+puts "attaching photos to we love trees"
+org_logo = URI.open('https://images.pexels.com/photos/9198/nature-sky-twilight-grass-9198.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')
+org_banner = URI.open('https://images.pexels.com/photos/957024/forest-trees-perspective-bright-957024.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')
+we_love_trees.photos.attach(io: org_logo, filename: 'org_logo.png', content_type: 'image/png')
+we_love_trees.attach(io: org_banner, filename: 'org_banner.jpg', content_type: 'image/jpg')
+
+puts "assigning we love trees to seigo"
+membership = Membership.new
+membership.user = seigo
+membership.organization = we_love_trees
+membership.save
+
+puts "creating plant a tree"
+event = Event.create!(
+  title: "Plant a tree",
+  category: 'Volunteer',
+  description: 'plant a tree',
+  positions: rand(3..10),
+  ongoing: true,
+  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
+  start_time: Time.now + rand(10000..100000),
+  end_time: Time.now + rand(100000..1000000),
+  organization: we_love_trees,
+  owner: seigo
+  )
+
+
+
+puts "attaching photo to plant a tree"
+event_photo = URI.open('https://www.eco.ca/wp-content/uploads/corporation-of-tomorrow.png')
+event.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
