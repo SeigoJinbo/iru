@@ -1,0 +1,75 @@
+<% day_of_the_week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] %>
+<%# Org banner %>
+<div class="org-banner" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path Organization.first.photos.second.key, height: 400, width: 1200, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+  <div class="org-banner-items">
+    <%= cl_image_tag @organization.photos.first.key, height: 100, width: 100, crop: :fill, class: "org-avatar" %>
+    <div class="org-banner-text ml-3">
+      <h1><span class="maize-text"><%= @organization.name %>'s</span> Profile</h1>
+      <p><span class="ivory-text"><%= @organization.description %></span></p>
+      <div class="btn btn-primary">Edit Description</div>
+    </div>
+  </div>
+</div>
+<div class="org-sections">
+  <%# Org-info %>
+  <div class="org-info">
+    <h3>Orgnization Info</h3>
+    <div class="round-box">
+      <ul>
+        <li>Adress: <%= @organization.address %></li>
+        <li>Email: <%= @organization.email %></li>
+        <li>Phone Number: <%= @organization.phone_number %></li>
+        <li>Establishment Year: <%= @organization.establishment_year %></li>
+        <li>HP Url: <%= @organization.hp_url %></li>
+        <li>FB Url: <%= @organization.fb_url %></li>
+        <li>Twitter Url: <%= @organization.twitter_url %></li>
+        <li>Insta Url: <%= @organization.insta_url %></li>
+      </ul>
+    </div>
+  </div>
+  <br>
+  <h2>Events</h2>
+  <% if @organization.users.include?(current_user) %>
+    <%= link_to "Create a new event", new_organization_event_path(@organization), class: 'btn btn-primary' %>
+  <% end %>
+  <% @organization.events.each do |event| %>
+    <h4><%= event.title %></h4>
+    <div class="round-box">
+      <ul>
+        <li><%= event.description %></li>
+        <li>positions: <%= event.positions %> ppl</li>
+        <% if event.dates.present? %>
+          <li>Every <% event.dates.each do |date| %>
+              <%= day_of_the_week[date] %>
+            <% end %></li>
+          <li>Start Time: <%= event.start_time.strftime("%k:%M") %></li>
+          <li>End Time: <%= event.end_time.strftime("%k:%M") %></li>
+        <% else %>
+          <li>Start Time: <%= event.start_time.strftime("%d of %B, %Y") %></li>
+          <li>End Time: <%= event.end_time.strftime("%d of %B, %Y") %></li>
+        <% end %>
+      </ul>
+      <div class="enroll-section">
+        <% if user_signed_in? %>
+          <% if event.owner == current_user || current_user.admin %>
+            <%= link_to "Edit", event_path(event), class: 'btn btn-primary' %>
+            <%= link_to "Delete", event_path(event), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete #{event.title}?" } %>
+          <% end %>
+          <% if event.owner != current_user || current_user.admin %>
+            <button class="enroll-btn btn btn-primary" type="button">Enroll!</button>
+            <div class="enroll-form">
+              <p>Select the volunteering time:</p>
+              <%= simple_form_for [event, @enrollment] do |f| %>
+                <%= f.input :start_time, as: :datetime, html5: true %>
+                <%= f.input :end_time, as: :datetime, html5: true %>
+                <%= f.button :submit, class: "btn btn-primary" %>
+              <% end %>
+            </div>
+          <% end %>
+        <% else %>
+          <%= link_to "Sign in to enroll", new_user_session_path, class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
