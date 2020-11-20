@@ -1,92 +1,131 @@
-<% day_of_the_week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] %>
+<% day_of_the_week = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"] %>
 <% if @organization.users.include?(current_user) %>
-  <nav>
-    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-      <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Organization Info</a>
-      <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Manage Events</a>
-      <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Pending Volunteer</a>
-    </div>
-  </nav>
   <div class="page">
     <div class="page-box">
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <a class="nav-item nav-link active" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Pending Volunteers</a>
+          <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Manage Events</a>
+          <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Organization Info</a>
+        </div>
+      </nav>
       <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+        <div class="tab-pane fade" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
           <%= render 'shared/org_page' %>
         </div>
 
         <%# Manage Events %>
         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
           <div class="org-sections">
-    				<h2>Events</h2>
+            <div class="event-title">
+      				<h2>Events</h2>
               <% if @organization.users.include?(current_user) %>
                 <%= link_to "Create a new event", new_organization_event_path(@organization), class: 'btn btn-primary' %>
               <% end %>
+            </div>
               <% @organization.events.each do |event| %>
-                <h4><%= event.title %></h4>
-                <div class="round-box">
-                  <ul>
-                    <li><%= event.description %></li>
-                    <li>positions: <%= event.positions %> ppl</li>
+
+                  <div class="d-inline-flex">
+                    <h4><%= event.title %> &nbsp </h4>
                     <% if event.dates.present? %>
-                      <li>Every <% event.dates.each do |date| %>
-                          <%= day_of_the_week[date] %>
-                        <% end %></li>
-                      <li>Start Time: <%= event.start_time.strftime("%k:%M") %></li>
-                      <li>End Time: <%= event.end_time.strftime("%k:%M") %></li>
+                      <p> (Every <%event.dates.each do |date| %>
+                        <strong><%= day_of_the_week[date] %></strong>
+                        <% end %></p>
+                      <p>&nbsp/<%= event.start_time.strftime("%I:%M %p") %> - <%= event.end_time.strftime("%I:%M %p") %></p>
                     <% else %>
-                      <li>Start Time: <%= event.start_time.strftime("%d of %B, %Y") %></li>
-                      <li>End Time: <%= event.end_time.strftime("%d of %B, %Y") %></li>
+                      <p>(From 👉🏻 <%= event.start_time.strftime("%d of %B, %Y - %I:%M %p") %></p>
+                      <p>&nbsp/To 👉🏻 <%= event.end_time.strftime("%d of %B, %Y - %I:%M %p") %></p>
                     <% end %>
-                  </ul>
-                  <div class="enroll-section">
-                    <% if user_signed_in? %>
-                      <% if event.owner != current_user || current_user.admin %>
-                        <button class="enroll-btn btn btn-primary" type="button">Enroll!</button>
-                        <div class="enroll-form">
-                          <p>Select the volunteering time:</p>
-                          <%= simple_form_for [event, @enrollment] do |f| %>
-                            <%= f.input :start_time, as: :datetime, html5: true %>
-                            <%= f.input :end_time, as: :datetime, html5: true %>
-                            <%= f.button :submit, class: "btn btn-primary" %>
-                          <% end %>
+                    <p>&nbsp/Positions: <%= event.positions %> people)</p>
+                  </div>
+              <div class="round-box mb-3 pt-2">
+
+                  <% if event.enrollments.empty? %>
+                    <p>No volunteers yet....<hp>
+
+                  <% else %>
+                  <% event.enrollments.each do |enrollment| %>
+                    <div class="attendie p-3 mt-3">
+                      <%= link_to user_path(enrollment.user) do  %>
+                        <div class="d-inline-flex align-items-center">
+                          <%= cl_image_tag enrollment.user.photos.first.key, height: 60, width: 60, crop: :fill, class: "enrollment-avatar" %>
+                          <%= enrollment.user.nickname %>
                         </div>
                       <% end %>
-                    <% else %>
-                      <%= link_to "Sign in to enroll", new_user_session_path, class: "btn btn-primary" %>
+                      <p><%= enrollment.start_time.strftime("%d of %B") %></p>
+                      <p><%= enrollment.start_time.strftime("%k:%M") %> -<%= enrollment.end_time.strftime("%k:%M") %></p>
+                    </div>
+                  <% end %>
+                <% end %>
+                <div class="enroll-section">
+                  <% if user_signed_in? %>
+                    <% if event.owner != current_user || current_user.admin %>
+                      <button class="enroll-btn btn btn-primary" type="button">Enroll!</button>
+                      <div class="enroll-form">
+                        <p>Select the volunteering time:</p>
+                        <%= simple_form_for [event, @enrollment] do |f| %>
+                          <%= f.input :start_time, as: :datetime, html5: true %>
+                          <%= f.input :end_time, as: :datetime, html5: true %>
+                          <%= f.button :submit, class: "btn btn-primary" %>
+                        <% end %>
+                      </div>
                     <% end %>
-                  </div>
+                  <% else %>
+                    <%= link_to "Sign in to enroll", new_user_session_path, class: "btn btn-primary" %>
+                  <% end %>
+                </div>
                 </div>
               <% end %>
+
           </div>
         </div>
 
         <%# Pending Volunteer %>
-        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+        <div class="tab-pane fade show active" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
           <div class="org-sections">
-            <% @organization.events.each do |event| %>
-              <div class="d-flex">
-                <h5><%= link_to event.title, organization_path(event.organization) %></h5>
-                <% event.enrollments.each do |enrollment| %>
+            <div class="pending">
+              <% @organization.events.each do |event| %>
+                <h4><%= event.title %></h4>
+                <% if event.enrollments.empty? %>
+                  <p>No volunteers yet...</p>
+                <% else %>
+
                   <div>
-                    <%= link_to user_path(enrollment.user) do  %>
-                      <p><%= enrollment.user.nickname %></p>
-                      <%= cl_image_tag enrollment.user.photos.first.key, height: 60, width: 60, crop: :fill %>
+
+                    <% event.enrollments.each do |enrollment| %>
+                      <% if enrollment.status == "Pending" %>
+                      <div class="d-flex text-center p-3 pending-card>
+                        <%= link_to user_path(enrollment.user) do %>
+
+                          <%= cl_image_tag enrollment.user.photos.first.key, height: 60, width: 60, crop: :fill, class: "pending-avatar" %>
+                          <%= enrollment.user.nickname %>
+                        <% end %>
+                        <p><%= enrollment.start_time.strftime("%d of %B, %k:%M") %></p>
+                        <p><%= enrollment.end_time.strftime("%d of %B, %k:%M") %></p>
+                        <div class="d-flex">
+                          <%= simple_form_for(enrollment) do |f| %>
+                            <%= f.input :status, as: :hidden, remote: true, input_html: { value: "Approved" } %>
+                            <div class="m-1"><%= f.submit 'Approve', class: 'btn btn-primary'%></div>
+                          <% end %>
+                          <%= simple_form_for(enrollment) do |f| %>
+                            <%= f.input :status, as: :hidden, remote: true, input_html: { value: "Declined" } %>
+                            <div class="m-1"><%= f.submit 'Decline', class: 'btn btn-primary'%></div>
+                          <% end %>
+                        </div>
+                      </div>
+
+                      <% end %>
                     <% end %>
-                    <p><%= enrollment.start_time %></p>
-                    <p><%= enrollment.end_time %></p>
-                    <%= enrollment.status %>
-                    <%= simple_form_for(enrollment) do |f| %>
-                      <%= f.input :status, as: :hidden, remote: true, input_html: { value: "Approved" } %>
-                      <div class="m-1"><%= f.submit 'Approve', class: 'btn btn-primary'%></div>
-                    <% end %>
-                    <%= simple_form_for(enrollment) do |f| %>
-                      <%= f.input :status, as: :hidden, remote: true, input_html: { value: "Declined" } %>
-                      <div class="m-1"><%= f.submit 'Decline', class: 'btn btn-primary'%></div>
-                    <% end %>
+
+
                   </div>
+
+
+
                 <% end %>
-              </div>
-            <% end %>
+              <% end %>
+
+            </div>
           </div>
         </div>
       </div>

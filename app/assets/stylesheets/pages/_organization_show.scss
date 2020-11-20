@@ -16,13 +16,121 @@
     display: flex;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
   }
+  position: relative;
 }
-.org-sections {
+.org-banner-text {
+  width: 880px;
+
+}
+.sections {
   padding: 48px;
+}
+
+.org-sections {
+  padding: 16px 48px;
 }
 .round-box {
   background-color: $darker-ivory;
   border-radius: 24px;
   padding: 24px;
+}
+.event-title {
+  display: flex;
+  justify-content: space-between;
+}
+.enrollment-avatar {
+  border-radius: 50%;
+}
+.hp-links {
+  font-size: 30px;
+  position: absolute;
+  right: 48px;
+  bottom: 36px;
+  color: $ivory;
+}
+.icon {
+  color: #FECE63;
+}
+.edit-btn {
+  position: absolute;
+  right: 48px;
+  top: 36px;
+}
+.event-box {
+  background-color: $darker-ivory;
+  border-radius: 24px;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  // margin-bottom: 16px;
+}
+.event-card {
+  list-style: none;
+  background-color: $beige;
+  width: 480px;
+  margin: 16px;
+  padding: 24px;
+  display: inline-block;
+  border-radius: 5px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  .event-card-pic {
+    height: 300px;
+    width: 435px;
+    margin-bottom: 4px;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+    padding: 24px;
+  }
+}
+.event-card::after {
+  border-radius: 5px;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.event-card:hover {
+  -webkit-transform: scale(1.1, 1.1);
+  transform: scale(1.1, 1.1);
+}
+.event-card:hover::after {
+  opacity: 1;
+}
+.event-center {
+  text-align: center;
+}
+.pending-card {
+  background-color: $beige;
+  width: 210px;
+}
+.pending-avatar {
+  border-radius: 50%;
+}
+.dates-btn {
+  display: flex;
+}
+.heavy-btn {
+  margin: 2px;
 
+}
+.light-btn {
+  margin: 2px;
+}
+.event-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.attendie {
+  background-color: $beige;
+  width: 150px;
 }
