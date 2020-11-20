@@ -22,18 +22,23 @@
 				<div class="events">
 					<h3>My Events</h3>
 					<div class="user-box">
-						<%  @current_enrollments.each do |enrollment| %>
-							<li class="ivory-card">
-								<div class="ivory-card-contents">
-									<div class="ivory-card-pic" style="background-image: url(<%= cl_image_path enrollment.event.photo.key, height: 300, width: 400, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+
+						<% if @current_enrollments.any? %>
+							<%  @current_enrollments.each do |enrollment| %>
+								<li class="ivory-card">
+									<div class="ivory-card-contents">
+										<div class="ivory-card-pic" style="background-image: url(<%= cl_image_path enrollment.event.photo.key, height: 300, width: 400, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+										</div>
+										<h5><%= enrollment.event.title.truncate(25, separator: ' ') %> with <%= link_to enrollment.event.organization.name, organization_path(enrollment.event.organization) %></h5>
+										<% if enrollment.event.description %>
+											<p><%= enrollment.event.description.truncate(50, separator: ' ') %></p>
+										<% end %>
+										<h6><%=enrollment.status%></h6>
 									</div>
-									<h5><%= enrollment.event.title.truncate(25, separator: ' ') %> with <%= link_to enrollment.event.organization.name, organization_path(enrollment.event.organization) %></h5>
-									<% if enrollment.event.description %>
-										<p><%= enrollment.event.description.truncate(50, separator: ' ') %></p>
-									<% end %>
-									<h6><%=enrollment.status%></h6>
-								</div>
-							</li>
+								</li>
+							<% end %>
+						<% else %>
+							<p>None yet! <%= link_to "Find an organization?", map_path %></p>
 						<% end %>
 					</div>
 				</div>
@@ -65,19 +70,22 @@
 				<div class="history">
 					<h3>Volunteering History</h3>
 					<div class="user-box" id="history-box">
-						<% @past_enrollments.each do |enrollment| %>
+						<% if @past_enrollments.any? %>
+							<% @past_enrollments.each do |enrollment| %>
 
-							<li class="ivory-card">
-								<div class="ivory-card-contents">
-									<div class="ivory-card-pic" style="background-image: url(<%= cl_image_path enrollment.event.photo.key, height: 300, width: 400, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+								<li class="ivory-card">
+									<div class="ivory-card-contents">
+										<div class="ivory-card-pic" style="background-image: url(<%= cl_image_path enrollment.event.photo.key, height: 300, width: 400, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+										</div>
+										<h5><%= enrollment.event.title %> with <%= link_to enrollment.event.organization.name, organization_path(enrollment.event.organization) %></h5>
+										<% if enrollment.event.description %>
+											<p><%= enrollment.event.description.truncate(50, separator: ' ') %></p>
+										<% end %>
 									</div>
-									<h5><%= enrollment.event.title %> with <%= link_to enrollment.event.organization.name, organization_path(enrollment.event.organization) %></h5>
-									<% if enrollment.event.description %>
-										<p><%= enrollment.event.description.truncate(50, separator: ' ') %></p>
-									<% end %>
-								</div>
-							</li>
-
+								</li>
+							<% end %>
+							<% else %>
+							<p>None yet!</p>
 						<% end %>
 					</div>
 				</div>
