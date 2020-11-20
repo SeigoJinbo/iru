@@ -32,26 +32,30 @@
                         <strong><%= day_of_the_week[date] %></strong>
                         <% end %></p>
                       <p>&nbsp/<%= event.start_time.strftime("%I:%M %p") %> - <%= event.end_time.strftime("%I:%M %p") %></p>
-
                     <% else %>
-                      <p>From 👉🏻 <%= event.start_time.strftime("%d of %B, %Y - %I:%M %p") %></p>
-                      <p>To 👉🏻 <%= event.end_time.strftime("%d of %B, %Y - %I:%M %p") %></p>
+                      <p>(From 👉🏻 <%= event.start_time.strftime("%d of %B, %Y - %I:%M %p") %></p>
+                      <p>&nbsp/To 👉🏻 <%= event.end_time.strftime("%d of %B, %Y - %I:%M %p") %></p>
                     <% end %>
                     <p>&nbsp/Positions: <%= event.positions %> people)</p>
                   </div>
-              <div class="round-box mb-3">
+              <div class="round-box mb-3 pt-2">
 
-                <% event.enrollments.each do |enrollment| %>
-                  <div class="attendie p-3 mt-3">
-                    <%= link_to user_path(enrollment.user) do  %>
-                      <div class="d-inline-flex align-items-center">
-                        <%= cl_image_tag enrollment.user.photos.first.key, height: 60, width: 60, crop: :fill, class: "enrollment-avatar" %>
-                        <%= enrollment.user.nickname %>
-                      </div>
-                    <% end %>
-                    <p><%= enrollment.start_time.strftime("%d of %B") %></p>
-                    <p><%= enrollment.start_time.strftime("%k:%M") %> -<%= enrollment.end_time.strftime("%k:%M") %></p>
-                  </div>
+                  <% if event.enrollments.empty? %>
+                    <p>No volunteer yet....<hp>
+
+                  <% else %>
+                  <% event.enrollments.each do |enrollment| %>
+                    <div class="attendie p-3 mt-3">
+                      <%= link_to user_path(enrollment.user) do  %>
+                        <div class="d-inline-flex align-items-center">
+                          <%= cl_image_tag enrollment.user.photos.first.key, height: 60, width: 60, crop: :fill, class: "enrollment-avatar" %>
+                          <%= enrollment.user.nickname %>
+                        </div>
+                      <% end %>
+                      <p><%= enrollment.start_time.strftime("%d of %B") %></p>
+                      <p><%= enrollment.start_time.strftime("%k:%M") %> -<%= enrollment.end_time.strftime("%k:%M") %></p>
+                    </div>
+                  <% end %>
                 <% end %>
                 <div class="enroll-section">
                   <% if user_signed_in? %>
