@@ -17,7 +17,7 @@
           <%= f.input :start_time, html5: true, required: false %>
           <%= f.input :end_time, html5: true, required: false %>
         </div>
-        <%= f.input :photo, as: :file %>
+        <%= f.input :photo, as: :file, label: 'Please upload an event photo' %>
         <%= f.button :submit, class: "btn btn-primary" %>
       <% end %>
     <div/>

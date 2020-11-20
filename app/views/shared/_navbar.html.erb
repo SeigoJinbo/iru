@@ -11,8 +11,8 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
-        <li class="nav-item dropdown">
-          <%= link_to "Notifications", "#", height: 100, width: 100, crop: :fill, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+        <li class="nav-item dropdown text-white">
+          <%= link_to "Notifications", "#", height: 100, width: 100, crop: :fill, class: "avatar dropdown-toggle text-white", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
           <div class="dropdown-menu dropdown-menu-pending" aria-labelledby="navbarDropdown">
 
             <!-- Pending Enrollment Dropdown-->
@@ -46,17 +46,16 @@
               <% end %>
             <% end %>
           </div>
-
         <li class="nav-item active">
-          <%= link_to map_path, class: "dropdown" do %>
+          <%= link_to map_path, class: "dropdown text-white" do %>
 						<i class="fas fa-map-marked-alt"></i>
 					<% end %>
         </li>
 
         <!-- Organization Dropdown -->
         <li class="nav-item dropdown">
-					<%= link_to "#", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false do %>
-						<i class="fas fa-hands-helping"></i>
+					<%= link_to "#", class: "avatar dropdown-toggle text-white", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false do %>
+						<i class="fas fa-hands-helping text-white"></i>
 					<% end %>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <% current_user.organizations.each do |organization| %>
@@ -68,7 +67,7 @@
           </div>
         </li>
 
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown" id="user-avatar">
 					<%= cl_image_tag current_user.photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <%= link_to "My Dashboard", user_path(current_user), class: "dropdown-item" %>
