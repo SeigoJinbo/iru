@@ -37,6 +37,7 @@ Organization.destroy_all
 
 
 
+
 #------------------RANDOM USERS-----------------
 puts "creating random users"
 5.times do
@@ -66,7 +67,7 @@ puts "creating random organizations"
 
 
 ADDRESSES.each do |address|
-	tag = TAGS.sample
+  tag = TAGS.sample
   org = Organization.create!(
     email: Faker::Internet.email,
     name: Faker::Dessert.topping,
@@ -76,10 +77,10 @@ ADDRESSES.each do |address|
     phone_number: Faker::PhoneNumber.cell_phone_in_e164,
     hp_url: Faker::Internet.email,
     twitter_url: Faker::Internet.email,
-		insta_url: Faker::Internet.email,
-		tag_list: tag
-	)
-	org.tag_list.add(tag)
+    insta_url: Faker::Internet.email,
+    tag_list: tag
+  )
+  org.tag_list.add(tag)
 end
 
 #-----------RANDOM MEMBERSHIPS--------------
@@ -153,6 +154,8 @@ end
 
 
 #-----------------USERS--------------------
+puts 'creating dev team'
+
 seigo = User.create!(
   first_name: "Seigo",
   last_name: "Jinbo",
@@ -189,7 +192,7 @@ liz = User.create!(
   admin: false
   )
   #birthday: 'may 7th 1993'
-
+puts 'attach photos to dev team'
 user_avatar = URI.open('https://ca.slack-edge.com/T02NE0241-U01BGPC1Z0S-de16e0810ab9-512')
 user_banner = URI.open('https://images.pexels.com/photos/1237119/pexels-photo-1237119.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')
 liz.photos.attach(io: user_avatar, filename: 'user_avatar.png', content_type: 'image/png')
@@ -242,7 +245,7 @@ tsunami = Organization.create!(
   insta_url: "http://instagram.com/tsunamirelief",
   tag_list: "Disasters"
   )
-puts "attaching photos to we love trees"
+puts "attaching photos tsunami relief"
 org_logo = URI.open('https://images.pexels.com/photos/1295138/pexels-photo-1295138.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260')
 org_banner = URI.open('https://images.pexels.com/photos/753619/pexels-photo-753619.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260')
 tsunami.photos.attach(io: org_logo, filename: 'org_logo.png', content_type: 'image/png')
@@ -345,7 +348,7 @@ walk_a_panda = Event.create!(
   )
 puts "attaching photo to walk a panda"
 event_photo = URI.open('https://images.pexels.com/photos/148182/pexels-photo-148182.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')
-read_to_kids.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+walk_a_panda.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
 
 
 
@@ -375,3 +378,8 @@ Enrollment.create!(
   start_time: Time.now + rand(10000..100000),
   end_time: Time.now + rand(100000..1000000)
   )
+
+
+
+
+
