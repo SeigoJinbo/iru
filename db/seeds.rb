@@ -29,10 +29,8 @@ ADDRESSES = [
   "Bird Sanctuary, Okura-dori, Funabashi 1-chome, Funabashi, Setagaya, Tokyo, 157-8510, Japan",
   "Yogananajo-dori, 1-chome, Funabashi, Setagaya, Tokyo, 158-8577, Japan",
   'Times, Nakahara kaido, Tokyo, Ota, 145-8523, Japan', 'Tokyo, Ota, 145-0066, Japan',
-  'Meguro, Tokyo, 152-0034, Japan',
   'Gap, Kurinoki-Dori, Meguro, Tokyo, 152-0035, Japan',
   'Tomorrowland, Maple Street, Meguro, Tokyo, 152-0035, Japan',
-  'search by id forward search Ueshima Coffee Ten, Suzukake Street, Meguro, Tokyo, 152-0035, Japan',
   'Sans Souci, Nakahara kaido, Tokyo, Ota, 145-8523, Japan',
   'Den-en-Chofu Elementary School, Kampachi dori, Setagaya, Tokyo, 145-0071, Japan'
 ]
