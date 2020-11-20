@@ -1,23 +1,25 @@
 <div class="page">
   <div class="page-box">
-    <h1>Create a new event</h1>
-    <%= simple_form_for [@organization, @event] do |f| %>
-      <%= f.input :title %>
-      <%= f.input :description %>
-      <%= f.input :category, collection: Event::CATEGORIES %>
-      <%= f.input :positions %>
-      <%= f.input :ongoing, as: :radio_buttons, label: 'Is this an ongoing event?' %>
-      <div id="days_of_the_week" class="d-none">
-        <%= f.collection_check_boxes :dates, [[0, 'Mon'], [1, 'Tue'], [2, 'Wed'], [3, 'Thur'], [4, 'Fri'], [5, 'Sat'], [6, 'Sun']], :first, :last, include_hidden: false %>
-        <%= f.input :start_time, as: :time, html5: true %>
-        <%= f.input :end_time, as: :time, html5: true %>
-      </div>
-      <div id="date_with_time" class="d-none">
-        <%= f.input :start_time, html5: true, required: false %>
-        <%= f.input :end_time, html5: true, required: false %>
-      </div>
-      <%= f.input :photo, as: :file %>
-      <%= f.button :submit, class: "btn btn-primary" %>
-    <% end %>
+    <div class="sections">
+      <h1>Create a new event</h1>
+      <%= simple_form_for [@organization, @event] do |f| %>
+        <%= f.input :title %>
+        <%= f.input :description %>
+        <%= f.input :category, collection: Event::CATEGORIES %>
+        <%= f.input :positions %>
+        <%= f.input :ongoing, as: :radio_buttons, label: 'Is this an ongoing event?' %>
+        <div id="days_of_the_week" class="d-none">
+          <%= f.collection_check_boxes :dates, [[0, 'Mon'], [1, 'Tue'], [2, 'Wed'], [3, 'Thur'], [4, 'Fri'], [5, 'Sat'], [6, 'Sun']], :first, :last, include_hidden: false %>
+          <%= f.input :start_time, as: :time, html5: true %>
+          <%= f.input :end_time, as: :time, html5: true %>
+        </div>
+        <div id="date_with_time" class="d-none">
+          <%= f.input :start_time, html5: true, required: false %>
+          <%= f.input :end_time, html5: true, required: false %>
+        </div>
+        <%= f.input :photo, as: :file %>
+        <%= f.button :submit, class: "btn btn-primary" %>
+      <% end %>
+    <div/>
   </div>
 </div>

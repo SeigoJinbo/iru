@@ -1,22 +1,9 @@
 <div class="page">
   <div class="home-banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path Organization.first.photos.second.key, height: 1000, width: 1500, crop: :fill %>')">
-    <h1>iru</h1>
-    <h2>Contribute to a cause near you</h2>
+    <div class="home-text">
+			<h1>iru</h1>
+			<h2>Contribute to a cause near you</h2>
+			<div class="home-button"><%= link_to "Explore your community", map_path, class: 'btn btn-primary m-3' %></div>
+		</div>
   </div>
-</div>
-<br>
-<div class="just-instance">
-  Event photo instance
-  <%= cl_image_tag Event.first.photo.key, height: 300, width: 400, crop: :fill %>
-  <br>
-  User photos instance
-  <!-- avatar -->
-  <%= cl_image_tag User.first.photos.first.key, height: 100, width: 100, crop: :fill %>
-  <!-- banner -->
-  <%= cl_image_tag User.first.photos.second.key, height: 300, width: 700, crop: :fill %>
-  Org photos instance
-  <!-- avatar -->
-  <%= cl_image_tag Organization.first.photos.first.key, height: 100, width: 100, crop: :fill %>
-  <!-- banner -->
-  <%= cl_image_tag Organization.first.photos.second.key, height: 300, width: 700, crop: :fill %>
 </div>

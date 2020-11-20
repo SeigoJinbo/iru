@@ -7,6 +7,15 @@ class UsersController < ApplicationController
 
   def show
     authorize @user
+    @past_enrollments = @user.enrollments.select do |enrollment|
+      enrollment.status != "pending"
+    end
+
+
+
+
+
+
   end
 
   def edit

@@ -39,5 +39,4 @@ document.addEventListener('turbolinks:load', () => {
   showEnrollForm();
   initMapbox();
   ongoingFormCondition();
-
 });

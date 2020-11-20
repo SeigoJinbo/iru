@@ -310,6 +310,7 @@ event_photo = URI.open('https://www.eco.ca/wp-content/uploads/corporation-of-tom
 plant_a_tree.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
 
 
+
 puts "Read to kids"
 read_to_kids = Event.create!(
   title: "Read to kids",
@@ -322,6 +323,7 @@ read_to_kids = Event.create!(
   end_time: Time.now + rand(100000..1000000),
   organization: Organization.all.sample,
   owner: User.all.sample
+
   )
 puts "attaching photo to Read to kids"
 event_photo = URI.open('https://images.pexels.com/photos/5088188/pexels-photo-5088188.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')
