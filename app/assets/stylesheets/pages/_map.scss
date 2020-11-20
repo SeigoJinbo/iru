@@ -4,12 +4,20 @@
   background-color: $ivory;
   height: 500px;
   overflow: scroll;
-
-
+	margin-left: 24px;
 }
 .map-form {
   display: flex;
   align-items: center;
   justify-content: center;
+}
 
+.map-form-results {
+	margin-left: 16px;
+	margin-right: 16px;
+	padding: 8px;
+}
+
+.form-control {
+	background-color: $ivory;
 }
