@@ -45,6 +45,8 @@
 
                   <% else %>
                   <% event.enrollments.each do |enrollment| %>
+                  <% if enrollment.status == "Approved" %>
+
                     <div class="attendie p-3 mt-3">
                       <%= link_to user_path(enrollment.user) do  %>
                         <div class="d-inline-flex align-items-center">
@@ -55,6 +57,8 @@
                       <p><%= enrollment.start_time.strftime("%d of %B") %></p>
                       <p><%= enrollment.start_time.strftime("%k:%M") %> -<%= enrollment.end_time.strftime("%k:%M") %></p>
                     </div>
+                    <% end %>
+
                   <% end %>
                 <% end %>
                 <div class="enroll-section">

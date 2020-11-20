@@ -22,21 +22,16 @@
 				<div class="events">
 					<h3>My Events</h3>
 					<div class="user-box">
-						<% @user.events.each do |event| %>
+						<%  @current_enrollments.each do |enrollment| %>
 							<li class="ivory-card">
 								<div class="ivory-card-contents">
 									<div class="ivory-card-pic" style="background-image: url(<%= cl_image_path event.photo.key, height: 300, width: 400, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
 									</div>
-									<h5><%= event.title.truncate(25, separator: ' ') %> with <%= link_to event.organization.name, organization_path(event.organization) %></h5>
-									<% if event.description %>
-										<p><%= event.description.truncate(50, separator: ' ') %></p>
+									<h5><%= enrollment.event.title.truncate(25, separator: ' ') %> with <%= link_to enrollment.event.organization.name, organization_path(enrollment.event.organization) %></h5>
+									<% if enrollment.event.description %>
+										<p><%= enrollment.event.description.truncate(50, separator: ' ') %></p>
 									<% end %>
-									<p><% event.enrollments.each do |enrollment| %>
-										<% if enrollment.user_id == @user.id %>
-											<h6><%= enrollment.status %></h6>
-										<% end %>
-									<% end %>
-									</p>
+									<h6><%=enrollment.status%></h6>
 								</div>
 							</li>
 						<% end %>
