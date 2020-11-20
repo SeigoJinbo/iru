@@ -1,6 +1,6 @@
 <% day_of_the_week = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"] %>
 <%# Org banner %>
-<div class="org-banner" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path Organization.first.photos.second.key, height: 400, width: 1200, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+<div class="org-banner" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path @organization.photos.second.key, height: 400, width: 1200, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
   <div class="org-banner-items">
     <%= cl_image_tag @organization.photos.first.key, height: 100, width: 100, crop: :fill, class: "org-avatar" %>
     <div class="org-banner-text ml-3">

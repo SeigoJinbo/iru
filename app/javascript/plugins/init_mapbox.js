@@ -20,7 +20,7 @@ const initMapbox = () => {
 
     const userMarker = JSON.parse(mapElement.dataset.user);
 		const popup = new mapboxgl.Popup().setHTML(userMarker.infoWindow); // add this
-				
+
 		const element = document.createElement('div');
 		element.className = 'marker';
 		element.style.backgroundImage = `url('${userMarker.image_url}')`;
@@ -66,7 +66,7 @@ const initMapbox = () => {
     const addMarkersToMap = (map, markers) => {
       markers.forEach((marker) => {
 				const popup = new mapboxgl.Popup().setHTML(marker.infoWindow); // add this
-				
+
 				const element = document.createElement('div');
 				element.className = 'marker';
 				element.style.backgroundImage = `url('${marker.image_url}')`;
@@ -81,7 +81,7 @@ const initMapbox = () => {
       });
     };
 		addMarkersToMap(map, markers);
-		addMarkersToMap([userMarker]);
+		// addMarkersToMap([userMarker]);
 
     map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken, mapboxgl: mapboxgl }));
   }
