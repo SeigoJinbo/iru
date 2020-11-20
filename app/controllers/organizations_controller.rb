@@ -20,15 +20,15 @@ class OrganizationsController < ApplicationController
     else
       @organizations = Organization.all
 		end
-		marker_image = {"Animals/Wildlife" => "animals.png",
-										"Children/Youth" => "children.png",
-										"Disasters" => "disasters.png",
-										"Education" => "education.png",
-										"Environment/Agriculture" => "environment.png",
-										"Health" => "health.png",
-										"Women" => "women.png",
-										"Seniors/Disabilities" => "seniors.png",
-										"Other" => "others.png"
+		marker_image = {"Animals/Wildlife" => "0.png",
+										"Children/Youth" => "1.png",
+										"Disasters" => "2.png",
+										"Education" => "3.png",
+										"Environment/Agriculture" => "4.png",
+										"Health" => "5.png",
+										"Women" => "6.png",
+										"Seniors/Disabilities" => "7.png",
+										"Other" => "8.png"
 									}
     @markers = {}
     @markers[:user] = { lat: current_user.latitude, lng: current_user.longitude, image_url: cl_image_path(current_user.photos.first.key) }
@@ -37,7 +37,7 @@ class OrganizationsController < ApplicationController
         lat: organization.latitude,
         lng: organization.longitude,
 				infoWindow: render_to_string(partial: "info_window", locals: { organization: organization }),
-				image_url: helpers.asset_url( marker_image[organization.tag_list.first] || "others.png" )
+				image_url: helpers.asset_url( marker_image[organization.tag_list.first] || "8.png" )
       }
     end
   end

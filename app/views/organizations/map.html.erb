@@ -24,7 +24,8 @@
         <% @organizations.each do |organization| %>
           <div class="map-form-results border-bottom pb-3">
 						<h5><%= link_to organization.name, organization_path(organization) %></h5>
-						<%= cl_image_tag organization.photos.first.key, height: 40, width: 40, crop: :fill %>
+						<%#= cl_image_tag organization.photos.first.key, height: 40, width: 40, crop: :fill %>
+						<%= image_tag "#{organization.tag_number || 4}.png", class: "map-results-organization-image" %>
 						<%= organization.tag_list %>
           </div>
         <% end %>
