@@ -19,11 +19,22 @@ const initMapbox = () => {
     // });
 
     const userMarker = JSON.parse(mapElement.dataset.user);
-      new mapboxgl.Marker()
-      .setLngLat([ userMarker.lng, userMarker.lat ])
-      .addTo(map);
+		const popup = new mapboxgl.Popup().setHTML(userMarker.infoWindow); // add this
+				
+		const element = document.createElement('div');
+		element.className = 'marker';
+		element.style.backgroundImage = `url('${userMarker.image_url}')`;
+		element.style.backgroundSize = 'contain';
+		element.style.width = '56px';
+		element.style.height = '56px';
+		element.style.borderRadius = '50%';
+		element.style.border = '2px solid white';
+		element.style.boxShadow = '0 0 15px rgba(0,0,0,0.4)';
 
-
+		new mapboxgl.Marker(element)
+			.setLngLat([ userMarker.lng, userMarker.lat ])
+			.setPopup(popup) // add this
+			.addTo(map);
 
     // const fitMapToMarkers = (map, markers) => {
     //   const bounds = new mapboxgl.LngLatBounds();
@@ -69,7 +80,8 @@ const initMapbox = () => {
           .addTo(map);
       });
     };
-    addMarkersToMap(map, markers);
+		addMarkersToMap(map, markers);
+		addMarkersToMap([userMarker]);
 
     map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken, mapboxgl: mapboxgl }));
   }

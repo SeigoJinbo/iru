@@ -1,5 +1,6 @@
 class OrganizationsController < ApplicationController
-  before_action :set_organization, only: [:show, :edit, :update]
+	include CloudinaryHelper
+	before_action :set_organization, only: [:show, :edit, :update]
   skip_before_action :authenticate_user!, only: [:index, :show]
   def index
     @organizations = policy_scope(Organization)
@@ -30,7 +31,7 @@ class OrganizationsController < ApplicationController
 										"Other" => "others.png"
 									}
     @markers = {}
-    @markers[:user] = { lat: current_user.latitude, lng: current_user.longitude }
+    @markers[:user] = { lat: current_user.latitude, lng: current_user.longitude, image_url: cl_image_path(current_user.photos.first.key) }
     @markers[:organization] = @organizations.geocoded.map do |organization|
       {
         lat: organization.latitude,
