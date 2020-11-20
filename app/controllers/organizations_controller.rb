@@ -18,14 +18,25 @@ class OrganizationsController < ApplicationController
       @organizations = Organization.all.tagged_with((params[:query]))
     else
       @organizations = Organization.all
-    end
+		end
+		marker_image = {"Animals/Wildlife" => "animals.png",
+										"Children/Youth" => "children.png",
+										"Disasters" => "disasters.png",
+										"Education" => "education.png",
+										"Environment/Agriculture" => "environment.png",
+										"Health" => "health.png",
+										"Women" => "women.png",
+										"Seniors/Disabilities" => "seniors.png",
+										"Other" => "others.png"
+									}
     @markers = {}
     @markers[:user] = { lat: current_user.latitude, lng: current_user.longitude }
     @markers[:organization] = @organizations.geocoded.map do |organization|
       {
         lat: organization.latitude,
         lng: organization.longitude,
-        infoWindow: render_to_string(partial: "info_window", locals: { organization: organization })
+				infoWindow: render_to_string(partial: "info_window", locals: { organization: organization }),
+				image_url: helpers.asset_url( marker_image[organization.tag_list.first] || "others.png" )
       }
     end
   end

@@ -12,11 +12,11 @@ const initMapbox = () => {
     });
 
     const markers = JSON.parse(mapElement.dataset.markers);
-      markers.forEach((marker) => {
-      new mapboxgl.Marker()
-      .setLngLat([ marker.lng, marker.lat ])
-      .addTo(map);
-    });
+    //   markers.forEach((marker) => {
+    //   new mapboxgl.Marker()
+    //   .setLngLat([ marker.lng, marker.lat ])
+		// 	.addTo(map);
+    // });
 
     const userMarker = JSON.parse(mapElement.dataset.user);
       new mapboxgl.Marker()
@@ -54,8 +54,16 @@ const initMapbox = () => {
 
     const addMarkersToMap = (map, markers) => {
       markers.forEach((marker) => {
-        const popup = new mapboxgl.Popup().setHTML(marker.infoWindow); // add this
-        new mapboxgl.Marker()
+				const popup = new mapboxgl.Popup().setHTML(marker.infoWindow); // add this
+				
+				const element = document.createElement('div');
+				element.className = 'marker';
+				element.style.backgroundImage = `url('${marker.image_url}')`;
+				element.style.backgroundSize = 'contain';
+				element.style.width = '56px';
+				element.style.height = '56px';
+
+        new mapboxgl.Marker(element)
           .setLngLat([ marker.lng, marker.lat ])
           .setPopup(popup) // add this
           .addTo(map);
