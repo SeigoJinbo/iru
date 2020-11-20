@@ -17,7 +17,25 @@ ADDRESSES = [
   "3-39-5 Ebisu, Shibuya City, Tokyo 150-0013",
   "4-3-1 Hiroo, Shibuya City, Tokyo 150-0012",
   "Kamimeguro Elementary School, Meguro City, Tokyo 153-0051",
-  "2-8-17, Meguro City, Tokyo 153-0052"]
+  "2-8-17, Meguro City, Tokyo 153-0052",
+
+  "HIRAKUYA OSTERIA, Suzukake Street, Meguro, Tokyo, 152-0035, Japan",
+  "Kingdom Hall of Jehovah's Witnesses, Salesian Dori, Meguro, Tokyo, 152-0003, Japan",
+  "maker's base, Meguro ave., Meguro, Tokyo, 152-0001, Japan",
+  "FamilyMart, Ohara-dori, Tokyo, Shinagawa, 142-0042, Japan",
+  "Tokyo Gakugei University Setagaya Junior High School, Komahachi-dori, Setagaya, Tokyo, 158-0081, Japan",
+  "rise: town front, Tamazutsumi St., Setagaya, Tokyo, 158-0094, Japan", "
+  Takashimaya garden place, Tamagawa dori, Setagaya, Tokyo, 158-8502, Japan",
+  "Bird Sanctuary, Okura-dori, Funabashi 1-chome, Funabashi, Setagaya, Tokyo, 157-8510, Japan",
+  "Yogananajo-dori, 1-chome, Funabashi, Setagaya, Tokyo, 158-8577, Japan",
+  'Times, Nakahara kaido, Tokyo, Ota, 145-8523, Japan', 'Tokyo, Ota, 145-0066, Japan',
+  'Meguro, Tokyo, 152-0034, Japan',
+  'Gap, Kurinoki-Dori, Meguro, Tokyo, 152-0035, Japan',
+  'Tomorrowland, Maple Street, Meguro, Tokyo, 152-0035, Japan',
+  'search by id forward search Ueshima Coffee Ten, Suzukake Street, Meguro, Tokyo, 152-0035, Japan',
+  'Sans Souci, Nakahara kaido, Tokyo, Ota, 145-8523, Japan',
+  'Den-en-Chofu Elementary School, Kampachi dori, Setagaya, Tokyo, 145-0071, Japan'
+]
 
 ROLES = ['leader', 'member', 'member', 'member']
 CATEGORIES = ["Volunteer", "Donate", "Fundraise"]
