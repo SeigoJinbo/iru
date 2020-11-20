@@ -62,7 +62,7 @@
             <% current_user.organizations.each do |organization| %>
               <%= link_to organization_path(organization), class: "dropdown-item" do%>
                 <%= organization.name %>
-                <%= cl_image_tag Organization.first.photos.first.key, height: 40, width: 40, crop: :fill %>
+                <%= cl_image_tag organization.photos.first.key, height: 40, width: 40, crop: :fill %>
               <% end %>
             <% end %>
           </div>
