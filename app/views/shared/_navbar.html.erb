@@ -59,10 +59,12 @@
 					<% end %>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <% current_user.organizations.each do |organization| %>
+						<div class="dropdown-box">
               <%= link_to organization_path(organization), class: "dropdown-item" do%>
-                <%= organization.name %>
                 <%= cl_image_tag organization.photos.first.key, height: 40, width: 40, crop: :fill %>
+                <%= organization.name %>
               <% end %>
+						</div>
             <% end %>
           </div>
         </li>
