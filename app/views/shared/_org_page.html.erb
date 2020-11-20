@@ -34,7 +34,7 @@
               <h4><%= event.title %></h4>
               <p><%= event.description %></p>
             </div>
-              <p>positions: <%= event.positions %> ppl</p>
+              <p>Positions: <%= event.positions %> people</p>
               <% if event.dates.present? %>
               <div class="dates-btn">
                 <p>Every <% [0, 1, 2, 3, 4, 5, 6].each do |date| %>
@@ -50,7 +50,6 @@
                 <p>From 👉🏻 <%= event.start_time.strftime("%d of %B, %Y - %I:%M %p") %></p>
                 <p>To 👉🏻 <%= event.end_time.strftime("%d of %B, %Y - %I:%M %p") %></p>
               <% end %>
-
             <div class="enroll-section">
               <% if user_signed_in? %>
                 <% if event.owner == current_user || current_user.admin %>

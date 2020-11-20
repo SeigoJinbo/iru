@@ -1,4 +1,4 @@
-<% day_of_the_week = ["Mon", "Tue", "Wed", "Thursday", "Fri", "Sat", "Sun"] %>
+<% day_of_the_week = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"] %>
 <% if @organization.users.include?(current_user) %>
   <div class="page">
     <div class="page-box">
@@ -23,37 +23,31 @@
                 <%= link_to "Create a new event", new_organization_event_path(@organization), class: 'btn btn-primary' %>
               <% end %>
             </div>
-            <div class="round-box">
               <% @organization.events.each do |event| %>
-                <h4><%= event.title %></h4>
 
-                <ul>
-                  <li><%= event.description %></li>
-                  <li>positions: <%= event.positions %> ppl</li>
-                  <% if event.dates.present? %>
-                    <p>Every <% event.dates.each do |date| %>
-                        <%= day_of_the_week[date] %>
-                      <% end %></p>
-                    <p>Every <% [0, 1, 2, 3, 4, 5, 6].each do |date| %>
-                      <% event.dates.each do |select_date| %>
-                        <% if date == select_date %>
-                          <div class=""><strong><%= day_of_the_week[date] %></strong></div>
-                        <% else %>
-                          <div class=""><%= day_of_the_week[date] %></div>
-                        <% end %>
-                      <% end %>
-                      <% end %></p>
-                    <p><%= event.start_time.strftime("%I:%M %p") %> - <%= event.end_time.strftime("%I:%M %p") %></p>
-                  <% else %>
-                    <p>From 👉🏻 <%= event.start_time.strftime("%d of %B, %Y - %I:%M %p") %></p>
-                    <p>To 👉🏻 <%= event.end_time.strftime("%d of %B, %Y - %I:%M %p") %></p>
-                  <% end %>
-                </ul>
+                  <div class="d-inline-flex">
+                    <h4><%= event.title %> &nbsp </h4>
+                    <% if event.dates.present? %>
+                      <p> (Every <%event.dates.each do |date| %>
+                        <strong><%= day_of_the_week[date] %></strong>
+                        <% end %></p>
+                      <p>&nbsp/<%= event.start_time.strftime("%I:%M %p") %> - <%= event.end_time.strftime("%I:%M %p") %></p>
+
+                    <% else %>
+                      <p>From 👉🏻 <%= event.start_time.strftime("%d of %B, %Y - %I:%M %p") %></p>
+                      <p>To 👉🏻 <%= event.end_time.strftime("%d of %B, %Y - %I:%M %p") %></p>
+                    <% end %>
+                    <p>&nbsp/Positions: <%= event.positions %> people)</p>
+                  </div>
+              <div class="round-box mb-3">
+
                 <% event.enrollments.each do |enrollment| %>
-                  <div>
+                  <div class="attendie p-3 mt-3">
                     <%= link_to user_path(enrollment.user) do  %>
-                      <p><%= enrollment.user.nickname %></p>
-                      <%= cl_image_tag enrollment.user.photos.first.key, height: 60, width: 60, crop: :fill, class: "enrollment-avatar" %>
+                      <div class="d-inline-flex align-items-center">
+                        <%= cl_image_tag enrollment.user.photos.first.key, height: 60, width: 60, crop: :fill, class: "enrollment-avatar" %>
+                        <%= enrollment.user.nickname %>
+                      </div>
                     <% end %>
                     <p><%= enrollment.start_time.strftime("%d of %B") %></p>
                     <p><%= enrollment.start_time.strftime("%k:%M") %> -<%= enrollment.end_time.strftime("%k:%M") %></p>
@@ -76,8 +70,8 @@
                     <%= link_to "Sign in to enroll", new_user_session_path, class: "btn btn-primary" %>
                   <% end %>
                 </div>
+                </div>
               <% end %>
-            </div>
 
           </div>
         </div>

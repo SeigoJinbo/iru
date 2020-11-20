@@ -125,3 +125,12 @@
 .light-btn {
   margin: 2px;
 }
+.event-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.attendie {
+  background-color: $beige;
+  width: 150px;
+}
