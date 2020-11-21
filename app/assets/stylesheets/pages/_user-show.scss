@@ -67,6 +67,7 @@
 }
 
 .ivory-card {
+  position: relative;
 	list-style: none;
 	background-color: $beige;
 	width: 240px;
@@ -118,4 +119,36 @@
 	padding-top: 24px;
 	padding-left: 48px;
 	padding-right: 48px;
+}
+
+.status-badge-Pending{
+  padding: 4px;
+  border-radius: 4px;
+  width: 70px;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color:grey;
+  color: lightgray;
+}
+.status-badge-Approved{
+  padding: 4px;
+  border-radius: 4px;
+  width: 80px;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color:green;
+  color: lightgreen;
+}
+
+.status-badge-Declined{
+  padding: 4px;
+  border-radius: 4px;
+  width: 74px;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color:darkred;
+  color: red;
 }
