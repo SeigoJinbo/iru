@@ -8,15 +8,11 @@ class OrganizationsController < ApplicationController
 
   def show
     @enrollment = Enrollment.new
-    # @events = @organization.events.select do |event|
-    #   event.status = "Accepted"
-    # end
+    # @events = @organization.events.select { |event| event.status = "Accepted" }
 
     @volunteer_events = @organization.events.select { |event| event.category == "Volunteer" }
     @fundraiser_events = @organization.events.select { |event| event.category == "Fundraiser" }
     @donation_events = @organization.events.select { |event| event.category == "Dontaion" }
-
-
   end
 
   def map

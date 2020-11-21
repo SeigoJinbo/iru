@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_18_030915) do
+ActiveRecord::Schema.define(version: 2020_11_21_040306) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,8 +61,21 @@ ActiveRecord::Schema.define(version: 2020_11_18_030915) do
     t.datetime "end_time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "target"
+    t.integer "raised"
+    t.integer "price_cents", default: 0, null: false
     t.index ["organization_id"], name: "index_events_on_organization_id"
     t.index ["user_id"], name: "index_events_on_user_id"
+  end
+
+  create_table "invoices", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "event_id", null: false
+    t.integer "amount"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_id"], name: "index_invoices_on_event_id"
+    t.index ["user_id"], name: "index_invoices_on_user_id"
   end
 
   create_table "memberships", force: :cascade do |t|
@@ -146,6 +159,8 @@ ActiveRecord::Schema.define(version: 2020_11_18_030915) do
   add_foreign_key "enrollments", "users"
   add_foreign_key "events", "organizations"
   add_foreign_key "events", "users"
+  add_foreign_key "invoices", "events"
+  add_foreign_key "invoices", "users"
   add_foreign_key "memberships", "organizations"
   add_foreign_key "memberships", "users"
   add_foreign_key "taggings", "tags"
