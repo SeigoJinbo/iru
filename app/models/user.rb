@@ -6,7 +6,9 @@ class User < ApplicationRecord
   has_many :events, through: :enrollments
   has_many :memberships
   has_many :organizations, through: :memberships
+  has_many :organization_comments
   has_many :events_as_owner, class_name: "Event"
+  has_many :event_comments
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
   has_many_attached :photos
