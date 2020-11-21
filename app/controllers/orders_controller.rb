@@ -1,4 +1,12 @@
 class OrdersController < ApplicationController
+
+
+  def new
+    raise
+    @order = Order.new
+
+  end
+
   def create
     authorize current_user
     event = Event.find(params[:event_id])
@@ -25,9 +33,11 @@ class OrdersController < ApplicationController
 
     order.update(checkout_session_id: session.id)
     redirect_to new_order_payment_path(order)
+
   end
 
   def show
+    authorize current_user
     @order = current_user.orders.find(params[:id])
   end
 end

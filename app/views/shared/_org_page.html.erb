@@ -25,7 +25,7 @@
   <div class="round-box">
     <div class="event-box">
 
-      <!----------Volunteer Event---------->
+      <!---------------------Volunteer Event--------------------->
       <% @volunteer_events.each do |event| %>
         <li class="event-card">
           <div class="event-card-contents">
@@ -77,14 +77,15 @@
         </li>
       <% end %>
 
-      <!----------Fundraiser Event---------->
+      <!---------------------Fundraiser Event-------------------->
       <% @fundraiser_events.each do |event| %>
         <li class="event-card">
           <h1>Fundraiser</h1>
+          <p><%= humanized_money_with_symbol(event.raised) %> / <%= humanized_money_with_symbol(event.target) %></p>
           <p>Amount: <%= humanized_money_with_symbol(event.price) %></p>
           <%= form_tag orders_path do %>
             <%= hidden_field_tag 'event_id', event.id %>
-            <%= submit_tag 'Purchase', class: 'btn btn-primary' %>
+            <%= submit_tag 'Donate', class: 'btn btn-primary' %>
           <% end %>
           <div class="event-card-contents">
             <div class="event-card-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
@@ -95,12 +96,12 @@
 
             <div class="enroll-section">
               <% if user_signed_in? %>
-                <!-- ------Event owner edit / delete -->
+                <!-- --------------Event owner edit / delete --------------------->
                 <% if event.owner == current_user || current_user.admin %>
                   <%= link_to "Edit", event_path(event), class: 'btn btn-primary' %>
                   <%= link_to "Delete", event_path(event), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete #{event.title}?" } %>
                 <% end %>
-                <!------- Enroll --------->
+                <!----------------------- Enroll --------------------------->
                 <% if event.owner != current_user || current_user.admin %>
                   <button class="enroll-btn btn btn-primary btn-block" type="button">Enroll!</button>
                   <div class="enroll-form">
@@ -112,7 +113,7 @@
                     <% end %>
                   </div>
                 <% end %>
-                <!------ Visitor sign in ------>
+                <!--------------------- Visitor sign in ------------->
               <% else %>
                 <%= link_to "Sign in to enroll", new_user_session_path, class: "btn btn-primary" %>
               <% end %>
