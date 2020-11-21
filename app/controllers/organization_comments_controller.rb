@@ -7,7 +7,6 @@ class OrganizationCommentsController < ApplicationController
     authorize current_user
   end
 
-
   def create
     authorize current_user
     @organization = Organization.find(params[:organization_id])
@@ -21,7 +20,11 @@ class OrganizationCommentsController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
+    authorize current_user
+    @organization_comment = OrganizationComment.find(params[:id])
+    @organization_comment.destroy
+    redirect_to organization_path(@organization_comment.organization)
   end
 
   private
@@ -29,5 +32,4 @@ class OrganizationCommentsController < ApplicationController
   def organization_comment_params
     params.require(:organization_comment).permit(:user, :organization, :content)
   end
-
 end
