@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
   has_many :enrollments
   has_many :invoices
+  has_many :orders
   has_many :events, through: :enrollments
   has_many :memberships
   has_many :organizations, through: :memberships

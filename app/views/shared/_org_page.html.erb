@@ -82,6 +82,10 @@
         <li class="event-card">
           <h1>Fundraiser</h1>
           <p>Amount: <%= humanized_money_with_symbol(event.price) %></p>
+          <%= form_tag orders_path do %>
+            <%= hidden_field_tag 'event_id', event.id %>
+            <%= submit_tag 'Purchase', class: 'btn btn-primary' %>
+          <% end %>
           <div class="event-card-contents">
             <div class="event-card-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
               <h4><%= event.title %></h4>

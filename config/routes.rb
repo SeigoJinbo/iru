@@ -10,5 +10,8 @@ Rails.application.routes.draw do
     resources :enrollments, only: [:new, :create]
   end
   resources :enrollments, only: [:update, :destroy]
+
   get '/map', to: 'organizations#map', as: :map
+
+  resources :orders, only: [:show, :create]
 end
