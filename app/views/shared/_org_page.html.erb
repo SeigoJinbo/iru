@@ -77,7 +77,26 @@
 
 
       <% end %>
-
     </div>
+    <div class="col-6">
+      <%= simple_form_for [@organization, @organization_comment] do |f| %>
+        <%= f.input :content, label: 'Comment' %>
+        <%= f.button :submit, 'Comment', remote: true, class: "btn btn-primary btn-block" %>
+      <% end %>
+      <% if @organization.organization_comments.any? %>
+        <% @organization.organization_comments.each do |comment| %>
+          <div class="organization-comment">
+            <div class="flex-box p-2">
+              <%= cl_image_tag comment.user.photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
+              <%= comment.user.nickname %>
+            </div>
+            <p class='p-2'><%= comment.content%></p>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+
+
   </div>
 </div>

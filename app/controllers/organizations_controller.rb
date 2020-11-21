@@ -7,6 +7,7 @@ class OrganizationsController < ApplicationController
   end
 
   def show
+    @organization_comment = OrganizationComment.new
     @enrollment = Enrollment.new
     # @events = @organization.events.select do |event|
     #   event.status = "Accepted"
