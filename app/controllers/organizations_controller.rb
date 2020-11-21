@@ -12,10 +12,9 @@ class OrganizationsController < ApplicationController
     #   event.status = "Accepted"
     # end
 
-    @volunteer_events = @organization.events.select do |event|
-      event.category == "Volunteer"
-      raise
-    end
+    @volunteer_events = @organization.events.select { |event| event.category == "Volunteer" }
+    @fundraiser_events = @organization.events.select { |event| event.category == "Fundraiser" }
+    @donation_events = @organization.events.select { |event| event.category == "Dontaion" }
 
 
   end

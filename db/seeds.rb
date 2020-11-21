@@ -36,7 +36,7 @@ ADDRESSES = [
 ]
 
 ROLES = ['leader', 'member', 'member', 'member']
-CATEGORIES = ["Volunteer", "Donate", "Fundraise"]
+CATEGORIES = ["Volunteer", "Donation", "Fundraiser"]
 TAGS = ["Animals/Wildlife", "Children/Youth", "Disasters", "Education", "Environment/Agriculture", "Health", "Women", "Seniors/Disabilities", "Other"]
 
 puts "destroying enrollments"
