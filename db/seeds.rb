@@ -333,7 +333,7 @@ plant_a_tree.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 
 puts "Read to kids"
 read_to_kids = Event.create!(
   title: "Read to kids",
-  category: 'Education',
+  category: 'Volunteer',
   description: 'help children learn to read',
   positions: rand(3..10),
   ongoing: true,
@@ -352,7 +352,7 @@ read_to_kids.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 
 puts "Walk a Panda"
 walk_a_panda = Event.create!(
   title: "Walk a Panda",
-  category: "Animals/Wildlife",
+  category: 'Volunteer',
   description: 'Pandas need exercise',
   positions: rand(3..10),
   ongoing: true,
