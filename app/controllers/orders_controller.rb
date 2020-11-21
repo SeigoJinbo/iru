@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   def create
+    authorize current_user
     event = Event.find(params[:event_id])
     order = Order.create!(
       event: event,
@@ -13,7 +14,7 @@ class OrdersController < ApplicationController
       payment_method_types: ['card'],
       line_items: [{
         name: event.title,
-        images: event.photo.key,
+        images: [event.photo.key],
         amount: event.price_cents,
         currency: 'jpy',
         quantity: 1
