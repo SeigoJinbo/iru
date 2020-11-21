@@ -2,36 +2,36 @@ require 'faker'
 require "open-uri"
 
 ADDRESSES = [
-  "Nishigotanda, Shinagawa City, Tokyo 141-0031",
-  "1-31-1, Shinagawa City, Tokyo 141-0031",
-  "3-6-6, Shinagawa City, Tokyo 141-0031",
-  "2-4-36 Meguro, Meguro City, Tokyo 153-0063",
-  "6-6-19, Shinagawa City, Tokyo 141-0031",
-  "2-11-2 Shinagawa City, Tokyo 141-0022",
-  "3-9-1, Shinagawa City, Tokyo 142-0062",
-  "4-6-6 Meguro, Meguro City, Tokyo 153-0063",
-  "2-14-1 Kamimeguro, Meguro City, Tokyo 153-0051",
-  "Sarugakucho, Shibuya City, Tokyo 150-0033",
-  "Kamimeguro, Tokyo 153-0051",
-  "5-21-9, Minato City, Tokyo 108-0071",
-  "3-39-5 Ebisu, Shibuya City, Tokyo 150-0013",
-  "4-3-1 Hiroo, Shibuya City, Tokyo 150-0012",
-  "Kamimeguro Elementary School, Meguro City, Tokyo 153-0051",
-  "2-8-17, Meguro City, Tokyo 153-0052",
+  # "Nishigotanda, Shinagawa City, Tokyo 141-0031",
+  # "1-31-1, Shinagawa City, Tokyo 141-0031",
+  # "3-6-6, Shinagawa City, Tokyo 141-0031",
+  # "2-4-36 Meguro, Meguro City, Tokyo 153-0063",
+  # "6-6-19, Shinagawa City, Tokyo 141-0031",
+  # "2-11-2 Shinagawa City, Tokyo 141-0022",
+  # "3-9-1, Shinagawa City, Tokyo 142-0062",
+  # "4-6-6 Meguro, Meguro City, Tokyo 153-0063",
+  # "2-14-1 Kamimeguro, Meguro City, Tokyo 153-0051",
+  # "Sarugakucho, Shibuya City, Tokyo 150-0033",
+  # "Kamimeguro, Tokyo 153-0051",
+  # "5-21-9, Minato City, Tokyo 108-0071",
+  # "3-39-5 Ebisu, Shibuya City, Tokyo 150-0013",
+  # "4-3-1 Hiroo, Shibuya City, Tokyo 150-0012",
+  # "Kamimeguro Elementary School, Meguro City, Tokyo 153-0051",
+  # "2-8-17, Meguro City, Tokyo 153-0052",
 
-  "HIRAKUYA OSTERIA, Suzukake Street, Meguro, Tokyo, 152-0035, Japan",
-  "Kingdom Hall of Jehovah's Witnesses, Salesian Dori, Meguro, Tokyo, 152-0003, Japan",
-  "maker's base, Meguro ave., Meguro, Tokyo, 152-0001, Japan",
-  "FamilyMart, Ohara-dori, Tokyo, Shinagawa, 142-0042, Japan",
-  "Tokyo Gakugei University Setagaya Junior High School, Komahachi-dori, Setagaya, Tokyo, 158-0081, Japan",
-  "rise: town front, Tamazutsumi St., Setagaya, Tokyo, 158-0094, Japan", "
-  Takashimaya garden place, Tamagawa dori, Setagaya, Tokyo, 158-8502, Japan",
-  "Bird Sanctuary, Okura-dori, Funabashi 1-chome, Funabashi, Setagaya, Tokyo, 157-8510, Japan",
-  "Yogananajo-dori, 1-chome, Funabashi, Setagaya, Tokyo, 158-8577, Japan",
-  'Times, Nakahara kaido, Tokyo, Ota, 145-8523, Japan', 'Tokyo, Ota, 145-0066, Japan',
-  'Gap, Kurinoki-Dori, Meguro, Tokyo, 152-0035, Japan',
-  'Tomorrowland, Maple Street, Meguro, Tokyo, 152-0035, Japan',
-  'Sans Souci, Nakahara kaido, Tokyo, Ota, 145-8523, Japan',
+  # "HIRAKUYA OSTERIA, Suzukake Street, Meguro, Tokyo, 152-0035, Japan",
+  # "Kingdom Hall of Jehovah's Witnesses, Salesian Dori, Meguro, Tokyo, 152-0003, Japan",
+  # "maker's base, Meguro ave., Meguro, Tokyo, 152-0001, Japan",
+  # "FamilyMart, Ohara-dori, Tokyo, Shinagawa, 142-0042, Japan",
+  # "Tokyo Gakugei University Setagaya Junior High School, Komahachi-dori, Setagaya, Tokyo, 158-0081, Japan",
+  # "rise: town front, Tamazutsumi St., Setagaya, Tokyo, 158-0094, Japan", "
+  # Takashimaya garden place, Tamagawa dori, Setagaya, Tokyo, 158-8502, Japan",
+  # "Bird Sanctuary, Okura-dori, Funabashi 1-chome, Funabashi, Setagaya, Tokyo, 157-8510, Japan",
+  # "Yogananajo-dori, 1-chome, Funabashi, Setagaya, Tokyo, 158-8577, Japan",
+  # 'Times, Nakahara kaido, Tokyo, Ota, 145-8523, Japan', 'Tokyo, Ota, 145-0066, Japan',
+  # 'Gap, Kurinoki-Dori, Meguro, Tokyo, 152-0035, Japan',
+  # 'Tomorrowland, Maple Street, Meguro, Tokyo, 152-0035, Japan',
+  # 'Sans Souci, Nakahara kaido, Tokyo, Ota, 145-8523, Japan',
   'Den-en-Chofu Elementary School, Kampachi dori, Setagaya, Tokyo, 145-0071, Japan'
 ]
 
@@ -333,15 +333,15 @@ plant_a_tree.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 
 puts "Read to kids"
 read_to_kids = Event.create!(
   title: "Read to kids",
-  category: 'Education',
+  category: 'Volunteer',
   description: 'help children learn to read',
   positions: rand(3..10),
   ongoing: true,
   dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
   start_time: Time.now + rand(10000..100000),
   end_time: Time.now + rand(100000..1000000),
-  organization: Organization.all.sample,
-  owner: User.all.sample
+  organization: animal,
+  owner: yuping
 
   )
 puts "attaching photo to Read to kids"
@@ -349,11 +349,11 @@ event_photo = URI.open('https://images.pexels.com/photos/5088188/pexels-photo-50
 read_to_kids.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
 
 
-puts "Walk a Panda"
+puts "Give money to pandas"
 walk_a_panda = Event.create!(
-  title: "Walk a Panda",
-  category: "Animals/Wildlife",
-  description: 'Pandas need exercise',
+  title: "Give money to pandas",
+  category: "Fundraiser",
+  description: 'Pandas need money',
   positions: rand(3..10),
   ongoing: true,
   dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
@@ -374,7 +374,7 @@ puts "creating enrollment"
 Enrollment.create!(
   user: liz,
   event: read_to_kids,
-  status: "Complete",
+  # status: "Pending",
   start_time: Time.now + rand(10000..100000),
   end_time: Time.now + rand(100000..1000000)
   )
