@@ -30,6 +30,7 @@ gem 'acts-as-taggable-on', '~> 6.0'
 gem 'faker'
 gem 'pundit'
 gem 'geocoder'
+gem 'pg_search', '~> 2.3.0'
 
 
 # Reduces boot times through caching; required in config/boot.rb

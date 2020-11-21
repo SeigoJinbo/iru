@@ -2,8 +2,13 @@ class OrganizationsController < ApplicationController
 	include CloudinaryHelper
 	before_action :set_organization, only: [:show, :edit, :update]
   skip_before_action :authenticate_user!, only: [:index, :show]
+
   def index
-    @organizations = policy_scope(Organization)
+    if params[:query].present?
+      @organizations = policy_scope(Organization).search_by_name(params[:query])
+    else
+      @organizations = policy_scope(Organization)
+    end
   end
 
   def show

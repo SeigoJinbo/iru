@@ -12,4 +12,11 @@ LIST = ["Animals/Wildlife", "Children/Youth", "Disasters", "Education", "Environ
   def tag_number
     LIST.index(tag = tag_list[0])
   end
+
+  include PgSearch::Model
+  pg_search_scope :search_by_name,
+    against: [ :name ],
+  using: {
+    tsearch: { prefix: true }
+  }
 end
