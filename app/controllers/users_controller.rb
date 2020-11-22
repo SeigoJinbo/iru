@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   def show
     authorize @user
     @past_enrollments = @user.enrollments.select do |enrollment|
-      enrollment.status != "Pending"
+      enrollment.status == "Complete"
     end
 
     @current_enrollments = @user.enrollments.select do |enrollment|

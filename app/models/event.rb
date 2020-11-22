@@ -1,11 +1,14 @@
 class Event < ApplicationRecord
-  CATEGORIES = ["volunteer", "donate", "fundraise"]
+  CATEGORIES = ["Volunteer", "Donation", "Fundraiser"]
   belongs_to :organization
-  belongs_to :owner, class_name: 'User', foreign_key: 'user_id'
   has_many :enrollments
+  has_many :orders
+  belongs_to :owner, class_name: 'User', foreign_key: 'user_id'
   has_many :users, through: :enrollments
+  has_many :event_comments
   has_one_attached :photo
-
+  
+  monetize :price_cents
 
   include PgSearch::Model
   multisearchable against: :title
