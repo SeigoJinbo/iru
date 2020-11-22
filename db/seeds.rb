@@ -35,25 +35,25 @@ ADDRESSES = [
   'Den-en-Chofu Elementary School, Kampachi dori, Setagaya, Tokyo, 145-0071, Japan'
 ]
 
-# se of meruro
-'南保育園, Kannana dori, Meguro, Tokyo, 152-0013, Japan',
-'若竹幼稚園, Kannana dori, Meguro, Tokyo, 152-0013, Japan',
-'品川区立心身障害者福祉会館, Mitsuma-dori, Tokyo, Shinagawa, 142-0054, Japan',
-'荏原消防署旗の台出張所, 中原街道, Gotanda, Tokyo, Shinagawa, 142-0063, Japan',
-'日本聖公会三光教会, 22-24, 中原街道, Gotanda, Tokyo, Shinagawa, 142-0064, Japan',
-'丸山寺, 三間通り, Tokyo, Shinagawa, 142-0043, Japan',
-'伊藤児童センター, 立会道路, Tokyo, Shinagawa, 140-0015, Japan ',
-'Yukigaya Hachiman Shrine, Nakahara kaido, Tokyo, Ota, 145-8523, Japan',
-'昴児童公園, Nakahara kaido, Tokyo, Ota, 145-8523, Japan',
-'Ebara Hospital, 中原街道, Gotanda, Tokyo, Shinagawa, 145-0065, Japan',
-'田園調布消防署 久が原出張所, 呑川緑道, Tokyo, Ota, 146-0081, Japan',
+# # se of meruro
+# '南保育園, Kannana dori, Meguro, Tokyo, 152-0013, Japan',
+# '若竹幼稚園, Kannana dori, Meguro, Tokyo, 152-0013, Japan',
+# '品川区立心身障害者福祉会館, Mitsuma-dori, Tokyo, Shinagawa, 142-0054, Japan',
+# '荏原消防署旗の台出張所, 中原街道, Gotanda, Tokyo, Shinagawa, 142-0063, Japan',
+# '日本聖公会三光教会, 22-24, 中原街道, Gotanda, Tokyo, Shinagawa, 142-0064, Japan',
+# '丸山寺, 三間通り, Tokyo, Shinagawa, 142-0043, Japan',
+# '伊藤児童センター, 立会道路, Tokyo, Shinagawa, 140-0015, Japan ',
+# 'Yukigaya Hachiman Shrine, Nakahara kaido, Tokyo, Ota, 145-8523, Japan',
+# '昴児童公園, Nakahara kaido, Tokyo, Ota, 145-8523, Japan',
+# 'Ebara Hospital, 中原街道, Gotanda, Tokyo, Shinagawa, 145-0065, Japan',
+# '田園調布消防署 久が原出張所, 呑川緑道, Tokyo, Ota, 146-0081, Japan',
 
-#nw of meguro
-'Setagaya Park, 420, Sangenjaya, Setagaya, Tokyo, 154-0005, Japan',
-"Showa Women's University, Tamagawa-dori, Sangenjaya, Setagaya, Tokyo, 154-0004, Japan",
-'千代の湯, Tamagawa-dori, Sangenjaya, Setagaya, Tokyo, 154-0024, Japan'
-'世田谷区太子堂在宅介護支援センター, Awashima-dori, Taishido, Funabashi, Setagaya, Tokyo, 155-0032, Japan',
-'駒沢給水所, 426, 1-chome, Funabashi, Setagaya, Tokyo, 154-0014, Japan Water works'
+# #nw of meguro
+# 'Setagaya Park, 420, Sangenjaya, Setagaya, Tokyo, 154-0005, Japan',
+# "Showa Women's University, Tamagawa-dori, Sangenjaya, Setagaya, Tokyo, 154-0004, Japan",
+# '千代の湯, Tamagawa-dori, Sangenjaya, Setagaya, Tokyo, 154-0024, Japan'
+# '世田谷区太子堂在宅介護支援センター, Awashima-dori, Taishido, Funabashi, Setagaya, Tokyo, 155-0032, Japan',
+# '駒沢給水所, 426, 1-chome, Funabashi, Setagaya, Tokyo, 154-0014, Japan Water works'
 
 ROLES = ['leader', 'member', 'member', 'member']
 CATEGORIES = ["Volunteer", "Donation", "Fundraiser"]
@@ -337,12 +337,14 @@ plant_a_tree = Event.create!(
   category: 'Volunteer',
   description: 'plant a tree',
   positions: rand(3..10),
+  address: "Koyamadai, Shinagawa Tokyo 142-0061",
   ongoing: true,
   dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
   start_time: Time.now + rand(10000..100000),
   end_time: Time.now + rand(100000..1000000),
   organization: we_love_trees,
-  owner: liz
+  owner: liz,
+  tag_list: "Environment/Agriculture"
   )
 puts "attaching photo to plant a tree"
 event_photo = URI.open('https://www.eco.ca/wp-content/uploads/corporation-of-tomorrow.png')
@@ -355,13 +357,15 @@ read_to_kids = Event.create!(
   title: "Read to kids",
   category: 'Volunteer',
   description: 'help children learn to read',
+  address: "Hachimangu shrine, Salesian Dori, Meguro, Tokyo, 152-0003, Japan",
   positions: rand(3..10),
   ongoing: true,
   dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
   start_time: Time.now + rand(10000..100000),
   end_time: Time.now + rand(100000..1000000),
   organization: animal,
-  owner: yuping
+  owner: yuping,
+  tag_list: "Education"
 
   )
 puts "attaching photo to Read to kids"
@@ -374,13 +378,16 @@ walk_a_panda = Event.create!(
   title: "Give Money to Pandas",
   category: 'Fundraiser',
   description: 'Pandas need money',
+  address: "Setagaya, Tokyo, 152-0035, Japan",
   positions: rand(3..10),
   ongoing: true,
   dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
   start_time: Time.now + rand(10000..100000),
   end_time: Time.now + rand(100000..1000000),
   organization: animal,
-  owner: yuping
+  owner: yuping,
+  price_cents: 100,
+  tag_list: "Animals/Wildlife"
   )
 puts "attaching photo give money to pandas"
 event_photo = URI.open('https://images.pexels.com/photos/148182/pexels-photo-148182.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')
@@ -394,7 +401,6 @@ puts "creating enrollment"
 Enrollment.create!(
   user: liz,
   event: read_to_kids,
-  # status: "Pending",
   start_time: Time.now + rand(10000..100000),
   end_time: Time.now + rand(100000..1000000)
   )
@@ -402,7 +408,6 @@ Enrollment.create!(
 Enrollment.create!(
   user: seigo,
   event: plant_a_tree,
-  status: "Pending",
   start_time: Time.now + rand(10000..100000),
   end_time: Time.now + rand(100000..1000000)
   )
@@ -410,7 +415,6 @@ Enrollment.create!(
 Enrollment.create!(
   user: yuping,
   event: plant_a_tree,
-  status: "Pending",
   start_time: Time.now + rand(10000..100000),
   end_time: Time.now + rand(100000..1000000)
   )
