@@ -69,6 +69,9 @@ ActiveRecord::Schema.define(version: 2020_11_22_003031) do
     t.boolean "ongoing"
     t.datetime "start_time"
     t.datetime "end_time"
+    t.string "address"
+    t.float "latitude"
+    t.float "longitude"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "target"
@@ -76,16 +79,6 @@ ActiveRecord::Schema.define(version: 2020_11_22_003031) do
     t.integer "price_cents", default: 0, null: false
     t.index ["organization_id"], name: "index_events_on_organization_id"
     t.index ["user_id"], name: "index_events_on_user_id"
-  end
-
-  create_table "invoices", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "event_id", null: false
-    t.integer "amount"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["event_id"], name: "index_invoices_on_event_id"
-    t.index ["user_id"], name: "index_invoices_on_user_id"
   end
 
   create_table "memberships", force: :cascade do |t|
@@ -96,16 +89,6 @@ ActiveRecord::Schema.define(version: 2020_11_22_003031) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["organization_id"], name: "index_memberships_on_organization_id"
     t.index ["user_id"], name: "index_memberships_on_user_id"
-  end
-
-  create_table "organization_comments", force: :cascade do |t|
-    t.bigint "organization_id", null: false
-    t.bigint "user_id", null: false
-    t.text "content"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["organization_id"], name: "index_organization_comments_on_organization_id"
-    t.index ["user_id"], name: "index_organization_comments_on_user_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -119,6 +102,16 @@ ActiveRecord::Schema.define(version: 2020_11_22_003031) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["event_id"], name: "index_orders_on_event_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "organization_comments", force: :cascade do |t|
+    t.bigint "organization_id", null: false
+    t.bigint "user_id", null: false
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["organization_id"], name: "index_organization_comments_on_organization_id"
+    t.index ["user_id"], name: "index_organization_comments_on_user_id"
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -203,13 +196,11 @@ ActiveRecord::Schema.define(version: 2020_11_22_003031) do
   add_foreign_key "event_comments", "users"
   add_foreign_key "events", "organizations"
   add_foreign_key "events", "users"
-  add_foreign_key "invoices", "events"
-  add_foreign_key "invoices", "users"
   add_foreign_key "memberships", "organizations"
   add_foreign_key "memberships", "users"
-  add_foreign_key "organization_comments", "organizations"
-  add_foreign_key "organization_comments", "users"
   add_foreign_key "orders", "events"
   add_foreign_key "orders", "users"
+  add_foreign_key "organization_comments", "organizations"
+  add_foreign_key "organization_comments", "users"
   add_foreign_key "taggings", "tags"
 end

@@ -1,5 +1,7 @@
 class Event < ApplicationRecord
   CATEGORIES = ["Volunteer", "Donation", "Fundraiser"]
+  LIST = ["Animals/Wildlife", "Children/Youth", "Disasters", "Education", "Environment/Agriculture", "Health", "Women", "Seniors/Disabilities", "Other"]
+
   belongs_to :organization
   has_many :enrollments
   has_many :orders
@@ -7,7 +9,10 @@ class Event < ApplicationRecord
   has_many :users, through: :enrollments
   has_many :event_comments
   has_one_attached :photo
-  
+  geocoded_by :address
+  after_validation :geocode, if: :will_save_change_to_address?
+  acts_as_taggable_on :tags
+
   monetize :price_cents
 
   include PgSearch::Model
@@ -20,4 +25,9 @@ class Event < ApplicationRecord
   #validates :ongoing, presence: true
   validates :start_time, presence: true
   validates :end_time, presence: true
+
+
+  def tag_number
+    LIST.index(tag_list[0])
+  end
 end

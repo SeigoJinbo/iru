@@ -1,0 +1,43 @@
+<div class="d-flex">
+
+  <div id="map"
+       style="width: 100%; height: calc(100vh - 66px);"
+       data-markers="<%= @markers[:event].to_json %>"
+       data-user="<%= @markers[:user].to_json %>"
+       data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+       <h2>HEADER</h2>
+
+    <!----------------------Filter---------------------->
+    <div class="map-box">
+      <div class="map-form">
+        <%= form_with url: map_path, method: :get, local: true do |f|%>
+          <div class="d-flex">
+            <%= select_tag :query,
+            options_for_select(Event::LIST, params[:query]),
+            class: "form-control",
+            placeholder: "filter" %>
+            <div class="index-submit">
+              <%= f.submit "Filter", class: "btn btn-primary" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <!-----------------------Results-------------------->
+      <div>
+        <% @events.each do |event| %>
+          <%= link_to event_path(event) do%>
+            <div class="map-form-results border-bottom pb-3">
+              <h5><%=  event.title %></h5>
+              <%#= cl_image_tag event.photos.first.key, height: 40, width: 40, crop: :fill %>
+              <%= image_tag "#{event.tag_number || 4}.png", class: "map-results-organization-image" %>
+              <%= event.tag_list %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>

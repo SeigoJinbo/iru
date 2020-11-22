@@ -22,5 +22,24 @@
 </div>
 
 <div>
-  <p>comments</p>
+      <div class="col-6">
+      <%= simple_form_for [@event, @event_comment] do |f| %>
+        <%= f.input :content, label: 'Comment' %>
+        <%= f.button :submit, 'Comment', remote: true, class: "btn btn-primary btn-block" %>
+      <% end %>
+      <% if @event.event_comments.any? %>
+        <% @event.event_comments.each do |comment| %>
+          <div class="event-comment">
+            <div class="flex-box p-2">
+              <%= cl_image_tag comment.user.photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
+              <%= comment.user.nickname %>
+            </div>
+            <p class='p-2'><%= comment.content%></p>
+            <% if current_user == comment.user || @event.users.include?(current_user)  %>
+              <%= link_to "Delete", event_comment_path(comment), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete comment?" } %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
 </div>

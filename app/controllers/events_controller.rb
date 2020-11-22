@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   skip_before_action :authenticate_user!, only: [:index, :show]
-
+  include CloudinaryHelper
   def index
     if params[:query].present?
       PgSearch::Multisearch.rebuild(policy_scope(Organization))
@@ -12,8 +12,39 @@ class EventsController < ApplicationController
     end
   end
 
-  def show
 
+  def map
+    authorize current_user
+    if params[:query].present?
+      @events = Event.all.tagged_with((params[:query]))
+    else
+      @events = Event.all
+    end
+    marker_image = {
+      "Animals/Wildlife" => "0.png",
+      "Children/Youth" => "1.png",
+      "Disasters" => "2.png",
+      "Education" => "3.png",
+      "Environment/Agriculture" => "4.png",
+      "Health" => "5.png",
+      "Women" => "6.png",
+      "Seniors/Disabilities" => "7.png",
+      "Other" => "8.png"
+    }
+    @markers = {}
+    @markers[:user] = { lat: current_user.latitude, lng: current_user.longitude, image_url: cl_image_path(current_user.photos.first.key) }
+    @markers[:event] = @events.geocoded.map do |event|
+      {
+        lat: event.latitude,
+        lng: event.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { event: event }),
+        image_url: helpers.asset_url(marker_image[event.tag_list.first] || "8.png")
+      }
+    end
+  end
+
+  def show
+    @event_comment = EventComment.new
   end
 
   def new
