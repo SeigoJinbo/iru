@@ -7,7 +7,10 @@ class Event < ApplicationRecord
   has_many :users, through: :enrollments
   has_many :event_comments
   has_one_attached :photo
-  
+  geocoded_by :address
+  after_validation :geocode, if: :will_save_change_to_address?
+  acts_as_taggable_on :tags
+
   monetize :price_cents
 
   include PgSearch::Model

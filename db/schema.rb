@@ -69,6 +69,9 @@ ActiveRecord::Schema.define(version: 2020_11_22_003031) do
     t.boolean "ongoing"
     t.datetime "start_time"
     t.datetime "end_time"
+    t.string "address"
+    t.float "latitude"
+    t.float "longitude"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "target"

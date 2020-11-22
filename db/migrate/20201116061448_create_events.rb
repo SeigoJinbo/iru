@@ -11,6 +11,9 @@ class CreateEvents < ActiveRecord::Migration[6.0]
       t.boolean :ongoing
       t.datetime :start_time
       t.datetime :end_time
+      t.string :address
+      t.float :latitude
+      t.float :longitude
 
       t.timestamps
     end
