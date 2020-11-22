@@ -36,7 +36,7 @@ ADDRESSES = [
 ]
 
 ROLES = ['leader', 'member', 'member', 'member']
-CATEGORIES = ["Volunteer", "Donate", "Fundraise"]
+CATEGORIES = ["Volunteer", "Donation", "Fundraiser"]
 TAGS = ["Animals/Wildlife", "Children/Youth", "Disasters", "Education", "Environment/Agriculture", "Health", "Women", "Seniors/Disabilities", "Other"]
 
 puts "destroying enrollments"
@@ -349,10 +349,10 @@ event_photo = URI.open('https://images.pexels.com/photos/5088188/pexels-photo-50
 read_to_kids.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
 
 
-puts "Give money to pandas"
+puts "Give Money to Pandas"
 walk_a_panda = Event.create!(
-  title: "Give money to pandas",
-  category: "Fundraiser",
+  title: "Give Money to Pandas",
+  category: 'Fundraiser',
   description: 'Pandas need money',
   positions: rand(3..10),
   ongoing: true,
@@ -362,7 +362,7 @@ walk_a_panda = Event.create!(
   organization: animal,
   owner: yuping
   )
-puts "attaching photo to walk a panda"
+puts "attaching photo give money to pandas"
 event_photo = URI.open('https://images.pexels.com/photos/148182/pexels-photo-148182.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')
 walk_a_panda.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
 

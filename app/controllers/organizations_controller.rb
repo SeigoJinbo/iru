@@ -1,6 +1,6 @@
 class OrganizationsController < ApplicationController
-	include CloudinaryHelper
-	before_action :set_organization, only: [:show, :edit, :update]
+  include CloudinaryHelper
+  before_action :set_organization, only: [:show, :edit, :update]
   skip_before_action :authenticate_user!, only: [:index, :show]
   def index
     @organizations = policy_scope(Organization)
@@ -8,9 +8,11 @@ class OrganizationsController < ApplicationController
 
   def show
     @enrollment = Enrollment.new
-    # @events = @organization.events.select do |event|
-    #   event.status = "Accepted"
-    # end
+    # @events = @organization.events.select { |event| event.status = "Accepted" }
+
+    @volunteer_events = @organization.events.select { |event| event.category == "Volunteer" }
+    @fundraiser_events = @organization.events.select { |event| event.category == "Fundraiser" }
+    @donation_events = @organization.events.select { |event| event.category == "Dontaion" }
   end
 
   def map
@@ -19,25 +21,26 @@ class OrganizationsController < ApplicationController
       @organizations = Organization.all.tagged_with((params[:query]))
     else
       @organizations = Organization.all
-		end
-		marker_image = {"Animals/Wildlife" => "0.png",
-										"Children/Youth" => "1.png",
-										"Disasters" => "2.png",
-										"Education" => "3.png",
-										"Environment/Agriculture" => "4.png",
-										"Health" => "5.png",
-										"Women" => "6.png",
-										"Seniors/Disabilities" => "7.png",
-										"Other" => "8.png"
-									}
+    end
+    marker_image = {
+      "Animals/Wildlife" => "0.png",
+      "Children/Youth" => "1.png",
+      "Disasters" => "2.png",
+      "Education" => "3.png",
+      "Environment/Agriculture" => "4.png",
+      "Health" => "5.png",
+      "Women" => "6.png",
+      "Seniors/Disabilities" => "7.png",
+      "Other" => "8.png"
+    }
     @markers = {}
     @markers[:user] = { lat: current_user.latitude, lng: current_user.longitude, image_url: cl_image_path(current_user.photos.first.key) }
     @markers[:organization] = @organizations.geocoded.map do |organization|
       {
         lat: organization.latitude,
         lng: organization.longitude,
-				infoWindow: render_to_string(partial: "info_window", locals: { organization: organization }),
-				image_url: helpers.asset_url( marker_image[organization.tag_list.first] || "8.png" )
+        infoWindow: render_to_string(partial: "info_window", locals: { organization: organization }),
+        image_url: helpers.asset_url(marker_image[organization.tag_list.first] || "8.png")
       }
     end
   end
