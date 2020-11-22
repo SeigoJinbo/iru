@@ -1,5 +1,7 @@
 class Event < ApplicationRecord
   CATEGORIES = ["Volunteer", "Donation", "Fundraiser"]
+  LIST = ["Animals/Wildlife", "Children/Youth", "Disasters", "Education", "Environment/Agriculture", "Health", "Women", "Seniors/Disabilities", "Other"]
+
   belongs_to :organization
   has_many :enrollments
   has_many :orders
@@ -23,4 +25,9 @@ class Event < ApplicationRecord
   #validates :ongoing, presence: true
   validates :start_time, presence: true
   validates :end_time, presence: true
+
+
+  def tag_number
+    LIST.index(tag_list[0])
+  end
 end

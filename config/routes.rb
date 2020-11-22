@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :enrollments, only: [:update, :destroy]
   resources :organization_comments, only: [:update, :destroy]
   resources :event_comments, only: [:update, :destroy]
-  get '/map', to: 'organizations#map', as: :map
+  get '/map', to: 'events#map', as: :map
 
   resources :orders, only: [:show, :create] do
     resources :payments, only: :new
