@@ -374,7 +374,7 @@ puts "creating enrollment"
 Enrollment.create!(
   user: liz,
   event: read_to_kids,
-  status: "Pending",
+  # status: "Pending",
   start_time: Time.now + rand(10000..100000),
   end_time: Time.now + rand(100000..1000000)
   )

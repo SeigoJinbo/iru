@@ -4,6 +4,7 @@ class Enrollment < ApplicationRecord
 
   belongs_to :event
 
+  validates :status, presence: true
   validates :start_time, presence: true
   validates :end_time, presence: true
   validate :end_time_after_start_time

@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2020_11_21_042559) do
     t.bigint "event_id", null: false
     t.datetime "start_time"
     t.datetime "end_time"
-    t.string "status"
+    t.string "status", default: "Pending"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["event_id"], name: "index_enrollments_on_event_id"
