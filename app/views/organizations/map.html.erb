@@ -7,6 +7,7 @@
        data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
        <h2>HEADER</h2>
 
+    <!----------------------Filter---------------------->
     <div class="map-box">
       <div class="map-form">
         <%= form_with url: map_path, method: :get, local: true do |f|%>
@@ -21,15 +22,17 @@
           </div>
         <% end %>
       </div>
-
+      <!-----------------------Results-------------------->
       <div>
         <% @organizations.each do |organization| %>
-          <div class="map-form-results border-bottom pb-3">
-						<h5><%= link_to organization.name, organization_path(organization) %></h5>
-						<%#= cl_image_tag organization.photos.first.key, height: 40, width: 40, crop: :fill %>
-						<%= image_tag "#{organization.tag_number || 4}.png", class: "map-results-organization-image" %>
-						<%= organization.tag_list %>
-          </div>
+					<%= link_to organization_path(organization) do%>
+            <div class="map-form-results border-bottom pb-3">
+              <h5><%=  organization.name %></h5>
+  						<%#= cl_image_tag organization.photos.first.key, height: 40, width: 40, crop: :fill %>
+  						<%= image_tag "#{organization.tag_number || 4}.png", class: "map-results-organization-image" %>
+  						<%= organization.tag_list %>
+            </div>
+          <% end %>
         <% end %>
       </div>
 
