@@ -1,45 +1,68 @@
+<div class="page">
+	<div class="page-box">
+		<%# Event "banner" %>
+		<div class="event-title">
+			<div class="event-title-details">
+				<h1><%= @event.title %></h1>
+				<h3>Target amount $$$</h3>
+				<% if Time.now < @event.end_time %>
+					<% remaining_days = ((@event.end_time - Time.now) / 360 / 60 / 24 ) %>
+					<p>remaining: <%= remaining_days %> days</p>
+				<% end %>
+			</div>
+			<div><%= image_tag @event.photo %></div>
+		</div>
 
-<p><%= @event.title %></p>
+		<%# Tabs bar %>
+		<ul class="nav nav-tabs">
+			<li class="nav-item active"><a data-toggle="tab" href="#mission" class="nav-link active">Mission</a></li>
+			<li class="nav-item"><a data-toggle="tab" href="#organization" class="nav-link">Organization Info</a></li>
+			<li class="nav-item"><a data-toggle="tab" href="#comments" class="nav-link">Comments/Questions</a></li>
+		</ul>
 
-<div>
-  <p><%= @event.owner.nickname %></p>
-  <p><%= @event.owner.description %></p>
-  <p><%= @event.owner.events_as_owner.count %> events </p>
-</div>
+		<div class="tab-content">
+			<%# Mission %>
+			<div id="mission" class="tab-pane fade in active">
+					<h3>Mission</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+			</div>
 
-<div>
-  <p>target amount $$$</p>
+			<%# Organization %>
+			<div id="organization" class="tab-pane fade">
+				<h3>Organization</h3>
+				<div>
+					<p><%= @event.owner.nickname %></p>
+					<p><%= @event.owner.description %></p>
+					<p><%= @event.owner.events_as_owner.count %> events </p>
+				</div>
+			</div>
 
-  <% if Time.now < @event.end_time %>
-    <% remaining_days = ((@event.end_time - Time.now) / 360 / 60 / 24 ) %>
-    <p>remaining: <%= remaining_days %> days</p>
-  <% end %>
-  <p>Contributors: ...</p>
-</div>
-
-<div>
-  <p>recommended</p>
-</div>
-
-<div>
-      <div class="col-6">
-      <%= simple_form_for [@event, @event_comment] do |f| %>
-        <%= f.input :content, label: 'Comment' %>
-        <%= f.button :submit, 'Comment', remote: true, class: "btn btn-primary btn-block" %>
-      <% end %>
-      <% if @event.event_comments.any? %>
-        <% @event.event_comments.each do |comment| %>
-          <div class="event-comment">
-            <div class="flex-box p-2">
-              <%= cl_image_tag comment.user.photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
-              <%= comment.user.nickname %>
-            </div>
-            <p class='p-2'><%= comment.content%></p>
-            <% if current_user == comment.user || @event.users.include?(current_user)  %>
-              <%= link_to "Delete", event_comment_path(comment), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete comment?" } %>
+			<%# Comments %>
+			<div id="comments" class="tab-pane fade">
+				<h3>Any comments/questions?</h3>
+				<div>
+          <div class="col-6">
+          <%= simple_form_for [@event, @event_comment] do |f| %>
+            <%= f.input :content, label: 'Comment' %>
+            <%= f.button :submit, 'Comment', remote: true, class: "btn btn-primary btn-block" %>
+          <% end %>
+          <% if @event.event_comments.any? %>
+            <% @event.event_comments.each do |comment| %>
+              <div class="event-comment">
+                <div class="flex-box p-2">
+                  <%= cl_image_tag comment.user.photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
+                  <%= comment.user.nickname %>
+                </div>
+                <p class='p-2'><%= comment.content%></p>
+                <% if current_user == comment.user || @event.users.include?(current_user)  %>
+                  <%= link_to "Delete", event_comment_path(comment), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete comment?" } %>
+                <% end %>
+              </div>
             <% end %>
-          </div>
-        <% end %>
-      <% end %>
+          <% end %>
     </div>
+			</div>
+		</div>
+	</div>
+
 </div>
