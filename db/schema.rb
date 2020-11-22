@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_21_042559) do
+ActiveRecord::Schema.define(version: 2020_11_21_102220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,16 @@ ActiveRecord::Schema.define(version: 2020_11_21_042559) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["event_id"], name: "index_enrollments_on_event_id"
     t.index ["user_id"], name: "index_enrollments_on_user_id"
+  end
+
+  create_table "event_comments", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.bigint "user_id", null: false
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_id"], name: "index_event_comments_on_event_id"
+    t.index ["user_id"], name: "index_event_comments_on_user_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -88,6 +98,17 @@ ActiveRecord::Schema.define(version: 2020_11_21_042559) do
     t.index ["user_id"], name: "index_memberships_on_user_id"
   end
 
+
+  create_table "organization_comments", force: :cascade do |t|
+    t.bigint "organization_id", null: false
+    t.bigint "user_id", null: false
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["organization_id"], name: "index_organization_comments_on_organization_id"
+    t.index ["user_id"], name: "index_organization_comments_on_user_id"
+  end
+  
   create_table "orders", force: :cascade do |t|
     t.string "state"
     t.string "event_title"
@@ -170,12 +191,16 @@ ActiveRecord::Schema.define(version: 2020_11_21_042559) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "enrollments", "events"
   add_foreign_key "enrollments", "users"
+  add_foreign_key "event_comments", "events"
+  add_foreign_key "event_comments", "users"
   add_foreign_key "events", "organizations"
   add_foreign_key "events", "users"
   add_foreign_key "invoices", "events"
   add_foreign_key "invoices", "users"
   add_foreign_key "memberships", "organizations"
   add_foreign_key "memberships", "users"
+  add_foreign_key "organization_comments", "organizations"
+  add_foreign_key "organization_comments", "users"
   add_foreign_key "orders", "events"
   add_foreign_key "orders", "users"
   add_foreign_key "taggings", "tags"

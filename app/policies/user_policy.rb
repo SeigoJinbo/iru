@@ -20,4 +20,8 @@ class UserPolicy < ApplicationPolicy
   def update?
     current_user
   end
+
+  def destroy?
+    true
+  end
 end
