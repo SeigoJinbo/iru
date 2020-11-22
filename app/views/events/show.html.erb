@@ -9,7 +9,11 @@
 
 <div>
   <p>target amount $$$</p>
-  <p>remaining: ... days</p>
+
+  <% if Time.now < @event.end_time %>
+    <% remaining_days = ((@event.end_time - Time.now) / 360 / 60 / 24 ) %>
+    <p>remaining: <%= remaining_days %> days</p>
+  <% end %>
   <p>Contributors: ...</p>
 </div>
 
