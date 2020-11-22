@@ -1,0 +1,23 @@
+* {
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+}
+
+.page {
+	background-color: $sage;
+	height: calc(100vh - 66px);
+	overflow: auto;
+}
+.page-box {
+	background-color: $ivory;
+	border-radius: 24px;
+	margin: 24px;
+	padding: 48px;
+		h1 {
+			font-weight: 700;
+		}
+		h3 {
+			font-weight: 400;
+		}
+}
