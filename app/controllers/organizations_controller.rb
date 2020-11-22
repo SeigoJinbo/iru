@@ -5,7 +5,9 @@ class OrganizationsController < ApplicationController
 
   def index
     if params[:query].present?
-      @organizations = policy_scope(Organization).search_by_name(params[:query])
+      PgSearch::Multisearch.rebuild(policy_scope(Organization))
+      PgSearch::Multisearch.rebuild(policy_scope(Event))
+      @results = PgSearch.multisearch(params[:query])
     else
       @organizations = policy_scope(Organization)
     end
