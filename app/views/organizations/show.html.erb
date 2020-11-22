@@ -38,7 +38,7 @@
                     <% end %>
                     <p>&nbsp/Positions: <%= event.positions %> people)</p>
                   </div>
-              <div class="round-box mb-3 pt-2 d-flex">
+              <div class="round-box mb-3 pt-2">
 
                   <% if event.enrollments.empty? %>
                     <p>No volunteers yet....<hp>
@@ -47,7 +47,7 @@
                   <% event.enrollments.each do |enrollment| %>
                   <% if enrollment.status == "Approved" %>
 
-                    <div class="attendie p-3 mt-3 mr-2 text-center">
+                    <div class="attendie p-3 mt-3">
                       <%= link_to user_path(enrollment.user) do  %>
                         <div class="d-inline-flex align-items-center">
                           <%= cl_image_tag enrollment.user.photos.first.key, height: 60, width: 60, crop: :fill, class: "enrollment-avatar" %>
@@ -55,9 +55,10 @@
                         </div>
                       <% end %>
                       <p><%= enrollment.start_time.strftime("%d of %B") %></p>
-                      <p><%= enrollment.start_time.strftime("%I:%M %p") %> -<%= enrollment.end_time.strftime("%I:%M %p") %></p>
+                      <p><%= enrollment.start_time.strftime("%k:%M") %> -<%= enrollment.end_time.strftime("%k:%M") %></p>
                     </div>
                     <% end %>
+
                   <% end %>
                 <% end %>
                 <div class="enroll-section">
@@ -87,41 +88,43 @@
         <div class="tab-pane fade show active" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
           <div class="org-sections">
             <div class="pending">
-
               <% @organization.events.each do |event| %>
                 <h4><%= event.title %></h4>
                 <% if event.enrollments.empty? %>
                   <p>No volunteers yet...</p>
                 <% else %>
 
-                  <div class="d-flex">
+                  <div>
+
                     <% event.enrollments.each do |enrollment| %>
                       <% if enrollment.status == "Pending" %>
-                        <div class="text-center p-3 pending-card my-2 mr-2">
+                      <div class="d-flex text-center p-3 pending-card">
+                        <%= link_to user_path(enrollment.user) do %>
 
-                          <%= link_to user_path(enrollment.user) do %>
-
-                            <%= cl_image_tag enrollment.user.photos.first.key, height: 60, width: 60, crop: :fill, class: "pending-avatar" %>
-                            <%= enrollment.user.nickname %>
+                          <%= cl_image_tag enrollment.user.photos.first.key, height: 60, width: 60, crop: :fill, class: "pending-avatar" %>
+                          <%= enrollment.user.nickname %>
+                        <% end %>
+                        <p><%= enrollment.start_time.strftime("%d of %B, %k:%M") %></p>
+                        <p><%= enrollment.end_time.strftime("%d of %B, %k:%M") %></p>
+                        <div class="d-flex">
+                          <%= simple_form_for(enrollment) do |f| %>
+                            <%= f.input :status, as: :hidden, remote: true, input_html: { value: "Approved" } %>
+                            <div class="m-1"><%= f.submit 'Approve', class: 'btn btn-primary'%></div>
                           <% end %>
-                          <p><%= enrollment.start_time.strftime("%d of %B, %k:%M") %></p>
-                          <p><%= enrollment.end_time.strftime("%d of %B, %k:%M") %></p>
-                          <div class="d-flex">
-                            <%= simple_form_for(enrollment) do |f| %>
-                              <%= f.input :status, as: :hidden, remote: true, input_html: { value: "Approved" } %>
-                              <div class="m-1"><%= f.submit 'Approve', class: 'btn btn-primary'%></div>
-                            <% end %>
-                            <%= simple_form_for(enrollment) do |f| %>
-                              <%= f.input :status, as: :hidden, remote: true, input_html: { value: "Declined" } %>
-                              <div class="m-1"><%= f.submit 'Decline', class: 'btn btn-primary'%></div>
-                            <% end %>
-                          </div>
-
+                          <%= simple_form_for(enrollment) do |f| %>
+                            <%= f.input :status, as: :hidden, remote: true, input_html: { value: "Declined" } %>
+                            <div class="m-1"><%= f.submit 'Decline', class: 'btn btn-primary'%></div>
+                          <% end %>
                         </div>
+                      </div>
 
                       <% end %>
                     <% end %>
+
+
                   </div>
+
+
 
                 <% end %>
               <% end %>
