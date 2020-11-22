@@ -30,7 +30,9 @@ gem 'acts-as-taggable-on', '~> 6.0'
 gem 'faker'
 gem 'pundit'
 gem 'geocoder'
-
+gem 'money-rails'
+gem 'stripe'
+gem 'stripe_event'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

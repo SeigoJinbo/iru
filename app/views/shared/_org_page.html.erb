@@ -25,11 +25,10 @@
   <div class="round-box">
     <div class="event-box">
 
-
-      <% @organization.events.each do |event| %>
+      <!---------------------Volunteer Event--------------------->
+      <% @volunteer_events.each do |event| %>
         <li class="event-card">
           <div class="event-card-contents">
-
             <div class="event-card-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
               <h4><%= event.title %></h4>
               <p><%= event.description %></p>
@@ -52,10 +51,12 @@
               <% end %>
             <div class="enroll-section">
               <% if user_signed_in? %>
+                <!-- ------Event owner edit / delete -->
                 <% if event.owner == current_user || current_user.admin %>
                   <%= link_to "Edit", event_path(event), class: 'btn btn-primary' %>
                   <%= link_to "Delete", event_path(event), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete #{event.title}?" } %>
                 <% end %>
+                <!------- Enroll --------->
                 <% if event.owner != current_user || current_user.admin %>
                   <button class="enroll-btn btn btn-primary btn-block" type="button">Enroll!</button>
                   <div class="enroll-form">
@@ -67,16 +68,62 @@
                     <% end %>
                   </div>
                 <% end %>
+                <!------ Visitor sign in ------>
               <% else %>
                 <%= link_to "Sign in to enroll", new_user_session_path, class: "btn btn-primary" %>
               <% end %>
             </div>
-
           </div>
         </li>
-
-
       <% end %>
+
+      <!---------------------Fundraiser Event-------------------->
+      <% @fundraiser_events.each do |event| %>
+        <li class="event-card">
+          <h1>Fundraiser</h1>
+          <p><%= humanized_money_with_symbol(event.raised) %> / <%= humanized_money_with_symbol(event.target) %></p>
+          <p>Amount: <%= humanized_money_with_symbol(event.price) %></p>
+          <%= form_tag orders_path do %>
+            <%= hidden_field_tag 'event_id', event.id %>
+            <%= submit_tag 'Donate', class: 'btn btn-primary' %>
+          <% end %>
+          <div class="event-card-contents">
+            <div class="event-card-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+              <h4><%= event.title %></h4>
+              <p><%= event.description %></p>
+            </div>
+              <p>Positions: <%= event.positions %> people</p>
+
+            <div class="enroll-section">
+              <% if user_signed_in? %>
+                <!-- --------------Event owner edit / delete --------------------->
+                <% if event.owner == current_user || current_user.admin %>
+                  <%= link_to "Edit", event_path(event), class: 'btn btn-primary' %>
+                  <%= link_to "Delete", event_path(event), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete #{event.title}?" } %>
+                <% end %>
+                <!----------------------- Enroll --------------------------->
+                <% if event.owner != current_user || current_user.admin %>
+                  <button class="enroll-btn btn btn-primary btn-block" type="button">Enroll!</button>
+                  <div class="enroll-form">
+                    <p>Select the volunteering time:</p>
+                    <%= simple_form_for [event, @enrollment] do |f| %>
+                      <%= f.input :start_time, as: :datetime, html5: true %>
+                      <%= f.input :end_time, as: :datetime, html5: true %>
+                      <%= f.button :submit, class: "btn btn-primary btn-block" %>
+                    <% end %>
+                  </div>
+                <% end %>
+                <!--------------------- Visitor sign in ------------->
+              <% else %>
+                <%= link_to "Sign in to enroll", new_user_session_path, class: "btn btn-primary" %>
+              <% end %>
+            </div>
+          </div>
+        </li>
+      <% end %>
+
+
+
 
     </div>
   </div>

@@ -1,11 +1,17 @@
 class Event < ApplicationRecord
   belongs_to :organization
-  belongs_to :owner, class_name: 'User', foreign_key: 'user_id'
   has_many :enrollments
-  has_many :users, through: :enrollments
-  has_one_attached :photo
+  has_many :orders
 
-  CATEGORIES = ["volunteer", "donate", "fundraise"]
+  belongs_to :owner, class_name: 'User', foreign_key: 'user_id'
+
+  has_many :users, through: :enrollments
+  # has_many :fundraisers, through: :orders, source: :users
+  # has_many :volunteers, through: :enrollments, source: :users
+  has_one_attached :photo
+  monetize :price_cents
+
+  CATEGORIES = ["Volunteer", "Donation", "Fundraiser"]
 
   validates :title, presence: true
   validates :description, presence: true
