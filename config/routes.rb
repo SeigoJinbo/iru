@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :organizations, only: [:index, :show, :new, :create, :edit, :update] do
     resources :events, only: [:new, :create, :edit, :update]
   end
-  resources :events, only: [:index, :destroy] do
+  resources :events, only: [:index, :show, :destroy] do
     resources :enrollments, only: [:new, :create]
   end
   resources :enrollments, only: [:update, :destroy]

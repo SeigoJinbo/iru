@@ -29,11 +29,12 @@
       <% @organization.events.each do |event| %>
         <li class="event-card">
           <div class="event-card-contents">
-
-            <div class="event-card-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
-              <h4><%= event.title %></h4>
-              <p><%= event.description %></p>
-            </div>
+            <%= link_to event_path(event) do  %>
+              <div class="event-card-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+                <h4><%= event.title %></h4>
+                <p><%= event.description %></p>
+              </div>
+            <% end %>
               <p>Positions: <%= event.positions %> people</p>
               <% if event.dates.present? %>
               <div class="dates-btn">
