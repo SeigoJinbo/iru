@@ -2,7 +2,7 @@
   <%= link_to "/", class: "navbar-brand" do %>
     <h2>iru</h2>
     <% end %>
-      <%= form_with url: organizations_path, method: :get, local: true do %>
+      <%= form_with url: events_path, method: :get, local: true do %>
         <div class="d-flex">
           <%= text_field_tag :query,
           params[:query],
