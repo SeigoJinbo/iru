@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :events, only: [:new, :create, :edit, :update]
     resources :organization_comments, only: [:new, :create]
   end
-  resources :events, only: [:index, :destroy] do
+  resources :events, only: [:index, :show, :destroy] do
     resources :enrollments, only: [:new, :create]
     resources :event_comments
   end

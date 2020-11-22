@@ -2,8 +2,15 @@ class OrganizationsController < ApplicationController
   include CloudinaryHelper
   before_action :set_organization, only: [:show, :edit, :update]
   skip_before_action :authenticate_user!, only: [:index, :show]
+
   def index
-    @organizations = policy_scope(Organization)
+    if params[:query].present?
+      PgSearch::Multisearch.rebuild(policy_scope(Organization))
+      PgSearch::Multisearch.rebuild(policy_scope(Event))
+      @results = PgSearch.multisearch(params[:query])
+    else
+      @organizations = policy_scope(Organization)
+    end
   end
 
   def show

@@ -1,11 +1,19 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   skip_before_action :authenticate_user!, only: [:index, :show]
+
   def index
-    @events = policy_scope(Event)
+    if params[:query].present?
+      PgSearch::Multisearch.rebuild(policy_scope(Organization))
+      PgSearch::Multisearch.rebuild(policy_scope(Event))
+      @results = PgSearch.multisearch(params[:query])
+    else
+      @events = policy_scope(Event)
+    end
   end
 
   def show
+
   end
 
   def new

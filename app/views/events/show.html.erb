@@ -1,0 +1,26 @@
+
+<p><%= @event.title %></p>
+
+<div>
+  <p><%= @event.owner.nickname %></p>
+  <p><%= @event.owner.description %></p>
+  <p><%= @event.owner.events_as_owner.count %> events </p>
+</div>
+
+<div>
+  <p>target amount $$$</p>
+
+  <% if Time.now < @event.end_time %>
+    <% remaining_days = ((@event.end_time - Time.now) / 360 / 60 / 24 ) %>
+    <p>remaining: <%= remaining_days %> days</p>
+  <% end %>
+  <p>Contributors: ...</p>
+</div>
+
+<div>
+  <p>recommended</p>
+</div>
+
+<div>
+  <p>comments</p>
+</div>
