@@ -407,7 +407,8 @@ blanket_a_panda = Event.create!(
   owner: yuping,
 	tag_list: "Animals/Wildlife",
 	donation_tag_list: "Supplies",
-	item: "Blankets"
+	item: "Blankets",
+  target: 10
   )
 puts "attaching photo give blankets to pandas"
 event_photo = URI.open('https://images.pexels.com/photos/148182/pexels-photo-148182.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')
@@ -439,7 +440,13 @@ Enrollment.create!(
   end_time: Time.now + rand(100000..1000000)
   )
 
+puts "creating donations"
 
+Donation.create!(
+  user: liz,
+  event: blanket_a_panda,
+  amount: rand(1..3)
+  )
 
 # doug 'https://ca.slack-edge.com/T02NE0241-U4APKLFLM-da0b004a3774-512'
 # tomo 'https://ca.slack-edge.com/T02NE0241-U01BNV6UT5J-a4aaf5262922-512'
