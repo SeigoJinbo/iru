@@ -9,10 +9,14 @@ class User < ApplicationRecord
   has_many :organization_comments
   has_many :events_as_owner, class_name: "Event"
   has_many :event_comments
-  has_many :events, through: :enrollments
-  # has_many :events_as_fundraiser, through: :orders, source: :events
-  #has_many :events_as_volunteer, class_name: "Event", through: :enrollments
+  #has_many :events, through: :enrollments #events volunteer
+  has_many :enrollment_events, through: :enrollments, source: :event
+  has_many :order_events, through: :orders, source: :event
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
   has_many_attached :photos
+
+  def events
+    enrollment_events + order_events
+  end
 end

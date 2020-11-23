@@ -8,12 +8,13 @@ class OrdersController < ApplicationController
   end
 
   def create
+
     authorize current_user
     event = Event.find(params[:event_id])
     order = Order.create!(
       event: event,
       event_title: event.title,
-      amount: event.price,
+      amount: params[:amount_cents].to_i,
       state: 'pending',
       user: current_user
       )
@@ -23,7 +24,7 @@ class OrdersController < ApplicationController
       line_items: [{
         name: event.title,
         images: [event.photo.key],
-        amount: event.price_cents,
+        amount: params[:amount_cents].to_i,
         currency: 'jpy',
         quantity: 1
       }],
