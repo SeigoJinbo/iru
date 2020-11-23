@@ -32,6 +32,7 @@ gem 'pundit'
 gem 'geocoder'
 gem 'pg_search', '~> 2.3.0'
 gem 'money-rails'
+gem "simple_calendar", "~> 2.0"
 gem 'stripe'
 gem 'stripe_event'
 

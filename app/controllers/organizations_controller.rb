@@ -22,6 +22,9 @@ class OrganizationsController < ApplicationController
     @volunteer_events = @organization.events.select { |event| event.category == "Volunteer" }
     @fundraiser_events = @organization.events.select { |event| event.category == "Fundraiser" }
     @donation_events = @organization.events.select { |event| event.category == "Donation" }
+    
+		@events = @organization.events.all
+
   end
 
   def map
