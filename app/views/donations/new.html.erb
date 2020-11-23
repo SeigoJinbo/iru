@@ -1,2 +1,17 @@
-<h1>Donations#new</h1>
-<p>Find me in app/views/donations/new.html.erb</p>
+<!--To implement in the show view -->
+<!--Drop this form if category of event == 'Donation' -->
+
+<div class="page">
+  <div class="page-box">
+    <!--Need to change the selector name if we implement javascript drop down btn laster-->
+
+            <p>How many 'items' would you like to donation?</p>
+            <%= simple_form_for [@event, @donation] do |f| %>
+              <%= f.input :amount %>
+              <%= f.button :submit, class: "btn btn-primary btn-block" %>
+            <% end %>
+
+  </div>
+</div>
+
+
