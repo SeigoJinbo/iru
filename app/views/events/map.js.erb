@@ -1,0 +1,28 @@
+
+// var jsonMarkers = "<%= j @markers[:event].to_json %>"
+// console.log(jsonMarkers);
+// const markers = JSON.parse(jsonMarkers);
+//var markers = JSON.parse("<%= j @markers[:event] %>");
+
+
+mapBoxMarkers.forEach((mapBoxMarker) => {
+  mapBoxMarker.remove();
+});
+var newMarkers = [];
+var newMarkerIds = JSON.parse('<%= j @markers[:event].map {|event| event[:event_id]} %>')
+
+markers.forEach((marker) => {
+
+  if (newMarkerIds.includes(marker.event_id)) {
+    newMarkers.push(marker)
+    console.log(newMarkers)
+  }
+
+})
+
+addMarkersToMap(mapbox, newMarkers);
+function refreshSearch(innerHTML) {
+  const box = document.querySelector('.map-box');
+  box.innerHTML = innerHTML;
+}
+refreshSearch("<%= j render 'events/search_box', events: @events %>");
