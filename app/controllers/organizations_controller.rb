@@ -25,7 +25,7 @@ class OrganizationsController < ApplicationController
 
 		@events = @organization.events.all
     @colors = @events.map do |event|
-      event.id
+      event.title
     end
 
 
