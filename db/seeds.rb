@@ -358,10 +358,10 @@ read_to_kids = Event.create!(
   description: 'help children learn to read',
   address: "Hachimangu shrine, Salesian Dori, Meguro, Tokyo, 152-0003, Japan",
   positions: rand(3..10),
-  ongoing: true,
-  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
+  ongoing: false,
   start_time: Time.now + rand(10000..100000),
   end_time: Time.now + rand(100000..1000000),
+  target: 10,
   organization: animal,
   owner: yuping,
   tag_list: "Education"
