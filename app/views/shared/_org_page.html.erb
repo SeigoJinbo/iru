@@ -211,12 +211,11 @@
   <div class="tab-pane fade" id="calendar" role="tabpanel" aria-labelledby="calendar-tab">
     <div class=calendar-box>
 			<%= month_calendar(events: @events) do |date, events| %>
-				<%= date.day %>
-
+				<span class="calendar-date"><%= date.day %></span>
 				<% events.each do |event| %>
 					<div class="border">
 						<%= link_to event_path(event) do %>
-							<button class="enroll-btn btn btn-block calendar-link-<%= @colors.index(event.id) %>" type="button"><%= event.title %></button>
+							<button class="btn btn-block calendar-link-<%= @colors.index(event.title) %>" type="button"><%= event.title %></button>
 						<% end %>
 					</div>
 				<% end %>
