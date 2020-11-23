@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :events_as_owner, class_name: "Event"
   has_many :event_comments
   has_many :events, through: :enrollments
+  has_many :events, through: :donations
   # has_many :events_as_fundraiser, through: :orders, source: :events
   #has_many :events_as_volunteer, class_name: "Event", through: :enrollments
   geocoded_by :address
