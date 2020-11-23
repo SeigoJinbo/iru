@@ -564,8 +564,8 @@ Based on the refurbished bus, it is held regularly in Shibuya and Shinjuku.',
   dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
   start_time: Time.now + rand(10000..100000),
   end_time: Time.now + rand(100000..1000000),
-  organization: women,
-  owner: yuping,
+  organization: colabo,
+  owner: liz,
   price_cents: 100,
   tag_list: "Women"
   )
