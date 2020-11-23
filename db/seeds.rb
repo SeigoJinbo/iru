@@ -31,7 +31,6 @@ ADDRESSES = [
   # 'Times, Nakahara kaido, Tokyo, Ota, 145-8523, Japan', 'Tokyo, Ota, 145-0066, Japan',
   # 'Gap, Kurinoki-Dori, Meguro, Tokyo, 152-0035, Japan',
   # 'Tomorrowland, Maple Street, Meguro, Tokyo, 152-0035, Japan',
-  # 'Sans Souci, Nakahara kaido, Tokyo, Ota, 145-8523, Japan',
   'Den-en-Chofu Elementary School, Kampachi dori, Setagaya, Tokyo, 145-0071, Japan'
 ]
 
@@ -201,8 +200,41 @@ Organization.destroy_all
 # require_relative './organization_seeds'
 
 #------------------SET EVENTS--------------
+
 require_relative './event_seeds'
 
+puts "Give Blankets to Pandas"
+BLANKET_A_PANDA = Event.create!(
+  title: "Give Blankets to Pandas",
+  category: 'Donation',
+  description: 'Pandas need blankets',
+  address: "Sans Souci, Nakahara kaido, Tokyo, Ota, 145-8523, Japan",
+  positions: rand(3..10),
+  ongoing: true,
+  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
+  start_time: Time.now + rand(10000..100000),
+  end_time: Time.now + rand(100000..1000000),
+  organization: ANIMAL,
+  owner: YUPING,
+	tag_list: "Animals/Wildlife",
+	donation_tag_list: "Supplies",
+	item: "Blankets",
+  target: 10
+  )
+puts "attaching photo give blankets to pandas"
+event_photo = URI.open('https://images.pexels.com/photos/148182/pexels-photo-148182.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')
+BLANKET_A_PANDA.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+
+
+
+
+puts "creating donations"
+
+Donation.create!(
+  user: LIZ,
+  event: BLANKET_A_PANDA,
+  amount: rand(1..3)
+  )
 
 puts '
   _______________________________________    _________

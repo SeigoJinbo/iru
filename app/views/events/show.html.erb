@@ -36,7 +36,7 @@
 				<div class="event-show-box">
 					<div class="event-show-organization">
 						<div class="event-show-organization-details">
-							<h3><%= @event.organization.name %></h3>
+							<h3><%= link_to @event.organization.name, organization_path(@event.organization) %></h3>
 							<p><%= @event.organization.description %></p>
 						</div>
 						<%# Organizer small box %>
@@ -46,7 +46,7 @@
 									<%= cl_image_tag @event.owner.photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
 								</div>
 								<div class="ml-3">
-									<h4><%= @event.owner.nickname %></h4>
+									<h4><%= link_to @event.owner.nickname, user_path(@event.owner) %></h4>
 									<h5>Event Organizer</h5>
 								</div>
 							</div>

@@ -16,11 +16,19 @@ class OrganizationsController < ApplicationController
   def show
     @organization_comment = OrganizationComment.new
     @enrollment = Enrollment.new
+    @donation = Donation.new
     # @events = @organization.events.select { |event| event.status = "Accepted" }
 
     @volunteer_events = @organization.events.select { |event| event.category == "Volunteer" }
     @fundraiser_events = @organization.events.select { |event| event.category == "Fundraiser" }
-    @donation_events = @organization.events.select { |event| event.category == "Dontaion" }
+    @donation_events = @organization.events.select { |event| event.category == "Donation" }
+
+		@events = @organization.events.all
+    @colors = @events.map do |event|
+      event.title
+    end
+
+
   end
 
   def map

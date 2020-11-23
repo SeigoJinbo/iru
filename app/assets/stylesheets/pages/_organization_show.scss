@@ -1,3 +1,7 @@
+* {
+	text-decoration: none;
+}
+
 .enroll-form {
   display: none;
 }
@@ -147,4 +151,28 @@
     text-decoration: none;
     font-weight: bolder;
   }
+}
+
+.calendar-box {
+	padding: 24px;
+	text-decoration: none;
+	.calendar-date {
+		font-weight: bolder;
+	}
+}
+
+.calendar-link-0 {
+  background: $honeydew;
+}
+
+.calendar-link-1 {
+  background: $banana;
+}
+
+.calendar-link-2 {
+  background: $tangerine;
+}
+
+.calendar-link-3 {
+  background: $pink;
 }
