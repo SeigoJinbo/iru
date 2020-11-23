@@ -13,11 +13,52 @@
 	background-color: $ivory;
 	border-radius: 24px;
 	margin: 24px;
-	padding: 48px;
+	// padding: 48px;
 		h1 {
 			font-weight: 700;
 		}
 		h3 {
 			font-weight: 400;
 		}
+}
+
+#event-show {
+	padding: 48px;
+}
+
+.event-title {
+	display: flex;
+	.event-title-photo {
+		margin-right: 40px;
+	}
+}
+
+.event-show-box {
+	padding: 16px;
+	margin: 16px;
+}
+
+.event-show-organization {
+	display: flex;
+	justify-content: space-between;
+}
+
+.event-show-organization-details {
+	width: 640px;
+	padding: 0 48px 16px 0;
+}
+
+.border-box {
+	border-radius: 24px;
+	padding: 24px;
+	border: 1px solid $darker-ivory;
+}
+
+.organizer-details-title {
+	display: flex;
+	align-items: center;
+}
+
+.other-events-box {
+	height: 400px;
 }
