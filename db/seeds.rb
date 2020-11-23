@@ -59,8 +59,13 @@ ROLES = ['leader', 'member', 'member', 'member']
 CATEGORIES = ["Volunteer", "Donation", "Fundraiser"]
 TAGS = ["Animals/Wildlife", "Children/Youth", "Disasters", "Education", "Environment/Agriculture", "Health", "Women", "Seniors/Disabilities", "Other"]
 
+
+EventComment.destroy_all
+OrganizationComment.destroy_all
 puts "destroying enrollments"
 Enrollment.destroy_all
+puts "destroying orders"
+Order.destroy_all
 puts "destroying events"
 Event.destroy_all
 puts "destroying memberships"
@@ -75,67 +80,67 @@ Organization.destroy_all
 
 
 #------------------RANDOM USERS-----------------
-puts "creating random users"
-5.times do
-  User.create!(
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
-    nickname: Faker::FunnyName.name,
-    address: Faker::Address.full_address,
-    email: Faker::Internet.email,
-    password: "123456",
-    description: Faker::Hipster.paragraph,
-    gender: Faker::Gender.binary_type
-  )
-end
+# puts "creating random users"
+# 5.times do
+#   User.create!(
+#     first_name: Faker::Name.first_name,
+#     last_name: Faker::Name.last_name,
+#     nickname: Faker::FunnyName.name,
+#     address: Faker::Address.full_address,
+#     email: Faker::Internet.email,
+#     password: "123456",
+#     description: Faker::Hipster.paragraph,
+#     gender: Faker::Gender.binary_type
+#   )
+# end
 
-puts "attaching users photos"
-User.all.each do |user|
-  user_avatar = URI.open('https://i.imgur.com/PxgXkTX.png')
-  user_banner = URI.open('https://i.imgur.com/nwaLuxT.jpg')
-  user.photos.attach(io: user_avatar, filename: 'user_avatar.png', content_type: 'image/png')
-  user.photos.attach(io: user_banner, filename: 'user_banner.jpg', content_type: 'image/jpg')
-end
+# puts "attaching users photos"
+# User.all.each do |user|
+#   user_avatar = URI.open('https://i.imgur.com/PxgXkTX.png')
+#   user_banner = URI.open('https://i.imgur.com/nwaLuxT.jpg')
+#   user.photos.attach(io: user_avatar, filename: 'user_avatar.png', content_type: 'image/png')
+#   user.photos.attach(io: user_banner, filename: 'user_banner.jpg', content_type: 'image/jpg')
+# end
 
 
 #------------RANDOM ORGANIZATIONS----------------
-puts "creating random organizations"
+# puts "creating random organizations"
 
 
-ADDRESSES.each do |address|
-  tag = TAGS.sample
-  org = Organization.create!(
-    email: Faker::Internet.email,
-    name: Faker::Dessert.topping,
-    address: address,
-    description: Faker::Hipster.paragraph,
-    establishment_year: rand(1960..2020).to_s,
-    phone_number: Faker::PhoneNumber.cell_phone_in_e164,
-    hp_url: Faker::Internet.email,
-    twitter_url: Faker::Internet.email,
-    insta_url: Faker::Internet.email,
-    tag_list: tag
-  )
-  org.tag_list.add(tag)
-end
+# ADDRESSES.each do |address|
+#   tag = TAGS.sample
+#   org = Organization.create!(
+#     email: Faker::Internet.email,
+#     name: Faker::Dessert.topping,
+#     address: address,
+#     description: Faker::Hipster.paragraph,
+#     establishment_year: rand(1960..2020).to_s,
+#     phone_number: Faker::PhoneNumber.cell_phone_in_e164,
+#     hp_url: Faker::Internet.email,
+#     twitter_url: Faker::Internet.email,
+#     insta_url: Faker::Internet.email,
+#     tag_list: tag
+#   )
+#   org.tag_list.add(tag)
+# end
 
-#-----------RANDOM MEMBERSHIPS--------------
-Organization.all.each do |organization|
-  Membership.create!(
-    organization: organization,
-    user: User.all.sample,
-    role: 'leader'
-  )
-end
+# #-----------RANDOM MEMBERSHIPS--------------
+# Organization.all.each do |organization|
+#   Membership.create!(
+#     organization: organization,
+#     user: User.all.sample,
+#     role: 'leader'
+#   )
+# end
 
-#-----------RANDOM ORG PHOTOS----------------
-puts "attaching org photos"
-Organization.all.each do |org|
-  org_logo = URI.open('https://i.imgur.com/LrBo4bK.png')
-  org_banner = URI.open('https://i.imgur.com/qqvHVOz.jpg')
-  org.photos.attach(io: org_logo, filename: 'org_logo.png', content_type: 'image/png')
-  org.photos.attach(io: org_banner, filename: 'org_banner.jpg', content_type: 'image/jpg')
-end
+# #-----------RANDOM ORG PHOTOS----------------
+# puts "attaching org photos"
+# Organization.all.each do |org|
+#   org_logo = URI.open('https://i.imgur.com/LrBo4bK.png')
+#   org_banner = URI.open('https://i.imgur.com/qqvHVOz.jpg')
+#   org.photos.attach(io: org_logo, filename: 'org_logo.png', content_type: 'image/png')
+#   org.photos.attach(io: org_banner, filename: 'org_banner.jpg', content_type: 'image/jpg')
+# end
 
 
 
@@ -190,6 +195,121 @@ end
 
 
 #-----------------USERS--------------------
+# require_relative './db/user_seeds'
+# doug 'https://ca.slack-edge.com/T02NE0241-U4APKLFLM-da0b004a3774-512'
+doug = User.create!(
+  first_name: "Doug",
+  last_name: "Doug",
+  nickname: "Dugg",
+  address: "meguro tokyo Japan",
+  email: "dug@iru.com",
+  password: "123456",
+  description: "gives assistance and judgment",
+  gender: "male",
+  admin: false
+)
+user_avatar = URI.open('https://ca.slack-edge.com/T02NE0241-U4APKLFLM-da0b004a3774-512')
+doug.photos.attach(io: user_avatar, filename: 'user_avatar.png', content_type: 'image/png')
+doug.save
+
+# tomo 'https://ca.slack-edge.com/T02NE0241-U01BNV6UT5J-a4aaf5262922-512'
+tomo = User.create!(
+  first_name: "Tomo",
+  last_name: "Tomo",
+  nickname: "Tomo",
+  address: "meguro tokyo Japan",
+  email: "tomo@iru.com",
+  password: "123456",
+  description: "more animations",
+  gender: "male",
+  admin: false
+)
+user_avatar = URI.open('https://ca.slack-edge.com/T02NE0241-U01BNV6UT5J-a4aaf5262922-512')
+tomo.photos.attach(io: user_avatar, filename: 'user_avatar.png', content_type: 'image/png')
+tomo.save
+
+# taku 'https://ca.slack-edge.com/T02NE0241-U01BA1V6NT0-c1f678e8f104-512'
+taku = User.create!(
+  first_name: "Taku",
+  last_name: "Taku",
+  nickname: "Taku",
+  address: "meguro tokyo Japan",
+  email: "taku@iru.com",
+  password: "123456",
+  description: "...",
+  gender: "male",
+  admin: false
+)
+user_avatar = URI.open('https://ca.slack-edge.com/T02NE0241-U01BA1V6NT0-c1f678e8f104-512')
+taku.photos.attach(io: user_avatar, filename: 'user_avatar.png', content_type: 'image/png')
+taku.save
+
+# alex 'https://ca.slack-edge.com/T02NE0241-U01B28171C7-39328fb417e5-512'
+alex = User.create!(
+  first_name: "Alex",
+  last_name: "Alex",
+  nickname: "Tarako",
+  address: "meguro tokyo Japan",
+  email: "alex@iru.com",
+  password: "123456",
+  description: "my glasses are foggy...",
+  gender: "male",
+  admin: false
+)
+user_avatar = URI.open('https://ca.slack-edge.com/T02NE0241-U01B28171C7-39328fb417e5-512')
+alex.photos.attach(io: user_avatar, filename: 'user_avatar.png', content_type: 'image/png')
+alex.save
+
+# aline 'https://ca.slack-edge.com/T02NE0241-U01BA61426A-96a4db6efb46-512'
+aline = User.create!(
+  first_name: "Aline",
+  last_name: "Aline",
+  nickname: "Aline",
+  address: "meguro tokyo Japan",
+  email: "aline@iru.com",
+  password: "123456",
+  description: " ",
+  gender: "female",
+  admin: false
+)
+user_avatar = URI.open('https://ca.slack-edge.com/T02NE0241-U01BA61426A-96a4db6efb46-512')
+aline.photos.attach(io: user_avatar, filename: 'user_avatar.png', content_type: 'image/png')
+aline.save
+
+# jess 'https://ca.slack-edge.com/T02NE0241-U01BGQF8EN6-38cf90e892b8-512'
+jess = User.create!(
+  first_name: "jess",
+  last_name: "jess",
+  nickname: "Jess",
+  address: "meguro tokyo Japan",
+  email: "jess@iru.com",
+  password: "123456",
+  description: " ",
+  gender: "female",
+  admin: false
+)
+user_avatar = URI.open('https://ca.slack-edge.com/T02NE0241-U01BGQF8EN6-38cf90e892b8-512')
+jess.photos.attach(io: user_avatar, filename: 'user_avatar.png', content_type: 'image/png')
+jess.save
+
+
+# sho 'https://ca.slack-edge.com/T02NE0241-U01BGQ7MZ4J-e39557371271-512'
+sho = User.create!(
+  first_name: "sho",
+  last_name: "sho",
+  nickname: "sho",
+  address: "meguro tokyo Japan",
+  email: "sho@iru.com",
+  password: "123456",
+  description: "i think i broke everything...",
+  gender: "male",
+  admin: false
+)
+user_avatar = URI.open('https://ca.slack-edge.com/T02NE0241-U01BGQF8EN6-38cf90e892b8-512')
+sho.photos.attach(io: user_avatar, filename: 'user_avatar.png', content_type: 'image/png')
+sho.save
+
+
 puts 'creating dev team'
 
 seigo = User.create!(
@@ -204,6 +324,11 @@ seigo = User.create!(
   admin: false
 )
   #birthday: 'november 6 1987'
+user_avatar = URI.open('https://www.aboutmanchester.co.uk/wp-content/uploads/2017/11/IMG_2409.jpg')
+user_banner = URI.open('https://miro.medium.com/max/1400/1*nkARDRVDJaB9bKN0Po53-g.jpeg')
+seigo.photos.attach(io: user_avatar, filename: 'user_avatar.png', content_type: 'image/png')
+seigo.photos.attach(io: user_banner, filename: 'user_banner.jpg', content_type: 'image/jpg')
+seigo.save
 
 yuping = User.create!(
   first_name: "Yuping",
@@ -216,6 +341,11 @@ yuping = User.create!(
   admin: false
   )
  # birthday: 'august 11 1992'
+user_avatar = URI.open('https://ca.slack-edge.com/T02NE0241-U01BP13R1CL-aa72532c73d4-512')
+user_banner = URI.open('https://images.pexels.com/photos/315998/pexels-photo-315998.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')
+yuping.photos.attach(io: user_avatar, filename: 'user_avatar.png', content_type: 'image/png')
+yuping.photos.attach(io: user_banner, filename: 'user_banner.jpg', content_type: 'image/jpg')
+yuping.save
 
 liz = User.create!(
   first_name: "Liz",
@@ -228,27 +358,17 @@ liz = User.create!(
   admin: false
   )
   #birthday: 'may 7th 1993'
-puts 'attach photos to dev team'
 user_avatar = URI.open('https://ca.slack-edge.com/T02NE0241-U01BGPC1Z0S-de16e0810ab9-512')
 user_banner = URI.open('https://images.pexels.com/photos/1237119/pexels-photo-1237119.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')
 liz.photos.attach(io: user_avatar, filename: 'user_avatar.png', content_type: 'image/png')
 liz.photos.attach(io: user_banner, filename: 'user_banner.jpg', content_type: 'image/jpg')
 liz.save
 
-user_avatar = URI.open('https://ca.slack-edge.com/T02NE0241-U01BP13R1CL-aa72532c73d4-512')
-user_banner = URI.open('https://images.pexels.com/photos/315998/pexels-photo-315998.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')
-yuping.photos.attach(io: user_avatar, filename: 'user_avatar.png', content_type: 'image/png')
-yuping.photos.attach(io: user_banner, filename: 'user_banner.jpg', content_type: 'image/jpg')
-yuping.save
 
-user_avatar = URI.open('https://www.aboutmanchester.co.uk/wp-content/uploads/2017/11/IMG_2409.jpg')
-user_banner = URI.open('https://miro.medium.com/max/1400/1*nkARDRVDJaB9bKN0Po53-g.jpeg')
-seigo.photos.attach(io: user_avatar, filename: 'user_avatar.png', content_type: 'image/png')
-seigo.photos.attach(io: user_banner, filename: 'user_banner.jpg', content_type: 'image/jpg')
-seigo.save
 
 
 #-----------------SET ORGANIZATIONS------------------------
+#require_relative './db/organization_seeds'
 puts "creating we love trees"
 we_love_trees = Organization.create!(
   name: "We love trees",
@@ -309,28 +429,67 @@ animal.photos.attach(io: org_banner, filename: 'org_banner.jpg', content_type: '
 
 
 
+puts "colabo"
+colabo = Organization.create!(
+  name: "Colabo",
+  email: "sato@colabo.com",
+  # address: "Setagaya, Tokyo, 152-0035, Japan",
+  description: "We are working toward a society in which
+all girls have a “clothing, food and housing” and “relationship”, and
+girls with difficulties do not have to end up in exploitation or violence",
+  establishment_year: "2019",
+  phone_number: "08077633849",
+  hp_url: "https://colabo-official.net/",
+  twitter_url: "https://twitter.com/colabo_official",
+  insta_url: 'https://www.instagram.com/colabo.official/',
+  tag_list: "Women"
+  )
+
+puts "attaching photos to Animals are people"
+org_logo = URI.open('https://colabo-official.net/wp-content/uploads/2017/08/colabologo.svg')
+org_banner = URI.open('https://colabo-official.net/wp-content/uploads/2017/08/colabo-site_02.jpg?id=508')
+colabo.photos.attach(io: org_logo, filename: 'org_logo.png', content_type: 'image/png')
+colabo.photos.attach(io: org_banner, filename: 'org_banner.jpg', content_type: 'image/jpg')
+
+puts "second harvest"
+harvest = Organization.create!(
+  name: "Second Harvest",
+  email: "John@secondharvest.com",
+  # address: "Setagaya, Tokyo, 152-0035, Japan",
+  description: "Food loss in Japan is virtually equivalent to the total amount of food aid distributed world-wide.
+Statistics published by the Ministry of Agriculture, Forestry and Fisheries in 2012 puts Japan’s annual food loss at between 5 and 8 million tons. Japan’s annual rice production is 8.39 million tons, a very similar amount. Of that 5 to 8 million tons of food loss, 2 to 4 million tons come from individual households. Food loss during production and distribution is between 3 and 4 million tons.",
+  establishment_year: "2004",
+  phone_number: "08077633849",
+  hp_url: "http://2hj.org/",
+  twitter_url: "https://twitter.com/2ndharvestjapan",
+
+  tag_list: "Other"
+  )
+
+puts "attaching photos to Animals are people"
+org_logo = URI.open('http://2hj.org/common/images/logo.gif')
+org_banner = URI.open('https://eatnorth.com/sites/default/files/styles/span9_thumbnail/public/field/image/82799828_10156521106077063_7024970787056517120_n_-_edited.jpg?itok=uEP3lm1H')
+harvest.photos.attach(io: org_logo, filename: 'org_logo.png', content_type: 'image/png')
+harvest.photos.attach(io: org_banner, filename: 'org_banner.jpg', content_type: 'image/jpg')
+
+#https://images.pexels.com/photos/961969/pexels-photo-961969.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260
+
 
 #----------------SET MEMBERSHIPS--------------
 puts "assigning we love trees to liz"
-membership = Membership.new
-membership.user = liz
-membership.organization = we_love_trees
-membership.save
+Membership.create!(user: liz, organization: we_love_trees)
 
 puts "tsunami relief to liz"
-membership = Membership.new
-membership.user = liz
-membership.organization = tsunami
-membership.save
+Membership.create!(user: liz, organization: tsunami)
 
 puts "assigning animals are people to yuping"
-membership = Membership.new
-membership.user = yuping
-membership.organization = animal
-membership.save
+Membership.create!(user: yuping, organization: animal)
+Membership.create!(user: liz, organization: colabo)
+
 
 
 #------------------SET EVENTS--------------
+# require_relative './db/event_seeds'
 puts "creating plant a tree"
 plant_a_tree = Event.create!(
   title: "Plant a tree",
@@ -393,6 +552,47 @@ puts "attaching photo give money to pandas"
 event_photo = URI.open('https://images.pexels.com/photos/148182/pexels-photo-148182.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')
 walk_a_panda.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
 
+puts "Night cafe"
+night_cafe = Event.create!(
+  title: "Night Cafe",
+  category: 'Volunteer',
+  description: 'Tsubomi Cafe is a free cafe for teens.
+Based on the refurbished bus, it is held regularly in Shibuya and Shinjuku.',
+  address: "Shibuya: 6-21 Jingumae, Shibuya-ku, Tokyo 6-22-8 Jingumae",
+  positions: rand(3..10),
+  ongoing: false,
+  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
+  start_time: Time.now + rand(10000..100000),
+  end_time: Time.now + rand(100000..1000000),
+  organization: women,
+  owner: yuping,
+  price_cents: 100,
+  tag_list: "Women"
+  )
+puts "attaching photo give money to pandas"
+event_photo = URI.open('https://i2.wp.com/colabo-official.net/wp-content/uploads/2018/10/8574236942707.jpg?fit=640%2C401&ssl=1')
+night_cafe.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+
+puts "Harvest kitchen"
+kitchen = Event.create!(
+  title: "Harvest Kitchen",
+  category: 'Volunteer',
+  description: 'We distribute hot meals at Ueno Park each Saturday.',
+  address: "1F Mizuta Bldg. 4-5-1 Asakusabashi
+Taito-ku, Tokyo, Japan 111-0053",
+  positions: rand(3..10),
+  ongoing: false,
+  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
+  start_time: Time.now + rand(10000..100000),
+  end_time: Time.now + rand(100000..1000000),
+  organization: harvest,
+  owner: yuping,
+  price_cents: 100,
+  tag_list: "Other"
+  )
+puts "attaching photo give money to pandas"
+event_photo = URI.open('http://2hj.org/activity_/images/img_2hj_activity01.jpg')
+night_cafe.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
 
 
 #---------------SET ENROLLMENTS---------------
@@ -421,10 +621,5 @@ Enrollment.create!(
 
 
 
-# doug 'https://ca.slack-edge.com/T02NE0241-U4APKLFLM-da0b004a3774-512'
-# tomo 'https://ca.slack-edge.com/T02NE0241-U01BNV6UT5J-a4aaf5262922-512'
-# taku 'https://ca.slack-edge.com/T02NE0241-U01BA1V6NT0-c1f678e8f104-512'
-# alex 'https://ca.slack-edge.com/T02NE0241-U01B28171C7-39328fb417e5-512'
-# aline 'https://ca.slack-edge.com/T02NE0241-U01BA61426A-96a4db6efb46-512'
-# jess 'https://ca.slack-edge.com/T02NE0241-U01BGQF8EN6-38cf90e892b8-512'
-# sho 'https://ca.slack-edge.com/T02NE0241-U01BGQ7MZ4J-e39557371271-512'
+
+puts 'Seeding Complete!'
