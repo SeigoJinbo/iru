@@ -212,10 +212,11 @@
     <div class=calendar-box>
 			<%= month_calendar(events: @events) do |date, events| %>
 				<%= date.day %>
+
 				<% events.each do |event| %>
 					<div class="border">
 						<%= link_to event_path(event) do %>
-							<button class="enroll-btn btn btn-primary btn-block" type="button"><%= event.title %></button>
+							<button class="enroll-btn btn btn-block calendar-link-<%= @colors.index(event.id) %>" type="button"><%= event.title %></button>
 						<% end %>
 					</div>
 				<% end %>
