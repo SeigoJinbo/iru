@@ -27,7 +27,7 @@
     <a class="nav-link active" id="event-tab" data-toggle="tab" href="#event" role="tab" aria-controls="event" aria-selected="true">Event</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="calendar-tab" data-toggle="tab" href="#calendar" role="tab" aria-controls="calendar" aria-selected="false">Profile</a>
+    <a class="nav-link" id="calendar-tab" data-toggle="tab" href="#calendar" role="tab" aria-controls="calendar" aria-selected="false">Calendar</a>
   </li>
 </ul>
 <!---------------------Tabs page--------------------->
@@ -169,7 +169,17 @@
   </div>
   <!---------------------Calendar tabs--------------------->
   <div class="tab-pane fade" id="calendar" role="tabpanel" aria-labelledby="calendar-tab">
-    This is the calendar.
+    <div class=calendar-box>
+			<%= month_calendar(events: @events) do |date, events| %>
+				<%= date.day %>
+				<% events.each do |event| %>
+					<div class="border">
+						<%= link_to event_path(event) do %>
+							<button class="enroll-btn btn btn-primary btn-block" type="button"><%= event.title %></button>
+						<% end %>
+					</div>
+				<% end %>
+			<% end %>
+		</div>
   </div>
 </div>
-

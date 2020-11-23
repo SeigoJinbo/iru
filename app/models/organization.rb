@@ -8,7 +8,12 @@ class Organization < ApplicationRecord
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
   has_many_attached :photos
-  acts_as_taggable_on :tags
+	acts_as_taggable_on :tags
+	
+	def start_time
+		self.events.start_time
+		# self.my_related_model.start ##Where 'start' is a attribute of type 'Date' accessible through MyModel's relationship
+	end
 
   def tag_number
     LIST.index(tag_list[0])
