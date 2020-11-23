@@ -97,7 +97,7 @@ Statistics published by the Ministry of Agriculture, Forestry and Fisheries in 2
   )
 
 puts "attaching photos to Animals are people"
-org_logo = URI.open('http://2hj.org/common/images/logo.gif')
+org_logo = URI.open('https://i.imgur.com/nr5yK9t.png')
 org_banner = URI.open('https://eatnorth.com/sites/default/files/styles/span9_thumbnail/public/field/image/82799828_10156521106077063_7024970787056517120_n_-_edited.jpg?itok=uEP3lm1H')
 HARVEST.photos.attach(io: org_logo, filename: 'org_logo.png', content_type: 'image/png')
 HARVEST.photos.attach(io: org_banner, filename: 'org_banner.jpg', content_type: 'image/jpg')
