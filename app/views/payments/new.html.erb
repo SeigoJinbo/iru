@@ -17,10 +17,10 @@
 
 
     <div class="col">
-      <h1>Checkout summary</h1>
-      <p>Purchase of <strong><%= @order.event.organization.name %></strong> for <strong><%= humanized_money_with_symbol @order.amount %></strong></p>
+      <h1>Confirmation</h1>
+      <p>Would you like to donate <strong><%= humanized_money_with_symbol @order.amount %></strong> to <strong><%= @order.event.organization.name %></strong>?</p>
 
-      <button id="pay" class="btn btn-primary">Donate</button>
+      <button id="pay" class="btn btn-primary">Yes!</button>
 
     </div>
   </div>

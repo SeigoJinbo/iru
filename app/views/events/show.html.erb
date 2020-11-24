@@ -3,30 +3,108 @@
 		<%# Event "banner" %>
 		<div class="event-title">
 			<div class="event-title-details">
-				<h1><%= @event.title %></h1>
+				<h1 class="seaweed-text"><%= @event.title %></h1>
 				<h3>Target amount $$$</h3>
 				<% if Time.now < @event.end_time %>
 					<% remaining_days = ((@event.end_time - Time.now) / 360 / 60 / 24 ) %>
 					<p>remaining: <%= remaining_days %> days</p>
 				<% end %>
+			<%# Forms %>
+				<div class="event-form-box border-box">
+					<% if @event.category == "Volunteer" %>
+						<div class="enroll-section">
+							<% if user_signed_in? %>
+								<!-- ------Event owner edit / delete -->
+								<% if @event.owner == current_user || current_user.admin %>
+									<%= link_to "Edit", event_path(@event), class: 'btn btn-primary' %>
+									<%= link_to "Delete", event_path(@event), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete #{@event.title}?" } %>
+								<% end %>
+								<!------- Enroll --------->
+								<% if @event.owner != current_user || current_user.admin %>
+									<div class="enroll-form">
+										<h6>When can you join us?</h6>
+										<%= simple_form_for [@event, @enrollment] do |f| %>
+											<%= f.input :start_time, as: :datetime, html5: true, item_label_class: 'my-custom-class' %>
+											<%= f.input :end_time, as: :datetime, html5: true %>
+											<div class="btn btn-primary btn-block"><%= f.button :submit, 'Register'%></div>
+										<% end %>
+									</div>
+								<% end %>
+								<!------ Visitor sign in ------>
+							<% else %>
+								<%= link_to "Sign in to join!", new_user_session_path, class: "btn btn-primary" %>
+							<% end %>
+						</div>
+
+					<% elsif @event.category == "Donation" %>
+						<div class="enroll-section">
+							<% if user_signed_in? %>
+								<!-- ------Event owner edit / delete -->
+								<% if @event.owner == current_user || current_user.admin %>
+									<%= link_to "Edit", event_path(@event), class: 'btn btn-primary' %>
+									<%= link_to "Delete", event_path(@event), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete #{@event.title}?" } %>
+								<% end %>
+								<!------- Enroll --------->
+								<% if @event.owner != current_user || current_user.admin %>
+									<div class="enroll-form">
+										<p>How many <%= @event.item %> would you like to donate?</p>
+										<%= simple_form_for [@event, @donation] do |f| %>
+											<%= f.input :amount %>
+											<%= f.button :submit, class: "btn btn-primary btn-block" %>
+										<% end %>
+									</div>
+								<% end %>
+								<!------ Visitor sign in ------>
+							<% else %>
+								<%= link_to "Sign in to donate!", new_user_session_path, class: "btn btn-primary" %>
+							<% end %>
+						</div>
+					<% elsif @event.category == "Fundraiser" %>
+						<div class="enroll-section">
+							<% if user_signed_in? %>
+								<!-- --------------Event owner edit / delete --------------------->
+								<% if @event.owner == current_user || current_user.admin %>
+									<%= link_to "Edit", event_path(@event), class: 'btn btn-primary' %>
+									<%= link_to "Delete", event_path(@event), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete #{@event.title}?" } %>
+								<% end %>
+								<!----------------------- Enroll --------------------------->
+								<% if @event.owner != current_user || current_user.admin %>
+									<h5>Support this mission:</h5>
+										<p><%= humanized_money_with_symbol(@event.raised) %> / <%= humanized_money_with_symbol(@event.target) %> raised</p>
+
+										<!---donate form---->
+										<%= form_tag orders_path do |f| %>
+											<%= hidden_field_tag 'event_id', @event.id %>
+											<%= text_field_tag :amount_cents, nil, placeholder: 'Any amount welcome!' %>
+
+											<%= submit_tag 'Donate', class: 'btn btn-primary' %>
+										<% end %>
+								<% end %>
+								<!--------------------- Visitor sign in ------------->
+							<% else %>
+								<%= link_to "Sign in to fundraise", new_user_session_path, class: "btn btn-primary" %>
+							<% end %>
+						</div>
+					<% end %>
+				</div>
 			</div>
 			<div class="event-title-photo"><%= cl_image_tag @event.photo.key, height: 300, width: 400, crop: :fill %></div>
 		</div>
 
 		<%# Tabs bar %>
 		<ul class="nav nav-tabs">
-			<li class="nav-item active"><a data-toggle="tab" href="#mission" class="nav-link active">Mission</a></li>
+			<li class="nav-item active"><a data-toggle="tab" href="#mission" class="nav-link active">Description</a></li>
 			<li class="nav-item"><a data-toggle="tab" href="#organization" class="nav-link">Organization Info</a></li>
 			<li class="nav-item"><a data-toggle="tab" href="#comments" class="nav-link">Comments/Questions</a></li>
 		</ul>
 
 		<div class="tab-content">
-			<%# Mission %>
+			<%# Description %>
 			<div id="mission" class="tab-pane active">
 					<div class="event-show-box">
 						<div class="event-box-contents">
-							<h3>Mission</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+							<h3>Description</h3>
+							<p><%= @event.description %></p>
 						</div>
 					</div>
 			</div>

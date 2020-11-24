@@ -58,8 +58,13 @@ ROLES = ['leader', 'member', 'member', 'member']
 CATEGORIES = ["Volunteer", "Donation", "Fundraiser"]
 TAGS = ["Animals/Wildlife", "Children/Youth", "Disasters", "Education", "Environment/Agriculture", "Health", "Women", "Seniors/Disabilities", "Other"]
 
+
+EventComment.destroy_all
+OrganizationComment.destroy_all
 puts "destroying enrollments"
 Enrollment.destroy_all
+puts "destroying orders"
+Order.destroy_all
 puts "destroying events"
 Event.destroy_all
 puts "destroying memberships"
@@ -74,67 +79,67 @@ Organization.destroy_all
 
 
 #------------------RANDOM USERS-----------------
-puts "creating random users"
-5.times do
-  User.create!(
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
-    nickname: Faker::FunnyName.name,
-    address: Faker::Address.full_address,
-    email: Faker::Internet.email,
-    password: "123456",
-    description: Faker::Hipster.paragraph,
-    gender: Faker::Gender.binary_type
-  )
-end
+# puts "creating random users"
+# 5.times do
+#   User.create!(
+#     first_name: Faker::Name.first_name,
+#     last_name: Faker::Name.last_name,
+#     nickname: Faker::FunnyName.name,
+#     address: Faker::Address.full_address,
+#     email: Faker::Internet.email,
+#     password: "123456",
+#     description: Faker::Hipster.paragraph,
+#     gender: Faker::Gender.binary_type
+#   )
+# end
 
-puts "attaching users photos"
-User.all.each do |user|
-  user_avatar = URI.open('https://i.imgur.com/PxgXkTX.png')
-  user_banner = URI.open('https://i.imgur.com/nwaLuxT.jpg')
-  user.photos.attach(io: user_avatar, filename: 'user_avatar.png', content_type: 'image/png')
-  user.photos.attach(io: user_banner, filename: 'user_banner.jpg', content_type: 'image/jpg')
-end
+# puts "attaching users photos"
+# User.all.each do |user|
+#   user_avatar = URI.open('https://i.imgur.com/PxgXkTX.png')
+#   user_banner = URI.open('https://i.imgur.com/nwaLuxT.jpg')
+#   user.photos.attach(io: user_avatar, filename: 'user_avatar.png', content_type: 'image/png')
+#   user.photos.attach(io: user_banner, filename: 'user_banner.jpg', content_type: 'image/jpg')
+# end
 
 
 #------------RANDOM ORGANIZATIONS----------------
-puts "creating random organizations"
+# puts "creating random organizations"
 
 
-ADDRESSES.each do |address|
-  tag = TAGS.sample
-  org = Organization.create!(
-    email: Faker::Internet.email,
-    name: Faker::Dessert.topping,
-    address: address,
-    description: Faker::Hipster.paragraph,
-    establishment_year: rand(1960..2020).to_s,
-    phone_number: Faker::PhoneNumber.cell_phone_in_e164,
-    hp_url: Faker::Internet.email,
-    twitter_url: Faker::Internet.email,
-    insta_url: Faker::Internet.email,
-    tag_list: tag
-  )
-  org.tag_list.add(tag)
-end
+# ADDRESSES.each do |address|
+#   tag = TAGS.sample
+#   org = Organization.create!(
+#     email: Faker::Internet.email,
+#     name: Faker::Dessert.topping,
+#     address: address,
+#     description: Faker::Hipster.paragraph,
+#     establishment_year: rand(1960..2020).to_s,
+#     phone_number: Faker::PhoneNumber.cell_phone_in_e164,
+#     hp_url: Faker::Internet.email,
+#     twitter_url: Faker::Internet.email,
+#     insta_url: Faker::Internet.email,
+#     tag_list: tag
+#   )
+#   org.tag_list.add(tag)
+# end
 
-#-----------RANDOM MEMBERSHIPS--------------
-Organization.all.each do |organization|
-  Membership.create!(
-    organization: organization,
-    user: User.all.sample,
-    role: 'leader'
-  )
-end
+# #-----------RANDOM MEMBERSHIPS--------------
+# Organization.all.each do |organization|
+#   Membership.create!(
+#     organization: organization,
+#     user: User.all.sample,
+#     role: 'leader'
+#   )
+# end
 
-#-----------RANDOM ORG PHOTOS----------------
-puts "attaching org photos"
-Organization.all.each do |org|
-  org_logo = URI.open('https://i.imgur.com/LrBo4bK.png')
-  org_banner = URI.open('https://i.imgur.com/qqvHVOz.jpg')
-  org.photos.attach(io: org_logo, filename: 'org_logo.png', content_type: 'image/png')
-  org.photos.attach(io: org_banner, filename: 'org_banner.jpg', content_type: 'image/jpg')
-end
+# #-----------RANDOM ORG PHOTOS----------------
+# puts "attaching org photos"
+# Organization.all.each do |org|
+#   org_logo = URI.open('https://i.imgur.com/LrBo4bK.png')
+#   org_banner = URI.open('https://i.imgur.com/qqvHVOz.jpg')
+#   org.photos.attach(io: org_logo, filename: 'org_logo.png', content_type: 'image/png')
+#   org.photos.attach(io: org_banner, filename: 'org_banner.jpg', content_type: 'image/jpg')
+# end
 
 
 
@@ -189,269 +194,35 @@ end
 
 
 #-----------------USERS--------------------
-puts 'creating dev team'
+# require_relative './user_seeds'
 
-seigo = User.create!(
-  first_name: "Seigo",
-  last_name: "Jinbo",
-  nickname: "SeiGOGOGO",
-  address: "meguro tokyo Japan",
-  email: "seigo@iru.com",
-  password: "123456",
-  description: "BURN IT ALL DOWN. VIVA LA RESISTANCE!",
-  gender: "male",
-  admin: false
-)
-  #birthday: 'november 6 1987'
-
-yuping = User.create!(
-  first_name: "Yuping",
-  email: "yuping@iru.com",
-  password: "123456",
-  address: "meguro tokyo Japan",
-  nickname: "YupYupYup",
-  description: "Do you guys want some eggrolls?",
-  gender: "female",
-  admin: false
-  )
- # birthday: 'august 11 1992'
-
-liz = User.create!(
-  first_name: "Liz",
-  email: "liz@iru.com",
-  password: "123456",
-  address: "meguro tokyo Japan",
-  nickname: "LizLizLiz",
-  description: "I’m passionate about nature and animals. We need to care about our preserving the environment not only for ourselves but for future generations to come. Leading We Love Trees and Tsunami Relief.",
-  gender: "female",
-  admin: false
-  )
-  #birthday: 'may 7th 1993'
-puts 'attach photos to dev team'
-user_avatar = URI.open('https://ca.slack-edge.com/T02NE0241-U01BGPC1Z0S-de16e0810ab9-512')
-user_banner = URI.open('https://images.pexels.com/photos/1237119/pexels-photo-1237119.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')
-liz.photos.attach(io: user_avatar, filename: 'user_avatar.png', content_type: 'image/png')
-liz.photos.attach(io: user_banner, filename: 'user_banner.jpg', content_type: 'image/jpg')
-liz.save
-
-user_avatar = URI.open('https://ca.slack-edge.com/T02NE0241-U01BP13R1CL-aa72532c73d4-512')
-user_banner = URI.open('https://images.pexels.com/photos/315998/pexels-photo-315998.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')
-yuping.photos.attach(io: user_avatar, filename: 'user_avatar.png', content_type: 'image/png')
-yuping.photos.attach(io: user_banner, filename: 'user_banner.jpg', content_type: 'image/jpg')
-yuping.save
-
-user_avatar = URI.open('https://www.aboutmanchester.co.uk/wp-content/uploads/2017/11/IMG_2409.jpg')
-user_banner = URI.open('https://miro.medium.com/max/1400/1*nkARDRVDJaB9bKN0Po53-g.jpeg')
-seigo.photos.attach(io: user_avatar, filename: 'user_avatar.png', content_type: 'image/png')
-seigo.photos.attach(io: user_banner, filename: 'user_banner.jpg', content_type: 'image/jpg')
-seigo.save
-
-
-#-----------------SET ORGANIZATIONS------------------------
-puts "creating we love trees"
-we_love_trees = Organization.create!(
-  name: "We love trees",
-  email: "trees@welovetrees.com",
-  address: "Koyamadai, Shinagawa Tokyo 142-0061",
-  description: "Save the trees.",
-  establishment_year: "2020",
-  phone_number: "08077633849",
-  hp_url: "http://welovetrees.com",
-  twitter_url: "http://twitter.com/trees",
-  insta_url: "http://instagram.com/welovetrees",
-  tag_list: "Environment/Agriculture"
-  )
-puts "attaching photos to we love trees"
-org_logo = URI.open('https://images.pexels.com/photos/9198/nature-sky-twilight-grass-9198.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')
-org_banner = URI.open('https://images.pexels.com/photos/957024/forest-trees-perspective-bright-957024.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')
-we_love_trees.photos.attach(io: org_logo, filename: 'org_logo.png', content_type: 'image/png')
-we_love_trees.photos.attach(io: org_banner, filename: 'org_banner.jpg', content_type: 'image/jpg')
-
-puts "creating tsunami relief"
-tsunami = Organization.create!(
-  name: "Tsunami Relief",
-  email: "liz@tsunamirelief.com",
-  address: "Hachimangu shrine, Salesian Dori, Meguro, Tokyo, 152-0003, Japan",
-  description: "Help people from tsunamis.",
-  establishment_year: "2020",
-  phone_number: "08077633849",
-  hp_url: "http://tsunamirelief.com",
-  twitter_url: "http://twitter.com/tsunami",
-  insta_url: "http://instagram.com/tsunamirelief",
-  tag_list: "Disasters"
-  )
-puts "attaching photos tsunami relief"
-org_logo = URI.open('https://images.pexels.com/photos/1295138/pexels-photo-1295138.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260')
-org_banner = URI.open('https://images.pexels.com/photos/753619/pexels-photo-753619.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260')
-tsunami.photos.attach(io: org_logo, filename: 'org_logo.png', content_type: 'image/png')
-tsunami.photos.attach(io: org_banner, filename: 'org_banner.jpg', content_type: 'image/jpg')
-
-
-puts "creating Animals are people"
-animal = Organization.create!(
-  name: "Animals Are People Too",
-  email: "yuping@animals.com",
-  address: "Setagaya, Tokyo, 152-0035, Japan",
-  description: "No furries allowed",
-  establishment_year: "2020",
-  phone_number: "08077633849",
-  hp_url: "http://tsunamirelief.com",
-  twitter_url: "http://twitter.com/animals",
-  insta_url: "http://instagram.com/animalsarepeople",
-  tag_list: "Animals/Wildlife"
-  )
-puts "attaching photos to Animals are people"
-org_logo = URI.open('https://images.pexels.com/photos/2675714/pexels-photo-2675714.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260')
-org_banner = URI.open('https://images.pexels.com/photos/247431/pexels-photo-247431.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')
-animal.photos.attach(io: org_logo, filename: 'org_logo.png', content_type: 'image/png')
-animal.photos.attach(io: org_banner, filename: 'org_banner.jpg', content_type: 'image/jpg')
-
-
-
-
-#----------------SET MEMBERSHIPS--------------
-puts "assigning we love trees to liz"
-membership = Membership.new
-membership.user = liz
-membership.organization = we_love_trees
-membership.save
-
-puts "tsunami relief to liz"
-membership = Membership.new
-membership.user = liz
-membership.organization = tsunami
-membership.save
-
-puts "assigning animals are people to yuping"
-membership = Membership.new
-membership.user = yuping
-membership.organization = animal
-membership.save
-
+# #-----------------SET ORGANIZATIONS------------------------
+# require_relative './organization_seeds'
 
 #------------------SET EVENTS--------------
-puts "creating plant a tree"
-plant_a_tree = Event.create!(
-  title: "Plant a tree",
-  category: 'Volunteer',
-  description: 'plant a tree',
-  positions: rand(3..10),
-  address: "Koyamadai, Shinagawa Tokyo 142-0061",
-  ongoing: true,
-  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
-  start_time: Time.now + rand(10000..100000),
-  end_time: Time.now + rand(100000..1000000),
-  organization: we_love_trees,
-  owner: liz,
-  tag_list: "Environment/Agriculture"
-  )
-puts "attaching photo to plant a tree"
-event_photo = URI.open('https://www.eco.ca/wp-content/uploads/corporation-of-tomorrow.png')
-plant_a_tree.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+
+require_relative './event_seeds'
 
 
-
-puts "Read to kids"
-read_to_kids = Event.create!(
-  title: "Read to kids",
-  category: 'Volunteer',
-  description: 'help children learn to read',
-  address: "Hachimangu shrine, Salesian Dori, Meguro, Tokyo, 152-0003, Japan",
-  positions: rand(3..10),
-  ongoing: false,
-  start_time: Time.now + rand(10000..100000),
-  end_time: Time.now + rand(100000..1000000),
-  target: 10,
-  organization: animal,
-  owner: yuping,
-  tag_list: "Education"
-
-  )
-puts "attaching photo to Read to kids"
-event_photo = URI.open('https://images.pexels.com/photos/5088188/pexels-photo-5088188.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')
-read_to_kids.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+puts '
+  _______________________________________    _________
+ /   _____/\_   _____/\_   _____/\______ \  /   _____/
+ \_____  \  |    __)_  |    __)_  |    |  \ \_____  \
+ /        \ |        \ |        \ |    `   \/        \
+/_______  //_______  //_______  //_______  /_______  /
+        \/         \/         \/         \/        \/
 
 
-puts "Give Money to Pandas"
-walk_a_panda = Event.create!(
-  title: "Give Money to Pandas",
-  category: 'Fundraiser',
-  description: 'Pandas need money',
-  address: "Setagaya, Tokyo, 152-0035, Japan",
-  positions: rand(3..10),
-  ongoing: true,
-  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
-  start_time: Time.now + rand(10000..100000),
-  end_time: Time.now + rand(100000..1000000),
-  organization: animal,
-  owner: yuping,
-  price_cents: 100,
-  tag_list: "Animals/Wildlife"
-  )
-puts "attaching photo give money to pandas"
-event_photo = URI.open('https://images.pexels.com/photos/148182/pexels-photo-148182.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')
-walk_a_panda.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
-
-puts "Give Blankets to Pandas"
-blanket_a_panda = Event.create!(
-  title: "Give Blankets to Pandas",
-  category: 'Donation',
-  description: 'Pandas need blankets',
-  address: "Sans Souci, Nakahara kaido, Tokyo, Ota, 145-8523, Japan",
-  positions: rand(3..10),
-  ongoing: true,
-  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
-  start_time: Time.now + rand(10000..100000),
-  end_time: Time.now + rand(100000..1000000),
-  organization: animal,
-  owner: yuping,
-	tag_list: "Animals/Wildlife",
-	donation_tag_list: "Supplies",
-	item: "Blankets",
-  target: 10
-  )
-puts "attaching photo give blankets to pandas"
-event_photo = URI.open('https://images.pexels.com/photos/148182/pexels-photo-148182.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')
-blanket_a_panda.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
-
-
-
-#---------------SET ENROLLMENTS---------------
-puts "creating enrollment"
-
-Enrollment.create!(
-  user: liz,
-  event: read_to_kids,
-  start_time: Time.now + rand(10000..100000),
-  end_time: Time.now + rand(100000..1000000)
-  )
-
-Enrollment.create!(
-  user: seigo,
-  event: plant_a_tree,
-  start_time: Time.now + rand(10000..100000),
-  end_time: Time.now + rand(100000..1000000)
-  )
-
-Enrollment.create!(
-  user: yuping,
-  event: plant_a_tree,
-  start_time: Time.now + rand(10000..100000),
-  end_time: Time.now + rand(100000..1000000)
-  )
-
-puts "creating donations"
-
-Donation.create!(
-  user: liz,
-  event: blanket_a_panda,
-  amount: rand(1..3)
-  )
-
-# doug 'https://ca.slack-edge.com/T02NE0241-U4APKLFLM-da0b004a3774-512'
-# tomo 'https://ca.slack-edge.com/T02NE0241-U01BNV6UT5J-a4aaf5262922-512'
-# taku 'https://ca.slack-edge.com/T02NE0241-U01BA1V6NT0-c1f678e8f104-512'
-# alex 'https://ca.slack-edge.com/T02NE0241-U01B28171C7-39328fb417e5-512'
-# aline 'https://ca.slack-edge.com/T02NE0241-U01BA61426A-96a4db6efb46-512'
-# jess 'https://ca.slack-edge.com/T02NE0241-U01BGQF8EN6-38cf90e892b8-512'
-# sho 'https://ca.slack-edge.com/T02NE0241-U01BGQ7MZ4J-e39557371271-512'
+                    ___           ___           ___
+     _____         /\  \         /\  \         /\__\
+    /::\  \       /::\  \        \:\  \       /:/ _/_
+   /:/\:\  \     /:/\:\  \        \:\  \     /:/ /\__\
+  /:/  \:\__\   /:/  \:\  \   _____\:\  \   /:/ /:/ _/_
+ /:/__/ \:|__| /:/__/ \:\__\ /::::::::\__\ /:/_/:/ /\__\
+ \:\  \ /:/  / \:\  \ /:/  / \:\~~\~~\/__/ \:\/:/ /:/  /
+  \:\  /:/  /   \:\  /:/  /   \:\  \        \::/_/:/  /
+   \:\/:/  /     \:\/:/  /     \:\  \        \:\/:/  /
+    \::/  /       \::/  /       \:\__\        \::/  /
+     \/__/         \/__/         \/__/         \/__/
+     Seeding Complete!
+'
