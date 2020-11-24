@@ -1,7 +1,10 @@
 * {
 	text-decoration: none;
 }
-
+p {
+  margin-bottom: 0.2rem;
+  font-weight: bold;
+}
 .enroll-form {
   display: none;
 }
@@ -71,7 +74,7 @@
 .event-card {
   list-style: none;
   background-color: $beige;
-  width: 300px;
+  width: 315px;
   margin: 16px;
   display: inline-block;
   border-radius: 5px;
@@ -82,12 +85,15 @@
   .event-card-pic {
     border-radius: 5px 5px 0 0;
     height: 200px;
-    width: 300px;
+    width: 315px;
     margin-bottom: 4px;
     color: white;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
     padding: 24px;
   }
+.card-info {
+  padding: 16px;
+}
 }
 .event-card::after {
   border-radius: 5px;
@@ -113,7 +119,6 @@
   text-align: center;
 }
 .pending-card {
-
   background-color: $beige;
   width: 210px;
   border-radius: 4px;
