@@ -8,7 +8,7 @@ ADDRESSES = [
   # "2-4-36 Meguro, Meguro City, Tokyo 153-0063",
   # "6-6-19, Shinagawa City, Tokyo 141-0031",
   # "2-11-2 Shinagawa City, Tokyo 141-0022",
-  # "3-9-1, Shinagawa City, Tokyo 142-0062",
+  # ,
   # "4-6-6 Meguro, Meguro City, Tokyo 153-0063",
   # "2-14-1 Kamimeguro, Meguro City, Tokyo 153-0051",
   # "Sarugakucho, Shibuya City, Tokyo 150-0033",
@@ -58,9 +58,11 @@ ROLES = ['leader', 'member', 'member', 'member']
 CATEGORIES = ["Volunteer", "Donation", "Fundraiser"]
 TAGS = ["Animals/Wildlife", "Children/Youth", "Disasters", "Education", "Environment/Agriculture", "Health", "Women", "Seniors/Disabilities", "Other"]
 
-
+puts "destroying all comments"
 EventComment.destroy_all
 OrganizationComment.destroy_all
+puts "destroying all donations"
+Donation.destroy_all
 puts "destroying enrollments"
 Enrollment.destroy_all
 puts "destroying orders"
