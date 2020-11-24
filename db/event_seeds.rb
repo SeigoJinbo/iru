@@ -7,7 +7,7 @@ PLANT_A_TREE = Event.create!(
   category: 'Volunteer',
   description: 'plant a tree',
   positions: rand(3..10),
-  address: "Koyamadai, Shinagawa Tokyo 142-0061",
+  address: "3-9-1, Shinagawa City, Tokyo 142-0062",
   ongoing: true,
   dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
   start_time: Time.now + rand(10000..100000),
@@ -70,6 +70,86 @@ event_photo = URI.open('https://images.pexels.com/photos/148182/pexels-photo-148
 PAY_A_PANDA.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
 
 puts "Tsubomi Cafe"
+
+CAFE = Event.create!(
+  title: "Tsubomi Cafe",
+  category: 'Volunteer',
+  description: 'Tsubomi Cafe is a bus that has been renovated into a free cafe and resource center for teenage girls. Tsubomi Cafe is open on alternate weeks in Shibuya and Shinjuku. Scheduled to be held in the future
+
+* There is a possibility of cancellation or change.
+
+Please check Twitter and Instagram for the latest information.',
+  address: "Shibuya, Tokyo 6-22-8 Jingumae",
+  positions: rand(3..10),
+  ongoing: false,
+  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
+  start_time: Time.new(2020, 11, 7, 18, 00, 00),
+  end_time: Time.new(2020, 11, 7, 20, 00, 00),
+  organization: COLABO,
+  owner: YUPING,
+  price_cents: 100,
+  tag_list: "Women",
+  target: 6,
+  raised: 2
+  )
+puts "attaching photo cafe"
+event_photo = URI.open('https://i2.wp.com/colabo-official.net/wp-content/uploads/2018/10/8574236942707-640x480.jpg')
+CAFE.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+
+
+
+CAFE = Event.create!(
+  title: "Tsubomi Cafe",
+  category: 'Volunteer',
+  description: 'Tsubomi Cafe is a bus that has been renovated into a free cafe and resource center for teenage girls. Tsubomi Cafe is open on alternate weeks in Shibuya and Shinjuku. Scheduled to be held in the future
+
+* There is a possibility of cancellation or change.
+
+Please check Twitter and Instagram for the latest information.',
+  address: "Shibuya, Tokyo 6-22-8 Jingumae",
+  positions: rand(3..10),
+  ongoing: false,
+  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
+  start_time: Time.new(2020, 11, 14, 18, 00, 00),
+  end_time: Time.new(2020, 11, 14, 20, 00, 00),
+  organization: COLABO,
+  owner: YUPING,
+  price_cents: 100,
+  tag_list: "Women",
+  target: 6,
+  raised: 2
+  )
+puts "attaching photo cafe"
+event_photo = URI.open('https://i2.wp.com/colabo-official.net/wp-content/uploads/2018/10/8574236942707-640x480.jpg')
+CAFE.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+
+
+
+CAFE = Event.create!(
+  title: "Tsubomi Cafe",
+  category: 'Volunteer',
+  description: 'Tsubomi Cafe is a bus that has been renovated into a free cafe and resource center for teenage girls. Tsubomi Cafe is open on alternate weeks in Shibuya and Shinjuku. Scheduled to be held in the future
+
+* There is a possibility of cancellation or change.
+
+Please check Twitter and Instagram for the latest information.',
+  address: "Shibuya, Tokyo 6-22-8 Jingumae",
+  positions: rand(3..10),
+  ongoing: false,
+  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
+  start_time: Time.new(2020, 11, 21, 18, 00, 00),
+  end_time: Time.new(2020, 11, 21, 20, 00, 00),
+  organization: COLABO,
+  owner: YUPING,
+  price_cents: 100,
+  tag_list: "Women",
+  target: 6,
+  raised: 2
+  )
+puts "attaching photo cafe"
+event_photo = URI.open('https://i2.wp.com/colabo-official.net/wp-content/uploads/2018/10/8574236942707-640x480.jpg')
+CAFE.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+
 CAFE = Event.create!(
   title: "Tsubomi Cafe",
   category: 'Volunteer',
@@ -100,7 +180,7 @@ BLANKETS = Event.create!(
   title: "Collecting Blankets for girls in need",
   category: 'Donation',
   description: 'We provide temporary shelter for girls who are unwilling or unable to go home, especially victims of physical and sexual violence. Shelter services include providing a place to sleep at night, but the space is also available for girls to shower, do laundry, cook, study, etc.',
-  address: "3-9-1, Shinagawa City, Tokyo 142-0062",
+  address: "Koyamadai, Shinagawa Tokyo 142-0061",
   positions: rand(3..10),
   ongoing: false,
   dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
@@ -128,7 +208,7 @@ In 2014, in co-operation with Louisa Musing of Oxford Brooks University, JWCS in
 CROSSING INTERNATIONAL BORDERS: THE TRADE OF SLOW LORISES Nycticebus spp. AS PETS IN JAPAN  Louisa Musing, Kirie Suzuki, and K.A.I. Nekaris
 
 When the “Act on Conservation of Endangered Species of Wild Fauna and Flora” was amended in 2017, articles were added requiring the implantation of microchip IDs at registration and making registrations for fixed periods. JWCS lobbied for strict enforcement of the legislation but was unable to exact any further changes.',
-  address: "3-9-1, Shinagawa City, Tokyo 142-0062",
+  address: "2-14-1 Kamimeguro, Meguro City, Tokyo 153-0051",
   positions: rand(3..10),
   ongoing: false,
   dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
@@ -199,16 +279,6 @@ BLANKET_A_PANDA.photo.attach(io: event_photo, filename: 'event.jpg', content_typ
 
 
 
-
-
-
-
-
-
-
-
-
-
 #---------------SET ENROLLMENTS---------------
 puts "creating enrollment"
 
@@ -233,6 +303,19 @@ Enrollment.create!(
   end_time: Time.now + rand(100000..1000000)
   )
 
+Enrollment.create!(
+  user: JESS,
+  event: CAFE,
+  start_time: Time.now + rand(10000..100000),
+  end_time: Time.now + rand(100000..1000000)
+  )
+
+Enrollment.create!(
+  user: ALINE,
+  event: CAFE,
+  start_time: Time.now + rand(10000..100000),
+  end_time: Time.now + rand(100000..1000000)
+  )
 
 puts "creating donations"
 
@@ -242,5 +325,20 @@ Donation.create!(
   amount: rand(1..3)
   )
 
+#---------------CREATE COMMENTS---------------
 
-
+EventComment.create!(
+  user: JESS,
+  event: CAFE,
+  content: "last week's event was a lot of fun!"
+  )
+EventComment.create!(
+  user: ALINE,
+  event: CAFE,
+  content: "what should i bring?"
+  )
+EventComment.create!(
+  user: YUPING,
+  event: CAFE,
+  content: "you don't have to bring anything!"
+  )

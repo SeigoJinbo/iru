@@ -2,57 +2,53 @@ require 'faker'
 require "open-uri"
 
 ADDRESSES = [
-  # "Nishigotanda, Shinagawa City, Tokyo 141-0031",
-  # "1-31-1, Shinagawa City, Tokyo 141-0031",
-  # "3-6-6, Shinagawa City, Tokyo 141-0031",
-  # "2-4-36 Meguro, Meguro City, Tokyo 153-0063",
-  # "6-6-19, Shinagawa City, Tokyo 141-0031",
-  # "2-11-2 Shinagawa City, Tokyo 141-0022",
-  # ,
-  # "4-6-6 Meguro, Meguro City, Tokyo 153-0063",
-  # "2-14-1 Kamimeguro, Meguro City, Tokyo 153-0051",
-  # "Sarugakucho, Shibuya City, Tokyo 150-0033",
-  # "Kamimeguro, Tokyo 153-0051",
-  # "5-21-9, Minato City, Tokyo 108-0071",
-  # "3-39-5 Ebisu, Shibuya City, Tokyo 150-0013",
-  # "4-3-1 Hiroo, Shibuya City, Tokyo 150-0012",
-  # "Kamimeguro Elementary School, Meguro City, Tokyo 153-0051",
-  # "2-8-17, Meguro City, Tokyo 153-0052",
+  "Nishigotanda, Shinagawa City, Tokyo 141-0031",
+  "1-31-1, Shinagawa City, Tokyo 141-0031",
+  "3-6-6, Shinagawa City, Tokyo 141-0031",
+  "2-4-36 Meguro, Meguro City, Tokyo 153-0063",
+  "6-6-19, Shinagawa City, Tokyo 141-0031",
+  "2-11-2 Shinagawa City, Tokyo 141-0022",
+  "4-6-6 Meguro, Meguro City, Tokyo 153-0063",
+  "Sarugakucho, Shibuya City, Tokyo 150-0033",
+  "Kamimeguro, Tokyo 153-0051",
+  "5-21-9, Minato City, Tokyo 108-0071",
+  "3-39-5 Ebisu, Shibuya City, Tokyo 150-0013",
+  "4-3-1 Hiroo, Shibuya City, Tokyo 150-0012",
+  "Kamimeguro Elementary School, Meguro City, Tokyo 153-0051",
+  "2-8-17, Meguro City, Tokyo 153-0052",
 
-  # "HIRAKUYA OSTERIA, Suzukake Street, Meguro, Tokyo, 152-0035, Japan",
-  # "Kingdom Hall of Jehovah's Witnesses, Salesian Dori, Meguro, Tokyo, 152-0003, Japan",
-  # "maker's base, Meguro ave., Meguro, Tokyo, 152-0001, Japan",
-  # "FamilyMart, Ohara-dori, Tokyo, Shinagawa, 142-0042, Japan",
-  # "Tokyo Gakugei University Setagaya Junior High School, Komahachi-dori, Setagaya, Tokyo, 158-0081, Japan",
-  # "rise: town front, Tamazutsumi St., Setagaya, Tokyo, 158-0094, Japan", "
-  # Takashimaya garden place, Tamagawa dori, Setagaya, Tokyo, 158-8502, Japan",
-  # "Bird Sanctuary, Okura-dori, Funabashi 1-chome, Funabashi, Setagaya, Tokyo, 157-8510, Japan",
-  # "Yogananajo-dori, 1-chome, Funabashi, Setagaya, Tokyo, 158-8577, Japan",
-  # 'Times, Nakahara kaido, Tokyo, Ota, 145-8523, Japan', 'Tokyo, Ota, 145-0066, Japan',
-  # 'Gap, Kurinoki-Dori, Meguro, Tokyo, 152-0035, Japan',
-  # 'Tomorrowland, Maple Street, Meguro, Tokyo, 152-0035, Japan',
-  'Den-en-Chofu Elementary School, Kampachi dori, Setagaya, Tokyo, 145-0071, Japan'
+  "HIRAKUYA OSTERIA, Suzukake Street, Meguro, Tokyo, 152-0035, Japan",
+  "Kingdom Hall of Jehovah's Witnesses, Salesian Dori, Meguro, Tokyo, 152-0003, Japan",
+  "maker's base, Meguro ave., Meguro, Tokyo, 152-0001, Japan",
+  "FamilyMart, Ohara-dori, Tokyo, Shinagawa, 142-0042, Japan",
+  "Tokyo Gakugei University Setagaya Junior High School, Komahachi-dori, Setagaya, Tokyo, 158-0081, Japan",
+  "rise: town front, Tamazutsumi St., Setagaya, Tokyo, 158-0094, Japan", "
+  Takashimaya garden place, Tamagawa dori, Setagaya, Tokyo, 158-8502, Japan",
+  "Bird Sanctuary, Okura-dori, Funabashi 1-chome, Funabashi, Setagaya, Tokyo, 157-8510, Japan",
+  "Yogananajo-dori, 1-chome, Funabashi, Setagaya, Tokyo, 158-8577, Japan",
+  'Times, Nakahara kaido, Tokyo, Ota, 145-8523, Japan', 'Tokyo, Ota, 145-0066, Japan',
+  'Gap, Kurinoki-Dori, Meguro, Tokyo, 152-0035, Japan',
+  'Tomorrowland, Maple Street, Meguro, Tokyo, 152-0035, Japan',
+  'Den-en-Chofu Elementary School, Kampachi dori, Setagaya, Tokyo, 145-0071, Japan',
+  'Kannana dori, Meguro, Tokyo, 152-0013, Japan',
+
+  'Mitsuma-dori, Tokyo, Shinagawa, 142-0054, Japan',
+  'Gotanda, Tokyo, Shinagawa, 142-0063, Japan',
+
+  '¥Shinagawa, 142-0043, Japan',
+  'Tokyo, Shinagawa, 140-0015, Japan ',
+  'Yukigaya Hachiman Shrine, Nakahara kaido, Tokyo, Ota, 145-8523, Japan',
+  'Nakahara kaido, Tokyo, Ota, 145-8523, Japan',
+  'Ebara Hospital, Gotanda, Tokyo, Shinagawa, 145-0065, Japan',
+  'Tokyo, Ota, 146-0081, Japan',
+  'Setagaya Park, 420, Sangenjaya, Setagaya, Tokyo, 154-0005, Japan',
+  "Showa Women's University, Tamagawa-dori, Sangenjaya, Setagaya, Tokyo, 154-0004, Japan",
+  'Tamagawa-dori, Sangenjaya, Setagaya, Tokyo, 154-0024, Japan',
+  'Awashima-dori, Taishido, Funabashi, Setagaya, Tokyo, 155-0032, Japan',
+  '426, 1-chome, Funabashi, Setagaya, Tokyo, 154-0014, Japan Water works'
 ]
 
-# # se of meruro
-# '南保育園, Kannana dori, Meguro, Tokyo, 152-0013, Japan',
-# '若竹幼稚園, Kannana dori, Meguro, Tokyo, 152-0013, Japan',
-# '品川区立心身障害者福祉会館, Mitsuma-dori, Tokyo, Shinagawa, 142-0054, Japan',
-# '荏原消防署旗の台出張所, 中原街道, Gotanda, Tokyo, Shinagawa, 142-0063, Japan',
-# '日本聖公会三光教会, 22-24, 中原街道, Gotanda, Tokyo, Shinagawa, 142-0064, Japan',
-# '丸山寺, 三間通り, Tokyo, Shinagawa, 142-0043, Japan',
-# '伊藤児童センター, 立会道路, Tokyo, Shinagawa, 140-0015, Japan ',
-# 'Yukigaya Hachiman Shrine, Nakahara kaido, Tokyo, Ota, 145-8523, Japan',
-# '昴児童公園, Nakahara kaido, Tokyo, Ota, 145-8523, Japan',
-# 'Ebara Hospital, 中原街道, Gotanda, Tokyo, Shinagawa, 145-0065, Japan',
-# '田園調布消防署 久が原出張所, 呑川緑道, Tokyo, Ota, 146-0081, Japan',
 
-# #nw of meguro
-# 'Setagaya Park, 420, Sangenjaya, Setagaya, Tokyo, 154-0005, Japan',
-# "Showa Women's University, Tamagawa-dori, Sangenjaya, Setagaya, Tokyo, 154-0004, Japan",
-# '千代の湯, Tamagawa-dori, Sangenjaya, Setagaya, Tokyo, 154-0024, Japan'
-# '世田谷区太子堂在宅介護支援センター, Awashima-dori, Taishido, Funabashi, Setagaya, Tokyo, 155-0032, Japan',
-# '駒沢給水所, 426, 1-chome, Funabashi, Setagaya, Tokyo, 154-0014, Japan Water works'
 
 ROLES = ['leader', 'member', 'member', 'member']
 CATEGORIES = ["Volunteer", "Donation", "Fundraiser"]
@@ -76,7 +72,23 @@ User.destroy_all
 puts "destroying organizations"
 Organization.destroy_all
 
+user = User.create!(email: 'user@user.com', password: '123456')
+organization = Organization.create!
+ADDRESSES.each do |address|
 
+Event.create!(
+  title: Faker::Movie.title,
+  category: CATEGORIES.sample,
+  description: Faker::Hipster.paragraph,
+  address: address,
+  positions: rand(3..10),
+  start_time: Time.now + rand(10000..100000),
+  end_time: Time.now + rand(100000..1000000),
+  tag_list: TAGS.sample,
+  owner: user,
+  organization: organization
+  )
+end
 
 
 
