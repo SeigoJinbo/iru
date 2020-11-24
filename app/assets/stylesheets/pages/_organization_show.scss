@@ -126,14 +126,23 @@ p {
 }
 .pending-card {
   background-color: $beige;
-  width: 210px;
+  width: 100px;
+  margin-right: 8px;
   border-radius: 4px;
-  p {
-    margin: 8px 0 0 0;
-  }
   a {
     text-decoration: none;
     font-weight: bolder;
+    color: black;
+  }
+  .btn {
+    padding: 0;
+  }
+}
+.pending-btn {
+  display: flex;
+  justify-content: space-evenly;
+  .simple_form {
+    display: flex;
   }
 }
 .pending-avatar {
@@ -199,4 +208,8 @@ p {
 .org-members {
   width: 200px;
 }
-
+.donations {
+}
+.pending-info {
+  width: 200px;
+}
