@@ -16,11 +16,23 @@
 				<% end %>
 				
 				<% if @event.category == "Volunteer" %>
-					<h3><span class="maize-text"><%= @event.raised %></span> coming (<%= @event.target %> spots available)</h3>
+					<% if @event.raised.nil? %>
+						<h3><span class="maize-text">0 coming</span> (<%= @event.target %> spots available)</h3>
+					<% else %>
+						<h3><span class="maize-text"><%= @event.raised %></span> coming (<%= @event.target %> spots available)</h3>
+					<% end %>
 				<% elsif @event.category == "Donation" %>
-					<h3><span class="maize-text"><%= @event.raised %></span> out of <%= @event.target %> collected</h3>
+					<% if @event.raised.nil? %>
+						<h3><span class="maize-text">0</span> out of <%= @event.target %> collected</h3>
+					<% else %>
+						<h3><span class="maize-text"><%= @event.raised %></span> out of <%= @event.target %> collected</h3>
+					<% end %>
 				<% elsif @event.category == "Fundraiser" %>
+					<% if @event.raised.nil? %>
+						<h3><span class="maize-text">¥0</span> out of ¥<%= @event.target %> raised</h3>
+					<% else %>
 					<h3><span class="maize-text">¥<%= @event.raised %></span> out of ¥<%= @event.target %> raised</h3>
+					<% end %>
 				<% end %>
 
 				<%# Meters %>
@@ -29,8 +41,12 @@
 				<% end %>
 
 				<div class="meter">
-					<% raised_amount = ((@event.raised.to_f / @event.target.to_f) * 100).to_i %>
-					<span style="width:<%= raised_amount %>%;"><span class="progress"></span></span>
+					<% if @event.raised.nil? %>
+						<span style="width:0%;"><span class="progress"></span></span>
+					<% else %>
+						<% raised_amount = ((@event.raised.to_f / @event.target.to_f) * 100).to_i %>
+						<span style="width:<%= raised_amount %>%;"><span class="progress"></span></span>
+					<% end %>
 				</div>
 
 			<%# Forms %>
@@ -47,11 +63,15 @@
 								<!------- Enroll --------->
 								<% if @event.owner != current_user || current_user.admin %>
 									<div class="enroll-form">
-										<h5>When can you join us?</h5>
+										<h5>Can you help us on <span class="seaweed-text"><%= @event.start_time.strftime("%d of %B, %Y") %></span> ?</h5>
+										<p class="font-weight-bold"><i class="fas fa-clock"></i> <%= @event.start_time.strftime("%I:%M %p") %> to <%= @event.end_time.strftime("%I:%M %p") %></p>
+										<p><i class="fas fa-map-marker-alt"></i> <%= @event.address %></p>
 										<%= simple_form_for [@event, @enrollment] do |f| %>
-											<%= f.input :start_time, as: :datetime, html5: true, item_label_class: 'my-custom-class' %>
-											<%= f.input :end_time, as: :datetime, html5: true %>
-											<div class="btn btn-primary btn-block"><%= f.button :submit, 'Register'%></div>
+											<div class="no-input">
+												<%= f.input :start_time, as: :datetime, html5: true, item_label_class: 'my-custom-class' %>
+												<%= f.input :end_time, as: :datetime, html5: true %>
+											</div>
+											<div class="btn btn-primary btn-block mt-2"><%= f.button :submit, 'Yes!'%></div>
 										<% end %>
 									</div>
 								<% end %>
@@ -90,7 +110,7 @@
 							<% if user_signed_in? %>
 								<!-- --------------Event owner edit / delete --------------------->
 								<% if @event.owner == current_user || current_user.admin %>
-									<h6>Make any changes?</h6>
+									<h5>Make any changes?</h5>
 									<%= link_to "Edit", event_path(@event), class: 'btn btn-primary' %>
 									<%= link_to "Delete", event_path(@event), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete #{@event.title}?" } %>
 								<% end %>

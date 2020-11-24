@@ -2,6 +2,8 @@
   <%= link_to "/", class: "navbar-brand" do %>
     <h2>iru</h2>
     <% end %>
+		<%# search bar that is hidden for now %>
+		<% if false %>
       <%= form_with url: events_path, method: :get, local: true do %>
         <div class="d-flex">
           <%= text_field_tag :query,
@@ -13,6 +15,7 @@
           </div>
         </div>
       <% end %>
+		<% end %>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
