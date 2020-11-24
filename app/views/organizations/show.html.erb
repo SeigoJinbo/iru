@@ -209,6 +209,7 @@
               <div class="border">
                 <%= link_to event_path(event) do %>
                   <button class="btn btn-block calendar-link-<%= @colors.index(event.title) %>" type="button"><%= event.title %></button>
+
                 <% end %>
               </div>
             <% end %>

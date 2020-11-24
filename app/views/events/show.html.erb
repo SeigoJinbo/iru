@@ -14,7 +14,7 @@
 						<h4><%= remaining_days.round %> days left</h4>
 					<% end %>
 				<% end %>
-				
+
 				<% if @event.category == "Volunteer" %>
 					<% if @event.raised.nil? %>
 						<h3><span class="maize-text">0 coming</span> (<%= @event.target %> spots available)</h3>
@@ -189,7 +189,7 @@
 									<%= cl_image_tag @event.owner.photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
 								</div>
 								<div class="ml-3">
-									<h4><%= link_to @event.owner.nickname, user_path(@event.owner) %></h4>
+									<h4><%= link_to @event.owner.nickname, event_path(@event) %></h4>
 									<h5>Project Organizer</h5>
 								</div>
 							</div>
@@ -238,7 +238,7 @@
 											<div class="d-flex ml-3 align-items-center"><h5><%= link_to comment.user.nickname, user_path(comment.user) %> says:</h5></div>
 										</div>
 										<p class='p-1 my-2'><%= comment.content%></p>
-										<% if current_user == comment.user || @event.users.include?(current_user)  %>
+										<% if (current_user == comment.user)  %>
 											<%= link_to "Delete", event_comment_path(comment), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete comment?" } %>
 										<% end %>
 									</div>

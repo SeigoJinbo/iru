@@ -14,7 +14,7 @@ class EnrollmentsController < ApplicationController
     @organization = @event.organization
     authorize @enrollment
     if @enrollment.save
-      redirect_to user_path(current_user)
+      redirect_to event_path(@event)
     else
       render "organizations/show"
     end
