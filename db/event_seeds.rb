@@ -307,14 +307,16 @@ Enrollment.create!(
   user: JESS,
   event: CAFE,
   start_time: Time.now + rand(10000..100000),
-  end_time: Time.now + rand(100000..1000000)
+  end_time: Time.now + rand(100000..1000000),
+  status: "Approved"
   )
 
 Enrollment.create!(
   user: ALINE,
   event: CAFE,
   start_time: Time.now + rand(10000..100000),
-  end_time: Time.now + rand(100000..1000000)
+  end_time: Time.now + rand(100000..1000000),
+  status: "Approved"
   )
 
 puts "creating donations"
