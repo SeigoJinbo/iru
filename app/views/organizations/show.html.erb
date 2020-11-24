@@ -61,10 +61,8 @@
                   <%= cl_image_tag user.photos.first.key, height: 40, width: 40, crop: :fill , class: "avatar-sm"%>
                 <% end %>
                 <%= user.nickname %>
-
               <% end %>
             </div>
-
           </div>
         </div>
       </div>
@@ -75,7 +73,9 @@
           <div class="event-title">
             <h2>Projects</h2>
             <% if @organization.users.include?(current_user) %>
-              <%= link_to "Create a new event", new_organization_event_path(@organization), class: 'btn btn-primary' %>
+              <%= link_to new_organization_event_path(@organization) do %>
+                <i class="fas fa-plus"></i> project
+              <% end %>
             <% end %>
           </div>
           <!---------------------Volunteer Event--------------------->
@@ -95,26 +95,25 @@
                         <div class="event-card-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path event.photo.key, height: 240, width: 360, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
                           <h4><%= event.title %></h4>
                         </div>
-                      <% end %>
-
-                      <div class="card-info">
-                        <p><i class="far fa-calendar-alt"></i> <%= event.start_time.strftime("%d of %B, %Y") %></p>
-                        <p><i class="far fa-clock"></i> <%= event.start_time.strftime("%I:%M %p")%> - <%= event.end_time.strftime("%I:%M %p")%></p>
-                        <p>Volunteers: <%= event.enrollments.where(status: "Approved").count %>/<%= event.target %> people</p>
-                        <div>
-                          <% event.enrollments.where(status: "Approved").each do |enrollment| %>
-                            <%= link_to user_path(enrollment.user) do %>
-                              <%= cl_image_tag enrollment.user.photos.first.key, height: 40, width: 40, crop: :fill , class: "avatar-sm"%>
+                        <div class="card-info">
+                          <p><i class="far fa-calendar-alt"></i> <%= event.start_time.strftime("%d of %B, %Y") %></p>
+                          <p><i class="far fa-clock"></i> <%= event.start_time.strftime("%I:%M %p")%> - <%= event.end_time.strftime("%I:%M %p")%></p>
+                          <p>Volunteers: <%= event.enrollments.where(status: "Approved").count %>/<%= event.target %> people</p>
+                          <div>
+                            <% event.enrollments.where(status: "Approved").each do |enrollment| %>
+                              <%= link_to user_path(enrollment.user) do %>
+                                <%= cl_image_tag enrollment.user.photos.first.key, height: 40, width: 40, crop: :fill , class: "avatar-sm"%>
+                              <% end %>
                             <% end %>
+                          </div>
+                          <br>
+                          <!-- ------Event owner edit / delete -->
+                          <% if event.owner == current_user || current_user.admin %>
+                            <%= link_to "Edit", event_path(event), class: 'btn btn-primary' %>
+                            <%= link_to "Delete", event_path(event), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete #{event.title}?" } %>
                           <% end %>
-                        </div>
-                        <br>
-                        <!-- ------Event owner edit / delete -->
-                        <% if event.owner == current_user || current_user.admin %>
-                          <%= link_to "Edit", event_path(event), class: 'btn btn-primary' %>
-                          <%= link_to "Delete", event_path(event), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete #{event.title}?" } %>
-                        <% end %>
                       </div>
+                      <% end %>
                     </div>
                   </li>
                 <% end %>
@@ -125,43 +124,31 @@
           <h5>Donations</h5>
           <div class="round-box">
             <div class="event-box">
-
               <% if @donation_events.empty? %>
                 <p>No donation event yet...</p>
               <% else %>
-
                 <div class="event">
-
                   <% @donation_events.each do |event| %>
                     <li class="event-card">
-
                       <div class="event-card-contents">
-
                         <%= link_to event_path(event) do  %>
                           <div class="event-card-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
                             <h4><%= event.title %></h4>
                           </div>
+                          <div class="card-info">
+                            <h3><span class="seaweed-text font-weight-bold"><%= (Date.today...event.end_time).count %> days left</span></h3>
+                            <p>until <%= event.end_time.strftime("%d of %B, %Y") %></p>
+                            <% if event.owner == current_user || current_user.admin %>
+                            <%= link_to "Edit", event_path(event), class: 'btn btn-primary' %>
+                            <%= link_to "Delete", event_path(event), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete #{event.title}?" } %>
+                            <% end %>
+                          </div>
                         <% end %>
-
-                        <div class="card-info">
-                          <h3><span class="seaweed-text font-weight-bold"><%= (Date.today...event.end_time).count %> days left</span></h3>
-                          <p>until <%= event.end_time.strftime("%d of %B, %Y") %></p>
-                          <% if event.owner == current_user || current_user.admin %>
-                          <%= link_to "Edit", event_path(event), class: 'btn btn-primary' %>
-                          <%= link_to "Delete", event_path(event), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete #{event.title}?" } %>
-                          <% end %>
-                        </div>
-
                       </div>
-
                     </li>
-
                   <% end %>
-
                 </div>
-
               <% end %>
-
             </div>
           </div>
           <!---------------------Fundraiser Event-------------------->
@@ -176,19 +163,20 @@
                 <% @fundraiser_events.each do |event| %>
                   <li class="event-card">
                     <div class="event-card-contents">
-                      <div class="event-card-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
-                        <h4><%= event.title %></h4>
-                      </div>
-                      <div class="card-info">
-                        <p><%= humanized_money_with_symbol(event.raised) %> / <%= humanized_money_with_symbol(event.target) %></p>
-                        <p>Target Amount: <%= humanized_money_with_symbol(event.price) %></p>
-                        <h3><span class="seaweed-text font-weight-bold"><%= (Date.today...event.end_time).count %> days left</span></h3>
-                        <p>until <%= event.end_time.strftime("%d of %B, %Y") %></p>
-                        <% if event.owner == current_user || current_user.admin %>
-                          <%= link_to "Edit", event_path(event), class: 'btn btn-primary' %>
-                          <%= link_to "Delete", event_path(event), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete #{event.title}?" } %>
-                        <% end %>
-                      </div>
+                      <%= link_to event_path(event) do  %>
+                        <div class="event-card-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+                          <h4><%= event.title %></h4>
+                        </div>
+                        <div class="card-info">
+                          <p><%= humanized_money_with_symbol(event.raised) %> / <%= humanized_money_with_symbol(event.target) %></p>
+                          <h3><span class="seaweed-text font-weight-bold"><%= (Date.today...event.end_time).count %> days left</span></h3>
+                          <p>until <%= event.end_time.strftime("%d of %B, %Y") %></p>
+                          <% if event.owner == current_user || current_user.admin %>
+                            <%= link_to "Edit", event_path(event), class: 'btn btn-primary' %>
+                            <%= link_to "Delete", event_path(event), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete #{event.title}?" } %>
+                          <% end %>
+                        </div>
+                      <% end %>
                     </div>
                   </li>
                 <% end %>
