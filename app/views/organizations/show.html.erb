@@ -26,10 +26,16 @@
     <!---------------------Tabs bar--------------------->
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item">
-        <a class="nav-link active" id="event-tab" data-toggle="tab" href="#event" role="tab" aria-controls="event" aria-selected="true">Event</a>
+        <a class="nav-link active" id="Mission-tab" data-toggle="tab" href="#Mission" role="tab" aria-controls="Mission" aria-selected="true">Mission</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="event-tab" data-toggle="tab" href="#event" role="tab" aria-controls="event" aria-selected="true">Event</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" id="calendar-tab" data-toggle="tab" href="#calendar" role="tab" aria-controls="calendar" aria-selected="false">Calendar</a>
+      </li>
+      <li class="nav-item">
+      <a class="nav-link" id="comment-tab" data-toggle="tab" href="#comment" role="tab" aria-controls="comment" aria-selected="false">Comments</a>
       </li>
       <% if @organization.users.include?(current_user) %>
         <li class="nav-item">
@@ -38,15 +44,18 @@
         <li class="nav-item">
         <a class="nav-link" id="manage-event-tab" data-toggle="tab" href="#manage-event" role="tab" aria-controls="manage-event" aria-selected="false">Manage Events</a>
         </li>
-        <li class="nav-item">
-        <a class="nav-link" id="comment-tab" data-toggle="tab" href="#comment" role="tab" aria-controls="comment" aria-selected="false">Comments</a>
-        </li>
       <% end %>
     </ul>
     <!---------------------Tabs page--------------------->
     <div class="tab-content" id="myTabContent">
+      <!---------------------Mission--------------------->
+      <div class="tab-pane fade show active" id="mission" role="tabpanel" aria-labelledby="mission-tab">
+        <div class="org-sections">
+          <%= @organization.description %>
+        </div>
+      </div>
       <!---------------------Event tabs--------------------->
-      <div class="tab-pane fade show active" id="event" role="tabpanel" aria-labelledby="event-tab">
+      <div class="tab-pane fade show" id="event" role="tabpanel" aria-labelledby="event-tab">
         <div class="org-sections">
           <div class="event-center"><h2>Events</h2></div>
           <div class="round-box">
