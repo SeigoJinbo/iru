@@ -49,7 +49,9 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event_comment = EventComment.new
+		@event_comment = EventComment.new
+		@enrollment = Enrollment.new
+		@donation = Donation.new
   end
 
   def new
