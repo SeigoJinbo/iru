@@ -40,10 +40,12 @@ p {
   background-color: $darker-ivory;
   border-radius: 24px;
   padding: 24px;
+  margin-bottom: 16px;
 }
 .event-title {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 16px;
 }
 .enrollment-avatar {
   border-radius: 50%;
@@ -66,7 +68,6 @@ p {
 .event-box {
   background-color: $darker-ivory;
   border-radius: 24px;
-  padding: 24px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   // margin-bottom: 16px;
@@ -74,7 +75,7 @@ p {
 .event-card {
   list-style: none;
   background-color: $beige;
-  width: 315px;
+  width: 240px;
   margin: 16px;
   display: inline-block;
   border-radius: 5px;
@@ -84,8 +85,8 @@ p {
   transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
   .event-card-pic {
     border-radius: 5px 5px 0 0;
-    height: 200px;
-    width: 315px;
+    height: 120px;
+    width: 240px;
     margin-bottom: 4px;
     color: white;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
