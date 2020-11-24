@@ -4,6 +4,7 @@
 p {
   margin-bottom: 0.2rem;
   font-weight: bold;
+  color: black;
 }
 .enroll-form {
   // display: none;
@@ -46,6 +47,10 @@ p {
   display: flex;
   justify-content: space-between;
   margin-bottom: 16px;
+  a {
+    font-size:24px;
+    text-decoration: none;
+  }
 }
 .enrollment-avatar {
   border-radius: 50%;
@@ -189,7 +194,9 @@ p {
 }
 
 .org-mission {
+  width: 800px;
 }
 .org-members {
   width: 200px;
 }
+

@@ -19,7 +19,7 @@
 					<% if @event.raised.nil? %>
 						<h3><span class="maize-text">0 coming</span> (<%= @event.target %> spots available)</h3>
 					<% else %>
-						<h3><span class="maize-text"><%= @event.raised %></span> coming (<%= @event.target %> spots available)</h3>
+						<h3><span class="maize-text"><%= @event.enrollments.where(status: "Approved").count %></span> coming (<%= @event.target %> spots available)</h3>
 					<% end %>
 				<% elsif @event.category == "Donation" %>
 					<% if @event.raised.nil? %>
@@ -44,7 +44,7 @@
 					<% if @event.raised.nil? %>
 						<span style="width:0%;"><span class="progress"></span></span>
 					<% else %>
-						<% raised_amount = ((@event.raised.to_f / @event.target.to_f) * 100).to_i %>
+						<% raised_amount = ((@event.enrollments.where(status: "Approved").count.to_f / @event.target.to_f) * 100).to_i %>
 						<span style="width:<%= raised_amount %>%;"><span class="progress"></span></span>
 					<% end %>
 				</div>
@@ -199,7 +199,6 @@
 							</div>
 						</div>
 					</div>
-
 					<%# Organization's other events list %>
 					<div class="other-events">
 						<h3><%= @event.organization.name.capitalize %>'s Projects:</h3>
