@@ -29,7 +29,7 @@
         <a class="nav-link active" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="true">Organization Info</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="event-tab" data-toggle="tab" href="#event" role="tab" aria-controls="event" aria-selected="false">Event</a>
+        <a class="nav-link" id="event-tab" data-toggle="tab" href="#event" role="tab" aria-controls="event" aria-selected="false">Projects</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" id="calendar-tab" data-toggle="tab" href="#calendar" role="tab" aria-controls="calendar" aria-selected="false">Calendar</a>
@@ -39,7 +39,7 @@
       </li>
       <% if @organization.users.include?(current_user) %>
         <li class="nav-item">
-          <a class="nav-link" id="pending-volunteer-tab" data-toggle="tab" href="#pending-volunteer" role="tab" aria-controls="pending-volunteer" aria-selected="false">Pending Volunteers</a>
+          <a class="nav-link" id="pending-volunteer-tab" data-toggle="tab" href="#pending-volunteer" role="tab" aria-controls="pending-volunteer" aria-selected="false">Management</a>
         </li>
       <% end %>
     </ul>
@@ -48,7 +48,24 @@
       <!---------------------Info--------------------->
       <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
         <div class="org-sections">
-          <%= @organization.description %>
+          <div class="org-info">
+            <div class="org-mission">
+              <h4>Our Mission</h4>
+              <%= @organization.description %>
+            </div>
+
+            <div class="org-members">
+              <h4>Our Members</h4>
+              <% @organization.users.each do |user| %>
+                <%= link_to user_path(user) do %>
+                  <%= cl_image_tag user.photos.first.key, height: 40, width: 40, crop: :fill , class: "avatar-sm"%>
+                <% end %>
+                <%= user.nickname %>
+
+              <% end %>
+            </div>
+
+          </div>
         </div>
       </div>
       <!---------------------Event tabs--------------------->
@@ -56,7 +73,7 @@
         <div class="org-sections">
 
           <div class="event-title">
-            <h2>Events</h2>
+            <h2>Projects</h2>
             <% if @organization.users.include?(current_user) %>
               <%= link_to "Create a new event", new_organization_event_path(@organization), class: 'btn btn-primary' %>
             <% end %>
@@ -81,8 +98,8 @@
                       <% end %>
 
                       <div class="card-info">
-                        <p><%= event.start_time.strftime("%d of %B, %Y") %></p>
-                        <p><%= event.start_time.strftime("%I:%M %p")%> - <%= event.end_time.strftime("%I:%M %p")%></p>
+                        <p><i class="far fa-calendar-alt"></i> <%= event.start_time.strftime("%d of %B, %Y") %></p>
+                        <p><i class="far fa-clock"></i> <%= event.start_time.strftime("%I:%M %p")%> - <%= event.end_time.strftime("%I:%M %p")%></p>
                         <p>Volunteers: <%= event.enrollments.where(status: "Approved").count %>/<%= event.target %> people</p>
                         <div>
                           <% event.enrollments.where(status: "Approved").each do |enrollment| %>
@@ -127,8 +144,8 @@
                         <% end %>
 
                         <div class="card-info">
-                          <p><%= (Date.today...event.end_time).count %> days left until </p>
-                          <p><%= event.end_time.strftime("%d of %B, %Y") %></p>
+                          <h3><span class="seaweed-text font-weight-bold"><%= (Date.today...event.end_time).count %> days left</span></h3>
+                          <p>until <%= event.end_time.strftime("%d of %B, %Y") %></p>
                           <% if event.owner == current_user || current_user.admin %>
                           <%= link_to "Edit", event_path(event), class: 'btn btn-primary' %>
                           <%= link_to "Delete", event_path(event), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete #{event.title}?" } %>
@@ -164,7 +181,9 @@
                       </div>
                       <div class="card-info">
                         <p><%= humanized_money_with_symbol(event.raised) %> / <%= humanized_money_with_symbol(event.target) %></p>
-                        <p>Amount: <%= humanized_money_with_symbol(event.price) %></p>
+                        <p>Target Amount: <%= humanized_money_with_symbol(event.price) %></p>
+                        <h3><span class="seaweed-text font-weight-bold"><%= (Date.today...event.end_time).count %> days left</span></h3>
+                        <p>until <%= event.end_time.strftime("%d of %B, %Y") %></p>
                         <% if event.owner == current_user || current_user.admin %>
                           <%= link_to "Edit", event_path(event), class: 'btn btn-primary' %>
                           <%= link_to "Delete", event_path(event), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete #{event.title}?" } %>
@@ -222,13 +241,20 @@
                         <%= enrollment.user.nickname %>
                       <% end %>
                       <div class="d-flex">
-                        <%= simple_form_for(enrollment) do |f| %>
-                          <%= f.input :status, as: :hidden, remote: true, input_html: { value: "Approved" } %>
-                          <div class="m-1"><%= f.submit 'Approve', class: 'btn btn-primary'%></div>
+                        <%= simple_form_for(enrollment, remote: true) do |f| %>
+                          <%= f.input :status, as: :hidden, input_html: { value: "Approved" } %>
+                          <div class="m-1"><%= f.button :button do %>
+                            <i class="far fa-check-circle text-primary" aria-hidden="true"></i>
+                          <% end %>
+                          </div>
                         <% end %>
+                        <%= params[:management_tab] %>
                         <%= simple_form_for(enrollment) do |f| %>
-                          <%= f.input :status, as: :hidden, remote: true, input_html: { value: "Declined" } %>
-                          <div class="m-1"><%= f.submit 'Decline', class: 'btn btn-primary'%></div>
+                          <%= f.input :status, as: :hidden, input_html: { value: "Declined" } %>
+                          <div class="m-1"><%= f.button :button do %>
+                            <i class="far fa-times-circle text-primary" aria-hidden="true"></i>
+                          <% end %>
+                          </div>
                         <% end %>
                       </div>
                     </div>
@@ -253,13 +279,19 @@
                         <%= donation.user.nickname %>
                       <% end %>
                       <div class="d-flex">
-                        <%= simple_form_for(donation) do |f| %>
-                          <%= f.input :status, as: :hidden, remote: true, input_html: { value: "Recieved" } %>
-                          <div class="m-1"><%= f.submit 'Mark it recieved', class: 'btn btn-primary'%></div>
+                        <%= simple_form_for(donation, remote: true) do |f| %>
+                          <%= f.input :status, as: :hidden, input_html: { value: "Recieved" } %>
+                          <div class="m-1"><%= f.button :button do %>
+                            <i class="far fa-check-circle text-primary" aria-hidden="true"></i>
+                          <% end %>
+                          </div>
                         <% end %>
                         <%= simple_form_for(donation) do |f| %>
-                          <%= f.input :status, as: :hidden, remote: true, input_html: { value: "Declined" } %>
-                          <div class="m-1"><%= f.submit 'Decline', class: 'btn btn-primary'%></div>
+                          <%= f.input :status, as: :hidden, input_html: { value: "Canceled!" } %>
+                          <div class="m-1"><%= f.button :button do %>
+                            <i class="far fa-times-circle text-primary" aria-hidden="true"></i>
+                          <% end %>
+                          </div>
                         <% end %>
                       </div>
                     </div>

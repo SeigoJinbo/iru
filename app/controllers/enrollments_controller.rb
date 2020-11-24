@@ -23,7 +23,7 @@ class EnrollmentsController < ApplicationController
   def update
     authorize @enrollment
     if @enrollment.update(enrollment_params)
-      redirect_back(fallback_location: root_path)
+      redirect_to organization_path(@enrollment.event.organization, management_tab: true)
     end
   end
 
