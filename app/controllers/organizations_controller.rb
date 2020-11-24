@@ -23,7 +23,7 @@ class OrganizationsController < ApplicationController
     @fundraiser_events = @organization.events.select { |event| event.category == "Fundraiser" }
     @donation_events = @organization.events.select { |event| event.category == "Donation" }
 
-		@events = @organization.events.all
+		@events = @organization.events.uniq
     @colors = @events.map do |event|
       event.title
     end

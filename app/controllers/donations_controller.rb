@@ -14,7 +14,7 @@ class DonationsController < ApplicationController
     @organization = @event.organization
     authorize @donation
     if @donation.save
-      redirect_to user_path(current_user)
+      redirect_to event_path(@event)
     else
       render :new
     end
