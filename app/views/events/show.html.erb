@@ -5,6 +5,13 @@
 			<div class="event-title-details">
 				<h1 class="seaweed-text"><%= @event.title %></h1>
 				<h3>Target amount $$$</h3>
+				<meter low="<%= @event.target/1.5 %>" high="<%= @event.target/1.25 %>" max="<%= @event.target %>" value="<%= @event.raised %>"></meter>
+
+				<div class="meter">
+					<% raised_amount = ((@event.raised.to_f / @event.target.to_f) * 100).to_i %>
+					<span style="width:<%= raised_amount %>%;"><span class="progress"></span></span>
+				</div>
+
 				<% if Time.now < @event.end_time %>
 					<% remaining_days = ((@event.end_time - Time.now) / 360 / 60 / 24 ) %>
 					<p>remaining: <%= remaining_days %> days</p>
