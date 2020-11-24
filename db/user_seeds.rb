@@ -119,7 +119,7 @@ puts 'creating dev team'
 SEIGO = User.create!(
   first_name: "Seigo",
   last_name: "Jinbo",
-  nickname: "SeiGOGOGO",
+  nickname: "Seigo",
   address: "meguro tokyo Japan",
   email: "seigo@iru.com",
   password: "123456",
@@ -139,8 +139,8 @@ YUPING = User.create!(
   email: "yuping@iru.com",
   password: "123456",
   address: "meguro tokyo Japan",
-  nickname: "YupYupYup",
-  description: "Do you guys want some eggrolls?",
+  nickname: "Yuping",
+  description: "I’m passionate about women's rights. We need to care about our preserving the environment not only for ourselves but for future generations to come. Proud member of Colabo.",
   gender: "female",
   admin: false
   )
@@ -156,8 +156,8 @@ LIZ = User.create!(
   email: "liz@iru.com",
   password: "123456",
   address: "meguro tokyo Japan",
-  nickname: "LizLizLiz",
-  description: "I’m passionate about nature and animals. We need to care about our preserving the environment not only for ourselves but for future generations to come. Leading We Love Trees and Tsunami Relief.",
+  nickname: "Liz",
+  description: "I’m passionate about nature and animals. We need to care about our preserving the environment not only for ourselves but for future generations to come.",
   gender: "female",
   admin: false
   )

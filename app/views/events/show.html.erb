@@ -93,7 +93,7 @@
 								<!------- Enroll --------->
 								<% if @event.owner != current_user || current_user.admin %>
 									<div class="enroll-form">
-										<p>How many <%= @event.item %> would you like to donate?</p>
+										<h5>How many <%= @event.item %> would you like to donate?</h5>
 										<%= simple_form_for [@event, @donation] do |f| %>
 											<%= f.input :amount %>
 											<%= f.button :submit, class: "btn btn-primary btn-block", data: { confirm: "The organizer will confirm your donation upon receipt. Is that okay?"} %>
