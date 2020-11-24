@@ -1,10 +1,22 @@
 <div class="map-form">
         <%= form_with url: map_path, method: :get, remote: true do |f|%>
+          <h5>Category</h5>
           <div class="d-flex">
-            <%= select_tag :query,
-            options_for_select(Event::LIST, params[:query]),
+            <div>
+              <%= select_tag :query,
+              options_for_select(Event::LIST, params[:query]),
+              class: "form-control",
+              placeholder: "filter" %>
+            </div>
+          </div>
+          <h5>Type</h5>
+          <div class="d-flex">
+            <div>
+             <%= select_tag :category,
+            options_for_select(Event::CATEGORIES, params[:category]),
             class: "form-control",
             placeholder: "filter" %>
+            </div>
             <div class="index-submit">
               <%= f.submit "Filter", class: "btn btn-primary" %>
             </div>
@@ -18,7 +30,7 @@
             <div class="map-form-results border-bottom pb-3">
               <h5><%=  event.title %></h5>
               <%#= cl_image_tag event.photos.first.key, height: 40, width: 40, crop: :fill %>
-              <%= image_tag "#{event.tag_number || 4}.png", class: "map-results-organization-image" %>
+              <%= image_tag "#{event.tag_number - 1 || 4}.png", class: "map-results-organization-image" %>
               <%= event.tag_list %>
             </div>
           <% end %>

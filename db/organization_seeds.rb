@@ -102,19 +102,62 @@ org_banner = URI.open('https://eatnorth.com/sites/default/files/styles/span9_thu
 HARVEST.photos.attach(io: org_logo, filename: 'org_logo.png', content_type: 'image/png')
 HARVEST.photos.attach(io: org_banner, filename: 'org_banner.jpg', content_type: 'image/jpg')
 
+
+
+puts "colabo"
+JWCS = Organization.create!(
+  name: "Japan Wildlife Conservation Society",
+  email: "sato@jwcs.com",
+  # address: "Setagaya, Tokyo, 152-0035, Japan",
+  description: "The Japan Wildlife Conservation Society (JWCS) aims to create a society where humans and wildlife can coexist. The globalization of economics has had enormous effects on wildlife, for which many of Japan’s policies, business activities and consumer behavior are responsible. As a Japanese non-profit NGO, we aim to bring attention to problems and suggest appropriate solutions.
+
+In our activities, our basic principles are:
+1) to keep in mind that ecosystems provide the basis for the survival of humanity,
+2) to avoid simplistic artificial solutions,
+3) to require decision-making to be based on the precautionary principle.",
+  establishment_year: "1990",
+  phone_number: "422-54-4885",
+  hp_url: "https://www.jwcs.org/",
+  fb_url: "https://www.facebook.com/JapanWildlifeConservationSociety/",
+  tag_list: "Animals/Wildlife"
+  )
+
+puts "attaching photos to JWcs"
+org_logo = URI.open('https://www.jwcs.org/en/wp-content/uploads/sites/2/logo_en.png')
+org_banner = URI.open('https://www.jwcs.org/en/wp-content/uploads/sites/2/top_image_3.jpg')
+JWCS.photos.attach(io: org_logo, filename: 'org_logo.png', content_type: 'image/png')
+JWCS.photos.attach(io: org_banner, filename: 'org_banner.jpg', content_type: 'image/jpg')
+
+
+
+
+
 #https://images.pexels.com/photos/961969/pexels-photo-961969.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260
 
 
 #----------------SET MEMBERSHIPS--------------
-puts "assigning we love trees to liz"
-Membership.create!(user: LIZ, organization: WE_LOVE_TREES)
+# puts "assigning we love trees to liz"
+# Membership.create!(user: LIZ, organization: WE_LOVE_TREES)
 
-puts "tsunami relief to liz"
-Membership.create!(user: LIZ, organization: TSUNAMI)
+# puts "tsunami relief to liz"
+# Membership.create!(user: LIZ, organization: TSUNAMI)
+
+Membership.create!(user: LIZ, organization: JWCS)
+Membership.create!(user: SEIGO, organization: JWCS)
+
+Membership.create!(user: LIZ, organization: HARVEST)
+
 
 puts "assigning animals are people to yuping"
 Membership.create!(user: YUPING, organization: ANIMAL)
-Membership.create!(user: LIZ, organization: COLABO)
+Membership.create!(user: YUPING, organization: COLABO)
 Membership.create!(user: YUPING, organization: HARVEST)
 
 
+puts ' ______   _______  _______  ______    ___   _______  _______  _______  _______
+|      | |       ||       ||    _ |  |   | |       ||   _   ||       ||       |
+|  _    ||    ___||    _  ||   | ||  |   | |       ||  |_|  ||_     _||    ___|
+| | |   ||   |___ |   |_| ||   |_||_ |   | |       ||       |  |   |  |   |___
+| |_|   ||    ___||    ___||    __  ||   | |      _||       |  |   |  |    ___|
+|       ||   |___ |   |    |   |  | ||   | |     |_ |   _   |  |   |  |   |___
+|______| |_______||___|    |___|  |_||___| |_______||__| |__|  |___|  |_______|'
