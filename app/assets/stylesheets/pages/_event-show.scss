@@ -40,6 +40,10 @@
 	}
 }
 
+.no-input {
+	display: none;
+}
+
 .event-small-info {
 	font-size: smaller;
 }
@@ -59,7 +63,7 @@
 
 .progress {
 	background-color: #e4c465;
-	animation: progressBar 2.5s ease-in-out;
+	animation: progressBar 1.25s ease-in-out;
 	animation-fill-mode:both; 
 }
 
