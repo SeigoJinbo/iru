@@ -200,7 +200,7 @@ BLANKETS.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'ima
 
 
 WHALES = Event.create!(
-  title: "Help fund conservation effort of endangered slow loris",
+  title: "Help conserve the loris",
   category: 'Fundraiser',
   description: 'Despite the facts that the popular slow loris species are Appendix II listed and that since 2005 imports of primates for the pet trade have been prohibited because of zoonotic infections, many slow lorises are still smuggled into Japan. When the species were upgraded to Appendix I and gained the protection of conservation legislation, smuggling decreased. Nevertheless, there are continual cases involving abuse of registrations made before the upgrade.
 

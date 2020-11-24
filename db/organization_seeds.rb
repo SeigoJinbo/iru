@@ -125,7 +125,7 @@ In our activities, our basic principles are:
 
 puts "attaching photos to JWcs"
 org_logo = URI.open('https://www.jwcs.org/en/wp-content/uploads/sites/2/logo_en.png')
-org_banner = URI.open('https://www.jwcs.org/en/wp-content/uploads/sites/2/top_image_3.jpg')
+org_banner = URI.open('https://images.pexels.com/photos/689784/pexels-photo-689784.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')
 JWCS.photos.attach(io: org_logo, filename: 'org_logo.png', content_type: 'image/png')
 JWCS.photos.attach(io: org_banner, filename: 'org_banner.jpg', content_type: 'image/jpg')
 
