@@ -26,271 +26,212 @@
     <!---------------------Tabs bar--------------------->
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item">
-        <a class="nav-link active" id="event-tab" data-toggle="tab" href="#event" role="tab" aria-controls="event" aria-selected="true">Event</a>
+        <a class="nav-link active" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="true">Organization Info</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="event-tab" data-toggle="tab" href="#event" role="tab" aria-controls="event" aria-selected="false">Projects</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" id="calendar-tab" data-toggle="tab" href="#calendar" role="tab" aria-controls="calendar" aria-selected="false">Calendar</a>
       </li>
+      <li class="nav-item">
+      <a class="nav-link" id="comment-tab" data-toggle="tab" href="#comment" role="tab" aria-controls="comment" aria-selected="false">Comments</a>
+      </li>
       <% if @organization.users.include?(current_user) %>
         <li class="nav-item">
-          <a class="nav-link" id="pending-volunteer-tab" data-toggle="tab" href="#pending-volunteer" role="tab" aria-controls="pending-volunteer" aria-selected="false">Pending Volunteers</a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link" id="manage-event-tab" data-toggle="tab" href="#manage-event" role="tab" aria-controls="manage-event" aria-selected="false">Manage Events</a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link" id="comment-tab" data-toggle="tab" href="#comment" role="tab" aria-controls="comment" aria-selected="false">Comments</a>
+          <a class="nav-link" id="pending-volunteer-tab" data-toggle="tab" href="#pending-volunteer" role="tab" aria-controls="pending-volunteer" aria-selected="false">Management</a>
         </li>
       <% end %>
     </ul>
     <!---------------------Tabs page--------------------->
     <div class="tab-content" id="myTabContent">
-      <!---------------------Event tabs--------------------->
-      <div class="tab-pane fade show active" id="event" role="tabpanel" aria-labelledby="event-tab">
+      <!---------------------Info--------------------->
+      <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
         <div class="org-sections">
-          <div class="event-center"><h2>Events</h2></div>
-          <div class="round-box">
-            <div class="event-box">
+          <div class="org-info">
+            <div class="org-mission">
+              <h4>Our Mission</h4>
+              <%= @organization.description %>
+            </div>
 
-              <!---------------------Volunteer Event--------------------->
-              <% @volunteer_events.each do |event| %>
-                <li class="event-card">
-                  <div class="event-card-contents">
-                    <%= link_to event_path(event) do  %>
-                      <div class="event-card-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path event.photo.key, height: 240, width: 360, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
-                        <h4><%= event.title %></h4>
-                      </div>
-                    <% end %>
-                    <div class="card-info">
-                      <p><%= event.start_time.strftime("%d of %B, %Y") %></p>
-                      <p><%= event.start_time.strftime("%I:%M %p")%> - <%= event.end_time.strftime("%I:%M %p")%></p>
-                      <p>Volunteers: <%= event.enrollments.where(status: "Approved").count %>/<%= event.target %> people</p>
-                      <div>
-                        <% event.enrollments.where(status: "Approved").each do |enrollment| %>
-                          <%= link_to user_path(enrollment.user) do %>
-                            <%= cl_image_tag enrollment.user.photos.first.key, height: 40, width: 40, crop: :fill , class: "avatar-sm"%>
-                          <% end %>
-                        <% end %>
-                      </div>
-                      <br>
-                      <div class="enroll-section">
-                        <% if user_signed_in? %>
-                          <!-- ------Event owner edit / delete -->
-                          <% if event.owner == current_user || current_user.admin %>
-                            <%= link_to "Edit", event_path(event), class: 'btn btn-primary' %>
-                            <%= link_to "Delete", event_path(event), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete #{event.title}?" } %>
-                          <% end %>
-                          <!------- Enroll --------->
-                          <% if event.owner != current_user || current_user.admin %>
-                            <button class="enroll-btn btn btn-primary btn-block" type="button">Enroll!</button>
-                            <div class="enroll-form">
-                              <p>Select the volunteering time:</p>
-                              <%= simple_form_for [event, @enrollment] do |f| %>
-                                <%= f.input :start_time, as: :datetime, html5: true %>
-                                <%= f.input :end_time, as: :datetime, html5: true %>
-                                <%= f.button :submit, class: "btn btn-primary btn-block" %>
-                              <% end %>
-                            </div>
-                          <% end %>
-                          <!------ Visitor sign in ------>
-                        <% else %>
-                          <%= link_to "Sign in to enroll", new_user_session_path, class: "btn btn-primary" %>
-                        <% end %>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              <% end %>
+            <div class="org-members">
+              <h4>Our Members</h4>
+              <% @organization.users.each do |user| %>
+                <%= link_to user_path(user) do %>
+                  <%= cl_image_tag user.photos.first.key, height: 40, width: 40, crop: :fill , class: "avatar-sm"%>
+                <% end %>
+                <%= user.nickname %>
 
-              <!---------------------Donation Event--------------------->
-              <% @donation_events.each do |event| %>
-                <li class="event-card">
-                  <div class="event-card-contents">
-                    <%= link_to event_path(event) do  %>
-                      <div class="event-card-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
-                        <h4><%= event.title %></h4>
-                      </div>
-                    <% end %>
-                    <div class="card-info">
-                      <p>From: <%= event.start_time.strftime("%d of %B, %Y - %I:%M %p") %></p>
-                      <p>To: <%= event.end_time.strftime("%d of %B, %Y - %I:%M %p") %></p>
-                      <div class="enroll-section">
-                        <% if user_signed_in? %>
-                          <!-- ------Event owner edit / delete -->
-                          <% if event.owner == current_user || current_user.admin %>
-                            <%= link_to "Edit", event_path(event), class: 'btn btn-primary' %>
-                            <%= link_to "Delete", event_path(event), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete #{event.title}?" } %>
-                          <% end %>
-                          <!------- Enroll --------->
-                          <% if event.owner != current_user || current_user.admin %>
-                            <button class="enroll-btn btn btn-primary btn-block" type="button">Donate!</button>
-                            <div class="enroll-form">
-                              <p>How many <%= event.item %> would you like to donate?</p>
-                              <%= simple_form_for [event, @donation] do |f| %>
-                                <%= f.input :amount %>
-                                <%= f.button :submit, class: "btn btn-primary btn-block" %>
-                              <% end %>
-                            </div>
-                          <% end %>
-                          <!------ Visitor sign in ------>
-                        <% else %>
-                          <%= link_to "Sign in to enroll", new_user_session_path, class: "btn btn-primary" %>
-                        <% end %>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              <% end %>
-
-
-              <!---------------------Fundraiser Event-------------------->
-              <% @fundraiser_events.each do |event| %>
-                <li class="event-card">
-                  <div class="event-card-contents">
-                    <div class="event-card-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
-                      <h4><%= event.title %></h4>
-                      <p><%= event.description %></p>
-                    </div>
-                    <div class="card-info">
-                      <p><%= humanized_money_with_symbol(event.raised) %> / <%= humanized_money_with_symbol(event.target) %></p>
-                      <p>Amount: <%= humanized_money_with_symbol(event.price) %></p>
-
-                      <!---donate form---->
-                      <%= form_tag orders_path do |f| %>
-                        <%= hidden_field_tag 'event_id', event.id %>
-                         <%= text_field_tag :amount_cents %>
-
-                        <%= submit_tag 'Donate', class: 'btn btn-primary' %>
-                      <% end %>
-                      <div class="enroll-section">
-                        <% if user_signed_in? %>
-                          <!-- --------------Event owner edit / delete --------------------->
-                          <% if event.owner == current_user || current_user.admin %>
-                            <%= link_to "Edit", event_path(event), class: 'btn btn-primary' %>
-                            <%= link_to "Delete", event_path(event), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete #{event.title}?" } %>
-                          <% end %>
-                          <!----------------------- Enroll --------------------------->
-                          <% if event.owner != current_user || current_user.admin %>
-                            <button class="enroll-btn btn btn-primary btn-block" type="button">Enroll!</button>
-                            <div class="enroll-form">
-                              <p>Select the volunteering time:</p>
-                              <%= simple_form_for [event, @enrollment] do |f| %>
-                                <%= f.input :start_time, as: :datetime, html5: true %>
-                                <%= f.input :end_time, as: :datetime, html5: true %>
-                                <%= f.button :submit, class: "btn btn-primary btn-block" %>
-                              <% end %>
-                            </div>
-                          <% end %>
-                          <!--------------------- Visitor sign in ------------->
-                        <% else %>
-                          <%= link_to "Sign in to enroll", new_user_session_path, class: "btn btn-primary" %>
-                        <% end %>
-                      </div>
-                    </div>
-                  </div>
-                </li>
               <% end %>
             </div>
+
           </div>
         </div>
       </div>
-      <!---------------------Calendar tabs--------------------->
-      <div class="tab-pane fade" id="calendar" role="tabpanel" aria-labelledby="calendar-tab">
-				<div class=calendar-box>
-					<%= month_calendar(events: @events) do |date, events| %>
-						<span class="calendar-date"><%= date.day %></span>
-						<% events.each do |event| %>
-							<div class="border">
-								<%= link_to event_path(event) do %>
-									<button class="btn btn-block calendar-link-<%= @colors.index(event.title) %>" type="button"><%= event.title %></button>
-								<% end %>
-							</div>
-						<% end %>
-					<% end %>
-				</div>
-			</div>
-
-      <!-- Owner Section -->
-      <%# Manage Events %>
-      <div class="tab-pane fade" id="manage-event" role="tabpanel" aria-labelledby="manage-event-tab">
+      <!---------------------Event tabs--------------------->
+      <div class="tab-pane fade" id="event" role="tabpanel" aria-labelledby="event-tab">
         <div class="org-sections">
+
           <div class="event-title">
-            <h2>Events</h2>
+            <h2>Projects</h2>
             <% if @organization.users.include?(current_user) %>
               <%= link_to "Create a new event", new_organization_event_path(@organization), class: 'btn btn-primary' %>
             <% end %>
           </div>
-            <% @organization.events.each do |event| %>
+          <!---------------------Volunteer Event--------------------->
+          <h5>Volunteers</h5>
+          <div class="round-box">
+            <div class="event-box">
 
-                <div class="d-inline-flex">
-                  <h4><%= event.title %> &nbsp </h4>
-                  <% if event.dates.present? %>
-                    <p> (Every <%event.dates.each do |date| %>
-                      <strong><%= day_of_the_week[date] %></strong>
-                      <% end %></p>
-                    <p>&nbsp/<%= event.start_time.strftime("%I:%M %p") %> - <%= event.end_time.strftime("%I:%M %p") %></p>
-                  <% else %>
-                    <p>(From 👉🏻 <%= event.start_time.strftime("%d of %B, %Y - %I:%M %p") %></p>
-                    <p>&nbsp/To 👉🏻 <%= event.end_time.strftime("%d of %B, %Y - %I:%M %p") %></p>
-                  <% end %>
-                  <p>&nbsp/Positions: <%= event.positions %> people)</p>
-                </div>
-            <div class="round-box mb-3 pt-2">
+              <% if @volunteer_events.empty? %>
+                <p>No volunteer event yet...</p>
+              <% else %>
+                <% @volunteer_events.each do |event| %>
 
-                <% if event.enrollments.empty? %>
-                  <p>No volunteers yet....<hp>
+                  <li class="event-card">
 
-                <% else %>
-                <% event.enrollments.each do |enrollment| %>
-                <% if enrollment.status == "Approved" %>
+                    <div class="event-card-contents">
+                      <%= link_to event_path(event) do  %>
+                        <div class="event-card-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path event.photo.key, height: 240, width: 360, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+                          <h4><%= event.title %></h4>
+                        </div>
+                      <% end %>
 
-                  <div class="attendie p-3 mt-3">
-                    <%= link_to user_path(enrollment.user) do  %>
-                      <div class="d-inline-flex align-items-center">
-                        <%= cl_image_tag enrollment.user.photos.first.key, height: 60, width: 60, crop: :fill, class: "enrollment-avatar" %>
-                        <%= enrollment.user.nickname %>
+                      <div class="card-info">
+                        <p><i class="far fa-calendar-alt"></i> <%= event.start_time.strftime("%d of %B, %Y") %></p>
+                        <p><i class="far fa-clock"></i> <%= event.start_time.strftime("%I:%M %p")%> - <%= event.end_time.strftime("%I:%M %p")%></p>
+                        <p>Volunteers: <%= event.enrollments.where(status: "Approved").count %>/<%= event.target %> people</p>
+                        <div>
+                          <% event.enrollments.where(status: "Approved").each do |enrollment| %>
+                            <%= link_to user_path(enrollment.user) do %>
+                              <%= cl_image_tag enrollment.user.photos.first.key, height: 40, width: 40, crop: :fill , class: "avatar-sm"%>
+                            <% end %>
+                          <% end %>
+                        </div>
+                        <br>
+                        <!-- ------Event owner edit / delete -->
+                        <% if event.owner == current_user || current_user.admin %>
+                          <%= link_to "Edit", event_path(event), class: 'btn btn-primary' %>
+                          <%= link_to "Delete", event_path(event), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete #{event.title}?" } %>
+                        <% end %>
                       </div>
-                    <% end %>
-                    <p><%= enrollment.start_time.strftime("%d of %B") %></p>
-                    <p><%= enrollment.start_time.strftime("%k:%M") %> -<%= enrollment.end_time.strftime("%k:%M") %></p>
-                  </div>
-                  <% end %>
-
+                    </div>
+                  </li>
                 <% end %>
               <% end %>
-              <div class="enroll-section">
-                <% if user_signed_in? %>
-                  <% if event.owner != current_user || current_user.admin %>
-                    <button class="enroll-btn btn btn-primary" type="button">Enroll!</button>
-                    <div class="enroll-form">
-                      <p>Select the volunteering time:</p>
-                      <%= simple_form_for [event, @enrollment] do |f| %>
-                        <%= f.input :start_time, as: :datetime, html5: true %>
-                        <%= f.input :end_time, as: :datetime, html5: true %>
-                        <%= f.button :submit, class: "btn btn-primary" %>
-                      <% end %>
-                    </div>
+            </div>
+          </div>
+          <!---------------------Donation Event--------------------->
+          <h5>Donations</h5>
+          <div class="round-box">
+            <div class="event-box">
+
+              <% if @donation_events.empty? %>
+                <p>No donation event yet...</p>
+              <% else %>
+
+                <div class="event">
+
+                  <% @donation_events.each do |event| %>
+                    <li class="event-card">
+
+                      <div class="event-card-contents">
+
+                        <%= link_to event_path(event) do  %>
+                          <div class="event-card-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+                            <h4><%= event.title %></h4>
+                          </div>
+                        <% end %>
+
+                        <div class="card-info">
+                          <h3><span class="seaweed-text font-weight-bold"><%= (Date.today...event.end_time).count %> days left</span></h3>
+                          <p>until <%= event.end_time.strftime("%d of %B, %Y") %></p>
+                          <% if event.owner == current_user || current_user.admin %>
+                          <%= link_to "Edit", event_path(event), class: 'btn btn-primary' %>
+                          <%= link_to "Delete", event_path(event), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete #{event.title}?" } %>
+                          <% end %>
+                        </div>
+
+                      </div>
+
+                    </li>
+
                   <% end %>
-                <% else %>
-                  <%= link_to "Sign in to enroll", new_user_session_path, class: "btn btn-primary" %>
+
+                </div>
+
+              <% end %>
+
+            </div>
+          </div>
+          <!---------------------Fundraiser Event-------------------->
+          <h5>Fundraiser</h5>
+          <div class="round-box">
+            <div class="event-box">
+
+              <% if @fundraiser_events.empty? %>
+                <p>No fundraiser event yet...</p>
+              <% else %>
+
+                <% @fundraiser_events.each do |event| %>
+                  <li class="event-card">
+                    <div class="event-card-contents">
+                      <div class="event-card-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+                        <h4><%= event.title %></h4>
+                      </div>
+                      <div class="card-info">
+                        <p><%= humanized_money_with_symbol(event.raised) %> / <%= humanized_money_with_symbol(event.target) %></p>
+                        <p>Target Amount: <%= humanized_money_with_symbol(event.price) %></p>
+                        <h3><span class="seaweed-text font-weight-bold"><%= (Date.today...event.end_time).count %> days left</span></h3>
+                        <p>until <%= event.end_time.strftime("%d of %B, %Y") %></p>
+                        <% if event.owner == current_user || current_user.admin %>
+                          <%= link_to "Edit", event_path(event), class: 'btn btn-primary' %>
+                          <%= link_to "Delete", event_path(event), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete #{event.title}?" } %>
+                        <% end %>
+                      </div>
+                    </div>
+                  </li>
                 <% end %>
-              </div>
-              </div>
-            <% end %>
+
+              <% end %>
+
+            </div>
+          </div>
+
         </div>
       </div>
-
+      <!---------------------Calendar tabs--------------------->
+      <div class="tab-pane fade" id="calendar" role="tabpanel" aria-labelledby="calendar-tab">
+        <div class=calendar-box>
+          <%= month_calendar(events: @events) do |date, events| %>
+            <span class="calendar-date"><%= date.day %></span>
+            <% events.each do |event| %>
+              <div class="border">
+                <%= link_to event_path(event) do %>
+                  <button class="btn btn-block calendar-link-<%= @colors.index(event.title) %>" type="button"><%= event.title %></button>
+                <% end %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <!-- Owner Section -->
       <%# Pending %>
       <div class="tab-pane fade" id="pending-volunteer" role="tabpanel" aria-labelledby="pending-volunteer-tab">
         <div class="org-sections">
           <%# Pending Volunteer %>
           <div class="pending">
-            <h4>Volunteer</h4>
+            <h4>Volunteer Apporval</h4>
             <% @volunteer_events.each do |event| %>
               <h4><%= event.title %></h4>
               <% if event.enrollments.empty? %>
                 <p>No volunteers yet...</p>
               <% else %>
+                <div class="pending-info">
+                  <p><%= event.start_time.strftime("%d of %B, %Y") %></p>
+                  <p><%= event.start_time.strftime("%I:%M %p")%> - <%= event.end_time.strftime("%I:%M %p")%></p>
+                  <p>Volunteers: <%= event.enrollments.where(status: "Approved").count %>/<%= event.target %> people</p>
+                </div>
                 <% event.enrollments.each do |enrollment| %>
                   <% if enrollment.status == "Pending" %>
                     <div class="text-center p-3 pending-card">
@@ -300,13 +241,20 @@
                         <%= enrollment.user.nickname %>
                       <% end %>
                       <div class="d-flex">
-                        <%= simple_form_for(enrollment) do |f| %>
-                          <%= f.input :status, as: :hidden, remote: true, input_html: { value: "Approved" } %>
-                          <div class="m-1"><%= f.submit 'Approve', class: 'btn btn-primary'%></div>
+                        <%= simple_form_for(enrollment, remote: true) do |f| %>
+                          <%= f.input :status, as: :hidden, input_html: { value: "Approved" } %>
+                          <div class="m-1"><%= f.button :button do %>
+                            <i class="far fa-check-circle text-primary" aria-hidden="true"></i>
+                          <% end %>
+                          </div>
                         <% end %>
+                        <%= params[:management_tab] %>
                         <%= simple_form_for(enrollment) do |f| %>
-                          <%= f.input :status, as: :hidden, remote: true, input_html: { value: "Declined" } %>
-                          <div class="m-1"><%= f.submit 'Decline', class: 'btn btn-primary'%></div>
+                          <%= f.input :status, as: :hidden, input_html: { value: "Declined" } %>
+                          <div class="m-1"><%= f.button :button do %>
+                            <i class="far fa-times-circle text-primary" aria-hidden="true"></i>
+                          <% end %>
+                          </div>
                         <% end %>
                       </div>
                     </div>
@@ -317,7 +265,7 @@
           </div>
           <%# Pending Donation %>
           <div class="pending">
-            <h4>Donation</h4>
+            <h4>Donation Confirmation</h4>
             <% @donation_events.each do |event| %>
               <h4><%= event.title %></h4>
               <% if event.donations.empty? %>
@@ -327,18 +275,23 @@
                   <% if donation.status == "Waiting" %>
                     <div class="text-center p-3 pending-card">
                       <%= link_to user_path(donation.user) do %>
-
                         <%= cl_image_tag donation.user.photos.first.key, height: 60, width: 60, crop: :fill, class: "pending-avatar" %>
                         <%= donation.user.nickname %>
                       <% end %>
                       <div class="d-flex">
-                        <%= simple_form_for(donation) do |f| %>
-                          <%= f.input :status, as: :hidden, remote: true, input_html: { value: "Recieved" } %>
-                          <div class="m-1"><%= f.submit 'Mark it recieved', class: 'btn btn-primary'%></div>
+                        <%= simple_form_for(donation, remote: true) do |f| %>
+                          <%= f.input :status, as: :hidden, input_html: { value: "Recieved" } %>
+                          <div class="m-1"><%= f.button :button do %>
+                            <i class="far fa-check-circle text-primary" aria-hidden="true"></i>
+                          <% end %>
+                          </div>
                         <% end %>
                         <%= simple_form_for(donation) do |f| %>
-                          <%= f.input :status, as: :hidden, remote: true, input_html: { value: "Declined" } %>
-                          <div class="m-1"><%= f.submit 'Decline', class: 'btn btn-primary'%></div>
+                          <%= f.input :status, as: :hidden, input_html: { value: "Canceled!" } %>
+                          <div class="m-1"><%= f.button :button do %>
+                            <i class="far fa-times-circle text-primary" aria-hidden="true"></i>
+                          <% end %>
+                          </div>
                         <% end %>
                       </div>
                     </div>
