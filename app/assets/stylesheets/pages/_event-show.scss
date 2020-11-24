@@ -28,13 +28,25 @@
 
 .event-title {
 	display: flex;
+	.event-title-details {
+		width: 560px;
+	}
 	.event-title-photo {
 		margin-right: 40px;
 	}
+	.event-form-box {
+		margin-top: 16px;
+		margin-bottom: 16px;
+	}
 }
 
+.event-small-info {
+	font-size: smaller;
+}
+
+// Meter CSS & animation
 .meter { 
-	height: 5px;
+	height: 24px;
 	position: relative;
 	background: #f3efe6;
 	overflow: hidden;
@@ -47,7 +59,7 @@
 
 .progress {
 	background-color: #e4c465;
-	animation: progressBar 3s ease-in-out;
+	animation: progressBar 2.5s ease-in-out;
 	animation-fill-mode:both; 
 }
 
@@ -55,6 +67,8 @@
 	0% { width: 0; }
 	100% { width: 100%; }
 }
+
+// Meter end
 
 .seaweed-text {
 	color: $seaweed;
@@ -92,6 +106,24 @@
 
 .other-events-box {
 	height: 400px;
+}
+
+.event-comment-container {
+	margin-top: 16px;
+	width: auto;
+}
+
+.event-comment {
+	background-color: $darker-ivory;
+  border-radius: 24px;
+	padding: 24px;
+	margin: 8px;
+	width: 800px;
+}
+
+.event-comment-input {
+	margin-top: 16px;
+	width: 800px;
 }
 
 // .simple_form label {
