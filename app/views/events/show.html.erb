@@ -11,7 +11,7 @@
 					<% if remaining_days < 2 %>
 						<h4><%= (remaining_days * 24).round %> hours left!</h4>
 					<% else %>
-						<h4><%= remaining_days %> days left</h4>
+						<h4><%= remaining_days.round %> days left</h4>
 					<% end %>
 				<% end %>
 				
@@ -71,7 +71,7 @@
 												<%= f.input :start_time, as: :datetime, html5: true, item_label_class: 'my-custom-class' %>
 												<%= f.input :end_time, as: :datetime, html5: true %>
 											</div>
-											<div class="btn btn-primary btn-block mt-2"><%= f.button :submit, 'Yes!'%></div>
+											<div><%= f.button :submit, 'Yes!', class: "btn btn-primary btn-block mt-2", data: { confirm: "The organizer will confirm in 1-2 days. Is that okay?"} %></div>
 										<% end %>
 									</div>
 								<% end %>
@@ -96,7 +96,7 @@
 										<p>How many <%= @event.item %> would you like to donate?</p>
 										<%= simple_form_for [@event, @donation] do |f| %>
 											<%= f.input :amount %>
-											<%= f.button :submit, class: "btn btn-primary btn-block" %>
+											<%= f.button :submit, class: "btn btn-primary btn-block", data: { confirm: "The organizer will confirm your donation upon receipt. Is that okay?"} %>
 										<% end %>
 									</div>
 								<% end %>
@@ -213,6 +213,7 @@
   										<h5><%= event.title %> with <%= event.organization.name %></h5>
   										<% if event.description %>
   											<p><%= event.description.truncate(50, separator: ' ') %></p>
+												<p><%= event.start_time.strftime("%d of %B, %Y") %> from <%= @event.start_time.strftime("%I:%M %p") %></p>
   										<% end %>
   									</div>
   								</li>
