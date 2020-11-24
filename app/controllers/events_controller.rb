@@ -15,8 +15,12 @@ class EventsController < ApplicationController
 
   def map
     authorize current_user
-    if params[:query].present?
+    if params[:query].present? && params[:category].present?
+      @events = Event.all.tagged_with((params[:query])).where(category: params[:category])
+    elsif params[:query].present?
       @events = Event.all.tagged_with((params[:query]))
+    elsif params[:category].present?
+      @events = Event.all.where(category: params[:category])
     else
       @events = Event.all
     end
@@ -45,7 +49,6 @@ class EventsController < ApplicationController
     # respond_to do |format|
     #   format.
     # end
-
   end
 
   def show

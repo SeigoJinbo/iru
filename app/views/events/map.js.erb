@@ -11,9 +11,13 @@ mapBoxMarkers.forEach((mapBoxMarker) => {
 var newMarkers = [];
 var newMarkerIds = JSON.parse('<%= j @markers[:event].map {|event| event[:event_id]} %>')
 
+console.log({newMarkerIds}, {markers})
 markers.forEach((marker) => {
 
-  if (newMarkerIds.includes(marker.event_id)) {
+
+
+
+if (newMarkerIds.includes(marker.event_id)) {
     newMarkers.push(marker)
     console.log(newMarkers)
   }

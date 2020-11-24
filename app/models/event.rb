@@ -1,6 +1,6 @@
 class Event < ApplicationRecord
-  CATEGORIES = ["Volunteer", "Donation", "Fundraiser"]
-  LIST = ["Animals/Wildlife", "Children/Youth", "Disasters", "Education", "Environment/Agriculture", "Health", "Women", "Seniors/Disabilities", "Other"]
+  CATEGORIES = [nil, "Volunteer", "Donation", "Fundraiser"]
+  LIST = [nil, "Animals/Wildlife", "Children/Youth", "Disasters", "Education", "Environment/Agriculture", "Health", "Women", "Seniors/Disabilities", "Other"]
 
   belongs_to :organization
   has_many :enrollments
