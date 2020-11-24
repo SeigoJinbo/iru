@@ -44,8 +44,12 @@
 					<% if @event.raised.nil? %>
 						<span style="width:0%;"><span class="progress"></span></span>
 					<% else %>
-						<% raised_amount = ((@event.enrollments.where(status: "Approved").count.to_f / @event.target.to_f) * 100).to_i %>
-						<span style="width:<%= raised_amount %>%;"><span class="progress"></span></span>
+						<% if @event.category == "Volunteer" %>
+							<% raised_amount = ((@event.enrollments.where(status: "Approved").count.to_f / @event.target.to_f) * 100).to_i %>
+						<% else %>
+							<% raised_amount = ((@event.raised.to_f / @event.target.to_f) * 100).to_i %>
+						<% end %>
+							<span style="width:<%= raised_amount %>%;"><span class="progress"></span></span>
 					<% end %>
 				</div>
 
