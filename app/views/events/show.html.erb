@@ -235,10 +235,12 @@
 										<div class="d-flex p-1">
 											<div><%= cl_image_tag comment.user.photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %></div>
 											<div class="d-flex ml-3 align-items-center"><h5><%= link_to comment.user.nickname, user_path(comment.user) %> says:</h5></div>
+											<p class='p-1 my-2 ml-1'><%= comment.content%></p>
 										</div>
-										<p class='p-1 my-2'><%= comment.content%></p>
-										<% if (current_user == comment.user)  %>
-											<%= link_to "Delete", event_comment_path(comment), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete comment?" } %>
+										<% if false  %>
+											<% if (current_user == comment.user)  %>
+												<%= link_to "Delete", event_comment_path(comment), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete comment?" } %>
+											<% end %>
 										<% end %>
 									</div>
 								<% end %>
