@@ -1,0 +1,7 @@
+# config/meta.yml
+
+meta_product_name: "Iru"
+meta_title: "Iru - Contribute to a cause near to you"
+meta_description: "A central hub for NPOs to list their needs on a map, connecting individuals who can easily search, donate and know where their efforts are going."
+meta_image: "iru-logo.png" # should exist in `app/assets/images/`
+twitter_account: "@product_twitter_account"   # required for Twitter Cards
