@@ -2,40 +2,134 @@
 	<div class="page-box">
 		<div class="inner-padding-box">
 			<div class="confirmation-header">
-				<h2>Thank you for promising <span class="text-weight-bold"><%= @donation.amount %> <%= @event.item %></span> to <%= link_to @donation.event.title, event_path(@donation.event) %>! </h2>
+				<h2 class="seaweed-text">Donation #<%= @donation.id %> promise accepted! <small><span class="badge badge-primary"><%= @donation.status %></span></small> </h2>
+				<h3>Thank you for promising <span class="text-weight-bold"><%= @donation.amount %> <%= @event.item %></span> to <%= link_to @donation.event.title, event_path(@donation.event) %></h3>
 			</div>
 
 			<div class="confirmation-box">
-
+				<div class="confirmation-box-left">
+					<div class="confirmation-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path @donation.event.photo.key, height: 380, width: 480%>); background-repeat: norepeat; background-size: cover;">
+					</div>
+					<div class="share-box mt-2 d-flex">
+						<div>
+							<h6>Share to your network!</h6> 
+						</div>
+						<div class="ml-3">
+						 <p><%= social_share_button_tag(@event.title) %></p>
+						</div>
+					</div>
+				</div>
 
 				<div class="confirmation-instructions-container">
 					<div class="confirmation-title">
-						<h3>Donation #<%= @donation.id %> <small><span class="badge badge-primary"><%= @donation.status %></span></small></h3>
-						<p>Your promise to <%= link_to @donation.event.organization.name, organization_path(@donation.event.organization) %> has been accepted!</p> 
-						<p>They will be very grateful to receive the <%= @event.item %> within <%= (@event.end_time.to_date - @donation.created_at.to_date).to_i %> days (on or before <%= @event.end_time.to_date %>) and confirm upon receipt.</p>
 						
-						<div class="confirmation-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path @donation.event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+						<div class="instructions-box">
+							<div class="instructions-title mb-2">
+								<div>
+									<%= cl_image_tag @event.owner.photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
+								</div>
+								<div class="ml-2"><h3>Instructions from <%= link_to @event.owner.nickname, user_path(@event.owner) %> @ <%= link_to @donation.event.organization.name, organization_path(@donation.event.organization) %>:</h3></div>
+							</div>
+
+							<p>Thank you so much! <i class="far fa-smile"></i> Please kindly send the <%= @event.item %> within <%= (@event.end_time.to_date - @donation.created_at.to_date).to_i %> days (on or before <%= @event.end_time.strftime("%d of %B, %Y") %>).</p>
+
+							<h6>For postal donations:</h6>
+							<p><i class="fas fa-shipping-fast"></i> <%= @event.owner.nickname %> @ <%= @event.address %>.</p>
+							<h6>For in person donations:</h6>
+							<p><i class="fas fa-people-arrows"></i> <%= @event.item %> received at <%= @event.address %>.</p> 
+							<p>(If you can let us know around what time you'll be visiting <%= link_to "in the comments section", event_path(@event, tab: "comments") %> in advance, that would be great!)</p>
 						</div>
 					</div>
 
-					<div class="instructions-box">
-						<div class="instructions-title mb-2">
-							<div>
-								<%= cl_image_tag @event.owner.photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
-							</div>
-							<div class="ml-2"><h3>Instructions from <%= link_to @event.owner.nickname, user_path(@event.owner) %> @ <%= link_to @donation.event.organization.name, organization_path(@donation.event.organization) %>:</h3></div>
-						</div>
-						<h6>For postal donations:</h6>
-						<p>Please address your delivery to <%= @event.owner.nickname %> and post to <%= @event.address %>.</p>
-						<h6>For in person donations:</h6>
-						<p>Please bring your <%= @event.item %> directly to <%= @event.address %>.</p> 
-						<p>(If you can let us know around what time you'll be visiting <%= link_to "in the comments section", event_path(@event, tab: "comments") %> in advance, that would be great!)</p>
-					</div>
 				</div>
 			</div>
 
 			<div class="recs-box">
-				<h3>Other volunteers also checked out:</h3>
+				<h3 class="seaweed-text">Other volunteers also checked out:</h3>
+				<div class="recs-results border-box">
+					<% @event.organization.events.select{ |event| event.end_time > Time.now }.each do |event| %>
+						<% if event.category == "Volunteer" %>
+							<li class="event-card">
+								<div class="event-card-contents">
+									<%= link_to event_path(event) do  %>
+										<div class="event-card-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path event.photo.key, height: 240, width: 360, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+											<h4><%= event.title %></h4>
+										</div>
+										<div class="card-info">
+											<p><i class="far fa-calendar-alt"></i> <%= event.start_time.strftime("%d of %B, %Y") %></p>
+											<p><i class="far fa-clock"></i> <%= event.start_time.strftime("%I:%M %p")%> - <%= event.end_time.strftime("%I:%M %p")%></p>
+											<p>Volunteers: <%= event.enrollments.where(status: "Approved").count %>/<%= event.target %> people</p>
+											<div>
+												<% event.enrollments.where(status: "Approved").each do |enrollment| %>
+													<%= link_to user_path(enrollment.user) do %>
+														<%= cl_image_tag enrollment.user.photos.first.key, height: 40, width: 40, crop: :fill , class: "avatar-sm"%>
+													<% end %>
+												<% end %>
+											</div>
+											<br>
+									</div>
+									<% end %>
+								</div>
+							</li>
+						<% elsif event.category == "Donation" %>
+							<li class="event-card">
+								<div class="event-card-contents">
+									<%= link_to event_path(event) do  %>
+										<div class="event-card-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+											<h4><%= event.title %></h4>
+										</div>
+										<div class="card-info">
+											<h5><span class="seaweed-text font-weight-bold"><%= (Date.today...event.end_time).count %> days left</span></h5>
+											<p><i class="fas fa-bullseye"></i> <%= event.target %> <%= event.item %></p>
+											<p><i class="fas fa-signal"></i> <%= (event.raised.to_f / event.target.to_f * 100).to_i %>% collected</p>
+
+											<div class="card-meter mt-2">
+												<% if event.raised.nil? %>
+													<span style="width:0%;"><span class="card-progress"></span></span>
+												<% else %>
+													<% if event.category == "Volunteer" %>
+														<% raised_amount = ((event.enrollments.where(status: "Approved").count.to_f / event.target.to_f) * 100).to_i %>
+													<% else %>
+														<% raised_amount = ((event.raised.to_f / event.target.to_f) * 100).to_i %>
+													<% end %>
+														<span style="width:<%= raised_amount %>%;"><span class="card-progress"></span></span>
+												<% end %>
+											</div>
+										</div>
+									<% end %>
+								</div>
+							</li>
+						<% elsif event.category == "Fundraiser" %>
+							<li class="event-card">
+								<div class="event-card-contents">
+									<%= link_to event_path(event) do  %>
+										<div class="event-card-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+											<h4><%= event.title %></h4>
+										</div>
+										<div class="card-info">
+											<h5><span class="seaweed-text font-weight-bold"><%= (Date.today...event.end_time).count %> days left</span></h5>
+											<p><i class="fas fa-hand-holding-usd"></i> <%= humanized_money_with_symbol(event.raised) %> / <%= humanized_money_with_symbol(event.target) %></p>
+											<p><i class="fas fa-signal"></i> <%= (event.raised.to_f / event.target.to_f * 100).to_i %>% collected</p>
+
+											<div class="card-meter mt-2">
+												<% if event.raised.nil? %>
+													<span style="width:0%;"><span class="card-progress"></span></span>
+												<% else %>
+													<% if event.category == "Volunteer" %>
+														<% raised_amount = ((event.enrollments.where(status: "Approved").count.to_f / event.target.to_f) * 100).to_i %>
+													<% else %>
+														<% raised_amount = ((event.raised.to_f / event.target.to_f) * 100).to_i %>
+													<% end %>
+														<span style="width:<%= raised_amount %>%;"><span class="card-progress"></span></span>
+												<% end %>
+											</div>
+										</div>
+									<% end %>
+								</div>
+							</li>
+						<% end %>
+					<% end %>
+				</div>
 			</div>
 
 			<div class="back-button">

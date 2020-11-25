@@ -39,6 +39,7 @@ class OrdersController < ApplicationController
 
   def show
     authorize current_user
-    @order = current_user.orders.find(params[:id])
+		@order = current_user.orders.find(params[:id])
+		@event = @order.event
   end
 end
