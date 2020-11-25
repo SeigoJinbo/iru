@@ -1,0 +1,46 @@
+.inner-padding-box {
+	padding: 24px;
+}
+
+.confirmation-header {
+	margin-bottom: 16px;
+}
+
+.confirmation-instructions-container {
+	display: flex;
+	margin-left: 24px;
+}
+
+.confirmation-box {
+	display: flex;
+	// align-items: center;
+}
+
+.confirmation-pic {
+	height: 240px;
+	width: 360px;
+}
+
+.confirmation-title {
+	// margin-left: 24px;
+	margin: 16px;
+}
+
+.instructions-box {
+	border: 1px solid $darker-ivory;
+  border-radius: 24px;
+  padding: 24px;
+	margin-bottom: 16px;
+	width: fit-content;
+	height: fit-content;
+}
+
+.instructions-title {
+	display: flex;
+	align-items: center;
+}
+
+.back-button {
+	display: flex;
+	align-items: flex-end;
+}

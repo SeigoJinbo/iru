@@ -1,9 +1,10 @@
 class DonationsController < ApplicationController
-  before_action :set_donation, only: [:update, :destroy]
+  before_action :set_donation, only: [:update, :destroy, :show]
 	
 	def show
 		authorize current_user
     @donation = current_user.donations.find(params[:id])
+		@event = @donation.event
 	end
 
 	def new

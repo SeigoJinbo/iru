@@ -191,7 +191,8 @@ BLANKETS = Event.create!(
   price_cents: 100,
   tag_list: "Women",
   target: 20,
-  raised: 14
+	raised: 14,
+	item: "blankets"
   )
 puts "attaching photo blankets"
 event_photo = URI.open('https://i0.wp.com/colabo-official.net/wp-content/uploads/2017/12/af9f338ed319d27a376d3c1bd9111159.jpg?resize=560%2C420&ssl=1')
