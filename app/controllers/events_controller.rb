@@ -70,9 +70,10 @@ class EventsController < ApplicationController
     @event.organization = @organization
     @event.owner = current_user
     if @event.save
-      redirect_to organization_path(@event.organization)
+      redirect_to organization_path(@event.organization, tab: "event-tab")
+
     else
-      render :new
+      render 'new', locals: {category: params[:event][:category]}
     end
   end
 
@@ -100,6 +101,6 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:organization, :user, :category, :title, :description, :ongoing, :start_time, :end_time, :positions, :photo, dates: [])
+    params.require(:event).permit(:organization, :user, :category, :title, :description, :ongoing, :start_time, :end_time, :positions, :photo, :target, :address, :item, dates: [])
   end
 end

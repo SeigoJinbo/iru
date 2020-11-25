@@ -1,25 +1,62 @@
 <div class="page">
   <div class="page-box">
     <div class="sections">
-      <h1>Create a new event</h1>
-      <%= simple_form_for [@organization, @event] do |f| %>
-        <%= f.input :title %>
-        <%= f.input :description %>
-        <%= f.input :category, collection: Event::CATEGORIES %>
-        <%= f.input :positions %>
-        <%= f.input :ongoing, as: :radio_buttons, label: 'Is this an ongoing event?' %>
-        <div id="days_of_the_week" class="d-none">
-          <%= f.collection_check_boxes :dates, [[0, 'Mon'], [1, 'Tue'], [2, 'Wed'], [3, 'Thur'], [4, 'Fri'], [5, 'Sat'], [6, 'Sun']], :first, :last, include_hidden: false %>
-          <%= f.input :start_time, as: :time, html5: true %>
-          <%= f.input :end_time, as: :time, html5: true %>
-        </div>
-        <div id="date_with_time" class="d-none">
-          <%= f.input :start_time, html5: true, required: false %>
-          <%= f.input :end_time, html5: true, required: false %>
-        </div>
-        <%= f.input :photo, as: :file, label: 'Please upload an event photo' %>
-        <%= f.button :submit, class: "btn btn-primary" %>
+      <h1>Add a new project</h1>
+      <p>Please choose the type of the project</p>
+      <%= link_to 'Volunteer', new_organization_event_path(@organization, category: "Volunteer"), class: "btn btn-primary"%>
+      <%= link_to 'Donation', new_organization_event_path(@organization, category: "Donation"), class: "btn btn-primary"%>
+      <%= link_to 'Fundraiser', new_organization_event_path(@organization, category: "Fundraiser"), class: "btn btn-primary"%>
+      <% if params[:category] == "Volunteer" || @event.category == "Volunteer" %>
+        <%= simple_form_for [@organization, @event] do |f| %>
+          <div class="event-forms">
+            <%= f.input :category, as: :hidden, input_html: { value: "Volunteer" } %>
+            <%= f.input :title %>
+            <%= f.input :description %>
+            <%= f.input :tag_list, collection: Event::LIST, label: 'Project Category' %>
+            <%= f.input :target, label: 'How many people needed' %>
+            <%= f.input :address, html5: true%>
+            <%= f.input :start_time, html5: true%>
+            <%= f.input :end_time, html5: true%>
+            <%= f.input :photo, as: :file, label: 'Please upload an project photo' %>
+            <%= f.button :submit , 'Add', class: "btn btn-primary", label: 'Add'%>
+          </div>
+        <% end %>
+      <% elsif params[:category] == "Donation" || @event.category == "Volunteer" %>
+        <%= simple_form_for [@organization, @event] do |f| %>
+          <div class="event-forms">
+            <%= f.input :category, as: :hidden, input_html: { value: "Donation" } %>
+            <%= f.input :title %>
+            <%= f.input :description %>
+            <%= f.input :tag_list, collection: Event::LIST, label: 'Project Category' %>
+            <%= f.input :item, label: 'Item name' %>
+            <%= f.input :target, label: 'How many items needed' %>
+            <%= f.input :address, html5: true%>
+            <%= f.input :start_time, html5: true%>
+            <%= f.input :end_time, html5: true%>
+            <%= f.input :photo, as: :file, label: 'Please upload an project photo' %>
+            <%= f.button :submit , 'Add', class: "btn btn-primary", label: 'Add'%>
+          </div>
+        <% end %>
+      <% elsif params[:category] == "Fundraiser" || @event.category == "Volunteer" %>
+        <%= simple_form_for [@organization, @event] do |f| %>
+          <div class="event-forms">
+            <%= f.input :category, as: :hidden, input_html: { value: "Fundraiser" } %>
+            <%= f.input :title %>
+            <%= f.input :description %>
+            <%= f.input :tag_list, collection: Event::LIST, label: 'Project Category' %>
+            <%= f.input :item, label: 'Item name' %>
+            <%= f.input :target, label: 'Target Amount' %>
+            <%= f.input :address, html5: true%>
+            <%= f.input :start_time, html5: true%>
+            <%= f.input :end_time, html5: true%>
+            <%= f.input :photo, as: :file, label: 'Please upload an project photo' %>
+            <%= f.button :submit , 'Add', class: "btn btn-primary", label: 'Add'%>
+          </div>
+        <% end %>
+      <% else %>
+        <% new_organization_event_path(@organization) %>
       <% end %>
     <div/>
   </div>
 </div>
+

@@ -1,6 +1,12 @@
 class DonationsController < ApplicationController
   before_action :set_donation, only: [:update, :destroy]
-  def new
+	
+	def show
+		authorize current_user
+    @donation = current_user.donations.find(params[:id])
+	end
+
+	def new
     @donation = Donation.new
     @event = Event.find(params[:event_id])
     authorize @donation
@@ -14,7 +20,7 @@ class DonationsController < ApplicationController
     @organization = @event.organization
     authorize @donation
     if @donation.save
-      redirect_to event_path(@event)
+      redirect_to donation_path(@donation)
     else
       render :new
     end

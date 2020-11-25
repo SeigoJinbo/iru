@@ -12,8 +12,8 @@ class EventCommentsController < ApplicationController
     @event_comment = EventComment.new(event_comment_params)
     @event_comment.user = current_user
     @event_comment.event = @event
-    if @event_comment.save
-      redirect_to event_path(@event)
+		if @event_comment.save
+      redirect_to event_path(@event, anchor: "comment-#{@event_comment.id}", tab: "comments")
     else
       render "events/show"
     end
