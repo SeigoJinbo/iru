@@ -17,11 +17,12 @@ class OrganizationsController < ApplicationController
     @organization_comment = OrganizationComment.new
     @enrollment = Enrollment.new
     @donation = Donation.new
+    @membership = Membership.new
     # @events = @organization.events.select { |event| event.status = "Accepted" }
 
-    @volunteer_events = @organization.events.select { |event| event.category == "Volunteer" }
-    @fundraiser_events = @organization.events.select { |event| event.category == "Fundraiser" }
-    @donation_events = @organization.events.select { |event| event.category == "Donation" }
+    @volunteer_events = @organization.events.select { |event| event.category == "Volunteer" && event.end_time > Time.now }
+    @fundraiser_events = @organization.events.select { |event| event.category == "Fundraiser" && event.end_time > Time.now }
+    @donation_events = @organization.events.select { |event| event.category == "Donation" && event.end_time > Time.now }
 
 		@events = @organization.events.uniq
     @colors = @events.map do |event|
