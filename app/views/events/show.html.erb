@@ -241,7 +241,7 @@
 											<div class="d-flex ml-3 align-items-center"><h5><%= link_to comment.user.nickname, user_path(comment.user) %> says:</h5></div>
 											<p class='p-1 my-2 ml-1'><%= comment.content%></p>
 										</div>
-										<% if false  %>
+										<% if false %>
 											<% if (current_user == comment.user)  %>
 												<%= link_to "Delete", event_comment_path(comment), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete comment?" } %>
 											<% end %>
@@ -260,5 +260,4 @@
 			</div>
 		</div>
 	</div>
-
 </div>
