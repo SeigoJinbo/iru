@@ -25,15 +25,15 @@ class EventsController < ApplicationController
       @events = Event.all
     end
     marker_image = {
-      "Animals/Wildlife" => "0.png",
-      "Children/Youth" => "1.png",
-      "Disasters" => "2.png",
-      "Education" => "3.png",
-      "Environment/Agriculture" => "4.png",
-      "Health" => "5.png",
-      "Women" => "6.png",
-      "Seniors/Disabilities" => "7.png",
-      "Other" => "8.png"
+      "Animals/Wildlife" => "1.png",
+      "Children/Youth" => "2.png",
+      "Disasters" => "3.png",
+      "Education" => "4.png",
+      "Environment/Agriculture" => "5.png",
+      "Health" => "6.png",
+      "Women" => "7.png",
+      "Seniors/Disabilities" => "8.png",
+      "Other" => "9.png"
     }
     @markers = {}
     @markers[:user] = { lat: current_user.latitude, lng: current_user.longitude, image_url: cl_image_path(current_user.photos.first.key) }
@@ -42,7 +42,7 @@ class EventsController < ApplicationController
         lat: event.latitude,
         lng: event.longitude,
         infoWindow: render_to_string(partial: "info_window", locals: { event: event }),
-        image_url: helpers.asset_url(marker_image[event.tag_list.first] || "8.png"),
+        image_url: helpers.asset_url(marker_image[event.tag_list.first] || "9.png"),
         event_id: event.id
       }
     end
