@@ -30,7 +30,7 @@
             <div class="map-form-results border-bottom pb-3">
               <h5><%=  event.title %></h5>
               <%#= cl_image_tag event.photos.first.key, height: 40, width: 40, crop: :fill %>
-              <%= image_tag "#{event.tag_number - 1 || 4}.png", class: "map-results-organization-image" %>
+              <%= image_tag "#{event.tag_number || 4}.png", class: "map-results-organization-image" %>
               <%= event.tag_list %>
             </div>
           <% end %>

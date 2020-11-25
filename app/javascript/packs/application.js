@@ -34,12 +34,12 @@ import { initMapbox } from '../plugins/init_mapbox';
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 import { showEnrollForm } from '../components/enroll_form';
-import { ongoingFormCondition } from '../components/event_new';
+// import { ongoingFormCondition } from '../components/event_new';
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
   showEnrollForm();
   initMapbox();
-  ongoingFormCondition();
+  // ongoingFormCondition();
 });
