@@ -212,81 +212,94 @@
           <div class="pending">
             <h4>Volunteer Apporval</h4>
             <% @volunteer_events.each do |event| %>
-              <h4><%= event.title %></h4>
-              <% if event.enrollments.empty? %>
-                <p>No volunteers yet...</p>
-              <% else %>
+              <h5>- <%= event.title %></h5>
+              <div class="round-box d-flex">
                 <div class="pending-info">
                   <p><%= event.start_time.strftime("%d of %B, %Y") %></p>
                   <p><%= event.start_time.strftime("%I:%M %p")%> - <%= event.end_time.strftime("%I:%M %p")%></p>
                   <p>Volunteers: <%= event.enrollments.where(status: "Approved").count %>/<%= event.target %> people</p>
                 </div>
-                <% event.enrollments.each do |enrollment| %>
-                  <% if enrollment.status == "Pending" %>
-                    <div class="text-center p-3 pending-card">
-                      <%= link_to user_path(enrollment.user) do %>
+                <% if event.enrollments.where(status: "Pending").empty? %>
+                  <p>No volunteers yet...</p>
+                <% else %>
+                  <div class="d-flex">
+                    <% event.enrollments.each do |enrollment| %>
+                      <% if enrollment.status == "Pending" %>
+                        <div class="text-center py-2 pending-card">
+                          <%= link_to user_path(enrollment.user) do %>
 
-                        <%= cl_image_tag enrollment.user.photos.first.key, height: 60, width: 60, crop: :fill, class: "pending-avatar" %>
-                        <%= enrollment.user.nickname %>
+                            <%= cl_image_tag enrollment.user.photos.first.key, height: 60, width: 60, crop: :fill, class: "pending-avatar" %>
+                            <%= enrollment.user.nickname %>
+                          <% end %>
+                          <div class="pending-btn">
+                            <%= simple_form_for(enrollment, remote: true) do |f| %>
+                              <%= f.input :status, as: :hidden, input_html: { value: "Approved" } %>
+                              <%= f.button :button do %>
+                                <i class="far fa-check-circle text-primary"></i>
+                              <% end %>
+                            <% end %>
+                            <%= simple_form_for(enrollment, remote: true) do |f| %>
+                              <%= f.input :status, as: :hidden, input_html: { value: "Declined" } %>
+                              <%= f.button :button do %>
+                                <i class="far fa-times-circle text-seaweed"></i>
+                              <% end %>
+                            <% end %>
+                          </div>
+                        </div>
                       <% end %>
-                      <div class="d-flex">
-                        <%= simple_form_for(enrollment, remote: true) do |f| %>
-                          <%= f.input :status, as: :hidden, input_html: { value: "Approved" } %>
-                          <div class="m-1"><%= f.button :button do %>
-                            <i class="far fa-check-circle text-primary" aria-hidden="true"></i>
-                          <% end %>
-                          </div>
-                        <% end %>
-                        <%= params[:management_tab] %>
-                        <%= simple_form_for(enrollment) do |f| %>
-                          <%= f.input :status, as: :hidden, input_html: { value: "Declined" } %>
-                          <div class="m-1"><%= f.button :button do %>
-                            <i class="far fa-times-circle text-primary" aria-hidden="true"></i>
-                          <% end %>
-                          </div>
-                        <% end %>
-                      </div>
-                    </div>
-                  <% end %>
+                    <% end %>
+                  </div>
                 <% end %>
-              <% end %>
+              </div>
             <% end %>
           </div>
           <%# Pending Donation %>
           <div class="pending">
             <h4>Donation Confirmation</h4>
             <% @donation_events.each do |event| %>
-              <h4><%= event.title %></h4>
-              <% if event.donations.empty? %>
-                <p>No volunteers yet...</p>
-              <% else %>
-                <% event.donations.each do |donation| %>
-                  <% if donation.status == "Waiting" %>
-                    <div class="text-center p-3 pending-card">
-                      <%= link_to user_path(donation.user) do %>
-                        <%= cl_image_tag donation.user.photos.first.key, height: 60, width: 60, crop: :fill, class: "pending-avatar" %>
-                        <%= donation.user.nickname %>
+              <h5>- <%= event.title %></h5>
+              <div class="round-box d-flex">
+                <div class="pending-info">
+                  <p>Donations: <%= event.donations.where(status: "Recieved").count %>/<%= event.target %> items</p>
+                  <%= (Date.today...event.end_time).count %> days left</span></h3>
+                  <p>until <%= event.end_time.strftime("%d of %B, %Y") %></p>
+                </div>
+
+                <div>
+                  <% if event.donations.where(status: "Waiting").empty? %>
+                    <p>No donations yet...</p>
+                  <% else %>
+                    <div class="d-flex">
+                      <% event.donations.each do |donation| %>
+                        <% if donation.status == "Waiting" %>
+                          <div class="text-center py-2 pending-card">
+                            <%= link_to user_path(donation.user) do %>
+                              <%= cl_image_tag donation.user.photos.first.key, height: 60, width: 60, crop: :fill, class: "pending-avatar" %>
+                              <%= donation.user.nickname %>
+                            <% end %>
+                            <div class="pending-btn">
+                              <%= simple_form_for(donation, remote: true) do |f| %>
+                                <%= f.input :status, as: :hidden, input_html: { value: "Recieved" } %>
+                                <%= f.button :button do %>
+                                  <i class="far fa-check-circle text-primary"></i>
+                                <% end %>
+                              <% end %>
+                              <%= simple_form_for(donation, remote: true) do |f| %>
+                                <%= f.input :status, as: :hidden, input_html: { value: "Canceled!" } %>
+                                <%= f.button :button do %>
+                                  <i class="far fa-times-circle text-seaweed"></i>
+                                <% end %>
+                              <% end %>
+                            </div>
+                          </div>
+                        <% end %>
                       <% end %>
-                      <div class="d-flex">
-                        <%= simple_form_for(donation, remote: true) do |f| %>
-                          <%= f.input :status, as: :hidden, input_html: { value: "Recieved" } %>
-                          <div class="m-1"><%= f.button :button do %>
-                            <i class="far fa-check-circle text-primary" aria-hidden="true"></i>
-                          <% end %>
-                          </div>
-                        <% end %>
-                        <%= simple_form_for(donation) do |f| %>
-                          <%= f.input :status, as: :hidden, input_html: { value: "Canceled!" } %>
-                          <div class="m-1"><%= f.button :button do %>
-                            <i class="far fa-times-circle text-primary" aria-hidden="true"></i>
-                          <% end %>
-                          </div>
-                        <% end %>
-                      </div>
                     </div>
                   <% end %>
-                <% end %>
-              <% end %>
+                </div>
+
+              </div>
+
             <% end %>
           </div>
         </div>
