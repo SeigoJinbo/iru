@@ -278,10 +278,67 @@ event_photo = URI.open('https://images.pexels.com/photos/148182/pexels-photo-148
 BLANKET_A_PANDA.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
 
 
+puts "creating garbage"
+GARBAGE = Event.create!(
+  title: "Help keep the forests clean",
+  category: 'Volunteer',
+  description: 'Help keep the forests clean',
+  positions: rand(3..10),
+  address: "canada",
+  ongoing: true,
+  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..2)).sort,
+  start_time: Time.now + rand(10000..100000),
+  end_time: Time.new(2020, 12, 2, 20, 00, 00),
+  organization: UNHCR,
+  owner: SEIGO,
+  item: 'apples',
+  tag_list: "Environment/Agriculture",
+  target: 20,
+  raised: 5
+  )
+
+event_photo = URI.open('https://pcdn.piiojs.com/i/oaa0g2/vw,840,vh,0,r,1,pr,2,o,avwp/https%3A%2F%2Fwww.socialtables.com%2Fwp-content%2Fuploads%2F2016%2F10%2FiStock-540095978-1024x683.jpg')
+GARBAGE.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
 
 
 #---------------SET ENROLLMENTS---------------
 puts "creating enrollment"
+
+Enrollment.create!(
+  user: DOUG,
+  event: GARBAGE,
+  start_time: Time.now + rand(10000..100000),
+  end_time: Time.now + rand(100000..1000000)
+  )
+
+Enrollment.create!(
+  user: TOMO,
+  event: GARBAGE,
+  start_time: Time.now + rand(10000..100000),
+  end_time: Time.now + rand(100000..1000000)
+  )
+
+Enrollment.create!(
+  user: ALEX,
+  event: GARBAGE,
+  start_time: Time.now + rand(10000..100000),
+  end_time: Time.now + rand(100000..1000000)
+  )
+
+Enrollment.create!(
+  user: SHO,
+  event: GARBAGE,
+  start_time: Time.now + rand(10000..100000),
+  end_time: Time.now + rand(100000..1000000)
+  )
+
+Enrollment.create!(
+  user: TAKU,
+  event: GARBAGE,
+  start_time: Time.now + rand(10000..100000),
+  end_time: Time.now + rand(100000..1000000)
+  )
+
 
 Enrollment.create!(
   user: LIZ,
@@ -345,3 +402,5 @@ EventComment.create!(
   event: CAFE,
   content: "you don't have to bring anything!"
   )
+
+

@@ -73,7 +73,7 @@ puts "destroying organizations"
 Organization.destroy_all
 
 user = User.create!(email: 'user@user.com', password: '123456')
-organization = Organization.create!
+# organization = Organization.create!
 MEBYO = Organization.create!(
   name: "ME-BYO Japan",
   email: "sato@mebyo.com",
@@ -147,27 +147,50 @@ POLAR_BEARS.photo.attach(io: event_photo, filename: 'event.jpg', content_type: '
 
 
 
-puts "creating polar bears"
+puts "creating children"
 CHILDREN = Event.create!(
   title: "Ream World Donations",
   category: 'Donation',
-  description: 'save the polar bears',
+  description: 'Donate books to kids',
   positions: rand(3..10),
-  address: "alaska, america",
+  address: "Africa",
   ongoing: true,
   dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
   start_time: Time.now + rand(10000..100000),
-  end_time: Time.new(2020, 12, 20, 20, 00, 00),
-  organization: BASIC,
+  end_time: Time.new(2020, 12, 12, 20, 00, 00),
+  organization: UNHCR,
   owner: user,
-  item: books,
+  item: 'books',
   tag_list: "Children",
-  target: 1250000,
-  raised: 214503
+  target: 1000,
+  raised: 893
   )
 
 event_photo = URI.open('http://www.hiv-aids-kids.org/image/CSC29S.jpg')
 CHILDREN.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+
+
+puts "creating foodbank"
+FOOD = Event.create!(
+  title: "Foodbank fundraiser",
+  category: 'Fundraiser',
+  description: 'Help raise money for food',
+  positions: rand(3..10),
+  address: "sidney, Australia",
+  ongoing: true,
+  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
+  start_time: Time.now + rand(10000..100000),
+  end_time: Time.new(2020, 12, 10, 20, 00, 00),
+  organization: UNHCR,
+  owner: user,
+  item: 'apples',
+  tag_list: "Other",
+  target: 200000,
+  raised: 148792
+  )
+
+event_photo = URI.open('https://www.eskenazihealth.edu/images/default-source/default-album/food-drive---west-38th-streete8fac488bb856bcfa62bff000071c7da.jpg?sfvrsn=a57faf9d_2')
+FOOD.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
 
 
 

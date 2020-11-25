@@ -8,13 +8,32 @@
   </div>
 <% @organization = Organization.fourth %>
   <% @organizations = Organization.all %>
-    <div class='d-flex'>
-  <% @organizations[0..4].each do |organization| %>
-      <div>
+
+
+
+<h2>Top Organizations</h2>
+  <div class='d-flex'>
+    <% @organizations[4..8].each do |organization| %>
+      <div class='m-1'>
         <%= cl_image_tag organization.photos.first.key, height: 100, width: 100, crop: :fill, class: "org-avatar" %>
         <p><%= organization.name %></p>
       </div>
-  <% end %>
-    </div>
+    <% end %>
+  </div>
+
+<% @event = Event.find_by(title: "Help keep the forests clean") %>
+  <% @events = Event.all %>
+  <h2>Top Events</h2>
+<div class='d-flex'>
+    <% @events[0..2].each do |event| %>
+      <div class='m-1'>
+        <%= cl_image_tag event.photo.key, height: 100, width: 100, crop: :fill, class: "org-avatar" %>
+        <p><%= event.title %></p>
+      </div>
+
+    <% end %>
+              <%= cl_image_tag @event.photo.key, height: 100, width: 100, crop: :fill, class: "org-avatar" %>
+                      <p><%= @event.title %></p>
+
 
 </div>
