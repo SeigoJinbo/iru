@@ -17,9 +17,6 @@
             <i class="fab fa-twitter-square"></i>
             <i class="fab fa-instagram-square"></i>
           </div>
-          <% if @organization.memberships.where(status: "Active").include?(Membership.find_by(organization: @organization, user: current_user)) %>
-            <div class="btn btn-primary edit-btn">Edit Profile</div>
-          <% end %>
         </div>
       </div>
     </div>
@@ -50,7 +47,12 @@
         <div class="org-sections">
           <div class="org-info">
             <div class="org-mission">
+              <div class="d-flex justify-content-between">
               <h4>Our Mission</h4>
+              <% if @organization.memberships.where(status: "Active").include?(Membership.find_by(organization: @organization, user: current_user)) %>
+                <i class="far fa-edit"></i>
+              <% end %>
+              </div>
               <%= @organization.description %>
             </div>
             <div class="org-members">
@@ -101,12 +103,12 @@
           </div>
         </div>
       </div>
-      <!---------------------Event tabs--------------------->
+      <!---------------------PROJECTS--------------------->
       <div class="tab-pane fade" id="event" role="tabpanel" aria-labelledby="event-tab">
         <div class="org-sections">
 
           <div class="event-title">
-            <h2>Projects</h2>
+            <h4>Projects</h4>
             <% if @organization.users.include?(current_user) %>
               <%= link_to new_organization_event_path(@organization) do %>
                 <i class="fas fa-plus"></i> project
@@ -231,6 +233,11 @@
               </div>
             <% end %>
           <% end %>
+        <div class='calendar-add d-flex justify-content-end mr-2'><% if @organization.memberships.include?(Membership.find_by(user: current_user, organization: @organization)) %>
+              <%= link_to new_organization_event_path(@organization) do %>
+                <i class="fas fa-plus"></i> project
+              <% end %>
+        <% end %></div>
         </div>
       </div>
       <!-------------------------- Owner Section ---------------------------->
@@ -377,9 +384,7 @@
                     <%= comment.user.nickname %>
                   </div>
                   <p class='p-2'><%= comment.content%></p>
-                  <% if current_user == comment.user || @organization.users.include?(current_user)  %>
-                    <%= link_to "Delete", organization_comment_path(comment), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete comment?" } %>
-                  <% end %>
+
                 </div>
               <% end %>
             <% end %>
@@ -389,3 +394,5 @@
     </div>
   </div>
 </div>
+  <% @organizations = Organization.all %>
+  <% @organizations[8..10].each do |organization| %>

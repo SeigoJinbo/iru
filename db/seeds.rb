@@ -74,6 +74,109 @@ Organization.destroy_all
 
 user = User.create!(email: 'user@user.com', password: '123456')
 organization = Organization.create!
+MEBYO = Organization.create!(
+  name: "ME-BYO Japan",
+  email: "sato@mebyo.com",
+  address: "Koyamadai, Shinagawa Tokyo 142-0061",
+  description: "....",
+  establishment_year: "2020",
+  phone_number: "08077633849",
+  hp_url: "http://welovetrees.com",
+  twitter_url: "http://twitter.com/trees",
+  insta_url: "http://instagram.com/welovetrees",
+  tag_list: "Environment/Agriculture"
+  )
+puts "attaching photos to mebyo"
+org_logo = URI.open('https://www.ics-expo.jp/images/common/logo_me-byo2020.jpg')
+MEBYO.photos.attach(io: org_logo, filename: 'org_logo.png', content_type: 'image/png')
+
+UNHCR = Organization.create!(
+  name: "UNHCR",
+  email: "sato@unhcr.com",
+  address: "Koyamadai, Shinagawa Tokyo 142-0061",
+  description: "....",
+  establishment_year: "2020",
+  phone_number: "08077633849",
+  hp_url: "http://welovetrees.com",
+  twitter_url: "http://twitter.com/trees",
+  insta_url: "http://instagram.com/welovetrees",
+  tag_list: "Environment/Agriculture"
+  )
+puts "attaching photos to IJRA"
+org_logo = URI.open('https://upload.wikimedia.org/wikipedia/commons/f/f0/Kokurenunhcrkyoukai.logo.jpg')
+UNHCR.photos.attach(io: org_logo, filename: 'org_logo.png', content_type: 'image/png')
+
+BASIC = Organization.create!(
+  name: "Basic Ph",
+  email: "sato@basicph.com",
+  address: "Koyamadai, Shinagawa Tokyo 142-0061",
+  description: "....",
+  establishment_year: "2020",
+  phone_number: "08077633849",
+  hp_url: "http://welovetrees.com",
+  twitter_url: "http://twitter.com/trees",
+  insta_url: "http://instagram.com/welovetrees",
+  tag_list: "Environment/Agriculture"
+  )
+puts "attaching photos to Basic Ph"
+org_logo = URI.open('https://i.pinimg.com/564x/e4/6f/7a/e46f7abd46d41f4f122920e453a5756a.jpg')
+BASIC.photos.attach(io: org_logo, filename: 'org_logo.png', content_type: 'image/png')
+
+
+
+puts "creating polar bears"
+POLAR_BEARS = Event.create!(
+  title: "Save the polar bears",
+  category: 'Fundraiser',
+  description: 'save the polar bears',
+  positions: rand(3..10),
+  address: "alaska, america",
+  ongoing: true,
+  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
+  start_time: Time.now + rand(10000..100000),
+ end_time: Time.new(2020, 12, 20, 20, 00, 00),
+  organization: BASIC,
+  owner: user,
+  tag_list: "Animals/Wildlife",
+  target: 1250000,
+  raised: 214503
+  )
+
+event_photo = URI.open('https://media.pri.org/s3fs-public/styles/story_main/public/migration/PriMigrationsVivvoFilesImagesMigration/pri.org/files/640px_Polar_Bear_ANWR_1_400523505.jpeg?itok=yFqRPxTs')
+POLAR_BEARS.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+
+
+
+puts "creating polar bears"
+CHILDREN = Event.create!(
+  title: "Ream World Donations",
+  category: 'Donation',
+  description: 'save the polar bears',
+  positions: rand(3..10),
+  address: "alaska, america",
+  ongoing: true,
+  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
+  start_time: Time.now + rand(10000..100000),
+  end_time: Time.new(2020, 12, 20, 20, 00, 00),
+  organization: BASIC,
+  owner: user,
+  item: books,
+  tag_list: "Children",
+  target: 1250000,
+  raised: 214503
+  )
+
+event_photo = URI.open('http://www.hiv-aids-kids.org/image/CSC29S.jpg')
+CHILDREN.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+
+
+
+
+
+
+
+
+
 ADDRESSES.each do |address|
 
 Event.create!(
@@ -86,7 +189,7 @@ Event.create!(
   end_time: Time.now + rand(100000..1000000),
   tag_list: TAGS.sample,
   owner: user,
-  organization: organization,
+  organization: MEBYO,
   target: 10,
   raised: 2
   )

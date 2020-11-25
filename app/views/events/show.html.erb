@@ -7,7 +7,7 @@
         <p><%= social_share_button_tag(@event.title) %></p>
 				<%# Time/spots left %>
 				<% if Time.now < @event.end_time %>
-					<% remaining_days = ((@event.end_time - Time.now) / 360 / 60 / 24 ) %>
+					<% remaining_days =(Date.today...@event.end_time).count %>
 					<% if remaining_days < 2 %>
 						<h4><%= (remaining_days * 24).round %> hours left!</h4>
 					<% else %>
@@ -19,7 +19,7 @@
 					<% if @event.raised.nil? %>
 						<h3><span class="maize-text">0 coming</span> (<%= @event.target %> spots available)</h3>
 					<% else %>
-						<h3><span class="maize-text"><%= @event.enrollments.where(status: "Approved").count %></span> coming (<%= @event.target %> spots available)</h3>
+						<h3><span class="maize-text"><%= @event.enrollments.where(status: "Approved").count %></span> coming (<%= @event.target - @event.enrollments.count %> spots available)</h3>
 					<% end %>
 				<% elsif @event.category == "Donation" %>
 					<% if @event.raised.nil? %>
@@ -164,7 +164,16 @@
 			<div id="mission" class="tab-pane <%= "active" unless params[:tab] == "comments" %>">
 					<div class="event-show-box">
 						<div class="event-box-contents">
-							<h3>About this event</h3>
+
+
+
+
+              <div class="d-flex justify-content-between">
+              <h3>About this event</h3>
+              <% if current_user == @event.owner %>
+                <i class="far fa-edit"></i>
+              <% end %>
+              </div>
 							<p><%= @event.description %></p>
 						</div>
 					</div>
@@ -241,11 +250,7 @@
 											<div class="d-flex ml-3 align-items-center"><h5><%= link_to comment.user.nickname, user_path(comment.user) %> says:</h5></div>
 											<p class='p-1 my-2 ml-1'><%= comment.content%></p>
 										</div>
-										<% if false %>
-											<% if (current_user == comment.user)  %>
-												<%= link_to "Delete", event_comment_path(comment), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete comment?" } %>
-											<% end %>
-										<% end %>
+
 									</div>
 								<% end %>
 						<% end %>
