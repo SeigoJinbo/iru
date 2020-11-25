@@ -150,14 +150,14 @@
 
 		<%# Tabs bar %>
 		<ul class="nav nav-tabs">
-			<li class="nav-item active"><a data-toggle="tab" href="#mission" class="nav-link active">Event Description</a></li>
+			<li class="nav-item"><a data-toggle="tab" href="#mission" class="nav-link <%= "show active" unless params[:tab] == "comments" %>">Event Description</a></li>
 			<li class="nav-item"><a data-toggle="tab" href="#organization" class="nav-link">Organization Info</a></li>
-			<li class="nav-item"><a data-toggle="tab" href="#comments" class="nav-link">Comments/Questions</a></li>
+			<li class="nav-item"><a data-toggle="tab" href="#comments" class="nav-link <%= "active" if params[:tab] == "comments" %>">Comments/Questions</a></li>
 		</ul>
 
 		<div class="tab-content">
 			<%# Description %>
-			<div id="mission" class="tab-pane active">
+			<div id="mission" class="tab-pane <%= "active" unless params[:tab] == "comments" %>">
 					<div class="event-show-box">
 						<div class="event-box-contents">
 							<h3>About this event</h3>
@@ -224,14 +224,14 @@
 			</div>
 
 			<%# Comments %>
-		<div id="comments" class="tab-pane fade">
+		<div id="comments" class="tab-pane fade <%= "show active" if params[:tab] == "comments" %>">
 			<div class="event-show-box">
 				<h3>Any comments/questions?</h3>
 				<div class="comments-container">
 					<div class="event-comment-container">
 						<% if @event.event_comments.any? %>
 								<% @event.event_comments.each do |comment| %>
-									<div class="event-comment">
+									<div class="event-comment" id="comment-<%= comment.id %>">
 										<div class="d-flex p-1">
 											<div><%= cl_image_tag comment.user.photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %></div>
 											<div class="d-flex ml-3 align-items-center"><h5><%= link_to comment.user.nickname, user_path(comment.user) %> says:</h5></div>
