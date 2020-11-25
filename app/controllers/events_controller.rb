@@ -70,7 +70,7 @@ class EventsController < ApplicationController
     @event.organization = @organization
     @event.owner = current_user
     if @event.save
-      redirect_to organization_path(@event.organization, tab: "event-tab")
+      redirect_to event_path(@event)
 
     else
       render 'new', locals: {category: params[:event][:category]}
