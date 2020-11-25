@@ -53,14 +53,49 @@
               <h4>Our Mission</h4>
               <%= @organization.description %>
             </div>
-
             <div class="org-members">
               <h4>Our Members</h4>
-              <% @organization.users.each do |user| %>
-                <%= link_to user_path(user) do %>
-                  <%= cl_image_tag user.photos.first.key, height: 40, width: 40, crop: :fill , class: "avatar-sm"%>
-                <% end %>
-                <%= user.nickname %>
+              <% @organization.memberships.where(status: "Active").each do |membership| %>
+                <div>
+                  <%=  link_to user_path(membership.user) do %>
+                    <%= cl_image_tag membership.user.photos.first.key, height: 40, width: 40, crop: :fill , class: "avatar-sm"%>
+                  <% end %>
+                  <%= membership.user.nickname %>
+                </div>
+              <% end %>
+              <!-----------------------------------MEMBERS---------------------------->
+              <% unless @organization.users.include?(current_user) %>
+                <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold">Tell us about you</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body mx-3">
+                        <div class="md-form">
+                          <i class="fas fa-pencil prefix grey-text"></i>
+                          <textarea type="text" id="form8" class="md-textarea form-control" rows="4"></textarea>
+                          <label data-error="wrong" data-success="right" for="form8">Your message</label>
+                        </div>
+                      </div>
+                      <div class="modal-footer d-flex justify-content-center">
+                        <%= simple_form_for [@organization, @membership] do |f| %>
+                          <div class="no-input"><%= f.input :status %></div>
+                          <%= f.submit 'Apply', remote: true, class: 'btn btn-primary' %>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="text-center">
+                  <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalContactForm">
+                    Join?</a>
+                </div>
               <% end %>
             </div>
           </div>
@@ -155,11 +190,9 @@
           <h5>Fundraiser</h5>
           <div class="round-box">
             <div class="event-box">
-
               <% if @fundraiser_events.empty? %>
                 <p>No fundraiser event yet...</p>
               <% else %>
-
                 <% @fundraiser_events.each do |event| %>
                   <li class="event-card">
                     <div class="event-card-contents">
@@ -180,12 +213,9 @@
                     </div>
                   </li>
                 <% end %>
-
               <% end %>
-
             </div>
           </div>
-
         </div>
       </div>
       <!---------------------Calendar tabs--------------------->
@@ -197,19 +227,45 @@
               <div class="border">
                 <%= link_to event_path(event) do %>
                   <button class="btn btn-block calendar-link-<%= @colors.index(event.title) %>" type="button"><%= event.title %></button>
-
                 <% end %>
               </div>
             <% end %>
           <% end %>
         </div>
       </div>
-      <!-- Owner Section -->
+      <!-------------------------- Owner Section ---------------------------->
       <%# Pending %>
       <div class="tab-pane fade" id="pending-volunteer" role="tabpanel" aria-labelledby="pending-volunteer-tab">
         <div class="org-sections">
-          <%# Pending Volunteer %>
+          <%# ----------------------------MANAGEMENT------------------------------ %>
           <div class="pending">
+
+            <h4>Pending Members</h4>
+            <% @organization.memberships.where(status: "Pending").each do |membership| %>
+              <%= link_to user_path(membership.user) do %>
+                <%= membership.user.nickname %>
+                <%= cl_image_tag membership.user.photos.first.key, height: 60, width: 60, crop: :fill, class: "pending-avatar" %>
+                <% end %>
+
+              <div class="d-flex">
+                <%= simple_form_for([@organization, membership], remote: true) do |f| %>
+                  <%= f.input :status, as: :hidden, input_html: { value: "Active" } %>
+                  <div class="m-1"><%= f.button :button do %>
+                    <i class="far fa-check-circle text-primary" aria-hidden="true"></i>
+                  <% end %>
+                  </div>
+                <% end %>
+
+                <%= simple_form_for([@organization, membership]) do |f| %>
+                  <%= f.input :status, as: :hidden, input_html: { value: "Declined" } %>
+                  <div class="m-1"><%= f.button :button do %>
+                    <i class="far fa-times-circle text-primary" aria-hidden="true"></i>
+                  <% end %>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+
             <h4>Volunteer Apporval</h4>
             <% @volunteer_events.each do |event| %>
               <h5>- <%= event.title %></h5>
@@ -253,7 +309,7 @@
               </div>
             <% end %>
           </div>
-          <%# Pending Donation %>
+          <%# ---------------Pending Donation ---------------%>
           <div class="pending">
             <h4>Donation Confirmation</h4>
             <% @donation_events.each do |event| %>
@@ -279,13 +335,13 @@
                             <% end %>
                             <div class="pending-btn">
                               <%= simple_form_for(donation, remote: true) do |f| %>
-                                <%= f.input :status, as: :hidden, input_html: { value: "Recieved" } %>
+                                <%= f.input :status, as: :hidden, input_html: { value: "Received" } %>
                                 <%= f.button :button do %>
                                   <i class="far fa-check-circle text-primary"></i>
                                 <% end %>
                               <% end %>
                               <%= simple_form_for(donation, remote: true) do |f| %>
-                                <%= f.input :status, as: :hidden, input_html: { value: "Canceled!" } %>
+                                <%= f.input :status, as: :hidden, input_html: { value: "Cancelled!" } %>
                                 <%= f.button :button do %>
                                   <i class="far fa-times-circle text-seaweed"></i>
                                 <% end %>
@@ -304,7 +360,7 @@
           </div>
         </div>
       </div>
-      <!-- Comment tabs -->
+      <!-------------------------- Comment tabs ------------------------>
       <div class="tab-pane fade" id="comment" role="tabpanel" aria-labelledby="comment-tab">
         <div class="org-sections">
           <h4>Comments</h4>

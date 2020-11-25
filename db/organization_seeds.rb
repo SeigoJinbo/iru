@@ -143,16 +143,16 @@ JWCS.photos.attach(io: org_banner, filename: 'org_banner.jpg', content_type: 'im
 # puts "tsunami relief to liz"
 # Membership.create!(user: LIZ, organization: TSUNAMI)
 
-Membership.create!(user: LIZ, organization: JWCS)
-Membership.create!(user: SEIGO, organization: JWCS)
+Membership.create!(user: LIZ, organization: JWCS, status: 'Active')
+Membership.create!(user: SEIGO, organization: JWCS, status: 'Active')
 
-Membership.create!(user: LIZ, organization: HARVEST)
+Membership.create!(user: LIZ, organization: HARVEST, status: 'Active')
 
 
 puts "assigning animals are people to yuping"
-Membership.create!(user: YUPING, organization: ANIMAL)
-Membership.create!(user: YUPING, organization: COLABO)
-Membership.create!(user: YUPING, organization: HARVEST)
+Membership.create!(user: YUPING, organization: ANIMAL, status: 'Active')
+Membership.create!(user: YUPING, organization: COLABO, status: 'Active')
+Membership.create!(user: YUPING, organization: HARVEST, status: 'Active')
 
 
 puts ' ______   _______  _______  ______    ___   _______  _______  _______  _______

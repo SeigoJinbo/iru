@@ -177,7 +177,7 @@
 						<div class="event-show-organization-details">
 							<div class="d-flex">
 								<%= cl_image_tag @event.organization.photos.first.key, height: 100, width: 100, crop: :fill, class: "org-avatar rounded-circle" %>
-								<div class="ml-3 d-flex align-items-center"">
+								<div class="ml-3 d-flex align-items-center">
 									<div>
 										<div><h3><%= link_to @event.organization.name, organization_path(@event.organization) %></h3></div>
 										<div><h5><%= @event.tag_list %></h5></div>
