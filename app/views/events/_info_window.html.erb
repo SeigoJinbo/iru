@@ -1,5 +1,13 @@
-<h2><%= link_to event.title, event_path(event) %></h2>
-<p><%= event.address %></p>
+<div class="info-window">
+  <%= link_to event_path(event) do%>
+    <div class="window-background" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path event.photo.key, height: 100, width: 200, crop: :fill if event.photo.attached?%>); background-repeat: norepeat; background-size: cover;">
+    </div>
+    <div class="window-details">
+      <h6><%= event.title %></h6>
+      <p><i class="far fa-calendar-alt"></i> <%= event.start_time.strftime("%d of %B, %Y") %></p>
+      <p><i class="far fa-clock"></i> <%= event.start_time.strftime("%I:%M %p")%> - <%= event.end_time.strftime("%I:%M %p")%></p>
+    </div>
+  <% end %>
+</div>
 
-<%= cl_image_tag event.photo.key, height: 100, width: 100, crop: :fill if event.photo.attached? %>
 

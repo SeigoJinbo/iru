@@ -1,38 +1,46 @@
 <div class="map-form">
-        <%= form_with url: map_path, method: :get, remote: true do |f|%>
-          <h5>Category</h5>
-          <div class="d-flex">
-            <div>
-              <%= select_tag :query,
-              options_for_select(Event::LIST, params[:query]),
-              class: "form-control",
-              placeholder: "filter" %>
-            </div>
-          </div>
-          <h5>Type</h5>
-          <div class="d-flex">
-            <div>
-             <%= select_tag :category,
-            options_for_select(Event::CATEGORIES, params[:category]),
-            class: "form-control",
-            placeholder: "filter" %>
-            </div>
-            <div class="index-submit">
-              <%= f.submit "Filter", class: "btn btn-primary" %>
-            </div>
-          </div>
-        <% end %>
-      </div>
-      <!-----------------------Results-------------------->
+  <%= form_with url: map_path, method: :get, remote: true do |f|%>
+    <h5>Category</h5>
+    <div class="d-flex">
       <div>
-        <% events.each do |event| %>
-          <%= link_to event_path(event) do%>
-            <div class="map-form-results border-bottom pb-3">
-              <h5><%=  event.title %></h5>
-              <%#= cl_image_tag event.photos.first.key, height: 40, width: 40, crop: :fill %>
-              <%= image_tag "#{event.tag_number || 4}.png", class: "map-results-organization-image" %>
-              <%= event.tag_list %>
-            </div>
-          <% end %>
-        <% end %>
+        <%= select_tag :query,
+        options_for_select(Event::LIST, params[:query]),
+        class: "form-control",
+        placeholder: "filter" %>
       </div>
+    </div>
+    <h5>Type</h5>
+    <div class="d-flex">
+      <div>
+        <%= f.radio_button :category, "Volunteer",
+        class: "form-control",
+        placeholder: "filter" %>
+        <%= f.label :category, "Volunteer"%>
+        <%= f.radio_button :category, "Donation",
+        class: "form-control",
+        placeholder: "filter" %>
+        <%= f.label :category, "Donation"%>
+        <%= f.radio_button :category, "Fundraiser",
+        class: "form-control",
+        placeholder: "filter" %>
+        <%= f.label :category, "Fundraiser"%>
+      </div>
+      <div class="index-submit">
+        <%= f.submit "Filter", class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<!-----------------------Results-------------------->
+<div>
+  <% events.each do |event| %>
+    <%= link_to event_path(event) do%>
+      <div class="map-form-results border-bottom pb-3">
+        <h5><%=  event.title %></h5>
+        <%#= cl_image_tag event.photos.first.key, height: 40, width: 40, crop: :fill %>
+        <%= image_tag "#{event.tag_number || 4}.png", class: "map-results-organization-image" %>
+        <%= event.tag_list %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

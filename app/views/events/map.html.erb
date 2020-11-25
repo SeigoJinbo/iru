@@ -1,5 +1,4 @@
 <div class="d-flex">
-
   <div id="map"
        style="width: 100%; height: calc(100vh - 66px);"
        data-markers="<%= @markers[:event].to_json %>"
@@ -10,9 +9,6 @@
     <!----------------------Filter---------------------->
     <div class="map-box">
       <%= render 'events/search_box', events: @events %>
-
     </div>
   </div>
-
-
 </div>

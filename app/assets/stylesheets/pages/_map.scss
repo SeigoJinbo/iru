@@ -27,3 +27,40 @@
 	height: 40px;
 	width: 40px;
 }
+.info-window {
+  width: 200px;
+  border-radius: 5px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  a {
+    color: white;
+    text-decoration: none;
+  }
+  h6 {
+    color: black;
+    text-decoration: none;
+  }
+  p {
+    margin-bottom: 0;
+    margin-top: 0.2rem;
+    font-weight: normal;
+  }
+}
+.window-background {
+  border-radius: 5px 5px 0 0;
+  width: 200px;
+  height: 100px;
+}
+.window-details {
+  padding: 4px 4px 4px 16px;
+}
+.mapboxgl-popup-content {
+  position: relative;
+  padding: 0 !important;
+}
+.mapboxgl-popup-close-button {
+  color: white;
+  font-size: bold;
+  position: absolute;
+  right: 5px !important;
+  font-size: 24px;
+}
