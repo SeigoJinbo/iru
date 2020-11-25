@@ -17,7 +17,7 @@
             <i class="fab fa-twitter-square"></i>
             <i class="fab fa-instagram-square"></i>
           </div>
-          <% if @organization.users.include?(current_user) %>
+          <% if @organization.memberships.where(status: "Active").include?(Membership.find_by(organization: @organization, user: current_user)) %>
             <div class="btn btn-primary edit-btn">Edit Profile</div>
           <% end %>
         </div>
@@ -37,7 +37,7 @@
       <li class="nav-item">
       <a class="nav-link" id="comment-tab" data-toggle="tab" href="#comment" role="tab" aria-controls="comment" aria-selected="false">Comments</a>
       </li>
-      <% if @organization.users.include?(current_user) %>
+      <% if @organization.memberships.where(status: "Active").include?(Membership.find_by(organization: @organization, user: current_user)) %>
         <li class="nav-item">
           <a class="nav-link" id="pending-volunteer-tab" data-toggle="tab" href="#pending-volunteer" role="tab" aria-controls="pending-volunteer" aria-selected="false">Management</a>
         </li>
