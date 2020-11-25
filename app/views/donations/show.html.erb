@@ -1,1 +1,46 @@
-confirmation page
+<div class="page">
+	<div class="page-box">
+		<div class="inner-padding-box">
+			<div class="confirmation-header">
+				<h2>Thank you for promising <span class="text-weight-bold"><%= @donation.amount %> <%= @event.item %></span> to <%= link_to @donation.event.title, event_path(@donation.event) %>! </h2>
+			</div>
+
+			<div class="confirmation-box">
+
+
+				<div class="confirmation-instructions-container">
+					<div class="confirmation-title">
+						<h3>Donation #<%= @donation.id %> <small><span class="badge badge-primary"><%= @donation.status %></span></small></h3>
+						<p>Your promise to <%= link_to @donation.event.organization.name, organization_path(@donation.event.organization) %> has been accepted!</p> 
+						<p>They will be very grateful to receive the <%= @event.item %> within <%= (@event.end_time.to_date - @donation.created_at.to_date).to_i %> days (on or before <%= @event.end_time.to_date %>) and confirm upon receipt.</p>
+						
+						<div class="confirmation-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path @donation.event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+						</div>
+					</div>
+
+					<div class="instructions-box">
+						<div class="instructions-title mb-2">
+							<div>
+								<%= cl_image_tag @event.owner.photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
+							</div>
+							<div class="ml-2"><h3>Instructions from <%= link_to @event.owner.nickname, user_path(@event.owner) %> @ <%= link_to @donation.event.organization.name, organization_path(@donation.event.organization) %>:</h3></div>
+						</div>
+						<h6>For postal donations:</h6>
+						<p>Please address your delivery to <%= @event.owner.nickname %> and post to <%= @event.address %>.</p>
+						<h6>For in person donations:</h6>
+						<p>Please bring your <%= @event.item %> directly to <%= @event.address %>.</p> 
+						<p>(If you can let us know around what time you'll be visiting <%= link_to "in the comments section", event_path(@event, tab: "comments") %> in advance, that would be great!)</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="recs-box">
+				<h3>Other volunteers also checked out:</h3>
+			</div>
+
+			<div class="back-button">
+				<%= link_to "Back", event_path(@event), class: "btn btn-primary" %>
+			</div>
+		</div>
+	</div>
+</div>
