@@ -1,4 +1,57 @@
 require_relative './user_seeds'
+
+
+MEBYO = Organization.create!(
+  name: "ME-BYO Japan",
+  email: "sato@mebyo.com",
+  address: "Koyamadai, Shinagawa Tokyo 142-0061",
+  description: "....",
+  establishment_year: "2020",
+  phone_number: "08077633849",
+  hp_url: "http://welovetrees.com",
+  twitter_url: "http://twitter.com/trees",
+  insta_url: "http://instagram.com/welovetrees",
+  tag_list: "Environment/Agriculture"
+  )
+puts "attaching photos to mebyo"
+org_logo = URI.open('https://www.ics-expo.jp/images/common/logo_me-byo2020.jpg')
+MEBYO.photos.attach(io: org_logo, filename: 'org_logo.png', content_type: 'image/png')
+
+UNHCR = Organization.create!(
+  name: "UNHCR",
+  email: "sato@unhcr.com",
+  address: "Koyamadai, Shinagawa Tokyo 142-0061",
+  description: "....",
+  establishment_year: "2020",
+  phone_number: "08077633849",
+  hp_url: "http://welovetrees.com",
+  twitter_url: "http://twitter.com/trees",
+  insta_url: "http://instagram.com/welovetrees",
+  tag_list: "Environment/Agriculture"
+  )
+puts "attaching photos to IJRA"
+org_logo = URI.open('https://upload.wikimedia.org/wikipedia/commons/f/f0/Kokurenunhcrkyoukai.logo.jpg')
+UNHCR.photos.attach(io: org_logo, filename: 'org_logo.png', content_type: 'image/png')
+
+BASIC = Organization.create!(
+  name: "Basic Ph",
+  email: "sato@basicph.com",
+  address: "Koyamadai, Shinagawa Tokyo 142-0061",
+  description: "....",
+  establishment_year: "2020",
+  phone_number: "08077633849",
+  hp_url: "http://welovetrees.com",
+  twitter_url: "http://twitter.com/trees",
+  insta_url: "http://instagram.com/welovetrees",
+  tag_list: "Environment/Agriculture"
+  )
+puts "attaching photos to Basic Ph"
+org_logo = URI.open('https://i.pinimg.com/564x/e4/6f/7a/e46f7abd46d41f4f122920e453a5756a.jpg')
+BASIC.photos.attach(io: org_logo, filename: 'org_logo.png', content_type: 'image/png')
+
+
+
+
 puts "creating we love trees"
 WE_LOVE_TREES = Organization.create!(
   name: "We love trees",
@@ -67,7 +120,9 @@ COLABO = Organization.create!(
   description: "We are working toward a society in which
 all girls have a “clothing, food and housing” and “relationship”, and
 girls with difficulties do not have to end up in exploitation or violence.
-  Our free, women-only and survivor-led service offers a holistic response to women and girls who have experienced, or are at risk of, gendered violence. The aim of our work is to create a safe, non-judgmental and non-directive space in which women and girls can explore their experiences, and know that they will be listened to and believed. Our goal is to promote, preserve, and restore the mental health and wellbeing of women and girls, to empower them to make a total and sustainable recovery from the experiences of violence. Empowerment is a key concept. Our role is to guide and facilitate, offering a range of interventions on the healing journey to enable each woman to take control of her own recovery. Our aim is to achieve sustainable recovery that helps women move forward in their lives and thrive. This involves working with women to explore and express deep and powerful emotions in order to free them from the pain of their experiences.",
+  Our free, women-only and survivor-led service offers a holistic response to women and girls who have experienced, or are at risk of, gendered violence. The aim of our work is to create a safe, non-judgmental and non-directive space in which women and girls can explore their experiences, and know that they will be listened to and believed. \n
+  Our goal is to promote, preserve, and restore the mental health and wellbeing of women and girls, to empower them to make a total and sustainable recovery from the experiences of violence. Empowerment is a key concept. Our role is to guide and facilitate, offering a range of interventions on the healing journey to enable each woman to take control of her own recovery. \n
+  Our aim is to achieve sustainable recovery that helps women move forward in their lives and thrive. This involves working with women to explore and express deep and powerful emotions in order to free them from the pain of their experiences.",
   establishment_year: "2019",
   phone_number: "08077633849",
   hp_url: "https://colabo-official.net/",

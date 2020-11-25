@@ -6,4 +6,15 @@
 			<div class="home-button"><%= link_to "Explore your community", map_path, class: 'btn btn-primary m-3' %></div>
 		</div>
   </div>
+<% @organization = Organization.fourth %>
+  <% @organizations = Organization.all %>
+    <div class='d-flex'>
+  <% @organizations[0..4].each do |organization| %>
+      <div>
+        <%= cl_image_tag organization.photos.first.key, height: 100, width: 100, crop: :fill, class: "org-avatar" %>
+        <p><%= organization.name %></p>
+      </div>
+  <% end %>
+    </div>
+
 </div>
