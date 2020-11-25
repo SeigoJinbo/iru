@@ -86,7 +86,9 @@ Event.create!(
   end_time: Time.now + rand(100000..1000000),
   tag_list: TAGS.sample,
   owner: user,
-  organization: organization
+  organization: organization,
+  target: 10,
+  raised: 2
   )
 end
 
