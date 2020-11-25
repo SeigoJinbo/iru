@@ -13,7 +13,7 @@
             <%= f.input :title %>
             <%= f.input :description %>
             <%# <%= f.input :tag_list, collection: Event::LIST, label: 'Project Category' %>
-						<%= f.input :tag_list, as: :check_boxes, collection: ["Animals/Wildlife", "Children/Youth", "Disasters", "Education", "Environment/Agriculture", "Health", "Women", "Seniors/Disabilities", "Other"] %>
+						<%= f.input :tag_list, as: :check_boxes, label: 'Project Category:', collection: ["Animals/Wildlife", "Children/Youth", "Disasters", "Education", "Environment/Agriculture", "Health", "Women", "Seniors/Disabilities", "Other"] %>
             <%= f.input :target, label: 'How many people needed' %>
             <%= f.input :address, html5: true%>
             <%= f.input :start_time, html5: true%>

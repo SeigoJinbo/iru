@@ -28,7 +28,8 @@ class Event < ApplicationRecord
   validates :start_time, presence: true
   validates :end_time, presence: true
   validates :target, presence: true
-  validates :address, presence: true
+	validates :address, presence: true
+	validates :tag_list, presence: true
 
 
   def tag_number
