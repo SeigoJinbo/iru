@@ -4,7 +4,7 @@
 		<div class="event-title">
 			<div class="event-title-details">
 				<h1 class="seaweed-text"><%= @event.title %></h1>
-
+        <p><%= social_share_button_tag(@event.title) %></p>
 				<%# Time/spots left %>
 				<% if Time.now < @event.end_time %>
 					<% remaining_days = ((@event.end_time - Time.now) / 360 / 60 / 24 ) %>
@@ -261,3 +261,9 @@
 		</div>
 	</div>
 </div>
+<!-- meta share -->
+<% content_for :meta_title, "#{@event.title} is on #{DEFAULT_META["meta_product_name"]}" %>
+<% content_for :meta_description, @event.description %>
+<% content_for :meta_image, cl_image_path(@event.photo.key) %>
+
+
