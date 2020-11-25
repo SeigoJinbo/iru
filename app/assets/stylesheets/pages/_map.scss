@@ -51,7 +51,7 @@
   height: 100px;
 }
 .window-details {
-  padding: 4px 4px 4px 16px;
+  padding: 8px 16px 8px 16px;
 }
 .mapboxgl-popup-content {
   position: relative;
@@ -63,4 +63,67 @@
   position: absolute;
   right: 5px !important;
   font-size: 24px;
+}
+.category-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.category-item {
+  flex: 0 0 30%;
+}
+
+.category-selector {
+  position: absolute;
+  // transform: scale(0);
+  cursor: pointer;
+  opacity: 0;
+}
+
+.category-selector + label {
+  display: block;
+  // cursor: pointer;
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 12px;
+  text-align: left;
+  padding: 10px 10px 30px 10px;
+  border: 1px solid #EAEAEA;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.category-selector:checked + label {
+  color: white !important;
+}
+
+
+#category_volunteer + label {
+  color: #FD1015;
+}
+
+#category_volunteer:checked + label {
+  background-color: #FD1015;
+  border-color: #FD1015;
+}
+
+
+#category_donation + label {
+  color: #FFC65A;
+}
+
+#category_donation:checked + label {
+  background-color: #FFC65A;
+  border-color: #FFC65A;
+}
+
+
+#category_fundraiser + label {
+  color: #62DDF5;
+}
+
+#category_fundraiser:checked + label {
+  background-color: #62DDF5;
+  border-color: #62DDF5;
 }
