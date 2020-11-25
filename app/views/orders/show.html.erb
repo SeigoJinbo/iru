@@ -2,21 +2,12 @@
 	<div class="page-box">
 		<div class="inner-padding-box">
 			<div class="confirmation-header">
-				<h2 class="seaweed-text">Donation #<%= @order.id %> promise accepted! </h2>
-				<h3>Thank you for promising <span class="text-weight-bold"><%= @order.amount %></h3>
+				<h2><span class="seaweed-text">Donation</span> #<%= @order.id %> confirmed! </h2>
 			</div>
 
 			<div class="confirmation-box">
 				<div class="confirmation-box-left">
 					<div class="confirmation-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path @order.event.photo.key, height: 380, width: 480%>); background-repeat: norepeat; background-size: cover;">
-					</div>
-					<div class="share-box mt-2 d-flex">
-						<div>
-							<h6>Share to your network!</h6> 
-						</div>
-						<div class="ml-3">
-						 <p><%= social_share_button_tag(@event.title) %></p>
-						</div>
 					</div>
 				</div>
 
@@ -24,20 +15,26 @@
 					<div class="confirmation-title">
 						
 						<div class="instructions-box">
-							<div class="instructions-title mb-2">
-								<div>
-									<%= cl_image_tag @event.owner.photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
+							<div class="fundraise-message">
+								<div class="instructions-title mb-2">
+									<div>
+										<%= cl_image_tag @event.owner.photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
+									</div>
+									<div class="ml-2"><h3><%= link_to @event.owner.nickname, user_path(@event.owner) %> @ <%= link_to @order.event.organization.name, organization_path(@order.event.organization) %> says:</h3></div>
 								</div>
-								<div class="ml-2"><h3>Instructions from <%= link_to @event.owner.nickname, user_path(@event.owner) %> @ <%= link_to @order.event.organization.name, organization_path(@order.event.organization) %>:</h3></div>
+
+								<p>Thank you so much for your donation of <%= humanized_money_with_symbol @order.amount %>! <i class="far fa-smile"></i></p>
+
+								<div class="share-box mt-2 d-flex">
+									<div>
+										<h6>Share to your network?</h6> 
+									</div>
+									<div class="ml-3">
+									<p><%= social_share_button_tag(@event.title) %></p>
+									</div>
+								</div>
 							</div>
 
-							<p>Thank you so much! <i class="far fa-smile"></i> Please kindly send the <%= @event.item %> within <%= (@event.end_time.to_date - @order.created_at.to_date).to_i %> days (on or before <%= @event.end_time.strftime("%d of %B, %Y") %>).</p>
-
-							<h6>For postal orders:</h6>
-							<p><i class="fas fa-shipping-fast"></i> <%= @event.owner.nickname %> @ <%= @event.address %>.</p>
-							<h6>For in person donations:</h6>
-							<p><i class="fas fa-people-arrows"></i> <%= @event.item %> received at <%= @event.address %>.</p> 
-							<p>(If you can let us know around what time you'll be visiting <%= link_to "in the comments section", event_path(@event, tab: "comments") %> in advance, that would be great!)</p>
 						</div>
 					</div>
 
@@ -45,7 +42,7 @@
 			</div>
 
 			<div class="recs-box">
-				<h3 class="seaweed-text">Other volunteers also checked out:</h3>
+				<h3 class="seaweed-text mt-3">Other volunteers also checked out:</h3>
 				<div class="recs-results border-box">
 					<% @event.organization.events.select{ |event| event.end_time > Time.now }.each do |event| %>
 						<% if event.category == "Volunteer" %>
