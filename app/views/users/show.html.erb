@@ -36,6 +36,9 @@
 													<p><i class="far fa-calendar-alt"></i> <%= enrollment.event.start_time.strftime("%d of %B, %Y") %></p>
 													<p><i class="far fa-clock"></i> <%= enrollment.event.start_time.strftime("%I:%M %p")%> - <%= enrollment.event.end_time.strftime("%I:%M %p")%></p>
 													<p>Volunteers: <%= enrollment.event.enrollments.where(status: "Approved").count %>/<%= enrollment.event.target %> people</p>
+													<%# status badge!! %>
+													<h6 class='status-badge-<%=enrollment.status%>'><%=enrollment.status%></h6>
+													<%# status badge!! %>
 													<div>
 														<% enrollment.event.enrollments.where(status: "Approved").each do |enrollment| %>
 															<%= link_to user_path(enrollment.user) do %>
@@ -44,6 +47,7 @@
 														<% end %>
 													</div>
 													<br>
+													
 											</div>
 											<% end %>
 										</div>
@@ -71,6 +75,9 @@
 															<% end %>
 																<span style="width:<%= raised_amount %>%;"><span class="card-progress"></span></span>
 														<% end %>
+														<%# status badge!! %>
+														<h6 class='status-badge-<%=enrollment.status%>'><%=enrollment.status%></h6>
+														<%# status badge!! %>
 													</div>
 												</div>
 											<% end %>
@@ -99,6 +106,9 @@
 															<% end %>
 																<span style="width:<%= raised_amount %>%;"><span class="card-progress"></span></span>
 														<% end %>
+														<%# status badge!! %>
+														<h6 class='status-badge-<%=enrollment.status%>'><%=enrollment.status%></h6>
+														<%# status badge!! %>
 													</div>
 												</div>
 											<% end %>
@@ -140,6 +150,7 @@
 							<% end %>
 						</div>
 				</div>
+				
 				<div class="organizations-history">
 					<h3>Volunteering History</h3>
 					<div class="user-box" id="history-box">
