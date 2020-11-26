@@ -23,6 +23,68 @@
 		}
 }
 
+.profile-mid {
+  background-color: green;
+}
+
+.bio {
+  background-color: $beige;
+  border-radius: 24px;
+  width: 480px;
+  height: 500px;
+  margin: 4px, 4px;
+  padding: 24px;
+  overflow: scroll;
+  p {
+  color: black;
+
+}
+}
+
+.feed {
+  background-color: $darker-ivory;
+  border-radius: 24px;
+  padding: 24px;
+  margin: 4px, 4px;
+}
+  .feed-scroll {
+  width: 800px;
+  height: 400px;
+  overflow: scroll;
+}
+
+.feed-comment {
+  background-color: white;
+  margin: auto;
+  img {
+    margin-left: 36px;
+  }
+}
+
+.feed-comment-content {
+  // margin-left: 32px;
+}
+
+.contributed {
+    padding: 24px;
+  margin: 4px, 4px;
+  background-color: $beige;
+  border-radius: 24px;
+    width: 480px;
+    height: 500px;
+
+}
+
+
+
+
+.badges {
+  background-color: $darker-ivory;
+  border-radius: 24px;
+  padding: 24px;
+  // margin-bottom: 16px;
+}
+
 // Coloured text to emphasize certain words
 .maize-text {
 	color: $maize;
@@ -32,26 +94,45 @@
 	color: $ivory;
 }
 
+
+  .banner-headers {
+    color: $ivory;
+  }
+
 // Styling
 
 
 .user-banner {
 	border-radius: 24px 24px 0 0;
+
 	height: 300px;
 	display: flex;
+
 	align-items: center;
+
+
 	.user-avatar {
 		border-radius: 50%;
 		border: 4px solid white;
 	}
+
+
 	.user-banner-items {
-		padding-left: 48px;
-		display: flex;
+	// 	padding-left: 48px;
+	// 	// display: flex;
 		align-items: center;
+
 		width: 780px;
 		text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+
+	// 	width: 720px;
+	// 	text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+
 	}
+
 }
+
+
 
 .user-box {
 	background-color: $darker-ivory;
