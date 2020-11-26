@@ -2,7 +2,7 @@
 	<div class="page-box">
 		<div class="inner-padding-box">
 			<div class="confirmation-header">
-				<h2 class="seaweed-text">Donation #<%= @donation.id %> promise accepted! <small><span class="badge badge-primary"><%= @donation.status %></span></small> </h2>
+				<h2 class="seaweed-text">Promise accepted! <small><span class="badge badge-primary"></span></small> </h2>
 				<h3>Thank you for promising <span class="text-weight-bold"><%= @donation.amount %> <%= @event.item %></span> to <%= link_to @donation.event.title, event_path(@donation.event) %></h3>
 			</div>
 
@@ -37,15 +37,23 @@
 							<p><i class="fas fa-shipping-fast"></i> <%= @event.owner.nickname %> @ <%= @event.address %>.</p>
 							<h6>For in person donations:</h6>
 							<p><i class="fas fa-people-arrows"></i> <%= @event.item %> received at <%= @event.address %>.</p>
-							<p>(If you can let us know around what time you'll be visiting <%= link_to "in the comments section", event_path(@event, tab: "comments") %> in advance, that would be great!)</p>
+							<p>Please make drop offs between 2-6PM!</p>
 						</div>
 					</div>
 
 				</div>
 			</div>
+					<div class="share-box mt-2 d-flex">
+						<div>
+							<h4>Share to your network?</h4>
+						</div>
+						<div class="ml-3">
+						 <p><%= social_share_button_tag(@event.title) %></p>
+						</div>
+					</div>
 
 			<div class="recs-box">
-				<h3 class="seaweed-text">Other volunteers also checked out:</h3>
+				<h3 class="seaweed-text">Other projects by <%= @donation.event.organization.name %></h3>
 				<div class="recs-results border-box">
 					<% @event.organization.events.select{ |event| event.end_time > Time.now }.each do |event| %>
 						<% if event.category == "Volunteer" %>
@@ -132,9 +140,7 @@
 				</div>
 			</div>
 
-			<div class="back-button">
-				<%= link_to "Back", event_path(@event), class: "btn btn-primary" %>
-			</div>
+
 		</div>
 	</div>
 </div>

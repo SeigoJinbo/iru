@@ -141,7 +141,7 @@ LIZ = User.create!(
   first_name: "Liz",
   email: "liz@iru.com",
   password: "123456",
-  address: "meguro, tokyo",
+  address: "2 Chome-11-3 Meguro, Meguro City, Tokyo 153-0063",
   nickname: "Liz",
   description: "I’m passionate about nature and animals. We need to care about our preserving the environment not only for ourselves but for future generations to come.",
   gender: "female",
