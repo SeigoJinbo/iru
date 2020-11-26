@@ -184,7 +184,7 @@ BLANKETS = Event.create!(
   positions: rand(3..10),
   ongoing: false,
   dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
-  start_time: Time.new(2020, 11, 28, 18, 00, 00),
+  start_time: Time.new(2020, 11, 29, 18, 00, 00),
   end_time: Time.new(2020, 12, 31, 20, 00, 00),
   organization: COLABO,
   owner: YUPING,
@@ -197,6 +197,30 @@ BLANKETS = Event.create!(
 puts "attaching photo blankets"
 event_photo = URI.open('https://i0.wp.com/colabo-official.net/wp-content/uploads/2017/12/af9f338ed319d27a376d3c1bd9111159.jpg?resize=560%2C420&ssl=1')
 BLANKETS.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+
+
+
+SHELTER = Event.create!(
+  title: "Shelter Sponsor",
+  category: 'Fundraiser',
+  description: 'It costs us 30,000 JPY to run our shelter for one day. Please help us stay open 365 days a year. Donors who do not wish to remain anonymous will be thanked in our annual report.',
+  address: "Koyamadai, Shinagawa Tokyo 142-0061",
+  positions: rand(3..10),
+  ongoing: false,
+  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
+  start_time: Time.new(2020, 11, 30, 18, 00, 00),
+  end_time: Time.new(2020, 12, 5, 20, 00, 00),
+  organization: COLABO,
+  owner: YUPING,
+  price_cents: 100,
+  tag_list: "Women",
+  target: 30000,
+  raised: 28500
+  )
+puts "attaching photo blankets"
+event_photo = URI.open('https://scontent-nrt1-1.xx.fbcdn.net/v/t1.0-9/44319787_2327095527304110_6699748068037754880_o.jpg?_nc_cat=110&ccb=2&_nc_sid=cdbe9c&_nc_ohc=gKDKoKIggLYAX97txch&_nc_ht=scontent-nrt1-1.xx&oh=fee1154e33b8742b74dc918ecde05af5&oe=5FE4BA9B')
+SHELTER.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+
 
 
 

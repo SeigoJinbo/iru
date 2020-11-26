@@ -73,18 +73,32 @@ puts "destroying organizations"
 Organization.destroy_all
 
 user = User.create!(email: 'user@user.com', password: '123456')
-# organization = Organization.create!
+DOUG = User.create!(
+  first_name: "Doug",
+  last_name: "Doug",
+  nickname: "Dugg",
+  address: "meguro tokyo Japan",
+  email: "dug@iru.com",
+  password: "123456",
+  description: "gives assistance and judgment",
+  gender: "male",
+  admin: false
+)
+user_avatar = URI.open('https://ca.slack-edge.com/T02NE0241-U4APKLFLM-da0b004a3774-512')
+DOUG.photos.attach(io: user_avatar, filename: 'user_avatar.png', content_type: 'image/png')
+DOUG.save
+
 MEBYO = Organization.create!(
   name: "ME-BYO Japan",
   email: "sato@mebyo.com",
   address: "Koyamadai, Shinagawa Tokyo 142-0061",
-  description: "....",
+  description: "...",
   establishment_year: "2020",
   phone_number: "08077633849",
   hp_url: "http://welovetrees.com",
   twitter_url: "http://twitter.com/trees",
   insta_url: "http://instagram.com/welovetrees",
-  tag_list: "Environment/Agriculture"
+  tag_list: "Sample"
   )
 puts "attaching photos to mebyo"
 org_logo = URI.open('https://www.ics-expo.jp/images/common/logo_me-byo2020.jpg')
@@ -100,7 +114,7 @@ UNHCR = Organization.create!(
   hp_url: "http://welovetrees.com",
   twitter_url: "http://twitter.com/trees",
   insta_url: "http://instagram.com/welovetrees",
-  tag_list: "Environment/Agriculture"
+  tag_list: "Sample"
   )
 puts "attaching photos to IJRA"
 org_logo = URI.open('https://upload.wikimedia.org/wikipedia/commons/f/f0/Kokurenunhcrkyoukai.logo.jpg')
@@ -116,11 +130,83 @@ BASIC = Organization.create!(
   hp_url: "http://welovetrees.com",
   twitter_url: "http://twitter.com/trees",
   insta_url: "http://instagram.com/welovetrees",
-  tag_list: "Environment/Agriculture"
+  tag_list: "Sample"
   )
 puts "attaching photos to Basic Ph"
 org_logo = URI.open('https://i.pinimg.com/564x/e4/6f/7a/e46f7abd46d41f4f122920e453a5756a.jpg')
 BASIC.photos.attach(io: org_logo, filename: 'org_logo.png', content_type: 'image/png')
+
+
+
+WWLD = Organization.create!(
+  name: "World Wildlife Day ",
+  email: "sato@wwld.com",
+  address: "Koyamadai, Shinagawa Tokyo 142-0061",
+  description: "....",
+  establishment_year: "2020",
+  phone_number: "08077633849",
+  hp_url: "http://welovetrees.com",
+  twitter_url: "http://twitter.com/trees",
+  insta_url: "http://instagram.com/welovetrees",
+  tag_list: "Sample"
+  )
+puts "attaching photos to WWLD"
+org_logo = URI.open('https://image.shutterstock.com/image-vector/world-wildlife-day-march-3-260nw-573200827.jpg')
+WWLD.photos.attach(io: org_logo, filename: 'org_logo.png', content_type: 'image/png')
+
+UNICEF = Organization.create!(
+  name: "Unicef",
+  email: "sato@wwld.com",
+  address: "Koyamadai, Shinagawa Tokyo 142-0061",
+  description: "....",
+  establishment_year: "2020",
+  phone_number: "08077633849",
+  hp_url: "http://welovetrees.com",
+  twitter_url: "http://twitter.com/trees",
+  insta_url: "http://instagram.com/welovetrees",
+  tag_list: "Sample"
+  )
+puts "attaching photos to WWLD"
+org_logo = URI.open('https://d.wildapricot.net/images/default-album/unicef.png')
+UNICEF.photos.attach(io: org_logo, filename: 'org_logo.png', content_type: 'image/png')
+
+HANDS = Organization.create!(
+  name: "Helping Hands",
+  email: "sato@wwld.com",
+  address: "Koyamadai, Shinagawa Tokyo 142-0061",
+  description: "....",
+  establishment_year: "2020",
+  phone_number: "08077633849",
+  hp_url: "http://welovetrees.com",
+  twitter_url: "http://twitter.com/trees",
+  insta_url: "http://instagram.com/welovetrees",
+  tag_list: "Sample"
+  )
+puts "attaching photos to WWLD"
+org_logo = URI.open('https://venngage-wordpress.s3.amazonaws.com/uploads/2019/04/nonprofit-logo.png')
+HANDS.photos.attach(io: org_logo, filename: 'org_logo.png', content_type: 'image/png')
+
+
+
+MORI = Organization.create!(
+  name: "Mirai no Mori",
+  email: "sato@wwld.com",
+  address: "Koyamadai, Shinagawa Tokyo 142-0061",
+  description: "....",
+  establishment_year: "2020",
+  phone_number: "08077633849",
+  hp_url: "http://welovetrees.com",
+  twitter_url: "http://twitter.com/trees",
+  insta_url: "http://instagram.com/welovetrees",
+  tag_list: "Sample"
+  )
+puts "attaching photos to WWLD"
+org_logo = URI.open('https://scontent-nrt1-1.xx.fbcdn.net/v/t31.0-0/cp0/e15/q65/p320x320/468508_472465212841537_1329765003_o.jpg?_nc_cat=111&ccb=2&_nc_sid=85a577&_nc_ohc=ARlhtRjjai8AX8L2csN&_nc_ht=scontent-nrt1-1.xx&tp=3&oh=3097b736dab1e40e7858b984ae47b04b&oe=5FE2A19D')
+MORI.photos.attach(io: org_logo, filename: 'org_logo.png', content_type: 'image/png')
+
+
+
+
 
 
 
@@ -130,16 +216,16 @@ POLAR_BEARS = Event.create!(
   category: 'Fundraiser',
   description: 'save the polar bears',
   positions: rand(3..10),
-  address: "alaska, america",
+  address: "Alaska, United States",
   ongoing: true,
   dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
   start_time: Time.now + rand(10000..100000),
  end_time: Time.new(2020, 12, 20, 20, 00, 00),
-  organization: BASIC,
-  owner: user,
+  organization: WWLD,
+  owner: DOUG,
   tag_list: "Animals/Wildlife",
   target: 1250000,
-  raised: 214503
+  raised: 914503
   )
 
 event_photo = URI.open('https://media.pri.org/s3fs-public/styles/story_main/public/migration/PriMigrationsVivvoFilesImagesMigration/pri.org/files/640px_Polar_Bear_ANWR_1_400523505.jpeg?itok=yFqRPxTs')
@@ -153,13 +239,13 @@ CHILDREN = Event.create!(
   category: 'Donation',
   description: 'Donate books to kids',
   positions: rand(3..10),
-  address: "Africa",
+  address: "Nairobi, Kenya",
   ongoing: true,
   dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
   start_time: Time.now + rand(10000..100000),
   end_time: Time.new(2020, 12, 12, 20, 00, 00),
   organization: UNHCR,
-  owner: user,
+  owner: DOUG,
   item: 'books',
   tag_list: "Children",
   target: 1000,
@@ -176,34 +262,55 @@ FOOD = Event.create!(
   category: 'Fundraiser',
   description: 'Help raise money for food',
   positions: rand(3..10),
-  address: "sidney, Australia",
+  address: "Sydney, Australia",
   ongoing: true,
   dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
   start_time: Time.now + rand(10000..100000),
   end_time: Time.new(2020, 12, 10, 20, 00, 00),
-  organization: UNHCR,
-  owner: user,
+  organization: UNICEF,
+  owner: DOUG,
   item: 'apples',
   tag_list: "Other",
   target: 200000,
   raised: 148792
   )
 
-event_photo = URI.open('https://www.eskenazihealth.edu/images/default-source/default-album/food-drive---west-38th-streete8fac488bb856bcfa62bff000071c7da.jpg?sfvrsn=a57faf9d_2')
+event_photo = URI.open('https://i0.wp.com/centraldigest.com/wp-content/uploads/2017/12/2016-03-28-1459180714-4846885-cannedfood2-thumb.jpg?resize=406%2C304&ssl=1')
 FOOD.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
 
+puts "creating christmas"
+CHRISTMAS = Event.create!(
+  title: "Presents for Children",
+  category: 'Donation',
+  description: 'Christmas presents for kids',
+  positions: rand(3..10),
+  address: "Colorado, United States",
+  ongoing: true,
+  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
+  start_time: Time.now + rand(10000..100000),
+  end_time: Time.new(2020, 12, 10, 20, 00, 00),
+  organization: HANDS,
+  owner: DOUG,
+  item: 'toys',
+  tag_list: "Other",
+  target: 10000,
+  raised: 67642
+  )
+
+event_photo = URI.open('https://www.theguardian.pe.ca/media/photologue/photos/cache/20141217-santas-angels-2777820_large.jpg')
+CHRISTMAS.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
 
 
 
 
 
 
-
+HEADERS = ["Help", 'Save', 'Rescue']
 
 ADDRESSES.each do |address|
 
-Event.create!(
-  title: Faker::Movie.title,
+event = Event.new!(
+  title: Faker::Food.fruits,
   category: CATEGORIES.sample,
   description: Faker::Hipster.paragraph,
   address: address,
@@ -216,6 +323,7 @@ Event.create!(
   target: 10,
   raised: 2
   )
+
 end
 
 
