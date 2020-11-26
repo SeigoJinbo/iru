@@ -1,20 +1,6 @@
 
 
-# doug 'https://ca.slack-edge.com/T02NE0241-U4APKLFLM-da0b004a3774-512'
-DOUG = User.create!(
-  first_name: "Doug",
-  last_name: "Doug",
-  nickname: "Dugg",
-  address: "meguro tokyo Japan",
-  email: "dug@iru.com",
-  password: "123456",
-  description: "gives assistance and judgment",
-  gender: "male",
-  admin: false
-)
-user_avatar = URI.open('https://ca.slack-edge.com/T02NE0241-U4APKLFLM-da0b004a3774-512')
-DOUG.photos.attach(io: user_avatar, filename: 'user_avatar.png', content_type: 'image/png')
-DOUG.save
+
 
 # tomo 'https://ca.slack-edge.com/T02NE0241-U01BNV6UT5J-a4aaf5262922-512'
 TOMO = User.create!(

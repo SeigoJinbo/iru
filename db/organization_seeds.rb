@@ -167,7 +167,7 @@ Membership.create!(user: YUPING, organization: HARVEST, status: 'Active')
 Membership.create!(user: JESS, organization: UNHCR, status: 'Active')
 Membership.create!(user: SHO, organization: BASIC, status: 'Active')
 Membership.create!(user: ALINE, organization: WWLD, status: 'Active')
-Membership.create!(user: TAKU, organization: UNICEFL, status: 'Active')
+Membership.create!(user: TAKU, organization: UNICEF, status: 'Active')
 Membership.create!(user: TOMO, organization: HANDS, status: 'Active')
 Membership.create!(user: ALEX, organization: MORI, status: 'Active')
 
