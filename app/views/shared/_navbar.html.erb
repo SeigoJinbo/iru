@@ -3,19 +3,19 @@
     <h2>iru</h2>
     <% end %>
 		<%# search bar that is hidden for now %>
-		<% if true %>
-      <%= form_with url: events_path, method: :get, local: true do %>
+		<%# if true %>
+      <%#= form_with url: events_path, method: :get, local: true do %>
         <div class="d-flex">
-          <%= text_field_tag :query,
+          <%#= text_field_tag :query,
           params[:query],
           class: "form-control",
           placeholder: "Find an organization"%>
           <div class="index-submit">
-            <%= submit_tag "Search", class: "btn btn-primary" %>
+            <%#= submit_tag "Search", class: "btn btn-primary" %>
           </div>
         </div>
-      <% end %>
-		<% end %>
+      <%# end %>
+		<%# end %>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -26,78 +26,39 @@
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
         <li class="nav-item dropdown text-white">
-          <%= link_to "Notifications", "#", height: 100, width: 100, crop: :fill, class: "avatar dropdown-toggle text-white", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-          <div class="dropdown-menu dropdown-menu-pending" aria-labelledby="navbarDropdown">
+          <div>
+          <!-- Map link -->
+            <li class="nav-item active">
+              <%= link_to map_path, class: "dropdown text-white" do %>
+    						<i class="fas fa-map-marked-alt"></i>
+    					<% end %>
+            </li>
 
-
-
-
-
-
-
-
-            <!-- Pending Enrollment Dropdown-->
-            <div data-controller>
-            <% if current_user.events_as_owner.any? %>
-              <% current_user.events_as_owner.each do |event| %>
-                <div class="d-flex">
-                  <% event.enrollments.each do |enrollment| %>
-                    <% if enrollment.status == 'Pending' %>
-                      <h5><%= link_to event.title, organization_path(event.organization) %></h5>
-                      <div>
-                        <%= link_to user_path(enrollment.user) do  %>
-                          <p><%= enrollment.user.nickname %></p>
-                          <%= cl_image_tag enrollment.user.photos.first.key, height: 40, width: 40, crop: :fill %>
-                        <% end %>
-                        <p><%= enrollment.start_time %></p>
-                        <p><%= enrollment.end_time %></p>
-                        <%= enrollment.status %>
-                        <%= simple_form_for(enrollment, remote: :true) do |f| %>
-                          <%= f.input :status, as: :hidden, input_html: { value: "Approved" } %>
-                          <div class="m-1"><%= f.submit 'Approve', class: 'btn btn-primary'%></div>
-                        <% end %>
-                        <%= simple_form_for(enrollment, remote: :true) do |f| %>
-                          <%= f.input :status, as: :hidden, input_html: { value: "Declined" } %>
-                          <div class="m-1"><%= f.submit 'Decline', class: 'btn btn-primary'%></div>
-                        <% end %>
-                      </div>
-                    <% end %>
+            <!-- Organization Dropdown -->
+            <li class="nav-item dropdown">
+    					<%= link_to "#", class: "avatar dropdown-toggle text-white", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false do %>
+    						<i class="fas fa-hands-helping text-white"></i>
+    					<% end %>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <% current_user.organizations.each do |organization| %>
+    						<div class="dropdown-box">
+                  <%= link_to organization_path(organization), class: "dropdown-item" do%>
+                    <%= cl_image_tag organization.photos.first.key, height: 40, width: 40, crop: :fill %>
+                    <%= organization.name %>
                   <% end %>
-                </div>
-              <% end %>
-            <% end %>
-          </div>
-        <li class="nav-item active">
-          <%= link_to map_path, class: "dropdown text-white" do %>
-						<i class="fas fa-map-marked-alt"></i>
-					<% end %>
-        </li>
+    						</div>
+                <% end %>
+              </div>
+            </li>
 
-        <!-- Organization Dropdown -->
-        <li class="nav-item dropdown">
-					<%= link_to "#", class: "avatar dropdown-toggle text-white", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false do %>
-						<i class="fas fa-hands-helping text-white"></i>
-					<% end %>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <% current_user.organizations.each do |organization| %>
-						<div class="dropdown-box">
-              <%= link_to organization_path(organization), class: "dropdown-item" do%>
-                <%= cl_image_tag organization.photos.first.key, height: 40, width: 40, crop: :fill %>
-                <%= organization.name %>
-              <% end %>
-						</div>
-            <% end %>
-          </div>
-        </li>
-
-        <li class="nav-item dropdown" id="user-avatar">
-					<%= cl_image_tag current_user.photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <%= link_to "My Dashboard", user_path(current_user), class: "dropdown-item" %>
-            <%# <%= link_to "Another action", "#", class: "dropdown-item" %>
-            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
-          </div>
-        </li>
+            <li class="nav-item dropdown" id="user-avatar">
+    					<%= cl_image_tag current_user.photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <%= link_to "My Dashboard", user_path(current_user), class: "dropdown-item" %>
+                <%# <%= link_to "Another action", "#", class: "dropdown-item" %>
+                <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+              </div>
+            </li>
 
           </div>
         </li>
