@@ -8,7 +8,7 @@
   </div>
 
 <% @organizations = Organization.all.where(description: "....").uniq { |organization| organization.name } %>
-<% @events = Event.all.select {|event| event.organization.description == "...."} %>
+<% @events = Event.all.order("id ASC").select {|event| event.organization.description == "...."} %>
 <% @event = Event.first %>
 
 <div class="page-box d-flex justify-content-around">
