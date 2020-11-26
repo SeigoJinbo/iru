@@ -10,6 +10,14 @@
 				<div class="confirmation-box-left">
 					<div class="confirmation-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path @donation.event.photo.key, height: 380, width: 480%>); background-repeat: norepeat; background-size: cover;">
 					</div>
+					<div class="share-box mt-2 d-flex">
+						<div>
+							<h6>Share to your network?</h6>
+						</div>
+						<div class="ml-3">
+						 <p><%= social_share_button_tag(@event.title) %></p>
+						</div>
+					</div>
 				</div>
 
 				<div class="confirmation-instructions-container">
@@ -29,7 +37,7 @@
 							<p><i class="fas fa-shipping-fast"></i> <%= @event.owner.nickname %> @ <%= @event.address %>.</p>
 							<h6>For in person donations:</h6>
 							<p><i class="fas fa-people-arrows"></i> <%= @event.item %> received at <%= @event.address %>.</p>
-							<p>Please make drop offs between 2-8pm!</p>
+							<p>Please make drop offs between 2-6PM!</p>
 						</div>
 					</div>
 
@@ -136,3 +144,7 @@
 		</div>
 	</div>
 </div>
+<!-- meta share -->
+<% content_for :meta_title, "#{@event.title} is on #{DEFAULT_META["meta_product_name"]}" %>
+<% content_for :meta_description, @event.description %>
+<% content_for :meta_image, cl_image_path(@event.photo.key) %>
