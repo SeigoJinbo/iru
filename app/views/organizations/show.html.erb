@@ -328,7 +328,7 @@
                   <p>until <%= event.end_time.strftime("%d of %B, %Y") %></p>
                 </div>
 
-                <div>
+                <div class="pending-box">
                   <% if event.donations.where(status: "Waiting").empty? %>
                     <p>No donations yet...</p>
                   <% else %>
