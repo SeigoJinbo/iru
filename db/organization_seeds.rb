@@ -1,54 +1,6 @@
 require_relative './user_seeds'
 
 
-MEBYO = Organization.create!(
-  name: "ME-BYO Japan",
-  email: "sato@mebyo.com",
-  address: "Koyamadai, Shinagawa Tokyo 142-0061",
-  description: "....",
-  establishment_year: "2020",
-  phone_number: "08077633849",
-  hp_url: "http://welovetrees.com",
-  twitter_url: "http://twitter.com/trees",
-  insta_url: "http://instagram.com/welovetrees",
-  tag_list: "Environment/Agriculture"
-  )
-puts "attaching photos to mebyo"
-org_logo = URI.open('https://www.ics-expo.jp/images/common/logo_me-byo2020.jpg')
-MEBYO.photos.attach(io: org_logo, filename: 'org_logo.png', content_type: 'image/png')
-
-UNHCR = Organization.create!(
-  name: "UNHCR",
-  email: "sato@unhcr.com",
-  address: "Koyamadai, Shinagawa Tokyo 142-0061",
-  description: "....",
-  establishment_year: "2020",
-  phone_number: "08077633849",
-  hp_url: "http://welovetrees.com",
-  twitter_url: "http://twitter.com/trees",
-  insta_url: "http://instagram.com/welovetrees",
-  tag_list: "Environment/Agriculture"
-  )
-puts "attaching photos to IJRA"
-org_logo = URI.open('https://upload.wikimedia.org/wikipedia/commons/f/f0/Kokurenunhcrkyoukai.logo.jpg')
-UNHCR.photos.attach(io: org_logo, filename: 'org_logo.png', content_type: 'image/png')
-
-BASIC = Organization.create!(
-  name: "Basic Ph",
-  email: "sato@basicph.com",
-  address: "Koyamadai, Shinagawa Tokyo 142-0061",
-  description: "....",
-  establishment_year: "2020",
-  phone_number: "08077633849",
-  hp_url: "http://welovetrees.com",
-  twitter_url: "http://twitter.com/trees",
-  insta_url: "http://instagram.com/welovetrees",
-  tag_list: "Environment/Agriculture"
-  )
-puts "attaching photos to Basic Ph"
-org_logo = URI.open('https://i.pinimg.com/564x/e4/6f/7a/e46f7abd46d41f4f122920e453a5756a.jpg')
-BASIC.photos.attach(io: org_logo, filename: 'org_logo.png', content_type: 'image/png')
-
 
 
 
@@ -209,6 +161,15 @@ Membership.create!(user: YUPING, organization: ANIMAL, status: 'Active')
 Membership.create!(user: YUPING, organization: COLABO, status: 'Active')
 Membership.create!(user: YUPING, organization: HARVEST, status: 'Active')
 
+
+
+
+Membership.create!(user: JESS, organization: UNHCR, status: 'Active')
+Membership.create!(user: SHO, organization: BASIC, status: 'Active')
+Membership.create!(user: ALINE, organization: WWLD, status: 'Active')
+Membership.create!(user: TAKU, organization: UNICEFL, status: 'Active')
+Membership.create!(user: TOMO, organization: HANDS, status: 'Active')
+Membership.create!(user: ALEX, organization: MORI, status: 'Active')
 
 puts ' ______   _______  _______  ______    ___   _______  _______  _______  _______
 |      | |       ||       ||    _ |  |   | |       ||   _   ||       ||       |

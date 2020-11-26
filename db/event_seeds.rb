@@ -200,6 +200,30 @@ BLANKETS.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'ima
 
 
 
+SHELTER = Event.create!(
+  title: "Shelter Sponsor",
+  category: 'Fundraiser',
+  description: 'It costs us 30,000 JPY to run our shelter for one day. Please help us stay open 365 days a year. Donors who do not wish to remain anonymous will be thanked in our annual report.',
+  address: "Koyamadai, Shinagawa Tokyo 142-0061",
+  positions: rand(3..10),
+  ongoing: false,
+  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
+  start_time: Time.new(2020, 11, 28, 18, 00, 00),
+  end_time: Time.new(2020, 12, 5, 20, 00, 00),
+  organization: COLABO,
+  owner: YUPING,
+  price_cents: 100,
+  tag_list: "Women",
+  target: 30000,
+  raised: 28500
+  )
+puts "attaching photo blankets"
+event_photo = URI.open('https://i0.wp.com/colabo-official.net/wp-content/uploads/2017/12/af9f338ed319d27a376d3c1bd9111159.jpg?resize=560%2C420&ssl=1')
+BLANKETS.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+
+
+
+
 WHALES = Event.create!(
   title: "Help conserve the loris",
   category: 'Fundraiser',
