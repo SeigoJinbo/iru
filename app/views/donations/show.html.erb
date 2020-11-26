@@ -12,7 +12,7 @@
 					</div>
 					<div class="share-box mt-2 d-flex">
 						<div>
-							<h6>Share to your network?</h6> 
+							<h6>Share to your network?</h6>
 						</div>
 						<div class="ml-3">
 						 <p><%= social_share_button_tag(@event.title) %></p>
@@ -22,7 +22,7 @@
 
 				<div class="confirmation-instructions-container">
 					<div class="confirmation-title">
-						
+
 						<div class="instructions-box">
 							<div class="instructions-title mb-2">
 								<div>
@@ -36,7 +36,7 @@
 							<h6>For postal donations:</h6>
 							<p><i class="fas fa-shipping-fast"></i> <%= @event.owner.nickname %> @ <%= @event.address %>.</p>
 							<h6>For in person donations:</h6>
-							<p><i class="fas fa-people-arrows"></i> <%= @event.item %> received at <%= @event.address %>.</p> 
+							<p><i class="fas fa-people-arrows"></i> <%= @event.item %> received at <%= @event.address %>.</p>
 							<p>(If you can let us know around what time you'll be visiting <%= link_to "in the comments section", event_path(@event, tab: "comments") %> in advance, that would be great!)</p>
 						</div>
 					</div>
@@ -138,3 +138,7 @@
 		</div>
 	</div>
 </div>
+<!-- meta share -->
+<% content_for :meta_title, "#{@event.title} is on #{DEFAULT_META["meta_product_name"]}" %>
+<% content_for :meta_description, @event.description %>
+<% content_for :meta_image, cl_image_path(@event.photo.key) %>
