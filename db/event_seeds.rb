@@ -215,7 +215,7 @@ SHELTER = Event.create!(
   price_cents: 100,
   tag_list: "Women",
   target: 30000,
-  raised: 28500
+  raised: 20500
   )
 puts "attaching photo blankets"
 event_photo = URI.open('https://scontent-nrt1-1.xx.fbcdn.net/v/t1.0-9/44319787_2327095527304110_6699748068037754880_o.jpg?_nc_cat=110&ccb=2&_nc_sid=cdbe9c&_nc_ohc=gKDKoKIggLYAX97txch&_nc_ht=scontent-nrt1-1.xx&oh=fee1154e33b8742b74dc918ecde05af5&oe=5FE4BA9B')
