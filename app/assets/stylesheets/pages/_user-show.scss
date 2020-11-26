@@ -13,7 +13,7 @@
 .page-box {
 	background-color: $ivory;
 	border-radius: 24px;
-	margin: 24px;
+	margin: 0 24px 24px 24px;
 	// padding: 48px;
 		h1 {
 			font-weight: 700;
@@ -37,7 +37,7 @@
 
 .user-banner {
 	border-radius: 24px 24px 0 0;
-	height: 400px;
+	height: 300px;
 	display: flex;
 	align-items: center;
 	.user-avatar {
@@ -48,7 +48,7 @@
 		padding-left: 48px;
 		display: flex;
 		align-items: center;
-		width: 720px;
+		width: 780px;
 		text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
 	}
 }

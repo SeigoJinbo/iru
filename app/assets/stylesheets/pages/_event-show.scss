@@ -10,10 +10,6 @@
 	overflow: auto;
 }
 .page-box {
-	background-color: $ivory;
-	border-radius: 24px;
-	margin: 24px;
-	// padding: 48px;
 		h1 {
 			font-weight: 700;
 		}
@@ -49,7 +45,7 @@
 }
 
 // Meter CSS & animation
-.meter { 
+.meter {
 	height: 24px;
 	position: relative;
 	background: #f3efe6;
@@ -64,7 +60,7 @@
 .progress {
 	background-color: #e4c465;
 	animation: progressBar 1.25s ease-in-out;
-	animation-fill-mode:both; 
+	animation-fill-mode:both;
 }
 
 @keyframes progressBar {
