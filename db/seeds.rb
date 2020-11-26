@@ -305,12 +305,12 @@ CHRISTMAS.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'im
 
 
 
-
+HEADERS = ["Help", 'Save', 'Rescue']
 
 ADDRESSES.each do |address|
 
-Event.create!(
-  title: Faker::Movie.title,
+event = Event.new!(
+  title: Faker::Food.fruits,
   category: CATEGORIES.sample,
   description: Faker::Hipster.paragraph,
   address: address,
@@ -323,6 +323,7 @@ Event.create!(
   target: 10,
   raised: 2
   )
+
 end
 
 
