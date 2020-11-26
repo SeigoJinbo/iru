@@ -1,53 +1,57 @@
 <div class="map-form">
-        <%= form_with url: map_path, method: :get, remote: true do |f|%>
-          <h5>Category</h5>
-          <div class="d-flex">
-            <div>
-              <%= select_tag :query,
-              options_for_select(Event::LIST, params[:query]),
-              class: "form-control",
-              placeholder: "filter" %>
-            </div>
-          </div>
-          <div >
-                <!-- <div class="d-flex"> -->
-                  <div class="category-wrapper">
-                    <div class="category-item">
-                      <%= f.radio_button :category, "Volunteer",
-                      class: "form-control category-selector",
-                      placeholder: "filter" %>
-                      <%= f.label :category, "Volunteer"%>
-                    </div>
-                    <div class="category-item">
-                      <%= f.radio_button :category, "Donation",
-                      class: "form-control category-selector",
-                      placeholder: "filter" %>
-                      <%= f.label :category, "Donation"%>
-                    </div>
-                    <div class="category-item">
-                      <%= f.radio_button :category, "Fundraiser",
-                      class: "form-control category-selector",
-                      placeholder: "filter" %>
-                      <%= f.label :category, "Fundraiser"%>
-                    </div>
-                  </div>
-                <!-- </div> -->
-                <div class="index-submit">
-                  <%= f.submit "Filter", class: "btn btn-primary" %>
-                </div>
-          </div>
-        <% end %>
+  <%= form_with url: map_path, method: :get, remote: true do |f|%>
+    <!-- Type -->
+    <div class="category-box">
+      <h5 class="mb-2.5">Category</h5>
+      <div class="category-wrapper">
+        <div class="category-item">
+          <%= f.radio_button :category, "Volunteer",
+          class: "form-control category-selector",
+          placeholder: "filter" %>
+          <%= f.label :category, "Volunteer"%>
+        </div>
+        <div class="category-item">
+          <%= f.radio_button :category, "Donation",
+          class: "form-control category-selector",
+          placeholder: "filter" %>
+          <%= f.label :category, "Donation"%>
+        </div>
+        <div class="category-item">
+          <%= f.radio_button :category, "Fundraiser",
+          class: "form-control category-selector",
+          placeholder: "filter" %>
+          <%= f.label :category, "Fundraiser"%>
+        </div>
       </div>
-      <!-----------------------Results-------------------->
-      <div>
-        <% events.each do |event| %>
-          <%= link_to event_path(event) do%>
-            <div class="map-form-results border-bottom pb-3">
-              <h5><%=  event.title %></h5>
-              <%#= cl_image_tag event.photos.first.key, height: 40, width: 40, crop: :fill %>
-              <%= image_tag "#{event.tag_number || 4}.png", class: "map-results-organization-image" %>
-              <%= event.tag_list %>
-            </div>
-          <% end %>
-        <% end %>
+      <!-- category -->
+      <div class="d-flex">
+        <div>
+          <%= select_tag :query,
+          options_for_select(Event::LIST, params[:query]),
+          class: "form-control",
+          placeholder: "filter" %>
+        </div>
+        <div class="index-submit">
+          <%= f.submit "Filter", class: "btn btn-primary" %>
+        </div>
       </div>
+    </div>
+  <% end %>
+</div>
+<!-----------------------Results-------------------->
+<div class="results">
+  <% events.each do |event| %>
+    <%= link_to event_path(event) do%>
+      <div class="map-form-results border-bottom">
+        <div>
+          <h5><%= event.title %></h5>
+          <p>by <%= event.organization.name %></p>
+        </div>
+        <%#= cl_image_tag event.photos.first.key, height: 40, width: 40, crop: :fill %>
+        <div class="d-flex align-items-center">
+          <%= image_tag "0#{event.tag_number || 4}.png", class: "map-results-organization-image" %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
