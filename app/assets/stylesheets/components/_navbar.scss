@@ -10,7 +10,9 @@
 .navbar-lewagon .navbar-brand img {
 	width: 40px;
 }
-
+.navbar-lewagon {
+  padding: 0.3rem 24px;
+}
 .dropdown-menu {
 	background-color: $sage;
 
@@ -45,7 +47,6 @@
   margin-top: 0px;
 
 }
-
 .dropdown-box {
 	display: flex;
 	justify-content: space-between;
