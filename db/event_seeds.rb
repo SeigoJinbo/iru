@@ -204,7 +204,7 @@ SHELTER = Event.create!(
   title: "Shelter Sponsor",
   category: 'Fundraiser',
   description: 'It costs us 30,000 JPY to run our shelter for one day. Please help us stay open 365 days a year. Donors who do not wish to remain anonymous will be thanked in our annual report.',
-  address: "Koyamadai, Shinagawa Tokyo 142-0061",
+  address: "Shibuya, Tokyo",
   positions: rand(3..10),
   ongoing: false,
   dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,

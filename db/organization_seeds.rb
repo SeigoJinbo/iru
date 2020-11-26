@@ -69,7 +69,10 @@ COLABO = Organization.create!(
   name: "Colabo",
   email: "sato@colabo.com",
   # address: "Setagaya, Tokyo, 152-0035, Japan",
-  description: "We are working toward a society in which
+  description: "
+  Looking for new members to organize events!
+
+  \nWe are working toward a society in which
 all girls have a “clothing, food and housing” and “relationship”, and
 girls with difficulties do not have to end up in exploitation or violence.
   Our free, women-only and survivor-led service offers a holistic response to women and girls who have experienced, or are at risk of, gendered violence. The aim of our work is to create a safe, non-judgmental and non-directive space in which women and girls can explore their experiences, and know that they will be listened to and believed. \n
