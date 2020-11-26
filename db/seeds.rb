@@ -309,7 +309,7 @@ HEADERS = ["Help", 'Save', 'Rescue']
 
 ADDRESSES.each do |address|
 
-event = Event.new!(
+event = Event.create!(
   title: Faker::Food.fruits,
   category: CATEGORIES.sample,
   description: Faker::Hipster.paragraph,
