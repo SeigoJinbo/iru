@@ -73,6 +73,13 @@
 .seaweed-text {
 	color: $seaweed;
 }
+.gunmetal-text {
+  color: $gunmetal;
+  a {
+    color: $gunmetal;
+    font-size: 36px;
+  }
+}
 
 .event-show-box {
 	padding: 16px;
@@ -124,6 +131,10 @@
 .event-comment-input {
 	margin-top: 16px;
 	width: 800px;
+}
+
+.input-form {
+  height: 38px;
 }
 
 // .simple_form label {
