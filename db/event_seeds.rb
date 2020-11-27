@@ -217,11 +217,52 @@ SHELTER = Event.create!(
   target: 30000,
   raised: 20500
   )
-puts "attaching photo blankets"
+puts "attaching photo night patrol"
 event_photo = URI.open('https://scontent-nrt1-1.xx.fbcdn.net/v/t1.0-9/44319787_2327095527304110_6699748068037754880_o.jpg?_nc_cat=110&ccb=2&_nc_sid=cdbe9c&_nc_ohc=gKDKoKIggLYAX97txch&_nc_ht=scontent-nrt1-1.xx&oh=fee1154e33b8742b74dc918ecde05af5&oe=5FE4BA9B')
 SHELTER.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
 
+PATROL = Event.create!(
+  title: "Night Patrol",
+  category: 'Volunteer',
+  description: "I'm patrolling the city at night, talking to a girl who can't go home / can't go home.",
+  address: "Kabukicho, Tokyo",
+  positions: rand(3..10),
+  ongoing: false,
+  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
+  start_time: Time.new(2020, 12, 7, 18, 00, 00),
+  end_time: Time.new(2020, 12, 7, 20, 00, 00),
+  organization: COLABO,
+  owner: TAKU,
+  price_cents: 100,
+  tag_list: "Women",
+  target: 3,
+  raised: 1
+  )
+puts "attaching photo night patrol"
+event_photo = URI.open('https://i1.wp.com/colabo-official.net/wp-content/uploads/2017/12/IMGP5921.jpg?resize=560%2C315&ssl=1')
+PATROL.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
 
+MEAL = Event.create!(
+  title: "Food drive",
+  category: 'Donation',
+  description: 'We cook together and value the time around the table. Not only does a girl who is not eating enough or a girl who continues to eat alone fill her stomach, but it is also a place to organize her situation and build relationships.',
+  address: "Shinjuku Tokyo",
+  positions: rand(3..10),
+  ongoing: false,
+  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..7)).sort,
+  start_time: Time.new(2020, 12, 12, 18, 00, 00),
+  end_time: Time.new(2020, 12, 25, 20, 00, 00),
+  organization: COLABO,
+  owner: YUPING,
+  price_cents: 100,
+  tag_list: "Women",
+  target: 20,
+  raised: 15,
+  item: "kg of rice"
+  )
+puts "attaching photo blankets"
+event_photo = URI.open('https://i1.wp.com/colabo-official.net/wp-content/uploads/2017/12/ea867c4c3eb897fb20fa532ed32a101e-e1512808513995.jpg?resize=560%2C357&ssl=1')
+MEAL.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
 
 
 WHALES = Event.create!(

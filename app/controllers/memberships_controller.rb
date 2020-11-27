@@ -14,6 +14,7 @@ class MembershipsController < ApplicationController
     @membership.organization = @organization
     @membership.user = current_user
     if @membership.save
+      flash[:notice] = "Thank you for your application. A member will be in contact soon."
       redirect_to organization_path(@organization)
     else
       render :new
