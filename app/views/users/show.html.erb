@@ -4,38 +4,26 @@
 	<div class="page-box">
 	<%# User banner, avatar, description %>
 		<div class="user-banner" style="background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= cl_image_path @user.photos.second.key, height: 200, width: 1200, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
-			<div class="user-banner-items d-flex justify-content-around">
-
-				<%= cl_image_tag @user.photos.first.key, height: 100, width: 100, crop: :fill, class: "user-avatar" %>
-        <h1 class="ml-3"><span class="maize-text"><%= @user.nickname %>'s</span> <span class="ivory-text">Profile</span></h1>
-        <div class="user-banner-text ml-3 ">
+			<div class="user-banner-items">
+        <div class="d-flex align-items-center mr-5">
+    			<%= cl_image_tag @user.photos.first.key, height: 100, width: 100, crop: :fill, class: "user-avatar" %>
+          <h1 class="ml-3"><span class="maize-text"><%= @user.nickname %>'s</span> <span class="ivory-text">Profile</span></h1>
+        </div>
+        <div class="user-banner-text ml-3">
           <div class='banner-headers d-flex justify-content-between'>
-            <div>
-							<div>
-								<h1>126</h1>
-							</div>
-							<div>
-								<h5>Items Donated</h5>
-							</div>
-						</div>
-            <div>
-							<div>
-								<h1>38</h1>
-							</div>
-							<div>
-								<h5>Projects Funded</h5>
-							</div>
-						</div>
-            <div>
-							<div>
-								<h1>12</h1>
-							</div>
-							<div>
-								<h5>Volunteer Events</h5>
-							</div>
-						</div>
+              <div class="numbers">
+                <h1>126</h1>
+                <h5>Items Donated</h5>
+              </div>
+              <div class="numbers">
+                <h1>38</h1>
+                <h5>Projects Funded</h5>
+              </div>
+              <div class="numbers">
+                <h1>12</h1>
+                <h5>Volunteer Events</h5>
+              </div>
           </div>
-
         </div>
 			</div>
 		</div>
@@ -88,16 +76,16 @@
 
         <% if @user.last_name.nil? %>
         <div class="feed-comment my-2">
-          <div class="feed-comment-content p-2">
+          <div class="feed-comment-content">
             <div class="d-flex align-items-center ">
 							<%= cl_image_tag Organization.all[-5].photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
 							<div class="ml-2"><h5>Colabo</h5></div>
 							<div>
-								<p class='ml-3 p-3'>Thank you so much for the blankets, Liz! They're going to a good cause.</p>
+								<p class='ml-3 pb-1'>Thank you so much for the blankets, Liz! They're going to a good cause.</p>
 							</div>
             </div>
 						<div class="pb-3">
-							<img src=https://cdn2.creativecirclemedia.com/ptleader/original/20181126-222144-25178be8b550118fe3b27f41b6b7a6b0.jpg width="500" alt="">
+							<img src=https://cdn2.creativecirclemedia.com/ptleader/original/20181126-222144-25178be8b550118fe3b27f41b6b7a6b0.jpg style="width: 530px" alt="">
 						</div>
           </div>
         </div>
@@ -105,16 +93,16 @@
         <% else %>
 
         <div class="feed-comment my-2">
-          <div class="feed-comment-content p-2">
+          <div class="feed-comment-content">
             <div class="d-flex align-items-center ">
               <%= cl_image_tag Organization.find_by(name: "Colabo").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
               <div class="ml-2"><h5>Colabo</h5></div>
               <div>
-                  <p class='ml-3 p-3'>Mitsuki really enjoyed your blanket!.</p>
+                  <p class='ml-3 pb1'>Mitsuki really enjoyed your blanket!.</p>
               </div>
            </div>
-           <div class="pb-3">
-							<img src=https://media.pri.org/s3fs-public/styles/open_graph/public/japan-tsunami-aid-effort-2011-03-17.jpg?itok=F3RNopiP width="500" alt="">
+           <div class="d-flex align-items-center">
+							<img src=https://media.pri.org/s3fs-public/styles/open_graph/public/japan-tsunami-aid-effort-2011-03-17.jpg?itok=F3RNopiP style="width: 530px" alt="">
 						</div>
           </div>
         </div>
@@ -122,38 +110,38 @@
         <% end %>
 
 				<div class="feed-comment my-2">
-          <div class="feed-comment-content flex-box p-2">
-						<div class="d-flex align-items-center ">
+          <div class="feed-comment-content flex-box">
+						<div class="d-flex align-items-center mb-2">
 							<%= cl_image_tag Organization.find_by(name: "World Wildlife Day ").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
 							<div class="ml-2"><h5>World Wildlife Day</h5></div>
 							<div>
-								<p class='ml-3 p-3'>The dog you saved had puppies!</p>
+								<p class='ml-3 p-1'>The dog you saved had puppies!</p>
 							</div>
             </div>
 						<div class="pb-3">
-							<img src="https://static.fox29.com/www.fox29.com/content/uploads/2019/06/PSPCA_dog_generic_01.jpg" width="500" alt="">
+							<img src="https://static.fox29.com/www.fox29.com/content/uploads/2019/06/PSPCA_dog_generic_01.jpg" style="width: 530px" alt="">
 						</div>
           </div>
         </div>
 
         <div class="feed-comment my-2">
-          <div class="feed-comment-content flex-box p-2">
-						<div class="d-flex align-items-center ">
+          <div class="feed-comment-content flex-box">
+						<div class="d-flex align-items-center mb-2">
 							<%= cl_image_tag Organization.find_by(name: "Mirai no Mori").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
 							<div class="ml-2"><h5>Mirai no Mori</h5></div>
 							<div>
-								<p class='ml-3 p-3'>Thanks for helping out!</p>
+								<p class='ml-3 p-1'>Thanks for helping out!</p>
 							</div>
             </div>
-						<div class="pb-3">
-							<img src="https://resources.realestate.co.jp/wp-content/uploads/2020/01/volunteering-tokyo-park-cleanup-1020x500.jpg" width="500" alt="">
+						<div class="pb-3 user-page-pics">
+							<img src="https://resources.realestate.co.jp/wp-content/uploads/2020/01/volunteering-tokyo-park-cleanup-1020x500.jpg" style="width: 530px" alt="">
 						</div>
 					</div>
         </div>
 
         <div class="feed-comment">
-          <div class="feed-comment-content flex-box p-2">
-						<div class="d-flex align-items-center ">
+          <div class="feed-comment-content flex-box p-2 mb-2">
+						<div class="d-flex align-items-center ml-3">
 							<%= cl_image_tag Organization.all[-4].photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
 							<div class="ml-2"><h5>Seigo</h5></div>
 							<div>
@@ -186,9 +174,7 @@
                       <p><i class="far fa-clock"></i> <%= event.start_time.strftime("%I:%M %p")%> - <%= event.end_time.strftime("%I:%M %p")%></p>
                       <%# status badge!! %>
                       <%# status badge!! %>
-
                       <br>
-
                   </div>
                   <% end %>
                 </div>
@@ -302,20 +288,21 @@
 </div>
 
 <!------------------------------BADGE--------------------------------->
-  <div class='badges mx-3'>
-    <h3>Badges</h3>
+  <h3 class="pl-3">Badges</h3>
+  <div class='user-page-box mx-3'>
+
     <div class="d-flex justify-content-around">
-      <%= image_tag "b-1.png", class: "map-results-organization-image" %>
-      <%= image_tag "b-2.png", class: "map-results-organization-image" %>
-      <%= image_tag "b-3.png", class: "map-results-organization-image" %>
-      <%= image_tag "b-4.png", class: "map-results-organization-image" %>
-      <%= image_tag "b-5.png", class: "map-results-organization-image" %>
-      <%= image_tag "b-6.png", class: "map-results-organization-image" %>
+      <%= image_tag "b-1.png", class: "badges" %>
+      <%= image_tag "b-2.png", class: "badges" %>
+      <%= image_tag "b-3.png", class: "badges" %>
+      <%= image_tag "b-4.png", class: "badges" %>
+      <%= image_tag "b-5.png", class: "badges" %>
+      <%= image_tag "b-6.png", class: "badges" %>
     </div>
   </div>
 <!------------------------------ORIGINAL DASHBOARD--------------------------------->
 			<% if current_user == @user %>
-				<div class="events">
+				<div class="events px-3">
 					<h3>My Events</h3>
 					<div class="user-box">
 
@@ -420,7 +407,7 @@
 			<% end %>
 			</div>
 
-			<div class="user-profile">
+			<div class="user-profile px-3">
 			<%# -------------Organizations------------------%>
 				<div class="organizations-history">
 					<% if current_user == @user %>
