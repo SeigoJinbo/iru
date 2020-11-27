@@ -9,8 +9,7 @@
         <div class="org-banner-text ml-3">
           <h1><span class="maize-text"><%= @organization.name %> </span></h1>
           <p><span class="ivory-text">Since <%= @organization.establishment_year %></span></p>
-          <i class="fas fa-map-marker-alt icon"></i> <span class="ivory-text"><%= @organization.address %></span>
-          <i class="fas fa-phone icon"></i><span class="ivory-text"><%= @organization.phone_number %></span>
+          <i class="fas fa-phone icon"></i> <span class="ivory-text"><%= @organization.phone_number %></span>
           <div class="hp-links">
             <i class="fas fa-home"></i>
             <i class="fab fa-facebook-square"></i>
@@ -56,7 +55,7 @@
               <%= simple_format(@organization.description) %>
             </div>
             <div class="org-members">
-              <h4>Our Members</h4>
+              <h4>Our Team</h4>
               <% @organization.memberships.where(status: "Active").each do |membership| %>
                 <div class='m-2'>
                   <%=  link_to user_path(membership.user) do %>
@@ -94,9 +93,9 @@
                   </div>
                 </div>
 
-                <div class="text-center">
-                  <a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal" data-target="#modalContactForm">
-                    Join?</a>
+                <div class="mt-3">
+                  <a href="" class="iru-btn " data-toggle="modal" data-target="#modalContactForm">
+                    Join us?</a>
                 </div>
               <% end %>
             </div>
