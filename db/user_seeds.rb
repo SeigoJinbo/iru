@@ -95,7 +95,7 @@ SHO = User.create!(
   gender: "male",
   admin: false
 )
-user_avatar = URI.open('https://ca.slack-edge.com/T02NE0241-U01BGQF8EN6-38cf90e892b8-512')
+user_avatar = URI.open('https://ca.slack-edge.com/T02NE0241-U01BGQ7MZ4J-e39557371271-512')
 SHO.photos.attach(io: user_avatar, filename: 'user_avatar.png', content_type: 'image/png')
 SHO.save
 
@@ -143,7 +143,7 @@ LIZ = User.create!(
   password: "123456",
   address: "2 Chome-11-3 Meguro, Meguro City, Tokyo 153-0063",
   nickname: "Liz",
-  description: "I’m passionate about nature and animals. We need to care about our preserving the environment not only for ourselves but for future generations to come.",
+  description: "I’m passionate about nature and animals. We need to care about our preserving the environment not only for ourselves but for future generations to come. Contact me if you want to join an event together!",
   gender: "female",
   admin: false
   )
