@@ -5,7 +5,6 @@
        data-markers="<%= @markers[:organization].to_json %>"
        data-user="<%= @markers[:user].to_json %>"
        data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
-       <h2>HEADER</h2>
 
     <!----------------------Filter---------------------->
     <div class="map-box">
@@ -35,8 +34,6 @@
           <% end %>
         <% end %>
       </div>
-
     </div>
   </div>
-
 </div>

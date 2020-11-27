@@ -197,7 +197,7 @@
 									</div>
 								</div>
 							</div>
-							<p class="mt-3"><%= @event.organization.description %></p>
+							<p class="mt-3"><%= simple_format(@event.organization.description) %></p>
 						</div>
 						<%# Organizer small box %>
 						<div class="organizer-details border-box">
@@ -220,7 +220,7 @@
 					<div class="other-events">
 						<h3><%= @event.organization.name.capitalize %>'s Projects:</h3>
 						<div class="other-events-box border-box mt-3">
-							<% @event.organization.events.all.each do |event| %>
+							<% @event.organization.events.all.select{|event|event.end_time > Time.now}.each do |event| %>
 								<%= link_to event_path(event) do %>
   								<li class="ivory-card">
   									<div class="ivory-card-contents">
