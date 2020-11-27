@@ -37,11 +37,12 @@
       <p class='d-flex justify-content-end'><%= link_to "Edit", "#"  %></p>
     </div>
     <!--------------------------FRIENDS------------------------------>
-    <% @users = User.all %>
+    <% @users = [User.find_by(first_name: "Doug"), User.find_by(first_name: "Taku"), User.find_by(first_name: "jess"), User.find_by(first_name: "Alex")] %>
+
     <div>
       <h4>Friends</h4>
       <div>
-        <% @users[1..4].each do |user| %>
+        <% @users.each do |user| %>
           <%= cl_image_tag user.photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
         <% end %>
         <p><%= link_to "View all", "#"  %></p>
@@ -60,20 +61,39 @@
   <div class='feed'>
       <h4 class='feed-title'>Feed</h4>
       <div class="feed-scroll">
+
+        <% if @user.last_name.nil? %>
+
         <div class="feed-comment">
           <div class="feed-comment-content flex-box p-2">
             <div class="d-flex">
-            <%= cl_image_tag Organization.all[-5].photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
+            <%= cl_image_tag Organization.find_by(name: "Colabo").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
             <p class="mt-2 ml-2">Collabo</p>
             </div>
           </div>
           <img src=https://cdn2.creativecirclemedia.com/ptleader/original/20181126-222144-25178be8b550118fe3b27f41b6b7a6b0.jpg width="500" alt="">
           <p class='ml-3 p-3'>We used your blankets!</p>
         </div>
+
+        <% else %>
+
         <div class="feed-comment">
           <div class="feed-comment-content flex-box p-2">
             <div class="d-flex">
-              <%= cl_image_tag Organization.all[-4].photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
+            <%= cl_image_tag Organization.find_by(name: "Colabo").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
+            <p class="mt-2 ml-2">Collabo</p>
+            </div>
+          </div>
+          <img src=https://media.pri.org/s3fs-public/styles/open_graph/public/japan-tsunami-aid-effort-2011-03-17.jpg?itok=F3RNopiP width="500" alt="">
+          <p class='ml-3 p-3'>Mitsuki really enjoyed your blanket!</p>
+        </div>
+
+        <% end %>
+
+        <div class="feed-comment">
+          <div class="feed-comment-content flex-box p-2">
+            <div class="d-flex">
+              <%= cl_image_tag Organization.find_by(name: "Mirai no Mori").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
               <p class="mt-2 ml-2">Mirai no Mori</p>
             </div>
           </div>
@@ -85,7 +105,7 @@
         <div class="feed-comment">
           <div class="feed-comment-content flex-box p-2">
             <div class="d-flex">
-              <%= cl_image_tag Organization.all[-8].photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
+              <%= cl_image_tag Organization.find_by(name: "World Wildlife Day ").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
               <p class="mt-2 ml-2">World Wildlife Day</p>
             </div>
           </div>

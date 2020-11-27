@@ -26,7 +26,8 @@
   <% @organizations = Organization.all %>
 
 <% @organizations = Organization.all.where(description: "....").uniq { |organization| organization.name } %>
-<% @events = Event.all.order("id ASC").select {|event| event.organization.description == "...."} %>
+
+<% @events = [Event.find_by(title: "Ream World Donations"), Event.find_by(title: "Foodbank fundraiser"), Event.find_by(title: "Presents for Kids"), Event.find_by(title: "Help keep the forests clean")] %>
 <% @event = Event.first %>
 
 <div class="page-box d-flex justify-content-around mt-4" id="home-projects">
@@ -75,7 +76,7 @@
 			<div class="mx-4">
 				<h2>Recommended Projects</h2>
 				<div class='recommended'>
-						<%  @events[1..4].each do |event| %>
+						<%  @events.each do |event| %>
 							<div class='recommended-card m-2'>
 								<%= cl_image_tag event.photo.key, height: 180, width: 280, crop: :fill, class: "org-avata-home-event" %>
 								<div class="recommended-line1 d-flex justify-content-between flex-grow-*">
