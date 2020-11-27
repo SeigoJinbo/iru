@@ -110,7 +110,7 @@
               <%= cl_image_tag Organization.find_by(name: "Colabo").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
               <div class="ml-2"><h5>Colabo</h5></div>
               <div>
-                  <p class='ml-3 p-3'>Mitsuki really enjoyed your blanket!.</p>
+                  <p class='ml-3 p-3'>Mitsuki really enjoyed your blanket!</p>
               </div>
            </div>
            <div class="pb-3">
@@ -120,21 +120,6 @@
         </div>
 
         <% end %>
-
-				<div class="feed-comment my-2">
-          <div class="feed-comment-content flex-box p-2">
-						<div class="d-flex align-items-center ">
-							<%= cl_image_tag Organization.find_by(name: "World Wildlife Day ").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
-							<div class="ml-2"><h5>World Wildlife Day</h5></div>
-							<div>
-								<p class='ml-3 p-3'>The dog you saved had puppies!</p>
-							</div>
-            </div>
-						<div class="pb-3">
-							<img src="https://static.fox29.com/www.fox29.com/content/uploads/2019/06/PSPCA_dog_generic_01.jpg" width="500" alt="">
-						</div>
-          </div>
-        </div>
 
         <div class="feed-comment my-2">
           <div class="feed-comment-content flex-box p-2">
@@ -151,19 +136,53 @@
 					</div>
         </div>
 
-        <div class="feed-comment">
+        <div class="feed-comment my-2">
           <div class="feed-comment-content flex-box p-2">
-						<div class="d-flex align-items-center ">
-							<%= cl_image_tag Organization.all[-4].photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
-							<div class="ml-2"><h5>Seigo</h5></div>
-							<div>
-								<p class='ml-3 p-3'>Thanks for helping out!</p>
-							</div>
+            <div class="d-flex align-items-center ">
+              <%= cl_image_tag Organization.find_by(name: "Helping Hands").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
+              <div class="ml-2"><h5>Mirai no Mori</h5></div>
+              <div>
+                <p class='ml-3 p-3'>It was really nice walking again...</p>
+              </div>
             </div>
-					</div>
+            <div class="pb-3">
+              <%= image_tag "senior.png", width: 500 %>
+            </div>
+          </div>
+        </div>
+
+        <div class="feed-comment my-2">
+          <div class="feed-comment-content flex-box p-2">
+            <div class="d-flex align-items-center ">
+              <%= cl_image_tag Organization.find_by(name: "Unicef").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
+              <div class="ml-2"><h5>World Wildlife Day</h5></div>
+              <div>
+                <p class='ml-3 p-3'>Your book taught Kana to read!</p>
+              </div>
+            </div>
+            <div class="pb-3">
+              <img src="https://www.readingrockets.org/sites/default/files/field/image/hp_kidsbooks.jpg" width="500" alt="">
+            </div>
+          </div>
+        </div>
+
+        <div class="feed-comment my-2">
+          <div class="feed-comment-content flex-box p-2">
+            <div class="d-flex align-items-center ">
+              <%= cl_image_tag Organization.find_by(name: "World Wildlife Day ").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
+              <div class="ml-2"><h5>World Wildlife Day</h5></div>
+              <div>
+                <p class='ml-3 p-3'>The dog you saved had puppies!</p>
+              </div>
+            </div>
+            <div class="pb-3">
+              <img src="https://static.fox29.com/www.fox29.com/content/uploads/2019/06/PSPCA_dog_generic_01.jpg" width="500" alt="">
+            </div>
+          </div>
         </div>
       </div>
   </div>
+
 
 
   <div class='contributed'>
