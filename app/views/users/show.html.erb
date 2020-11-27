@@ -46,7 +46,7 @@
     <div>
 			<div class="my-4">
 				<div class="d-flex align-items-center justify-content-between">
-					<h4>Connections (23)</h4>
+					<h4>Connections</h4>
 					<p><%= link_to "View all", "#"  %></p>
 				</div>
 				<div>
@@ -58,7 +58,7 @@
       <!----------------------CONTRIBUTIONS ------------------------>
       <div>
 				<div class="d-flex align-items-center justify-content-between">
-					<h4>Supported (78)</h4>
+					<h4>Supported</h4>
 					<p><%= link_to "View all", "#"  %></p>
 				</div>
 				<div>
@@ -110,21 +110,6 @@
         <% end %>
 
 
-				<div class="feed-comment my-2">
-          <div class="feed-comment-content flex-box">
-						<div class="d-flex align-items-center mb-2">
-							<%= cl_image_tag Organization.find_by(name: "World Wildlife Day ").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
-							<div class="ml-2"><h5>World Wildlife Day</h5></div>
-							<div>
-								<p class='ml-3 p-1'>The dog you saved had puppies!</p>
-							</div>
-            </div>
-						<div class="pb-3">
-							<img src="https://static.fox29.com/www.fox29.com/content/uploads/2019/06/PSPCA_dog_generic_01.jpg" style="width: 530px" alt="">
-						</div>
-          </div>
-        </div>
-
         <div class="feed-comment my-2">
           <div class="feed-comment-content flex-box">
 						<div class="d-flex align-items-center mb-2">
@@ -141,13 +126,13 @@
         </div>
 
 
-        <div class="feed-comment">
-          <div class="feed-comment-content flex-box p-2 mb-2">
-            <div class="d-flex align-items-center ml-3">
+          <div class="feed-comment my-2">
+            <div class="feed-comment-content flex-box">
+              <div class="d-flex align-items-center mb-2">
               <%= cl_image_tag Organization.find_by(name: "Helping Hands").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
               <div class="ml-2"><h5>Mirai no Mori</h5></div>
               <div>
-                <p class='ml-3 p-3'>It was really nice walking again...</p>
+                <p class='ml-3 p-1'>It was really nice walking again...</p>
               </div>
 
             </div>
@@ -158,12 +143,12 @@
         </div>
 
         <div class="feed-comment my-2">
-          <div class="feed-comment-content flex-box p-2">
-            <div class="d-flex align-items-center ">
+          <div class="feed-comment-content flex-box">
+            <div class="d-flex align-items-center mb-2">
               <%= cl_image_tag Organization.find_by(name: "Unicef").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
               <div class="ml-2"><h5>World Wildlife Day</h5></div>
               <div>
-                <p class='ml-3 p-3'>Your book taught Kana to read!</p>
+                <p class='ml-3 p-1'>Your book taught Kana to read!</p>
               </div>
             </div>
             <div class="pb-3">
@@ -173,12 +158,12 @@
         </div>
 
         <div class="feed-comment my-2">
-          <div class="feed-comment-content flex-box p-2">
-            <div class="d-flex align-items-center ">
+          <div class="feed-comment-content flex-box">
+            <div class="d-flex align-items-center mb-2">
               <%= cl_image_tag Organization.find_by(name: "World Wildlife Day ").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
               <div class="ml-2"><h5>World Wildlife Day</h5></div>
               <div>
-                <p class='ml-3 p-3'>The dog you saved had puppies!</p>
+                <p class='ml-3 p-1'>The dog you saved had puppies!</p>
               </div>
             </div>
             <div class="pb-3">
