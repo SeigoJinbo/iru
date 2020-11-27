@@ -72,13 +72,11 @@ COLABO = Organization.create!(
   description: "
   Looking for new members to organize events!
 
-  \n\nWe are working toward a society in which
-all girls have a “clothing, food and housing” and “relationship”, and
-girls with difficulties do not have to end up in exploitation or violence.
-  \tOur free, women-only and survivor-led service offers a holistic response to women and girls who have experienced, or are at risk of, gendered violence. The aim of our work is to create a safe, non-judgmental and non-directive space in which women and girls can explore their experiences, and know that they will be listened to and believed. \n
-  \tOur goal is to promote, preserve, and restore the mental health and wellbeing of women and girls, to empower them to make a total and sustainable recovery from the experiences of violence. Empowerment is a key concept. Our role is to guide and facilitate, offering a range of interventions on the healing journey to enable each woman to take control of her own recovery. \n
-  \tOur aim is to achieve sustainable recovery that helps women move forward in their lives and thrive. This involves working with women to explore and express deep and powerful emotions in order to free them from the pain of their experiences.",
-  establishment_year: "2019",
+  \n\nWe are working toward a society in which all girls have a “clothing, food and housing” and “relationship”, and girls with difficulties do not have to end up in exploitation or violence.
+  Our free, women-only and survivor-led service offers a holistic response to women and girls who have experienced, or are at risk of, gendered violence. The aim of our work is to create a safe, non-judgmental and non-directive space in which women and girls can explore their experiences, and know that they will be listened to and believed. \n
+  Our goal is to promote, preserve, and restore the mental health and wellbeing of women and girls, to empower them to make a total and sustainable recovery from the experiences of violence. Empowerment is a key concept. Our role is to guide and facilitate, offering a range of interventions on the healing journey to enable each woman to take control of her own recovery. \n
+  Our aim is to achieve sustainable recovery that helps women move forward in their lives and thrive. This involves working with women to explore and express deep and powerful emotions in order to free them from the pain of their experiences.",
+  establishment_year: "2011",
   phone_number: "08077633849",
   hp_url: "https://colabo-official.net/",
   twitter_url: "https://twitter.com/colabo_official",
@@ -164,7 +162,9 @@ Membership.create!(user: YUPING, organization: ANIMAL, status: 'Active')
 Membership.create!(user: YUPING, organization: COLABO, status: 'Active')
 Membership.create!(user: YUPING, organization: HARVEST, status: 'Active')
 
-
+Membership.create!(user: TAKU, organization: COLABO, status: 'Active')
+Membership.create!(user: ALINE, organization: COLABO, status: 'Active')
+Membership.create!(user: JESS, organization: COLABO, status: 'Active')
 
 
 Membership.create!(user: JESS, organization: UNHCR, status: 'Active')

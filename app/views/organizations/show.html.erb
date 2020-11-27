@@ -64,6 +64,7 @@
                   <%= membership.user.nickname %>
                 </div>
               <% end %>
+							<h6 class="blinking">We need more members!</h6>
               <!-----------------------------------MEMBERS---------------------------->
               <% unless @organization.users.include?(current_user) %>
                 <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -93,10 +94,13 @@
                   </div>
                 </div>
 
-                <div class="mt-3">
-                  <a href="" class="iru-btn" data-toggle="modal" data-target="#modalContactForm">
-                    Join us?</a>
-                </div>
+
+								<div class="new-members-box">
+									<div class="mt-3">
+										<a href="" class="iru-btn " data-toggle="modal" data-target="#modalContactForm">
+											Join us?</a>
+									</div>
+								</div>
               <% end %>
             </div>
           </div>
@@ -163,7 +167,7 @@
               <% if @donation_events.empty? %>
                 <p>No donation event yet...</p>
               <% else %>
-                <div class="event">
+
                   <% @donation_events.each do |event| %>
                     <li class="event-card">
 											<div class="event-card-contents">
@@ -193,7 +197,7 @@
 											</div>
 										</li>
                   <% end %>
-                </div>
+
               <% end %>
             </div>
           </div>

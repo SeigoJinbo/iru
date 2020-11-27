@@ -172,6 +172,7 @@ p {
   }
 }
 .calendar-box {
+  button { color: black !important; }
 	padding: 24px;
 	text-decoration: none;
 	.calendar-date {
@@ -224,4 +225,15 @@ p {
 }
 .social_share_btn{
   width: 400px;
+}
+
+.blinking{
+	animation: blinkingText 1.5s infinite;
+}
+@keyframes blinkingText{
+	0%{     color: $grapefruit; }
+	49%{    color: $grapefruit; }
+	60%{    color: transparent; }
+	99%{    color: transparent; }
+	100%{   color: $grapefruit; }
 }
