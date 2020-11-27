@@ -8,7 +8,6 @@ ADDRESSES = [
   "2-4-36 Meguro, Meguro City, Tokyo 153-0063",
   "6-6-19, Shinagawa City, Tokyo 141-0031",
   "2-11-2 Shinagawa City, Tokyo 141-0022",
-  "4-6-6 Meguro, Meguro City, Tokyo 153-0063",
   "Sarugakucho, Shibuya City, Tokyo 150-0033",
   "Kamimeguro, Tokyo 153-0051",
   "5-21-9, Minato City, Tokyo 108-0071",
@@ -33,7 +32,6 @@ ADDRESSES = [
   'Kannana dori, Meguro, Tokyo, 152-0013, Japan',
 
   'Mitsuma-dori, Tokyo, Shinagawa, 142-0054, Japan',
-  'Gotanda, Tokyo, Shinagawa, 142-0063, Japan',
 
   '¥Shinagawa, 142-0043, Japan',
   'Tokyo, Shinagawa, 140-0015, Japan ',
