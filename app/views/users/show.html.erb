@@ -7,16 +7,33 @@
 			<div class="user-banner-items d-flex justify-content-around">
 
 				<%= cl_image_tag @user.photos.first.key, height: 100, width: 100, crop: :fill, class: "user-avatar" %>
-        <h1><span class="maize-text"><%= @user.nickname %>'s</span> <span class="ivory-text">Profile</span></h1>
+        <h1 class="ml-3"><span class="maize-text"><%= @user.nickname %>'s</span> <span class="ivory-text">Profile</span></h1>
         <div class="user-banner-text ml-3 ">
-
-          <div>
-
-          </div>
-           <div class='banner-headers d-flex justify-content-between'>
-            <div><h2><div>126</div>Items Donationated</h2></div>
-            <div><h2><div>38</div>Projects Funded</h2></div>
-            <div><h2><div>12</div>Volunteer Events</h2></div>
+          <div class='banner-headers d-flex justify-content-between'>
+            <div>
+							<div>
+								<h1>126</h1>
+							</div>
+							<div>
+								<h5>Items Donated</h5>
+							</div>
+						</div>
+            <div>
+							<div>
+								<h1>38</h1>
+							</div>
+							<div>
+								<h5>Projects Funded</h5>
+							</div>
+						</div>
+            <div>
+							<div>
+								<h1>12</h1>
+							</div>
+							<div>
+								<h5>Volunteer Events</h5>
+							</div>
+						</div>
           </div>
 
         </div>
@@ -27,98 +44,123 @@
 			<%# -----------------User Dashboard--------------- %>
 
 
-<div class="profile-mid d-flex">
+<div class="profile-mid d-flex m-3">
   <div class="bio">
-    <div>
       <!--------------------------BIO-------------------->
-      <h4>bio</h4>
-      <p><span><%= @user.gender.capitalize %>, 30 years old</span></p>
+    <div>
+      <h4>About Me</h4>
+      <p><span><%= @user.gender.capitalize %>, 27 years old</span></p>
       <p><span><%= @user.description %></span></p>
-      <p class='d-flex justify-content-end'><%= link_to "Edit", "#"  %></p>
     </div>
     <!--------------------------FRIENDS------------------------------>
     <% @users = [User.find_by(first_name: "Doug"), User.find_by(first_name: "Taku"), User.find_by(first_name: "jess"), User.find_by(first_name: "Alex")] %>
 
     <div>
-      <h4>Friends</h4>
-      <div>
-        <% @users.each do |user| %>
-          <%= cl_image_tag user.photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
-        <% end %>
-        <p><%= link_to "View all", "#"  %></p>
-      </div>
+			<div class="my-4">
+				<div class="d-flex align-items-center justify-content-between">
+					<h4>Friends</h4>
+					<p><%= link_to "View all", "#"  %></p>
+				</div>
+				<div>
+					<% @users.each do |user| %>
+            <%= cl_image_tag user.photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
+          <% end %>
+				</div>
+			</div>
       <!----------------------CONTRIBUTIONS ------------------------>
-      <h4>Contributed towards: 12 Organizations</h4>
       <div>
-        <% @organizations[1..4].each do |organization| %>
-          <%= cl_image_tag organization.photos.first.key, height: 80, width: 80, crop: :fill, class: "avatar"%>
-        <% end %>
-        <p><%= link_to "View all", "#"  %></p>
-      </div>
+				<div class="d-flex align-items-center justify-content-between">
+					<h4>Supported</h4>
+					<p><%= link_to "View all", "#"  %></p>
+				</div>
+				<div>
+					<% @organizations[1..4].each do |organization| %>
+						<%= cl_image_tag organization.photos.first.key, height: 80, width: 80, crop: :fill, class: "avatar"%>
+					<% end %>
+				</div>
+			</div>
     </div>
   </div>
     <!-------------------------FEED------------------------>
-  <div class='feed'>
-      <h4 class='feed-title'>Feed</h4>
+  <div class='feed mx-3'>
+      <h4 class='feed-title'><%= @user.nickname %>'s Feed</h4>
       <div class="feed-scroll">
 
         <% if @user.last_name.nil? %>
-
-        <div class="feed-comment">
-          <div class="feed-comment-content flex-box p-2">
-            <div class="d-flex">
-            <%= cl_image_tag Organization.find_by(name: "Colabo").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
-            <p class="mt-2 ml-2">Collabo</p>
+        <div class="feed-comment my-2">
+          <div class="feed-comment-content p-2">
+            <div class="d-flex align-items-center ">
+							<%= cl_image_tag Organization.all[-5].photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
+							<div class="ml-2"><h5>Colabo</h5></div>
+							<div>
+								<p class='ml-3 p-3'>Thank you so much for the blankets, Liz! They're going to a good cause.</p>
+							</div>
             </div>
+						<div class="pb-3">
+							<img src=https://cdn2.creativecirclemedia.com/ptleader/original/20181126-222144-25178be8b550118fe3b27f41b6b7a6b0.jpg width="500" alt="">
+						</div>
           </div>
-          <img src=https://cdn2.creativecirclemedia.com/ptleader/original/20181126-222144-25178be8b550118fe3b27f41b6b7a6b0.jpg width="500" alt="">
-          <p class='ml-3 p-3'>We used your blankets!</p>
         </div>
-
+        
         <% else %>
 
-        <div class="feed-comment">
-          <div class="feed-comment-content flex-box p-2">
-            <div class="d-flex">
-            <%= cl_image_tag Organization.find_by(name: "Colabo").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
-            <p class="mt-2 ml-2">Collabo</p>
-            </div>
+        <div class="feed-comment my-2">
+          <div class="feed-comment-content p-2">
+            <div class="d-flex align-items-center ">
+              <%= cl_image_tag Organization.find_by(name: "Colabo").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
+              <div class="ml-2"><h5>Colabo</h5></div>
+              <div>
+                  <p class='ml-3 p-3'>Mitsuki really enjoyed your blanket!.</p>
+              </div>
+           </div>
+           <div class="pb-3">
+							<img src=https://media.pri.org/s3fs-public/styles/open_graph/public/japan-tsunami-aid-effort-2011-03-17.jpg?itok=F3RNopiP width="500" alt="">
+						</div>
           </div>
-          <img src=https://media.pri.org/s3fs-public/styles/open_graph/public/japan-tsunami-aid-effort-2011-03-17.jpg?itok=F3RNopiP width="500" alt="">
-          <p class='ml-3 p-3'>Mitsuki really enjoyed your blanket!</p>
         </div>
 
         <% end %>
 
-        <div class="feed-comment">
+				<div class="feed-comment my-2">
           <div class="feed-comment-content flex-box p-2">
-            <div class="d-flex">
-              <%= cl_image_tag Organization.find_by(name: "Mirai no Mori").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
-              <p class="mt-2 ml-2">Mirai no Mori</p>
+						<div class="d-flex align-items-center ">
+							<%= cl_image_tag Organization.find_by(name: "World Wildlife Day ").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
+							<div class="ml-2"><h5>World Wildlife Day</h5></div>
+							<div>
+								<p class='ml-3 p-3'>The dog you saved had puppies!</p>
+							</div>
             </div>
+						<div class="pb-3">
+							<img src="https://static.fox29.com/www.fox29.com/content/uploads/2019/06/PSPCA_dog_generic_01.jpg" width="500" alt="">
+						</div>
           </div>
-          <img src="https://resources.realestate.co.jp/wp-content/uploads/2020/01/volunteering-tokyo-park-cleanup-1020x500.jpg" width="500" alt="">
+        </div>
 
-          <p class='ml-3 p-3'>Thanks for helping out!</p>
+        <div class="feed-comment my-2">
+          <div class="feed-comment-content flex-box p-2">
+						<div class="d-flex align-items-center ">
+							<%= cl_image_tag Organization.find_by(name: "Mirai no Mori").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
+							<div class="ml-2"><h5>Mirai no Mori</h5></div>
+							<div>
+								<p class='ml-3 p-3'>Thanks for helping out!</p>
+							</div>
+            </div>
+						<div class="pb-3">
+							<img src="https://resources.realestate.co.jp/wp-content/uploads/2020/01/volunteering-tokyo-park-cleanup-1020x500.jpg" width="500" alt="">
+						</div>
+					</div>
         </div>
 
         <div class="feed-comment">
           <div class="feed-comment-content flex-box p-2">
-            <div class="d-flex">
-              <%= cl_image_tag Organization.find_by(name: "World Wildlife Day ").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
-              <p class="mt-2 ml-2">World Wildlife Day</p>
+						<div class="d-flex align-items-center ">
+							<%= cl_image_tag Organization.all[-4].photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
+							<div class="ml-2"><h5>Seigo</h5></div>
+							<div>
+								<p class='ml-3 p-3'>Thanks for helping out!</p>
+							</div>
             </div>
-          </div>
-          <img src="https://static.fox29.com/www.fox29.com/content/uploads/2019/06/PSPCA_dog_generic_01.jpg" width="500" alt="">
-          <p class='ml-3 p-3'>The dog you saved had puppies!</p>
-        </div>
-
-        <div class="feed-comment">
-          <div class="feed-comment-content flex-box p-2">
-            <%= cl_image_tag current_user.photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
-            <%= current_user.nickname %>
-          </div>
-        <p class='ml-3 p-3'>thanks for your contribution!</p>
+					</div>
         </div>
       </div>
   </div>
@@ -138,20 +180,8 @@
   </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
 <!------------------------------BADGE--------------------------------->
-  <div class='badges'>
+  <div class='badges mx-3'>
     <h3>Badges</h3>
     <div class="d-flex justify-content-around">
       <%= image_tag "b-1.png", class: "map-results-organization-image" %>
@@ -160,21 +190,9 @@
       <%= image_tag "b-4.png", class: "map-results-organization-image" %>
       <%= image_tag "b-5.png", class: "map-results-organization-image" %>
       <%= image_tag "b-6.png", class: "map-results-organization-image" %>
-
-
-
     </div>
-
-
-
   </div>
-
-
-
-
-
-
-
+<!------------------------------ORIGINAL DASHBOARD--------------------------------->
 			<% if current_user == @user %>
 				<div class="events">
 					<h3>My Events</h3>

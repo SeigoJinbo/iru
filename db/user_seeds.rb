@@ -149,12 +149,7 @@ LIZ = User.create!(
   )
   #birthday: 'may 7th 1993'
 user_avatar = URI.open('https://ca.slack-edge.com/T02NE0241-U01BGPC1Z0S-de16e0810ab9-512')
-user_banner = URI.open('https://images.pexels.com/photos/1237119/pexels-photo-1237119.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')
+user_banner = URI.open('https://images.pexels.com/photos/1426718/pexels-photo-1426718.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')
 LIZ.photos.attach(io: user_avatar, filename: 'user_avatar.png', content_type: 'image/png')
 LIZ.photos.attach(io: user_banner, filename: 'user_banner.jpg', content_type: 'image/jpg')
 LIZ.save
-
-
-
-
-
