@@ -76,7 +76,7 @@
 }
 
 // Meter CSS & animation
-.home-meter { 
+.home-meter {
 	height: 24px;
 	position: relative;
 	background: #f3efe6;
@@ -91,7 +91,7 @@
 .home-progress {
 	background-color: $maize;
 	animation: progressBar 5s ease-in-out;
-	animation-fill-mode:both; 
+	animation-fill-mode:both;
 }
 
 @keyframes progressBar {
@@ -105,4 +105,13 @@
 	height: 160px;
 	width: 160px;
 	background-size: cover;
+}
+
+.home-btn {
+  background-color: #fd4c3d;
+  color: $ivory;
+}
+
+.btn {
+  color: $ivory;
 }
