@@ -137,6 +137,13 @@
   height: 38px;
 }
 
+.other-events-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 16px;
+  padding: 16px;
+}
+
 // .simple_form label {
 //   float: left;
 //   width: 100px;
