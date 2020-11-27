@@ -1,0 +1,84 @@
+.tag-item {
+  display: inline-block;
+}
+
+.tag-selector {
+  position: absolute;
+  transform: scale(0);
+}
+
+.tag-selector + label {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  padding: 0.1rem 0.5rem;
+  background-color: #dcf2e9;
+  color: $seaweed;
+  border: 1px solid $seaweed;
+  margin-right: 0.6rem;
+  margin-bottom: 0.4rem;
+}
+
+.tag-selector:checked + label {
+  background-color: $seaweed;
+  color: white;
+}
+
+// .iru-btn {
+//   font-size: 1rem;
+//   border-radius: 5px;
+//   padding: 6px 6px;
+//   background-color: rgba(253, 76, 61, 0.8);
+//   color: $ivory;
+//   border: 1px solid $grapefruit;
+//   margin-right: 01rem;
+//   margin-bottom: 0.4rem;
+// }
+
+// .iru-btn:hover {
+//   background-color: #f7e0de;
+//   color: $ivory;
+//   border: 1px solid $grapefruit;
+//   color: $grapefruit;
+// }
+
+
+// solid seaweed
+.iru-btn {
+  font-size: 16px;
+  border-radius: 5px;
+  padding: 6px 6px;
+  background-color: $seaweed;
+  color: $ivory;
+  border: 1px solid $seaweed;
+  margin-right: 0.5rem;
+  margin-bottom: 0.4rem;
+  margin-top: 0.5rem;
+}
+// // transparent seaweed
+// .iru-btn {
+//   font-size: 16px;
+//   border-radius: 5px;
+//   padding: 6px 6px;
+//   background-color: #dcf2e9;
+//   color: $seaweed;
+//   border: 1px solid $seaweed;
+//   margin-right: 01rem;
+//   margin-bottom: 0.4rem;
+// }
+
+// .iru-btn {
+//   font-size: 16px;
+//   border-radius: 5px;
+//   padding: 6px 6px;
+//   background-color: #f7e0de;
+//   color: $grapefruit;
+//   border: 1px solid $grapefruit;
+//   margin-right: 01rem;
+//   margin-bottom: 0.4rem;
+// }
+
+
+
+
