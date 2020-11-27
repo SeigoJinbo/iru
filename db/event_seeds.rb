@@ -308,7 +308,7 @@ GARBAGE = Event.create!(
   category: 'Volunteer',
   description: 'Help keep the forests clean',
   positions: rand(3..10),
-  address: "canada",
+  address: "Vancouver, Canada",
   ongoing: true,
   dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..2)).sort,
   start_time: Time.now + rand(10000..100000),

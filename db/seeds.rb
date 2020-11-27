@@ -325,7 +325,7 @@ event = Event.new(
   end_time: Time.now + rand(100000..1000000),
   tag_list: TAGS.sample,
   owner: user,
-  organization: MEBYO,
+  organization: Organization.all.sample,
   target: 10,
   raised: 2
   )
