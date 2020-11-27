@@ -14,13 +14,15 @@
         <li class="nav-item dropdown text-white">
           <div>
           <!-- Map link -->
+            <i class="fas fa-search mr-2"></i>
+            <i class="fas fa-bell"></i>
             <li class="nav-item active">
               <%= link_to map_path, class: "dropdown text-white" do %>
     						<i class="fas fa-map-marked-alt"></i>
     					<% end %>
             </li>
-
             <!-- Organization Dropdown -->
+
             <li class="nav-item dropdown">
     					<%= link_to "#", class: "avatar dropdown-toggle text-white", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false do %>
     						<i class="fas fa-hands-helping text-white"></i>

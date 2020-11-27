@@ -53,7 +53,8 @@
       <p><span><%= @user.description %></span></p>
     </div>
     <!--------------------------FRIENDS------------------------------>
-    <% @users = User.all %>
+    <% @users = [User.find_by(first_name: "Doug"), User.find_by(first_name: "Taku"), User.find_by(first_name: "jess"), User.find_by(first_name: "Alex")] %>
+
     <div>
 			<div class="my-4">
 				<div class="d-flex align-items-center justify-content-between">
@@ -61,10 +62,9 @@
 					<p><%= link_to "View all", "#"  %></p>
 				</div>
 				<div>
-					<% @users.uniq {|user| user.nickname}[1..4].each do |user| %>
-						<%= cl_image_tag user.photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
-					<% end %>
-					
+					<% @users.each do |user| %>
+            <%= cl_image_tag user.photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
+          <% end %>
 				</div>
 			</div>
       <!----------------------CONTRIBUTIONS ------------------------>
@@ -85,6 +85,8 @@
   <div class='feed mx-3'>
       <h4 class='feed-title'><%= @user.nickname %>'s Feed</h4>
       <div class="feed-scroll">
+
+        <% if @user.last_name.nil? %>
         <div class="feed-comment my-2">
           <div class="feed-comment-content p-2">
             <div class="d-flex align-items-center ">
@@ -99,11 +101,30 @@
 						</div>
           </div>
         </div>
+        
+        <% else %>
+
+        <div class="feed-comment my-2">
+          <div class="feed-comment-content p-2">
+            <div class="d-flex align-items-center ">
+              <%= cl_image_tag Organization.find_by(name: "Colabo").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
+              <div class="ml-2"><h5>Colabo</h5></div>
+              <div>
+                  <p class='ml-3 p-3'>Mitsuki really enjoyed your blanket!.</p>
+              </div>
+           </div>
+           <div class="pb-3">
+							<img src=https://media.pri.org/s3fs-public/styles/open_graph/public/japan-tsunami-aid-effort-2011-03-17.jpg?itok=F3RNopiP width="500" alt="">
+						</div>
+          </div>
+        </div>
+
+        <% end %>
 
 				<div class="feed-comment my-2">
           <div class="feed-comment-content flex-box p-2">
 						<div class="d-flex align-items-center ">
-							<%= cl_image_tag Organization.all[-8].photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
+							<%= cl_image_tag Organization.find_by(name: "World Wildlife Day ").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
 							<div class="ml-2"><h5>World Wildlife Day</h5></div>
 							<div>
 								<p class='ml-3 p-3'>The dog you saved had puppies!</p>
@@ -118,7 +139,7 @@
         <div class="feed-comment my-2">
           <div class="feed-comment-content flex-box p-2">
 						<div class="d-flex align-items-center ">
-							<%= cl_image_tag Organization.all[-4].photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
+							<%= cl_image_tag Organization.find_by(name: "Mirai no Mori").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
 							<div class="ml-2"><h5>Mirai no Mori</h5></div>
 							<div>
 								<p class='ml-3 p-3'>Thanks for helping out!</p>
