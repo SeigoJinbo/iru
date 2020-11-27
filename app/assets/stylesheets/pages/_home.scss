@@ -1,6 +1,6 @@
 // Specific CSS for your home-page
 .home-banner {
-	height: 500px;
+	height: 100vh;
 	position: relative;
 	background-repeat: no-repeat;
   background-size: cover;
@@ -100,3 +100,9 @@
 }
 
 // Meter end
+
+.top-org-logo {
+	height: 160px;
+	width: 160px;
+	background-size: cover;
+}
