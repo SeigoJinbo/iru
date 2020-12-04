@@ -391,23 +391,26 @@
       <!-------------------------- Comment tabs ------------------------>
       <div class="tab-pane fade <%= "show active" if params[:tab] == "comments" %>" id="comment" role="tabpanel" aria-labelledby="comment-tab">
         <div class="org-sections">
-          <h4>Comments</h4>
-          <div class="col-6">
-            
-            <% if @organization.organization_comments.any? %>
-              <% @organization.organization_comments.each do |comment| %>
-                <div class="organization-comment">
-                  <div class="flex-box p-2">
-                    <%= cl_image_tag comment.user.photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
-                    <%= comment.user.nickname %>
-                  </div>
-                  <p class='p-2'><%= comment.content%></p>
+          <h3>Any comments/questions?</h3>
+          <div class="comments-container">
+            <div class="event-comment-container">
+              <% if @organization.organization_comments.any? %>
+                  <% @organization.organization_comments.each do |comment| %>
+                    <div class="event-comment" id="comment-<%= comment.id %>">
+                      <div class="d-flex p-1">
+                        <div><%= cl_image_tag comment.user.photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %></div>
+                        <div class="d-flex ml-3 align-items-center"><h5><%= link_to comment.user.nickname, user_path(comment.user) %> says:</h5></div>
+                        <p class='p-1 my-2 ml-1'><%= comment.content%></p>
+                      </div>
 
-                </div>
+                    </div>
+                  <% end %>
               <% end %>
-            <% end %>
+            </div>
+          </div>
+          <div class="event-comment-input">
             <%= simple_form_for [@organization, @organization_comment] do |f| %>
-              <%= f.input :content, label: 'Comment' %>
+              <%= f.input :content, label: 'Feel free to ask anything to the organizers or leave your thoughts!' %>
               <%= f.button :submit, 'Comment', remote: true, class: "btn btn-primary btn-block" %>
             <% end %>
           </div>
@@ -416,3 +419,7 @@
     </div>
   </div>
 </div>
+
+
+
+
