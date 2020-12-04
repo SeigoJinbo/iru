@@ -22,7 +22,7 @@
     <!---------------------Tabs bar--------------------->
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item">
-        <a class="nav-link active" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="true">Organization Info</a>
+        <a class="nav-link <%= "show active" unless params[:tab] == "comments" %>" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="true">Organization Info</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" id="event-tab" data-toggle="tab" href="#event" role="tab" aria-controls="event" aria-selected="false">Projects</a>
@@ -31,7 +31,7 @@
         <a class="nav-link" id="calendar-tab" data-toggle="tab" href="#calendar" role="tab" aria-controls="calendar" aria-selected="false">Calendar</a>
       </li>
       <li class="nav-item">
-      <a class="nav-link" id="comment-tab" data-toggle="tab" href="#comment" role="tab" aria-controls="comment" aria-selected="false">Comments</a>
+      <a class="nav-link <%= "active" if params[:tab] == "comments" %>" id="comment-tab" data-toggle="tab" href="#comment" role="tab" aria-controls="comment" aria-selected="false">Comments</a>
       </li>
       <% if @organization.memberships.where(status: "Active").include?(Membership.find_by(organization: @organization, user: current_user)) %>
         <li class="nav-item">
@@ -39,10 +39,11 @@
         </li>
       <% end %>
     </ul>
+
     <!---------------------Tabs page--------------------->
     <div class="tab-content" id="myTabContent">
       <!---------------------Info--------------------->
-      <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
+      <div class="tab-pane fade <%= "show active" unless params[:tab] == "comments" %>" id="info" role="tabpanel" aria-labelledby="info-tab">
         <div class="org-sections">
           <div class="org-info">
             <div class="org-mission">
@@ -382,22 +383,17 @@
                     </div>
                   <% end %>
                 </div>
-
               </div>
-
             <% end %>
           </div>
         </div>
       </div>
       <!-------------------------- Comment tabs ------------------------>
-      <div class="tab-pane fade" id="comment" role="tabpanel" aria-labelledby="comment-tab">
+      <div class="tab-pane fade <%= "show active" if params[:tab] == "comments" %>" id="comment" role="tabpanel" aria-labelledby="comment-tab">
         <div class="org-sections">
           <h4>Comments</h4>
           <div class="col-6">
-            <%= simple_form_for [@organization, @organization_comment] do |f| %>
-              <%= f.input :content, label: 'Comment' %>
-              <%= f.button :submit, 'Comment', remote: true, class: "btn btn-primary btn-block" %>
-            <% end %>
+            
             <% if @organization.organization_comments.any? %>
               <% @organization.organization_comments.each do |comment| %>
                 <div class="organization-comment">
@@ -409,6 +405,10 @@
 
                 </div>
               <% end %>
+            <% end %>
+            <%= simple_form_for [@organization, @organization_comment] do |f| %>
+              <%= f.input :content, label: 'Comment' %>
+              <%= f.button :submit, 'Comment', remote: true, class: "btn btn-primary btn-block" %>
             <% end %>
           </div>
         </div>

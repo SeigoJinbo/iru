@@ -14,7 +14,7 @@ class OrganizationCommentsController < ApplicationController
     @organization_comment.user = current_user
     @organization_comment.organization = @organization
     if @organization_comment.save
-      redirect_to organization_path(@organization)
+      redirect_to organization_path(@organization, anchor: "comment-#{@organization_comment.id}", tab: "comments")
     else
       render "organizations/show"
     end
