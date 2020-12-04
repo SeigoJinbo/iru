@@ -206,7 +206,7 @@
 									<%= cl_image_tag @event.owner.photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
 								</div>
 								<div class="ml-3">
-									<h4><%= link_to @event.owner.nickname, event_path(@event) %></h4>
+									<h4><%= link_to @event.owner.nickname, user_path(@event.owner) %></h4>
 									<h5>Project Organizer</h5>
 								</div>
 							</div>
@@ -274,5 +274,3 @@
 <% content_for :meta_title, "#{@event.title} is on #{DEFAULT_META["meta_product_name"]}" %>
 <% content_for :meta_description, @event.description %>
 <% content_for :meta_image, cl_image_path(@event.photo.key) %>
-
-
