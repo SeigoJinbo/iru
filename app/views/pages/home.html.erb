@@ -5,21 +5,23 @@
     <div class="home-text">
 			<h1>iru</h1>
 			<h2>Contribute to a cause near you</h2>
-			<div>
-					<%= form_with url: events_path, method: :get, local: true do %>
-						<div class="d-flex">
-							<%= text_field_tag :query,
-							params[:query],
-							class: "form-control",
-							placeholder: "Find an organization"%>
-							<div class="index-submit">
-								<%= submit_tag "Search", class: "btn btn-primary" %>
-							</div>
-						</div>
-					<% end %>
+  			<div>
+      <% if false %>
+  					<%= form_with url: events_path, method: :get, local: true do %>
+  						<div class="d-flex">
+  							<%= text_field_tag :query,
+  							params[:query],
+  							class: "form-control",
+  							placeholder: "Find an organization"%>
+  							<div class="index-submit">
+  								<%= submit_tag "Search", class: "btn btn-primary" %>
+  							</div>
+  						</div>
+  					<% end %>
+      <% end %>
+  				<div class="home-button"><%= link_to "Explore your community", map_path, class: 'btn btn-primary m-3' %></div>
+  			</div>
 
-				<div class="home-button"><%= link_to "Explore your community", map_path, class: 'btn btn-primary m-3' %></div>
-			</div>
 		</div>
   </div>
 <% @organization = Organization.fourth %>
@@ -35,8 +37,10 @@
 	<div class='d-flex m-4 p-3'>
 		<div class="mx-4">
 			<h2>Today's Featured Project</h2>
-			<%= cl_image_tag @event.photo.key, height: 380, width: 540, crop: :fill, class: "org-avatar" %>
-			<div class="d-flex justify-content-between align-content-center mt-2">
+      <%= link_to event_path(@event) do %>
+			  <%= cl_image_tag @event.photo.key, height: 380, width: 540, crop: :fill, class: "org-avatar" %>
+			<% end %>
+      <div class="d-flex justify-content-between align-content-center mt-2">
 				<div class="d-flex">
 					<div><p><%= cl_image_tag @event.organization.photos.first.key, height: 80, width: 80, crop: :fill, class: "org-avatar-home" %></p></div>
 					<div class="ml-3">
@@ -78,8 +82,10 @@
 				<div class='recommended'>
 						<%  @events.each do |event| %>
 							<div class='recommended-card m-2'>
-								<%= cl_image_tag event.photo.key, height: 180, width: 280, crop: :fill, class: "org-avata-home-event" %>
-								<div class="recommended-line1 d-flex justify-content-between flex-grow-*">
+                <%= link_to event_path(event) do  %>
+								  <%= cl_image_tag event.photo.key, height: 180, width: 280, crop: :fill, class: "org-avata-home-event" %>
+								<% end %>
+                <div class="recommended-line1 d-flex justify-content-between flex-grow-*">
 									<div><p><%= event.title %></p></div>
 									<div><p class='recommended-address'><i class="fas fa-map-marker-alt"></i> <%= event.address %></p></div>
 								</div>
@@ -92,8 +98,6 @@
 			</div>
 		</div>
 	</div>
-
-
 </div>
 
 <div class="page-box-home mt-4">
@@ -101,7 +105,9 @@
   <div class='page-box-home-info d-flex justify-content-between m-4'>
     <% @organizations.each do |organization| %>
       <div class='m-2'>
-        <div class="top-org-logo" style="background-image:url('<%= cl_image_path organization.photos.first.key, height: 160, width: 160, crop: :fill%>');"></div>
+        <%= link_to organization_path(@organization) do%>
+          <div class="top-org-logo" style="background-image:url('<%= cl_image_path organization.photos.first.key, height: 160, width: 160, crop: :fill%>');"></div>
+        <% end %>
         <h6 class="mt-3 text-center"><%= organization.name %></h6>
       </div>
     <% end %>

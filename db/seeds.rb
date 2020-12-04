@@ -302,56 +302,56 @@ CHRISTMAS.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'im
 
 
 
-ANIMALLIST = ["Contribute to pet adoption", "Help with pandas", "Save stray cats", "Food for animals"]
-CHILDRENLIST =["Toys for children", "Youth sports", "Help special needs children"]
-DISASTERLIST = ["Disaster relief", "Tsunami relief", "Earthquake relief"]
-EDUCATIONLIST = ["Books for students", "Assistance for scholarships", "Community tutoring" ]
-ENVIRONMENTLIST = ["Aid in water purification", "Keep the rivers clean", "Planting trees"]
-HEALTHLIST = ["Medical research for COVID-19", "Testing for new medicine", "First aid education"]
-WOMENLIST = ["Support future female leaders", "Self defence for ladies", "STEM skills for girls"]
-SENIORLIST = ["Support for seniors", "Aid for disabilities", "Bingo with seniors"]
-OTHERLIST = ["Community legal advice", "Food drive collection", "Soup kitchen"]
+# ANIMALLIST = ["Contribute to pet adoption", "Help with pandas", "Save stray cats", "Food for animals"]
+# CHILDRENLIST =["Toys for children", "Youth sports", "Help special needs children"]
+# DISASTERLIST = ["Disaster relief", "Tsunami relief", "Earthquake relief"]
+# EDUCATIONLIST = ["Books for students", "Assistance for scholarships", "Community tutoring" ]
+# ENVIRONMENTLIST = ["Aid in water purification", "Keep the rivers clean", "Planting trees"]
+# HEALTHLIST = ["Medical research for COVID-19", "Testing for new medicine", "First aid education"]
+# WOMENLIST = ["Support future female leaders", "Self defence for ladies", "STEM skills for girls"]
+# SENIORLIST = ["Support for seniors", "Aid for disabilities", "Bingo with seniors"]
+# OTHERLIST = ["Community legal advice", "Food drive collection", "Soup kitchen"]
 
 
-ADDRESSES.each do |address|
+# ADDRESSES.each do |address|
 
-event = Event.new(
-  title: Faker::Food.fruits,
-  category: CATEGORIES.sample,
-  description: Faker::Hipster.paragraph,
-  address: address,
-  positions: rand(3..10),
-  start_time: Time.now + rand(10000..100000),
-  end_time: Time.now + rand(100000..1000000),
-  tag_list: TAGS.sample,
-  owner: user,
-  organization: Organization.all.sample,
-  target: 10,
-  raised: 2
-  )
+# event = Event.new(
+#   title: Faker::Food.fruits,
+#   category: CATEGORIES.sample,
+#   description: Faker::Hipster.paragraph,
+#   address: address,
+#   positions: rand(3..10),
+#   start_time: Time.now + rand(10000..100000),
+#   end_time: Time.now + rand(100000..1000000),
+#   tag_list: TAGS.sample,
+#   owner: user,
+#   organization: Organization.all.sample,
+#   target: 10,
+#   raised: 2
+#   )
 
-  case event[:tag_list]
-  when ["Animals/Wildlife"]
-    event[:title] = ANIMALLIST.sample
-  when ["Children/Youth"]
-    event[:title] = CHILDRENLIST.sample
-  when ["Disasters"]
-    event[:title] = DISASTERLIST.sample
-  when ["Education"]
-    event[:title] = EDUCATIONLIST.sample
-  when ["Environment/Agriculture"]
-    event[:title] = ENVIRONMENTLIST.sample
-  when ["Health"]
-    event[:title] = HEALTHLIST.sample
-  when ["Women"]
-    event[:title] = WOMENLIST.sample
-  when ["Seniors/Disabilities"]
-    event[:title] = SENIORLIST.sample
-  else
-    event[:title] = OTHERLIST.sample
-  end
-  event.save
-end
+#   case event[:tag_list]
+#   when ["Animals/Wildlife"]
+#     event[:title] = ANIMALLIST.sample
+#   when ["Children/Youth"]
+#     event[:title] = CHILDRENLIST.sample
+#   when ["Disasters"]
+#     event[:title] = DISASTERLIST.sample
+#   when ["Education"]
+#     event[:title] = EDUCATIONLIST.sample
+#   when ["Environment/Agriculture"]
+#     event[:title] = ENVIRONMENTLIST.sample
+#   when ["Health"]
+#     event[:title] = HEALTHLIST.sample
+#   when ["Women"]
+#     event[:title] = WOMENLIST.sample
+#   when ["Seniors/Disabilities"]
+#     event[:title] = SENIORLIST.sample
+#   else
+#     event[:title] = OTHERLIST.sample
+#   end
+#   event.save
+# end
 
 
 
