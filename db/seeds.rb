@@ -70,7 +70,7 @@ User.destroy_all
 puts "destroying organizations"
 Organization.destroy_all
 
-user = User.create!(email: 'user@user.com', password: '123456')
+user = User.create!(email: 'user@user.com', password: '123456', gender: "male", description: "...", nickname: "John", first_name: "John", last_name: "Dough", address: "Portland, Oregon")
 DOUG = User.create!(
   first_name: "Doug",
   last_name: "Doug",
@@ -83,7 +83,9 @@ DOUG = User.create!(
   admin: false
 )
 user_avatar = URI.open('https://ca.slack-edge.com/T02NE0241-U4APKLFLM-da0b004a3774-512')
+user_banner = URI.open('https://images.pexels.com/photos/1426718/pexels-photo-1426718.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')
 DOUG.photos.attach(io: user_avatar, filename: 'user_avatar.png', content_type: 'image/png')
+DOUG.photos.attach(io: user_banner, filename: 'user_banner.jpg', content_type: 'image/jpg')
 DOUG.save
 
 MEBYO = Organization.create!(

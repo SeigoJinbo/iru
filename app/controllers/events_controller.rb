@@ -1,3 +1,4 @@
+require "open-uri"
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   skip_before_action :authenticate_user!, only: [:index, :show]
@@ -69,6 +70,10 @@ class EventsController < ApplicationController
     authorize @event
     @event.organization = @organization
     @event.owner = current_user
+    unless @event.photo.attached?
+      event_photo = URI.open('https://archive.org/download/no-photo-available/no-photo-available.png')
+      @event.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+    end
     if @event.save
       redirect_to event_path(@event)
 
@@ -101,6 +106,6 @@ class EventsController < ApplicationController
   end
 
   def event_params
-		params.require(:event).permit(:organization, :user, :category, :title, :description, :ongoing, :start_time, :end_time, :positions, :photo, :target, :address, :item, dates: [], tag_list: [])	
+		params.require(:event).permit(:organization, :user, :category, :title, :description, :ongoing, :start_time, :end_time, :positions, :photo, :target, :address, :item, dates: [], tag_list: [])
   end
 end

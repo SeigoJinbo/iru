@@ -70,6 +70,12 @@ class OrganizationsController < ApplicationController
   def create
     @organization = Organization.new(organization_params)
     authorize @organization
+    unless @event.photo.attached?
+      org_logo = URI.open('https://archive.org/download/no-photo-available/no-photo-available.png')
+      org_banner = URI.open('https://cdn.kurashi-no.jp/assets/noimage-d0b1347608ca95154664baaba4fafcebc7d2280461b778eef871ce9662c6b822.png')
+      @orgnaization.photos.attach(io: org_logo, filename: 'org_logo.png', content_type: 'image/png')
+      @orgnaization.photos.attach(io: org_banner, filename: 'org_banner.jpg', content_type: 'image/jpg')
+    end
     if @organization.save
       Membership.create(
         organization: @organization,

@@ -152,7 +152,12 @@
         <div class="d-flex flex-row-reverse social_share_btn">
           <p><%= social_share_button_tag(@event.title) %></p>
         </div>
+        <% if @event.photo.attached? %>
 				<div class="event-title-photo"><%= cl_image_tag @event.photo.key, height: 300, width: 400, crop: :fill %></div>
+        <% else %>
+        <div class="event-title-photo"><%= image_tag "default-event.png", height: 300, width: 400, crop: :fill %></div>
+        <% end %>
+
 				<div class="d-flex mt-2 seaweed-text">
 					<div><i class="fas fa-map-marker-alt mr-1"></i><%= @event.address.truncate(35, separator: ' ') %></div>
 					<div class="ml-2"><i class="fas fa-hand-holding-heart mr-1"></i><%= @event.tag_list %></div>
@@ -203,8 +208,12 @@
 						<div class="organizer-details border-box">
 							<div class="organizer-details-title">
 								<div>
-									<%= cl_image_tag @event.owner.photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
-								</div>
+									<% if @event.owner.photos.first %>
+                    <%= cl_image_tag @event.owner.photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
+								  <% else %>
+                    <%= cl_image_tag "frog icon.png", height: 100, width: 100, crop: :fill, class: "avatar" %>
+                  <% end %>
+                </div>
 								<div class="ml-3">
 									<h4><%= link_to @event.owner.nickname, user_path(@event.owner) %></h4>
 									<h5>Project Organizer</h5>
@@ -325,7 +334,6 @@
 											<div class="d-flex ml-3 align-items-center"><h5><%= link_to comment.user.nickname, user_path(comment.user) %> says:</h5></div>
 											<p class='p-1 my-2 ml-1'><%= comment.content%></p>
 										</div>
-
 									</div>
 								<% end %>
 						<% end %>
