@@ -3,10 +3,15 @@
 
 	<div class="page-box">
 	<%# User banner, avatar, description %>
-		<div class="user-banner" style="background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= cl_image_path @user.photos.second.key, height: 200, width: 1200, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+		<div class="user-banner" style="background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= cl_image_path User.second.photos.second.key, height: 200, width: 1200, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
 			<div class="user-banner-items">
         <div class="d-flex align-items-center mr-5">
-    			<%= cl_image_tag @user.photos.first.key, height: 100, width: 100, crop: :fill, class: "user-avatar" %>
+          <% if @user.photos.first %>
+    			 <%= cl_image_tag @user.photos.first.key, height: 100, width: 100, crop: :fill, class: "user-avatar" %>
+          <% else %>
+            <%= image_tag "frog icon.png", height: 100, width: 100, crop: :fill, class: "user-avatar"%>
+          <% end %>
+
           <h1 class="ml-3"><span class="maize-text"><%= @user.nickname %>'s</span> <span class="ivory-text">Profile</span></h1>
         </div>
         <div class="user-banner-text ml-3">

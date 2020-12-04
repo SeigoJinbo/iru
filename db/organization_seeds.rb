@@ -167,6 +167,7 @@ Membership.create!(user: ALINE, organization: COLABO, status: 'Active')
 Membership.create!(user: JESS, organization: COLABO, status: 'Active')
 
 
+Membership.create!(user: JESS, organization: MEBYO, status: 'Active')
 Membership.create!(user: JESS, organization: UNHCR, status: 'Active')
 Membership.create!(user: SHO, organization: BASIC, status: 'Active')
 Membership.create!(user: ALINE, organization: WWLD, status: 'Active')
