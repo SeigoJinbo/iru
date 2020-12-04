@@ -1,2 +1,12 @@
 <h1>Organizations#new</h1>
 <p>Find me in app/views/organizations/new.html.erb</p>
+<%= simple_form_for(@organization) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :email %>
+  <%= f.input :description %>
+  <%= f.input :phone_number %>
+  <%= f.input :hp_url, label: "Homepage url" %>
+  <%= f.button :submit, class: "btn btn-primary btn-block" %>
+<% end %>
+
+
