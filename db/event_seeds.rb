@@ -345,11 +345,14 @@ BLANKET_A_PANDA.photo.attach(io: event_photo, filename: 'event.jpg', content_typ
 
 puts "creating garbage"
 GARBAGE = Event.create!(
-  title: "Help keep the forests clean",
+  title: "Keep the forests clean",
   category: 'Volunteer',
-  description: 'Help keep the forests clean',
+  description: "For more than 100 years, UNHCR has brought people and communities
+together to answer the call of conservation. Through campground hosting, trail
+maintenance, visitor services, research and more, volunteers make significant
+contributions to the legacy of conservation for future generations. ",
   positions: rand(3..10),
-  address: "Vancouver, Canada",
+  address: "Canada",
   ongoing: true,
   dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..2)).sort,
   start_time: Time.now + rand(10000..100000),

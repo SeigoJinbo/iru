@@ -113,7 +113,7 @@ HARVEST.photos.attach(io: org_banner, filename: 'org_banner.jpg', content_type: 
 
 
 
-puts "colabo"
+puts "JWS"
 JWCS = Organization.create!(
   name: "Japan Wildlife Conservation Society",
   email: "sato@jwcs.com",
