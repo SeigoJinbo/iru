@@ -23,7 +23,6 @@ event_photo = URI.open('https://www.eco.ca/wp-content/uploads/corporation-of-tom
 PLANT_A_TREE.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
 
 
-
 puts "Read to kids"
 READ_TO_KIDS = Event.create!(
   title: "Read to kids",
@@ -95,7 +94,6 @@ Please check Twitter and Instagram for the latest information.',
 puts "attaching photo cafe"
 event_photo = URI.open('https://i2.wp.com/colabo-official.net/wp-content/uploads/2018/10/8574236942707-640x480.jpg')
 CAFE.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
-
 
 
 CAFE = Event.create!(
@@ -292,10 +290,6 @@ event_photo = URI.open('https://www.jwcs.org/en/wp-content/uploads/sites/2/Web20
 WHALES.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
 
 
-
-
-
-
 puts "Harvest kitchen"
 KITCHEN = Event.create!(
   title: "Harvest Kitchen",
@@ -367,6 +361,446 @@ contributions to the legacy of conservation for future generations. ",
 
 event_photo = URI.open('https://pcdn.piiojs.com/i/oaa0g2/vw,840,vh,0,r,1,pr,2,o,avwp/https%3A%2F%2Fwww.socialtables.com%2Fwp-content%2Fuploads%2F2016%2F10%2FiStock-540095978-1024x683.jpg')
 GARBAGE.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+
+
+
+puts "creating relief"
+RELIEF = Event.create!(
+  title: "Tsunami Relief",
+  category: 'Volunteer',
+  description: "Six American students from Ohio University (OHIO) studying in Japan alongside several Japanese students from  four universities (Chubu University, Musashi University, Toyo Gakuen University, Iwate Prefectural University, and four OHIO alumni gathered in Iwate prefecture for a collaborative volunteer experience to provide humanitarian aid and support to those affected by the March 2011 earthquake and tsunami from September 26-29, 2013. Over the course of the weekend, this group took part in two types of volunteer tsunami relief activities – the Nanohana Project in Otsuchi, and the “Mizubora” (Water Volunteerism) Project in Rikuzentakata.
+  \nThe Nanohana Project seeds rice paddies in Otsuchi that were washed-out and became too salty to grow rice, by the tsunami that followed the Great East Japan Earthquake. Nanohana (Canola) not only helps to desalinate the soil, but can be processed into biodiesel. Kanayama Bunzo, a former truck driver coordinating this project, has two “yume” (dreams): 1) To be able to make rice paddies usable again, and 2) to run Otsuchi school buses on biodiesel in the future.
+  \nFor the “Mizubora” project, the American and Japanese participants joined ten students from Ofunato High School and 65 international college and graduate students in delivering over 800 boxes of water to neighborhoods on the coast of the Hirota Peninsula of Rikuzentakata. Two-and-a-half years after the Great East Japan Earthquake, the purpose of delivering water, was not the water itself, but in maintaining the human relationships that have been built over the past two-and-a-half years between IPU, which has been, delivering water at least once a month since the day of the Great East Japan Earthquake in 2011.
+  \nThrough this program, the groups of students from Ohio University were able to experience a unique form of international volunteerism. Not only did they learn about the current situation in the Tohoku region, but they also were exposed to creative processes the locals had come up with to reverse the damage the Great East Japan Earthquake had caused. This grant allowed the Ohio students to continue a program that had emerged immediately after the earthquake, as this was the third year of this volunteer project program. ",
+  positions: rand(3..10),
+  address: "Fukushima, Japan",
+  ongoing: true,
+  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..2)).sort,
+  start_time: Time.now + rand(10000..100000),
+  end_time: Time.new(2020, 12, 2, 20, 00, 00),
+  organization: MORI,
+  owner: DOUG,
+  item: 'apples',
+  tag_list: "Disasters",
+  target: 20,
+  raised: 12
+  )
+event_photo = URI.open('http://usjapantomodachi.org/wp/wp-content/uploads/2013/10/banner2.jpg')
+RELIEF.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+
+
+
+puts "creating earthquake"
+EARTHQUAKE = Event.create!(
+  title: "Dispatching Volunteers to Disaster-Affected Regions",
+  category: 'Volunteer',
+  description: "We dispatch volunteers to assist with the reconstruction of disaster-affected regions. We not only remove debris and rubble but also hold talks with local administrations, businesses and reconstruction assistance NPOs for ongoing support and creating new business that leads to reconstruction.These activities include the dispatch of volunteers for assisting with the reconstruction from the Great East Japan Earthquake as well as the Kumamoto Earthquake.",
+  positions: rand(3..10),
+  address: "Nerima, Japan",
+  ongoing: true,
+  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..2)).sort,
+  start_time: Time.now + rand(10000..100000),
+  end_time: Time.new(2020, 12, 2, 20, 00, 00),
+  organization: MORI,
+  owner: DOUG,
+  item: 'apples',
+  tag_list: "Disasters",
+  target: 20,
+  raised: 12
+  )
+event_photo = URI.open('https://recruit-holdings.com/sustainability/community/img/volunteer_01.JPG')
+EARTHQUAKE.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+
+
+puts "creating earthquake"
+EARTHQUAKE2 = Event.create!(
+  title: "Dispatching Volunteers to Disaster-Affected Regions",
+  category: 'Fundraiser',
+  description: "We dispatch volunteers to assist with the reconstruction of disaster-affected regions. We not only remove debris and rubble but also hold talks with local administrations, businesses and reconstruction assistance NPOs for ongoing support and creating new business that leads to reconstruction.These activities include the dispatch of volunteers for assisting with the reconstruction from the Great East Japan Earthquake as well as the Kumamoto Earthquake.",
+  positions: rand(3..10),
+  address: "Narita, Japan",
+  ongoing: true,
+  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..2)).sort,
+  start_time: Time.now + rand(10000..100000),
+  end_time: Time.new(2020, 12, 2, 20, 00, 00),
+  organization: MORI,
+  owner: DOUG,
+  item: 'apples',
+  tag_list: "Disasters",
+  target: 200000,
+  raised: 175936
+  )
+event_photo = URI.open('https://recruit-holdings.com/sustainability/community/img/volunteer_01.JPG')
+EARTHQUAKE2.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+
+
+puts "creating biodiversity"
+BIODIVERSITY = Event.create!(
+  title: "Forests and biodiversity",
+  category: 'Fundraiser',
+  description: "
+  \nHalf of the world’s forests have disappeared. Privatisation, trade liberalisation and increased exports of meat and crops, such as soy and palm oil, have led to a massive increase in large-scale plantations, triggering further deforestation.  Yet forests provide livelihoods for many local communities and indigenous peoples. They help to regulate our climate, and are home to some of the most species-diverse habitats on earth.
+  \nFoEI works with local communities and indigenous peoples to conserve forests, and strengthen communities’ rights and community management of forests. We campaign against industrial large scale plantations, monoculture, destructive logging and the commodification and financialization of forests and biodiversity.
+  \nWe urgently need to protect the forests in our fight for a sustainable future for everybody.",
+  positions: rand(3..10),
+  address: "Chofu, Japan",
+  ongoing: true,
+  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..2)).sort,
+  start_time: Time.now + rand(10000..100000),
+  end_time: Time.new(2020, 12, 2, 20, 00, 00),
+  organization: MORI,
+  owner: DOUG,
+  item: 'apples',
+  tag_list: "Environment/Agriculture",
+  target: 500000,
+  raised: 345935
+  )
+event_photo = URI.open('https://www.foei.org/wp-content/uploads/2013/11/RS1775_2nd-1067-biolost-David-Gilbert-scr.jpg')
+BIODIVERSITY.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+
+puts "creating Disabled"
+DISABLED = Event.create!(
+  title: "Support for Persons with Disabilities",
+  category: 'Fundraiser',
+  description: "The Nippon Foundation, established in 1962, has been involved in activities to support persons with disabilities in Japan and around the world for more than 50 years. In the course of working together with persons with disabilities, we have learned that removing the obstacles that prevent their equal participation paves the way for everyone – with or without a disability – to demonstrate their full potential. Persons with disabilities have often been stereotyped as people who “need to be protected by society,” but that image needs to be swept aside through a paradigm shift toward viewing them as “contributors to society.” It is important that we continue to lend a helping hand to people facing severe difficulties and also to carry on the support activities that aim to provide equal opportunities. But, at the same time, The Nippon Foundation wants to contribute to that paradigm shift by offering innovative support that seeks to allow highly talented persons with disabilities to better display their abilities and thereby lead the way in encouraging and inspiring others in society.",
+  positions: rand(3..10),
+  address: "Adachi, Japan",
+  ongoing: true,
+  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..2)).sort,
+  start_time: Time.now + rand(10000..100000),
+  end_time: Time.new(2020, 12, 2, 20, 00, 00),
+  organization: MORI,
+  owner: DOUG,
+  item: 'apples',
+  tag_list: "Seniors/Disabilities",
+  target: 100000,
+  raised: 83957
+  )
+event_photo = URI.open('https://www.nippon-foundation.or.jp/app/uploads/2018/11/pickup-02.jpg')
+DISABLED.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+
+puts "creating Disabled"
+DISABLED2 = Event.create!(
+  title: "Support for Persons with Disabilities",
+  category: 'Fundraiser',
+  description: "The Nippon Foundation, established in 1962, has been involved in activities to support persons with disabilities in Japan and around the world for more than 50 years. In the course of working together with persons with disabilities, we have learned that removing the obstacles that prevent their equal participation paves the way for everyone – with or without a disability – to demonstrate their full potential. Persons with disabilities have often been stereotyped as people who “need to be protected by society,” but that image needs to be swept aside through a paradigm shift toward viewing them as “contributors to society.” It is important that we continue to lend a helping hand to people facing severe difficulties and also to carry on the support activities that aim to provide equal opportunities. But, at the same time, The Nippon Foundation wants to contribute to that paradigm shift by offering innovative support that seeks to allow highly talented persons with disabilities to better display their abilities and thereby lead the way in encouraging and inspiring others in society.",
+  positions: rand(3..10),
+  address: "Mooka, Japan",
+  ongoing: true,
+  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..2)).sort,
+  start_time: Time.now + rand(10000..100000),
+  end_time: Time.new(2020, 12, 2, 20, 00, 00),
+  organization: MORI,
+  owner: DOUG,
+  item: 'apples',
+  tag_list: "Seniors/Disabilities",
+  target: 80000,
+  raised: 43957
+  )
+event_photo = URI.open('https://www.nippon-foundation.or.jp/app/uploads/2018/11/pickup-02.jpg')
+DISABLED2.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+
+
+puts "creating blood"
+BLOOD = Event.create!(
+  title: "Blood Program",
+  category: 'Donation',
+  description: "Thanks to the generous donations, the Japanese Red Cross Society is able to deliver blood products to medical institutions across the country.
+  \nBlood transfusion plays an important life-saving function in the treatment of malignant neoplasms (cancer), hematological diseases and other disorders. Blood cannot, as of yet, be manufactured through artificial processes. Blood collected by way of voluntary, non-remunerated donations from healthy individuals saves the lives of countless patients on a daily basis.
+  \nTo those who are considering donating blood within Japan:
+  Thank you very much for your support and kind consideration.
+  Under the blood donation policy and for safety reasons regarding the person donating blood, we are required to ask you to fill out a mandatory pre-questionnaire in Japanese, and have a certified physician conduct a preliminary medical examination for blood donation in Japanese. Both of these steps will take place on site at any of our blood donation facilities. For this reason, we cannot accept donations from individuals who are unable to understand and respond in Japanese. Thank you very much for your understanding and cooperation.",
+  positions: rand(3..10),
+  address: "Kamagaya, Japan",
+  ongoing: true,
+  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..2)).sort,
+  start_time: Time.now + rand(10000..100000),
+  end_time: Time.new(2020, 12, 2, 20, 00, 00),
+  organization: MORI,
+  owner: DOUG,
+  item: 'pints of blood',
+  tag_list: "Health",
+  target: 1000,
+  raised: 439
+  )
+event_photo = URI.open('http://www.jrc.or.jp/english/img/1669_s_2_VcContents_E-0_VcContentsImage_E001.jpg')
+BLOOD.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+
+puts "creating blood2"
+BLOOD2 = Event.create!(
+  title: "Donate your blood",
+  category: 'Donation',
+  description: "Thanks to the generous donations, the Japanese Red Cross Society is able to deliver blood products to medical institutions across the country.
+  \nBlood transfusion plays an important life-saving function in the treatment of malignant neoplasms (cancer), hematological diseases and other disorders. Blood cannot, as of yet, be manufactured through artificial processes. Blood collected by way of voluntary, non-remunerated donations from healthy individuals saves the lives of countless patients on a daily basis.
+  \nTo those who are considering donating blood within Japan:
+  Thank you very much for your support and kind consideration.
+  Under the blood donation policy and for safety reasons regarding the person donating blood, we are required to ask you to fill out a mandatory pre-questionnaire in Japanese, and have a certified physician conduct a preliminary medical examination for blood donation in Japanese. Both of these steps will take place on site at any of our blood donation facilities. For this reason, we cannot accept donations from individuals who are unable to understand and respond in Japanese. Thank you very much for your understanding and cooperation.",
+  positions: rand(3..10),
+  address: "Machida, Japan",
+  ongoing: true,
+  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..2)).sort,
+  start_time: Time.now + rand(10000..100000),
+  end_time: Time.new(2020, 12, 2, 20, 00, 00),
+  organization: MORI,
+  owner: DOUG,
+  item: 'pints of blood',
+  tag_list: "Health",
+  target: 1000,
+  raised: 589
+  )
+event_photo = URI.open('http://www.jrc.or.jp/english/assets_c/2014/09/Blood%20Programme_%E8%A3%BD%E5%93%81%E5%8C%96%E3%81%B8%E6%9C%80%E7%B5%82%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF-cropped-proto-custom_274.jpg')
+BLOOD2.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+
+
+puts "creating blood3"
+BLOOD3 = Event.create!(
+  title: "Give us blood",
+  category: 'Donation',
+  description: "Thanks to the generous donations, the Japanese Red Cross Society is able to deliver blood products to medical institutions across the country.
+  \nBlood transfusion plays an important life-saving function in the treatment of malignant neoplasms (cancer), hematological diseases and other disorders. Blood cannot, as of yet, be manufactured through artificial processes. Blood collected by way of voluntary, non-remunerated donations from healthy individuals saves the lives of countless patients on a daily basis.
+  \nTo those who are considering donating blood within Japan:
+  Thank you very much for your support and kind consideration.
+  Under the blood donation policy and for safety reasons regarding the person donating blood, we are required to ask you to fill out a mandatory pre-questionnaire in Japanese, and have a certified physician conduct a preliminary medical examination for blood donation in Japanese. Both of these steps will take place on site at any of our blood donation facilities. For this reason, we cannot accept donations from individuals who are unable to understand and respond in Japanese. Thank you very much for your understanding and cooperation.",
+  positions: rand(3..10),
+  address: "Ichihara, Japan",
+  ongoing: true,
+  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..2)).sort,
+  start_time: Time.now + rand(10000..100000),
+  end_time: Time.new(2020, 12, 2, 20, 00, 00),
+  organization: MORI,
+  owner: DOUG,
+  item: 'pints of blood',
+  tag_list: "Health",
+  target: 1000,
+  raised: 754
+  )
+event_photo = URI.open('http://www.jrc.or.jp/english/assets_c/2014/09/Blood%20Programme_%E8%A3%BD%E5%93%81%E5%8C%96%E3%81%B8%E6%9C%80%E7%B5%82%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF-cropped-proto-custom_274.jpg')
+BLOOD3.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+
+
+puts "creating blood4"
+BLOOD4 = Event.create!(
+  title: "Blood Drive",
+  category: 'Donation',
+  description: "Thanks to the generous donations, the Japanese Red Cross Society is able to deliver blood products to medical institutions across the country.
+  \nBlood transfusion plays an important life-saving function in the treatment of malignant neoplasms (cancer), hematological diseases and other disorders. Blood cannot, as of yet, be manufactured through artificial processes. Blood collected by way of voluntary, non-remunerated donations from healthy individuals saves the lives of countless patients on a daily basis.
+  \nTo those who are considering donating blood within Japan:
+  Thank you very much for your support and kind consideration.
+  Under the blood donation policy and for safety reasons regarding the person donating blood, we are required to ask you to fill out a mandatory pre-questionnaire in Japanese, and have a certified physician conduct a preliminary medical examination for blood donation in Japanese. Both of these steps will take place on site at any of our blood donation facilities. For this reason, we cannot accept donations from individuals who are unable to understand and respond in Japanese. Thank you very much for your understanding and cooperation.",
+  positions: rand(3..10),
+  address: "Nagoya, Japan",
+  ongoing: true,
+  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..2)).sort,
+  start_time: Time.now + rand(10000..100000),
+  end_time: Time.new(2020, 12, 2, 20, 00, 00),
+  organization: MORI,
+  owner: DOUG,
+  item: 'pints of blood',
+  tag_list: "Health",
+  target: 1000,
+  raised: 754
+  )
+event_photo = URI.open('http://www.jrc.or.jp/english/assets_c/2014/09/Blood%20Programme_%E8%A3%BD%E5%93%81%E5%8C%96%E3%81%B8%E6%9C%80%E7%B5%82%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF-cropped-proto-custom_274.jpg')
+BLOOD4.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+
+
+
+
+puts "creating help kids"
+KIDS = Event.create!(
+  title: "Save the Children!",
+  category: 'Fundraiser',
+  description: "We are solving social issues interfering happiness of parents and children.
+
+    \nOur Vision
+    \nSociety fulfilled with smiles of diverse families, where all children are embraced, and parents are challenging anything with child-rearing.
+
+    \nOur Mission
+    \nSolving social issues interfering happiness of parents and children.
+
+    \nOur purpose＆Activities
+    \n◼Provide hospitable nursing care for children with special needs.
+    \n◼Prevent abused and neglect death of newborn babies.
+    \n◼Offer alternative solution to all the parents when their children get sick, and be a good hand for both parents and children.
+    \n◼Zero waiting children for nursery school.All the mothers can continue their work.
+    Our Solutions
+    \n■Home-based daycare for sick children
+    \nProvide parents (mothers in particular) with a backstop in case of simultaneous work/family emergencies, helping them in their strive for work-life balance.
+
+    \n■Small size daycare service
+    \nAssist parents (mothers in particular) to remain in the workforce through provision of uniquely small (maximum 19 places) daycare converted from residential apartments.
+
+    \n■Daycare for disabled children
+    \nSupport disabled children and their families, who had been excluded from regular daycare service, to have an access to childcare and opportunities to pursue individual goals, through provision of daycare service.",
+  positions: rand(3..10),
+  address: "Kodaira, Japan",
+  ongoing: true,
+  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..2)).sort,
+  start_time: Time.now + rand(10000..100000),
+  end_time: Time.new(2020, 12, 2, 20, 00, 00),
+  organization: MORI,
+  owner: DOUG,
+  item: 'pints of blood',
+  tag_list: "Children/Youth",
+  target: 100000,
+  raised: 58979
+  )
+event_photo = URI.open('https://florence.or.jp/english/img/top_imgizo_lp3.jpg')
+KIDS.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+
+
+puts "creating help kids2"
+KIDS2 = Event.create!(
+  title: "Protect our Youth",
+  category: 'Fundraiser',
+  description: "We are solving social issues interfering happiness of parents and children.
+
+    \nOur Vision
+    \nSociety fulfilled with smiles of diverse families, where all children are embraced, and parents are challenging anything with child-rearing.
+
+    \nOur Mission
+    \nSolving social issues interfering happiness of parents and children.
+
+    \nOur purpose＆Activities
+    \n◼Provide hospitable nursing care for children with special needs.
+    \n◼Prevent abused and neglect death of newborn babies.
+    \n◼Offer alternative solution to all the parents when their children get sick, and be a good hand for both parents and children.
+    \n◼Zero waiting children for nursery school.All the mothers can continue their work.
+    Our Solutions
+    \n■Home-based daycare for sick children
+    \nProvide parents (mothers in particular) with a backstop in case of simultaneous work/family emergencies, helping them in their strive for work-life balance.
+
+    \n■Small size daycare service
+    \nAssist parents (mothers in particular) to remain in the workforce through provision of uniquely small (maximum 19 places) daycare converted from residential apartments.
+
+    \n■Daycare for disabled children
+    \nSupport disabled children and their families, who had been excluded from regular daycare service, to have an access to childcare and opportunities to pursue individual goals, through provision of daycare service.",
+  positions: rand(3..10),
+  address: "Chiba, Japan",
+  ongoing: true,
+  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..2)).sort,
+  start_time: Time.now + rand(10000..100000),
+  end_time: Time.new(2020, 12, 2, 20, 00, 00),
+  organization: MORI,
+  owner: DOUG,
+  item: 'pints of blood',
+  tag_list: "Children/Youth",
+  target: 100000,
+  raised: 58979
+  )
+event_photo = URI.open('https://florence.or.jp/english/img/top_imgizo_lp3.jpg')
+KIDS2.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+
+
+
+puts "creating help kids2"
+KIDS3 = Event.create!(
+  title: "Protect our Youth",
+  category: 'Fundraiser',
+  description: "We are solving social issues interfering happiness of parents and children.
+
+    \nOur Vision
+    \nSociety fulfilled with smiles of diverse families, where all children are embraced, and parents are challenging anything with child-rearing.
+
+    \nOur Mission
+    \nSolving social issues interfering happiness of parents and children.
+
+    \nOur purpose＆Activities
+    \n◼Provide hospitable nursing care for children with special needs.
+    \n◼Prevent abused and neglect death of newborn babies.
+    \n◼Offer alternative solution to all the parents when their children get sick, and be a good hand for both parents and children.
+    \n◼Zero waiting children for nursery school.All the mothers can continue their work.
+    Our Solutions
+    \n■Home-based daycare for sick children
+    \nProvide parents (mothers in particular) with a backstop in case of simultaneous work/family emergencies, helping them in their strive for work-life balance.
+
+    \n■Small size daycare service
+    \nAssist parents (mothers in particular) to remain in the workforce through provision of uniquely small (maximum 19 places) daycare converted from residential apartments.
+
+    \n■Daycare for disabled children
+    \nSupport disabled children and their families, who had been excluded from regular daycare service, to have an access to childcare and opportunities to pursue individual goals, through provision of daycare service.",
+  positions: rand(3..10),
+  address: "Ota, Japan",
+  ongoing: true,
+  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..2)).sort,
+  start_time: Time.now + rand(10000..100000),
+  end_time: Time.new(2020, 12, 2, 20, 00, 00),
+  organization: MORI,
+  owner: DOUG,
+  item: 'pints of blood',
+  tag_list: "Children/Youth",
+  target: 100000,
+  raised: 58979
+  )
+event_photo = URI.open('https://florence.or.jp/english/img/top_imgizo_lp3.jpg')
+KIDS3.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+
+puts "creating dolphin"
+DOLPHIN = Event.create!(
+  title: "Stop dolphin hunting",
+  category: 'Fundraiser',
+  description: "REQUEST TO ITO FISHERY COOPERATIVE: EVEN FOR LIVE CAPTURES, THE SEA BECOMES BLOODY AND THE DOLPHINS DIE!
+  \nImmediate halt to dolphin drive hunting in Futo for the purpose of selling live bodies to aquariums! In October 2019 Ito Fishery Cooperative in Futo area of Ito-city Shizuoka prefecture resumed dolphin drive hunting, which had not been performed for the past 15 years. If it’s a live capture, it’s not cruel. Based on such understanding, Ito Fishery Cooperative announced to the media the reopening of the hunt. However, the truth is very different. “Ocean-Dolphin-Human” released a video of live capture of bottlenose dolphins by dolphin drive hunting in Futo.",
+  positions: rand(3..10),
+  address: "Urayasu, Japan",
+  ongoing: true,
+  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..2)).sort,
+  start_time: Time.now + rand(10000..100000),
+  end_time: Time.new(2020, 12, 2, 20, 00, 00),
+  organization: MORI,
+  owner: DOUG,
+  item: 'apples',
+  tag_list: "Animals/Wildlife",
+  target: 500000,
+  raised: 374593
+  )
+event_photo = URI.open('https://i2.wp.com/arcj.org/wp-content/uploads/2020/01/1-3.jpg?resize=640%2C450&ssl=1')
+DOLPHIN.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+
+puts "creating chicken"
+CHICKEN = Event.create!(
+  title: "No more animal cruelty!",
+  category: 'Fundraiser',
+  description: "Japan’s leading egg producer Akita Foods is alleged to have bribed the Agriculture Minister so that the OIE (World Organization for Animal Health) standard for animal welfare allows for battery cages. Subsequently, Japan submitted an opinion to OIE that chickens do not need dust-bathing litter, nesting area, or perches, and that animal welfare can be achieved even with battery cages. As a result, OIE’s original proposal, which required litter, perches, and nest boxes, changed such that these installations are only “desirable” (moreover Japan is requesting that even “desirable” be omitted).",
+  positions: rand(3..10),
+  address: "Ageo, Japan",
+  ongoing: true,
+  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..2)).sort,
+  start_time: Time.now + rand(10000..100000),
+  end_time: Time.new(2020, 12, 2, 20, 00, 00),
+  organization: MORI,
+  owner: DOUG,
+  item: 'apples',
+  tag_list: "Animals/Wildlife",
+  target: 300000,
+  raised: 123552
+  )
+event_photo = URI.open('https://i1.wp.com/arcj.org/wp-content/uploads/2020/12/DSCN7856.jpg?resize=640%2C450&ssl=1')
+CHICKEN.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+
+
+
+puts "creating chicken2"
+CHICKEN2 = Event.create!(
+  title: "Better treatment of livestock",
+  category: 'Fundraiser',
+  description: "Japan’s leading egg producer Akita Foods is alleged to have bribed the Agriculture Minister so that the OIE (World Organization for Animal Health) standard for animal welfare allows for battery cages. Subsequently, Japan submitted an opinion to OIE that chickens do not need dust-bathing litter, nesting area, or perches, and that animal welfare can be achieved even with battery cages. As a result, OIE’s original proposal, which required litter, perches, and nest boxes, changed such that these installations are only “desirable” (moreover Japan is requesting that even “desirable” be omitted).",
+  positions: rand(3..10),
+  address: "Nagano, Japan",
+  ongoing: true,
+  dates: [0, 1, 2, 3, 4, 5, 6].sample(rand(1..2)).sort,
+  start_time: Time.now + rand(10000..100000),
+  end_time: Time.new(2020, 12, 2, 20, 00, 00),
+  organization: MORI,
+  owner: DOUG,
+  item: 'apples',
+  tag_list: "Animals/Wildlife",
+  target: 300000,
+  raised: 123552
+  )
+event_photo = URI.open('https://i1.wp.com/arcj.org/wp-content/uploads/2020/12/DSCN7856.jpg?resize=640%2C450&ssl=1')
+CHICKEN2.photo.attach(io: event_photo, filename: 'event.jpg', content_type: 'image/jpg')
+
 
 
 #---------------SET ENROLLMENTS---------------
