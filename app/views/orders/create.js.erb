@@ -1,9 +1,11 @@
+// Replace the modal
 console.log("Replace modal here");
 function refreshModal(innerHTML) {
   const box = document.querySelector('#order-modal-content');
   box.innerHTML = innerHTML;
 }
 refreshModal("<%= j render 'orders/modal', order: @order %>");
+// Calling stripe
 var paymentButton = document.getElementById('pay');
   paymentButton.addEventListener('click', () => {
     var stripe = Stripe('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>');
