@@ -1,4 +1,5 @@
 require "open-uri"
+require 'json'
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   skip_before_action :authenticate_user!, only: [:index, :show]
@@ -15,7 +16,9 @@ class EventsController < ApplicationController
 
 
   def map
+
     authorize current_user
+
     if params[:query].present? && params[:category].present?
       @events = Event.all.tagged_with((params[:query])).where(category: params[:category])
     elsif params[:query].present?

@@ -28,52 +28,62 @@ window.addMarkersToMap = (map, markers) => {
   });
 };
 const addMarkersToMap = window.addMarkersToMap;
+
+
 const initMapbox = () => {
   const mapElement = document.getElementById('map');
 
   if (mapElement) { // only build a map if there's a div#map to inject into
-    mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
-    const map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v10'
-    });
+    let userMarker = JSON.parse(mapElement.dataset.user);
+    navigator.geolocation.getCurrentPosition(drawMap);
+    function drawMap(pos) {
+      mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
+      const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v10'
+      });
 
-    const markers = JSON.parse(mapElement.dataset.markers);
-    //   markers.forEach((marker) => {
-    //   new mapboxgl.Marker()
-    //   .setLngLat([ marker.lng, marker.lat ])
-		// 	.addTo(map);
-    // });
-    window.markers = markers;
-    window.mapBoxMarkers = []
-    const userMarker = JSON.parse(mapElement.dataset.user);
-		const popup = new mapboxgl.Popup().setHTML(userMarker.infoWindow); // add this
+      let markers = JSON.parse(mapElement.dataset.markers);
+      //   markers.forEach((marker) => {
+      //   new mapboxgl.Marker()
+      //   .setLngLat([ marker.lng, marker.lat ])
+  		// 	.addTo(map);
+      // });
+      window.markers = markers;
+      window.mapBoxMarkers = []
+      var crd = pos.coords;
 
-		const element = document.createElement('div');
-		element.className = 'marker';
-		element.style.backgroundImage = `url('${userMarker.image_url}')`;
-		element.style.backgroundSize = 'contain';
-		element.style.width = '56px';
-		element.style.height = '56px';
-		element.style.borderRadius = '50%';
-		element.style.border = '2px solid white';
-		element.style.boxShadow = '0 0 15px rgba(0,0,0,0.4)';
+      userMarker.lat = crd.latitude;
+      userMarker.lng = crd.longitude;
 
-		new mapboxgl.Marker(element)
-			.setLngLat([ userMarker.lng, userMarker.lat ])
-			.setPopup(popup) // add this
-			.addTo(map);
+      console.log(userMarker.lat);
+      console.log(userMarker.lng);
+      const popup = new mapboxgl.Popup().setHTML(userMarker.infoWindow); // add this
 
+      const element = document.createElement('div');
+      element.className = 'marker';
+      element.style.backgroundImage = `url('${userMarker.image_url}')`;
+      element.style.backgroundSize = 'contain';
+      element.style.width = '56px';
+      element.style.height = '56px';
+      element.style.borderRadius = '50%';
+      element.style.border = '2px solid white';
+      element.style.boxShadow = '0 0 15px rgba(0,0,0,0.4)';
+      new mapboxgl.Marker(element)
+        .setLngLat([ userMarker.lng, userMarker.lat ])
+        .setPopup(popup) // add this
+        .addTo(map);
 
-    if (mapElement) {
-      fitMapToUser(map, userMarker);
+      if (mapElement) {
+        fitMapToUser(map, userMarker);
+        }
+      addMarkersToMap(map, markers);
+      // addMarkersToMap([userMarker]);
+
+      map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken, mapboxgl: mapboxgl }));
+      window.mapbox = map
+
     }
-
-    addMarkersToMap(map, markers);
-    // addMarkersToMap([userMarker]);
-
-    map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken, mapboxgl: mapboxgl }));
-    window.mapbox = map
   }
 };
     // const fitMapToMarkers = (map, markers) => {

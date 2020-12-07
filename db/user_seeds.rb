@@ -109,12 +109,12 @@ SEIGO = User.create!(
   address: "meguro tokyo Japan",
   email: "seigo@iru.com",
   password: "123456",
-  description: "BURN IT ALL DOWN. VIVA LA RESISTANCE!",
-  gender: "male",
+  description: "I love NPOs and making a difference. I also love children, puppies, the environment, wearing a mask like it's going out of style, LGBTQ, minorities, people with disabilities, and believe they hold equal importance and urgency. dislikes: pollution, violence, discrimination, snakes.",
+  gender: "gender is a social construct",
   admin: false
 )
   #birthday: 'november 6 1987'
-user_avatar = URI.open('https://www.aboutmanchester.co.uk/wp-content/uploads/2017/11/IMG_2409.jpg')
+user_avatar = URI.open('https://media-exp1.licdn.com/dms/image/C4D03AQFObj2fZk5h-Q/profile-displayphoto-shrink_400_400/0/1589424657368?e=1612396800&v=beta&t=h13HBzQn8n2xPw4gOUwx1RUh1pB47qVrOaP6ei2rniM')
 user_banner = URI.open('https://miro.medium.com/max/1400/1*nkARDRVDJaB9bKN0Po53-g.jpeg')
 SEIGO.photos.attach(io: user_avatar, filename: 'user_avatar.png', content_type: 'image/png')
 SEIGO.photos.attach(io: user_banner, filename: 'user_banner.jpg', content_type: 'image/jpg')
