@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   #redirect to login
   def configure_permitted_parameters
     added_attrs = [:nickname, :email, :password, :address]
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname, :address])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname, :gender, :address, photos: []])
   end
 
   def default_url_options

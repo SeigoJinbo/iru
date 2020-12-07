@@ -1,3 +1,4 @@
+
 <div class="page">
   <div class="row justify-content-md-center">
     <div class="col-8 center">
@@ -20,6 +21,10 @@
               <%= f.input :password_confirmation,
                           required: true,
                           input_html: { autocomplete: "new-password" } %>
+              <%= f.input :nickname, html5: true%>
+              <%= f.input :gender, as: :radio_buttons, collection: User::GENDER %>
+              <%= f.input :address, html5: true%>
+              <%= f.input :photos, as: :file, input_html: { multiple: true }, label: 'Please upload an avatar photo' %>
             </div>
 
             <div class="form-actions mb-2">
