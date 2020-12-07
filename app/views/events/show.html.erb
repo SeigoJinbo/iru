@@ -133,13 +133,32 @@
 										<% end %>
 
 										<!---donate form---->
-										<%= form_tag orders_path do |f| %>
+										<%= form_tag orders_path, remote: true do |f| %>
 											<%= hidden_field_tag 'event_id', @event.id %>
 											<%= text_field_tag :amount_cents, nil, placeholder: 'Any amount (¥) OK!' %>
-
-											<%= submit_tag 'Donate', class: 'btn btn-primary' %>
+                      <!-- Button trigger modal -->
+											<%= submit_tag 'Donate', class: 'btn btn-primary donate-btn', data: {toggle: "modal", target: "#exampleModal" } %>
 										<% end %>
 								<% end %>
+
+
+								<!-- Modal -->
+								<div
+								class="modal fade"
+								id="exampleModal"
+								tabindex="-1"
+								role="dialog"
+								aria-labelledby="exampleModalLabel"
+								aria-hidden="true"
+								>
+								<div class="modal-dialog" role="document">
+                  <script src="https://js.stripe.com/v3/"></script>
+									<div class="modal-content" id="order-modal-content">
+                    <%#= render 'orders/modal', order: @order %>
+									</div>
+								</div>
+								</div>
+
 								<!--------------------- Visitor sign in ------------->
 							<% else %>
 								<%= link_to "Sign in to fundraise", new_user_session_path, class: "btn btn-primary" %>
