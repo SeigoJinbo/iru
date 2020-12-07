@@ -28,31 +28,29 @@ window.addMarkersToMap = (map, markers) => {
   });
 };
 const addMarkersToMap = window.addMarkersToMap;
+
+
 const initMapbox = () => {
   const mapElement = document.getElementById('map');
 
   if (mapElement) { // only build a map if there's a div#map to inject into
-    mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
-    const map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v10'
-    });
     let userMarker = JSON.parse(mapElement.dataset.user);
-    navigator.geolocation.getCurrentPosition(drawUserMarker);
+    navigator.geolocation.getCurrentPosition(drawMap);
+    function drawMap(pos) {
+      mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
+      const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v10'
+      });
 
-    let markers = JSON.parse(mapElement.dataset.markers);
-    //   markers.forEach((marker) => {
-    //   new mapboxgl.Marker()
-    //   .setLngLat([ marker.lng, marker.lat ])
-		// 	.addTo(map);
-    // });
-    window.markers = markers;
-    window.mapBoxMarkers = []
-
-
-
-
-    function drawUserMarker(pos) {
+      let markers = JSON.parse(mapElement.dataset.markers);
+      //   markers.forEach((marker) => {
+      //   new mapboxgl.Marker()
+      //   .setLngLat([ marker.lng, marker.lat ])
+  		// 	.addTo(map);
+      // });
+      window.markers = markers;
+      window.mapBoxMarkers = []
       var crd = pos.coords;
 
       userMarker.lat = crd.latitude;
@@ -79,21 +77,13 @@ const initMapbox = () => {
       if (mapElement) {
         fitMapToUser(map, userMarker);
         }
+      addMarkersToMap(map, markers);
+      // addMarkersToMap([userMarker]);
+
+      map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken, mapboxgl: mapboxgl }));
+      window.mapbox = map
 
     }
-
-
-    console.log(userMarker.lat);
-    console.log(userMarker.lng);
-
-
-
-
-    addMarkersToMap(map, markers);
-    // addMarkersToMap([userMarker]);
-
-    map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken, mapboxgl: mapboxgl }));
-    window.mapbox = map
   }
 };
     // const fitMapToMarkers = (map, markers) => {
