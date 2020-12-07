@@ -137,7 +137,7 @@
 											<%= hidden_field_tag 'event_id', @event.id %>
 											<%= text_field_tag :amount_cents, nil, placeholder: 'Any amount (¥) OK!' %>
 
-											<%= submit_tag 'Donate', class: 'btn btn-primary' %>
+											<%= submit_tag 'Donate', class: 'btn btn-primary donate-btn', data: {toggle: "modal", target: "#exampleModal" } %>
 										<% end %>
 								<% end %>
 								<!-- Button trigger modal -->
@@ -173,10 +173,12 @@
 											</button>
 										</div>
 										<div class="modal-body">
+                      <% @order = Order.last %>
 											<p>
-												Would you like to donate
-												<strong><%#= humanized_money_with_symbol @order.amount %></strong> to
-												<strong><%#= @order.event.organization.name %></strong>?
+
+												<strong><%= humanized_money_with_symbol @order.amount %></strong> to
+												<strong><%= @order.event.organization.name %></strong>?
+
 											</p>
 										</div>
 										<div class="modal-footer">
@@ -185,13 +187,14 @@
 											</button>
 											<button type="button" id="pay" class="btn btn-primary">Yes!</button>
 										</div>
+
 										<script src="https://js.stripe.com/v3/"></script>
 										<script>
 											const paymentButton = document.getElementById('pay');
 											paymentButton.addEventListener('click', () => {
 												const stripe = Stripe('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>');
 												stripe.redirectToCheckout({
-													sessionId: '<%#= @order.checkout_session_id %>'
+													sessionId: '<%= @order.checkout_session_id %>'
 												});
 											});
 										</script>
