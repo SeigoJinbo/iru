@@ -136,6 +136,6 @@
 	</div>
 </div>
 <!-- meta share -->
-<% content_for :meta_title, "#{@event.title} is on #{DEFAULT_META["meta_product_name"]}" %>
-<% content_for :meta_description, @event.description %>
-<% content_for :meta_image, cl_image_path(@event.photo.key) %>
+<% content_for :meta_title, "#{@order.event.title} is on #{DEFAULT_META["meta_product_name"]}" %>
+<% content_for :meta_description, @order.event.description %>
+<% content_for :meta_image, cl_image_path(@order.event.photo.key) %>
