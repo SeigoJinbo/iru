@@ -1,4 +1,4 @@
-<% @organizations = Organization.all.where(description:"....") %>
+<% @organizations = Organization.all %>
 <div class="page">
 
 	<div class="page-box">
@@ -510,7 +510,13 @@
 											</div>
 											<div class="card-info">
 												<h6><%= organization.tag_list %></h6>
-												<p><%= organization.description.truncate(90, separator: ' ') %></p>
+                        
+                        <% if organization.description.nil? %>
+                          <p><%= organization.name %> is an organization registered by <%= organization.users.first.nickname %></p>
+                        <% else %>
+                          <p><%= organization.description.truncate(90, separator: ' ') %></p>
+                        <% end %>
+                        
 											</div>
 										<% end %>
 									</div>
