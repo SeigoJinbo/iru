@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  GENDER = ['female', 'male']
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
   has_many :enrollments
   has_many :orders
@@ -17,6 +18,7 @@ class User < ApplicationRecord
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
   has_many_attached :photos
+  validates :nickname, :gender, :address, :photos, presence: true
 
   def events
     enrollment_events + order_events + donation_event
