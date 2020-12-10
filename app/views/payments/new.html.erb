@@ -2,23 +2,25 @@
   <div class="row py-4">
 
 
-        <!-----------Event Card----------->
-        <li class="event-card">
-          <h1>Fundraiser</h1>
-          <div class="event-card-contents">
-            <div class="event-card-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path @order.event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
-              <h4><%= @order.event.title %></h4>
-              <p><%= @order.event.description %></p>
-            </div>
-          </div>
-        </li>
+    <!-----------Event Card----------->
+    <li class="event-card">
+      <h1>Fundraiser</h1>
+      <div class="event-card-contents">
+        <div class="event-card-pic"
+          style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path @order.event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+          <h4><%= @order.event.title %></h4>
+          <p><%= @order.event.description %></p>
+        </div>
+      </div>
+    </li>
 
 
 
 
     <div class="col">
       <h1>Confirmation</h1>
-      <p>Would you like to donate <strong><%= humanized_money_with_symbol @order.amount %></strong> to <strong><%= @order.event.organization.name %></strong>?</p>
+      <p>Would you like to donate <strong><%= humanized_money_with_symbol @order.amount %></strong> to
+        <strong><%= @order.event.organization.name %></strong>?</p>
 
       <button id="pay" class="btn btn-primary">Yes!</button>
 
