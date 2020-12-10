@@ -5,9 +5,10 @@
   position: absolute;
   z-index: 99;
   background-color: $ivory;
-  height: 500px;
-  overflow: scroll;
-	margin-left: 24px;
+  height: 90%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin: 16px 0 0 16px;
   width: 300px;
   border-radius: 5px;
   text-decoration: none !important;
@@ -17,31 +18,28 @@
   align-items: center;
   justify-content: center;
 }
-
 .map-form-results {
-	margin-left: 16px;
-	margin-right: 16px;
-	padding: 8px;
+  margin-left: 16px;
+  margin-right: 16px;
+  padding: 8px;
   display: flex;
   justify-content: space-between;
   align-item: center;
   h5 {
     margin: 0;
-    color: #182B33;
+    color: #182b33;
   }
   p {
     margin: 0;
     font-weight: normal;
   }
 }
-
 .form-control {
-	background-color: $ivory;
+  background-color: $ivory;
 }
-
 .map-results-organization-image {
-	height: 40px;
-	width: 40px;
+  height: 40px;
+  width: 40px;
 }
 .info-window {
   width: 200px;
@@ -100,7 +98,7 @@
   font-size: 15px;
   text-align: left;
   padding: 10px 10px 10px 10px;
-  border: 1px solid #EAEAEA;
+  border: 1px solid #eaeaea;
   border-radius: 4px;
   background-color: white;
 }
@@ -116,12 +114,12 @@
   border-color: $grapefruit;
 }
 #category_donation + label {
-  color: #FFC65A;
+  color: #ffc65a;
   background-color: $ivory;
 }
 #category_donation:checked + label {
-  background-color: #FFC65A;
-  border-color: #FFC65A;
+  background-color: #ffc65a;
+  border-color: #ffc65a;
 }
 #category_fundraiser + label {
   color: $sage;
@@ -142,4 +140,18 @@
 }
 .mapboxgl-ctrl-geocoder--icon-search {
   display: none;
+}
+@media only screen and (min-width: 1200px) {
+}
+@media only screen and (min-width: 768px) and (max-width: 1199px) {
+}
+@media only screen and (max-width: 767px) {
+  .results {
+    display: none;
+  }
+  .map-box {
+    height: 150px;
+    overflow: hidden;
+    margin: 16px 16px 0 16px;
+  }
 }
