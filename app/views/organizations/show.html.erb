@@ -3,7 +3,8 @@
 <div class="page">
   <div class="page-box">
     <%# Org banner %>
-    <div class="org-banner" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path @organization.photos.second.key, height: 400, width: 1200, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+    <div class="org-banner"
+      style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path @organization.photos.second.key, height: 400, width: 1200, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
       <div class="org-banner-items">
         <%= cl_image_tag @organization.photos.first.key, height: 100, width: 100, crop: :fill, class: "org-avatar" %>
         <div class="org-banner-text ml-3">
@@ -21,75 +22,80 @@
     <!---------------------Tabs bar--------------------->
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item">
-        <a class="nav-link <%= "show active" unless params[:tab] == "comments" %>" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="true">Organization Info</a>
+        <a class="nav-link <%= "show active" unless params[:tab] == "comments" %>" id="info-tab" data-toggle="tab"
+          href="#info" role="tab" aria-controls="info" aria-selected="true">Organization Info</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="event-tab" data-toggle="tab" href="#event" role="tab" aria-controls="event" aria-selected="false">Projects</a>
+        <a class="nav-link" id="event-tab" data-toggle="tab" href="#event" role="tab" aria-controls="event"
+          aria-selected="false">Projects</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="calendar-tab" data-toggle="tab" href="#calendar" role="tab" aria-controls="calendar" aria-selected="false">Calendar</a>
+        <a class="nav-link" id="calendar-tab" data-toggle="tab" href="#calendar" role="tab" aria-controls="calendar"
+          aria-selected="false">Calendar</a>
       </li>
       <li class="nav-item">
-      <a class="nav-link <%= "active" if params[:tab] == "comments" %>" id="comment-tab" data-toggle="tab" href="#comment" role="tab" aria-controls="comment" aria-selected="false">Comments</a>
+        <a class="nav-link <%= "active" if params[:tab] == "comments" %>" id="comment-tab" data-toggle="tab"
+          href="#comment" role="tab" aria-controls="comment" aria-selected="false">Comments</a>
       </li>
       <% if @organization.memberships.where(status: "Active").include?(Membership.find_by(organization: @organization, user: current_user)) %>
-        <li class="nav-item">
-          <a class="nav-link" id="pending-volunteer-tab" data-toggle="tab" href="#pending-volunteer" role="tab" aria-controls="pending-volunteer" aria-selected="false">Management</a>
-        </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pending-volunteer-tab" data-toggle="tab" href="#pending-volunteer" role="tab"
+          aria-controls="pending-volunteer" aria-selected="false">Management</a>
+      </li>
       <% end %>
     </ul>
 
     <!---------------------Tabs page--------------------->
     <div class="tab-content" id="myTabContent">
       <!---------------------Info--------------------->
-      <div class="tab-pane fade <%= "show active" unless params[:tab] == "comments" %>" id="info" role="tabpanel" aria-labelledby="info-tab">
+      <div class="tab-pane fade <%= "show active" unless params[:tab] == "comments" %>" id="info" role="tabpanel"
+        aria-labelledby="info-tab">
         <div class="org-sections">
           <div class="org-info">
             <div class="org-mission">
               <div class="d-flex justify-content-between">
-              <h4>Our Mission</h4>
-              <% if @organization.memberships.where(status: "Active").include?(Membership.find_by(organization: @organization, user: current_user)) %>
+                <h4>Our Mission</h4>
+                <% if @organization.memberships.where(status: "Active").include?(Membership.find_by(organization: @organization, user: current_user)) %>
                 <i class="far fa-edit"></i>
-              <% end %>
+                <% end %>
               </div>
               <%= simple_format(@organization.description) %>
             </div>
             <div class="org-members">
               <h4>Our Team</h4>
               <% @organization.memberships.where(status: "Active").each do |membership| %>
-                <div class='m-2'>
-                  <%=  link_to user_path(membership.user) do %>
-                    <%= cl_image_tag membership.user.photos.first.key, height: 40, width: 40, crop: :fill , class: "avatar-sm"%>
-                  <% end %>
-                  <%= membership.user.nickname %>
-                </div>
+              <div class='m-2'>
+                <%=  link_to user_path(membership.user) do %>
+                <%= cl_image_tag membership.user.photos.first.key, height: 40, width: 40, crop: :fill , class: "avatar-sm"%>
+                <% end %>
+                <%= membership.user.nickname %>
+              </div>
               <% end %>
-							<h6 class="blinking">We need more members!</h6>
+              <h6 class="blinking">We need more members!</h6>
               <!-----------------------------------MEMBERS---------------------------->
               <% unless @organization.users.include?(current_user) %>
-                <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                  aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header text-center">
-                        <h4 class="modal-title w-100 font-weight-bold">Tell us about you</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
+              <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header text-center">
+                      <h4 class="modal-title w-100 font-weight-bold">Tell us about you</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body mx-3">
+                      <div class="md-form">
+                        <i class="fas fa-pencil prefix grey-text"></i>
+                        <textarea type="text" id="form8" class="md-textarea form-control" rows="4"></textarea>
+                        <label data-error="wrong" data-success="right" for="form8"></label>
                       </div>
-                      <div class="modal-body mx-3">
-                        <div class="md-form">
-                          <i class="fas fa-pencil prefix grey-text"></i>
-                          <textarea type="text" id="form8" class="md-textarea form-control" rows="4"></textarea>
-                          <label data-error="wrong" data-success="right" for="form8"></label>
-                        </div>
-                      </div>
-                      <div class="modal-footer d-flex justify-content-center">
-                        <%= simple_form_for [@organization, @membership] do |f| %>
-                          <div class="no-input"><%= f.input :status %></div>
-                          <%= f.submit 'Apply', remote: true, class: 'btn btn-primary' %>
-                        <% end %>
-                      </div>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                      <%= simple_form_for [@organization, @membership] do |f| %>
+                      <div class="no-input"><%= f.input :status %></div>
+                      <%= f.submit 'Apply', remote: true, class: 'btn btn-primary' %>
+                      <% end %>
                     </div>
                   </div>
                 </div>
@@ -109,6 +115,7 @@
         <div class="org-sections">
           <div class="event-title">
             <h4>Projects</h4>
+
             <div class="project-add">
               <% if @organization.users.include?(current_user) %>
                 <%= link_to new_organization_event_path(@organization) do %>
@@ -240,20 +247,22 @@
       <div class="tab-pane fade" id="calendar" role="tabpanel" aria-labelledby="calendar-tab">
         <div class=calendar-box>
           <%= month_calendar(events: @events) do |date, events| %>
-            <span class="calendar-date"><%= date.day %></span>
-            <% events.each do |event| %>
-              <div class="border">
-                <%= link_to event_path(event) do %>
-                  <button class="btn btn-block calendar-link-<%= @colors.index(event.title) %>" type="button"><%= event.title %></button>
-                <% end %>
-              </div>
+          <span class="calendar-date"><%= date.day %></span>
+          <% events.each do |event| %>
+          <div class="border">
+            <%= link_to event_path(event) do %>
+            <button class="btn btn-block calendar-link-<%= @colors.index(event.title) %>"
+              type="button"><%= event.title %></button>
             <% end %>
+          </div>
           <% end %>
-        <div class='calendar-add d-flex justify-content-end mr-2'><% if @organization.memberships.include?(Membership.find_by(user: current_user, organization: @organization)) %>
-              <%= link_to new_organization_event_path(@organization) do %>
-                <i class="fas fa-plus"></i> project
-              <% end %>
-        <% end %></div>
+          <% end %>
+          <div class='calendar-add d-flex justify-content-end mr-2'>
+            <% if @organization.memberships.include?(Membership.find_by(user: current_user, organization: @organization)) %>
+            <%= link_to new_organization_event_path(@organization) do %>
+            <i class="fas fa-plus"></i> project
+            <% end %>
+            <% end %></div>
         </div>
       </div>
       <!-------------------------- Owner Section ---------------------------->
@@ -265,139 +274,144 @@
 
             <h4>Pending Members</h4>
             <% @organization.memberships.where(status: "Pending").each do |membership| %>
-              <%= link_to user_path(membership.user) do %>
-                <%= membership.user.nickname %>
-                <%= cl_image_tag membership.user.photos.first.key, height: 60, width: 60, crop: :fill, class: "pending-avatar" %>
-                <% end %>
+            <%= link_to user_path(membership.user) do %>
+            <%= membership.user.nickname %>
+            <%= cl_image_tag membership.user.photos.first.key, height: 60, width: 60, crop: :fill, class: "pending-avatar" %>
+            <% end %>
 
-              <div class="d-flex">
-                <%= simple_form_for([@organization, membership], remote: true) do |f| %>
-                  <%= f.input :status, as: :hidden, input_html: { value: "Active" } %>
-                  <div class="m-1"><%= f.button :button do %>
-                    <i class="far fa-check-circle text-primary" aria-hidden="true"></i>
-                  <% end %>
-                  </div>
-                <% end %>
-
-                <%= simple_form_for([@organization, membership]) do |f| %>
-                  <%= f.input :status, as: :hidden, input_html: { value: "Declined" } %>
-                  <div class="m-1"><%= f.button :button do %>
-                    <i class="far fa-times-circle text-primary" aria-hidden="true"></i>
-                  <% end %>
-                  </div>
+            <div class="d-flex">
+              <%= simple_form_for([@organization, membership], remote: true) do |f| %>
+              <%= f.input :status, as: :hidden, input_html: { value: "Active" } %>
+              <div class="m-1"><%= f.button :button do %>
+                <i class="far fa-check-circle text-primary" aria-hidden="true"></i>
                 <% end %>
               </div>
+              <% end %>
+
+              <%= simple_form_for([@organization, membership]) do |f| %>
+              <%= f.input :status, as: :hidden, input_html: { value: "Declined" } %>
+              <div class="m-1"><%= f.button :button do %>
+                <i class="far fa-times-circle text-primary" aria-hidden="true"></i>
+                <% end %>
+              </div>
+              <% end %>
+            </div>
             <% end %>
 
             <h4>Volunteer Approval</h4>
             <% @volunteer_events.each do |event| %>
-              <h5>- <%= event.title %></h5>
-              <div class="round-box d-flex">
-                <div class="pending-info">
-                  <p><%= event.start_time.strftime("%d of %B, %Y") %></p>
-                  <p><%= event.start_time.strftime("%I:%M %p")%> - <%= event.end_time.strftime("%I:%M %p")%></p>
-                  <p>Volunteers: <%= event.enrollments.where(status: "Approved").count %>/<%= event.target %> people</p>
-                </div>
-                <% if event.enrollments.where(status: "Pending").empty? %>
-                  <p>No volunteers yet...</p>
-                <% else %>
-                  <div class="d-flex">
-                    <% event.enrollments.each do |enrollment| %>
-                      <% if enrollment.status == "Pending" %>
-                        <div class="text-center py-2 pending-card">
-                          <%= link_to user_path(enrollment.user) do %>
+            <h5>- <%= event.title %></h5>
+            <div class="round-box d-flex">
+              <div class="pending-info">
+                <p><%= event.start_time.strftime("%d of %B, %Y") %></p>
+                <p><%= event.start_time.strftime("%I:%M %p")%> - <%= event.end_time.strftime("%I:%M %p")%></p>
+                <p>Volunteers: <%= event.enrollments.where(status: "Approved").count %>/<%= event.target %> people</p>
+              </div>
+              <% if event.enrollments.where(status: "Pending").empty? %>
+              <p>No volunteers yet...</p>
+              <% else %>
+              <div class="d-flex">
+                <% event.enrollments.each do |enrollment| %>
+                <% if enrollment.status == "Pending" %>
+                <div class="text-center py-2 pending-card">
+                  <%= link_to user_path(enrollment.user) do %>
 
-                            <%= cl_image_tag enrollment.user.photos.first.key, height: 60, width: 60, crop: :fill, class: "pending-avatar" %>
-                            <%= enrollment.user.nickname %>
-                          <% end %>
-                          <div class="pending-btn">
-                            <%= simple_form_for(enrollment, remote: true) do |f| %>
-                              <%= f.input :status, as: :hidden, input_html: { value: "Approved" } %>
-                              <%= f.button :button do %>
-                                <i class="far fa-check-circle text-primary"></i>
-                              <% end %>
-                            <% end %>
-                            <%= simple_form_for(enrollment, remote: true) do |f| %>
-                              <%= f.input :status, as: :hidden, input_html: { value: "Declined" } %>
-                              <%= f.button :button do %>
-                                <i class="far fa-times-circle text-seaweed"></i>
-                              <% end %>
-                            <% end %>
-                          </div>
-                        </div>
-                      <% end %>
+                  <%= cl_image_tag enrollment.user.photos.first.key, height: 60, width: 60, crop: :fill, class: "pending-avatar" %>
+                  <%= enrollment.user.nickname %>
+                  <% end %>
+                  <div class="pending-btn">
+                    <%= simple_form_for(enrollment, remote: true) do |f| %>
+                    <%= f.input :status, as: :hidden, input_html: { value: "Approved" } %>
+                    <%= f.button :button do %>
+                    <i class="far fa-check-circle text-primary"></i>
+                    <% end %>
+                    <% end %>
+                    <%= simple_form_for(enrollment, remote: true) do |f| %>
+                    <%= f.input :status, as: :hidden, input_html: { value: "Declined" } %>
+                    <%= f.button :button do %>
+                    <i class="far fa-times-circle text-seaweed"></i>
+                    <% end %>
                     <% end %>
                   </div>
+                </div>
+                <% end %>
                 <% end %>
               </div>
+              <% end %>
+            </div>
             <% end %>
           </div>
           <%# ---------------Pending Donation ---------------%>
           <div class="pending">
             <h4>Donation Confirmation</h4>
             <% @donation_events.each do |event| %>
-              <h5>- <%= event.title %></h5>
-              <div class="round-box d-flex">
-                <div class="pending-info">
-                  <p>Donations: <%= event.donations.where(status: "Recieved").count %>/<%= event.target %> items</p>
-                  <%= (Date.today...event.end_time).count %> days left</span></h3>
-                  <p>until <%= event.end_time.strftime("%d of %B, %Y") %></p>
-                </div>
+            <h5>- <%= event.title %></h5>
+            <div class="round-box d-flex">
+              <div class="pending-info">
+                <p>Donations: <%= event.donations.where(status: "Recieved").count %>/<%= event.target %> items</p>
+                <%= (Date.today...event.end_time).count %> days left</span></h3>
+                <p>until <%= event.end_time.strftime("%d of %B, %Y") %></p>
+              </div>
 
-                <div class="pending-box">
-                  <% if event.donations.where(status: "Waiting").empty? %>
-                    <p>No donations yet...</p>
-                  <% else %>
-                    <div class="d-flex">
-                      <% event.donations.each do |donation| %>
-                        <% if donation.status == "Waiting" %>
-                          <div class="text-center py-2 pending-card">
-                            <%= link_to user_path(donation.user) do %>
-                              <%= cl_image_tag donation.user.photos.first.key, height: 60, width: 60, crop: :fill, class: "pending-avatar" %>
-                              <%= donation.user.nickname %>
-                            <% end %>
-                            <div class="pending-btn">
-                              <%= simple_form_for(donation, remote: true) do |f| %>
-                                <%= f.input :status, as: :hidden, input_html: { value: "Received" } %>
-                                <%= f.button :button do %>
-                                  <i class="far fa-check-circle text-primary"></i>
-                                <% end %>
-                              <% end %>
-                              <%= simple_form_for(donation, remote: true) do |f| %>
-                                <%= f.input :status, as: :hidden, input_html: { value: "Cancelled!" } %>
-                                <%= f.button :button do %>
-                                  <i class="far fa-times-circle text-seaweed"></i>
-                                <% end %>
-                              <% end %>
-                            </div>
-                          </div>
-                        <% end %>
+              <div class="pending-box">
+                <% if event.donations.where(status: "Waiting").empty? %>
+                <p>No donations yet...</p>
+                <% else %>
+                <div class="d-flex">
+                  <% event.donations.each do |donation| %>
+                  <% if donation.status == "Waiting" %>
+                  <div class="text-center py-2 pending-card">
+                    <%= link_to user_path(donation.user) do %>
+                    <%= cl_image_tag donation.user.photos.first.key, height: 60, width: 60, crop: :fill, class: "pending-avatar" %>
+                    <%= donation.user.nickname %>
+                    <% end %>
+                    <div class="pending-btn">
+                      <%= simple_form_for(donation, remote: true) do |f| %>
+                      <%= f.input :status, as: :hidden, input_html: { value: "Received" } %>
+                      <%= f.button :button do %>
+                      <i class="far fa-check-circle text-primary"></i>
+                      <% end %>
+                      <% end %>
+                      <%= simple_form_for(donation, remote: true) do |f| %>
+                      <%= f.input :status, as: :hidden, input_html: { value: "Cancelled!" } %>
+                      <%= f.button :button do %>
+                      <i class="far fa-times-circle text-seaweed"></i>
+                      <% end %>
                       <% end %>
                     </div>
+                  </div>
+                  <% end %>
                   <% end %>
                 </div>
+                <% end %>
               </div>
+            </div>
             <% end %>
           </div>
         </div>
       </div>
       <!-------------------------- Comment tabs ------------------------>
-      <div class="tab-pane fade <%= "show active" if params[:tab] == "comments" %>" id="comment" role="tabpanel" aria-labelledby="comment-tab">
+      <div class="tab-pane fade <%= "show active" if params[:tab] == "comments" %>" id="comment" role="tabpanel"
+        aria-labelledby="comment-tab">
         <div class="org-sections">
           <h3>Any comments/questions?</h3>
           <div class="comments-container">
             <div class="event-comment-container">
               <% if @organization.organization_comments.any? %>
-                  <% @organization.organization_comments.each do |comment| %>
-                    <div class="event-comment" id="comment-<%= comment.id %>">
-                      <div class="d-flex p-1">
-                        <div><%= cl_image_tag comment.user.photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %></div>
-                        <div class="d-flex ml-3 align-items-center"><h5><%= link_to comment.user.nickname, user_path(comment.user) %> says:</h5></div>
-                        <p class='p-1 my-2 ml-1'><%= comment.content%></p>
-                      </div>
+              <% @organization.organization_comments.each do |comment| %>
+              <div class="event-comment" id="comment-<%= comment.id %>">
+                <div class="d-flex p-1">
+                  <div>
+                    <%= cl_image_tag comment.user.photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
+                  </div>
+                  <div class="d-flex ml-3 align-items-center">
+                    <h5><%= link_to comment.user.nickname, user_path(comment.user) %> says:</h5>
+                  </div>
+                  <p class='p-1 my-2 ml-1'><%= comment.content%></p>
+                </div>
 
-                    </div>
-                  <% end %>
+              </div>
+              <% end %>
               <% end %>
             </div>
           </div>
@@ -412,7 +426,3 @@
     </div>
   </div>
 </div>
-
-
-
-

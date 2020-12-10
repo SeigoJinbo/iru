@@ -1,9 +1,6 @@
 <div class="d-flex">
-  <div id="map"
-       style="width: 100%; height: calc(100vh - 66px);"
-       data-markers="<%= @markers[:event].to_json %>"
-       data-user="<%= @markers[:user].to_json %>"
-       data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+  <div id="map" style="width: 100%; height: calc(100vh - 66px);" data-markers="<%= @markers[:event].to_json %>"
+    data-user="<%= @markers[:user].to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
     <!----------------------Filter---------------------->
     <div class="map-box">
       <%= render 'events/search_box', events: @events %>

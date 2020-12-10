@@ -1,26 +1,8 @@
 // Default template for page
 * {
-	margin: 0;
-	padding: 0;
-	text-decoration: none;
-}
-
-.page {
-	background-color: $sage;
-	height: calc(100vh - 66px);
-	overflow: auto;
-}
-.page-box {
-	background-color: $ivory;
-	border-radius: 24px;
-	margin: 0 24px 24px 24px;
-	// padding: 48px;
-		h1 {
-			font-weight: 700;
-		}
-		h3 {
-			font-weight: 400;
-		}
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
 }
 
 .bio {
@@ -32,9 +14,8 @@
   padding: 24px;
   overflow: scroll;
   p {
-  color: black;
-
-}
+    color: black;
+  }
 }
 
 .feed {
@@ -44,7 +25,7 @@
   margin: 4px, 4px;
   width: 820px;
 }
-  .feed-scroll {
+.feed-scroll {
   //width: 800px;
   height: 400px;
   overflow: scroll;
@@ -60,17 +41,16 @@
   // margin-left: 32px;
 }
 .contributed {
-    padding: 24px;
+  padding: 24px;
   margin: 4px, 4px;
   background-color: $beige;
   border-radius: 24px;
-    width: 300px;
-    height: 500px;
-
+  width: 300px;
+  height: 500px;
 }
 .upcomming {
-   height: 400px;
-   overflow: scroll;
+  height: 400px;
+  overflow: scroll;
 }
 
 .upcomming-card {
@@ -92,12 +72,12 @@
     // width: 240px;
     margin-bottom: 4px;
     color: white;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
     padding: 24px;
   }
-.card-info {
-  padding: 16px;
-}
+  .card-info {
+    padding: 16px;
+  }
 }
 
 .user-page-box {
@@ -109,13 +89,12 @@
 
 // Coloured text to emphasize certain words
 .maize-text {
-	color: $maize;
+  color: $maize;
 }
 
 .ivory-text {
-	color: $ivory;
+  color: $ivory;
 }
-
 
 .banner-headers {
   color: $ivory;
@@ -123,64 +102,62 @@
 
 // Styling
 
-
 .user-banner {
-	border-radius: 24px 24px 0 0;
+  border-radius: 24px 24px 0 0;
 
-	height: 300px;
-	display: flex;
+  height: 300px;
+  display: flex;
 
-	align-items: center;
+  align-items: center;
 
-
-	.user-avatar {
-		border-radius: 50%;
-		border: 4px solid white;
-	}
+  .user-avatar {
+    border-radius: 50%;
+    border: 4px solid white;
+  }
 }
 
-  .user-banner-items {
-    padding: 0 48px 0 48px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
-    width: 100%;
-  }
+.user-banner-items {
+  padding: 0 48px 0 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  width: 100%;
+}
 
 .user-box {
-	background-color: $darker-ivory;
-	border-radius: 24px;
-	padding: 24px;
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
-	// margin-bottom: 16px;
+  background-color: $darker-ivory;
+  border-radius: 24px;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  // margin-bottom: 16px;
 }
 
 .user-profile {
-	padding-left: 48px;
-	padding-right: 48px;
-	padding-bottom: 48px;
+  padding-left: 48px;
+  padding-right: 48px;
+  padding-bottom: 48px;
 }
 
 .ivory-card {
   position: relative;
-	list-style: none;
-	background-color: $beige;
-	width: 240px;
-	height: 320px;
-	margin: 16px;
-	padding: 24px;
-	display: inline-block;
-	border-radius: 5px;
+  list-style: none;
+  background-color: $beige;
+  width: 240px;
+  height: 320px;
+  margin: 16px;
+  padding: 24px;
+  display: inline-block;
+  border-radius: 5px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
   transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-	.ivory-card-pic {
-		height: 100px;
-		width: 200px;
-		margin-bottom: 4px;
-	}
+  .ivory-card-pic {
+    height: 100px;
+    width: 200px;
+    margin-bottom: 4px;
+  }
 }
 
 .ivory-card::after {
@@ -203,57 +180,57 @@
 }
 
 .ivory-card:hover::after {
-    opacity: 1;
+  opacity: 1;
 }
 
 .user-banner-image {
-	width: 100%;
-	background-size: cover;
+  width: 100%;
+  background-size: cover;
 }
 
 .events {
-	padding-top: 24px;
-	padding-left: 48px;
-	padding-right: 48px;
+  padding-top: 24px;
+  padding-left: 48px;
+  padding-right: 48px;
 }
 
-.status-badge-Pending{
+.status-badge-Pending {
   padding: 4px;
   border-radius: 4px;
   width: 70px;
   // position: absolute;
   // top: 12px;
   // right: 12px;
-  background-color:grey;
+  background-color: grey;
   color: lightgray;
 }
-.status-badge-Approved{
+.status-badge-Approved {
   padding: 4px;
   border-radius: 4px;
   width: 80px;
   // position: absolute;
   // top: 12px;
   // right: 12px;
-  background-color:green;
+  background-color: green;
   color: lightgreen;
 }
 
-.status-badge-Declined{
+.status-badge-Declined {
   padding: 4px;
   border-radius: 4px;
   width: 74px;
   // position: absolute;
   // top: 12px;
   // right: 12px;
-  background-color:darkred;
+  background-color: darkred;
   color: red;
 }
 
 .organizations-history {
-	margin-top: 24px;
+  margin-top: 24px;
 }
 .user-page-pics {
-  width: 530
+  width: 530;
 }
 .numbers {
   width: 120px;
