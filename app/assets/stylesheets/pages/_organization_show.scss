@@ -1,5 +1,5 @@
 * {
-	text-decoration: none;
+  text-decoration: none;
 }
 p {
   margin-bottom: 0.2rem;
@@ -22,7 +22,7 @@ p {
   .org-banner-items {
     padding-left: 48px;
     display: flex;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
   }
   position: relative;
 }
@@ -47,7 +47,7 @@ p {
   justify-content: space-between;
   margin-bottom: 16px;
   a {
-    font-size:24px;
+    font-size: 24px;
     text-decoration: none;
   }
 }
@@ -62,7 +62,7 @@ p {
   color: $ivory;
 }
 .icon {
-  color: #FECE63;
+  color: #fece63;
 }
 .edit-btn {
   position: absolute;
@@ -94,12 +94,12 @@ p {
     width: 240px;
     margin-bottom: 4px;
     color: white;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
     padding: 24px;
   }
-.card-info {
-  padding: 16px;
-}
+  .card-info {
+    padding: 16px;
+  }
 }
 .event-card::after {
   border-radius: 5px;
@@ -172,12 +172,14 @@ p {
   }
 }
 .calendar-box {
-  button { color: black !important; }
-	padding: 24px;
-	text-decoration: none;
-	.calendar-date {
-		font-weight: bolder;
-	}
+  button {
+    color: black !important;
+  }
+  padding: 24px;
+  text-decoration: none;
+  .calendar-date {
+    font-weight: bolder;
+  }
 }
 .calendar-link-0 {
   background: $honeydew;
@@ -206,34 +208,73 @@ p {
 .avatar-sm {
   border-radius: 50%;
 }
-.org-info {
-  display: flex;
-  justify-content: space-between;
-}
 
-.org-mission {
-  width: 800px;
-}
 .org-members {
   width: 200px;
-}
-.donations {
 }
 .pending-info {
   width: 200px;
   border-right: solid 1px rgba(0, 0, 0, 0.3);
 }
-.social_share_btn{
+.social_share_btn {
   width: 400px;
 }
 
-.blinking{
-	animation: blinkingText 1.5s infinite;
+.blinking {
+  animation: blinkingText 1.5s infinite;
 }
-@keyframes blinkingText{
-	0%{     color: $grapefruit; }
-	49%{    color: $grapefruit; }
-	60%{    color: transparent; }
-	99%{    color: transparent; }
-	100%{   color: $grapefruit; }
+@keyframes blinkingText {
+  0% {
+    color: $grapefruit;
+  }
+  49% {
+    color: $grapefruit;
+  }
+  60% {
+    color: transparent;
+  }
+  99% {
+    color: transparent;
+  }
+  100% {
+    color: $grapefruit;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .org-info {
+    display: flex;
+    justify-content: space-between;
+  }
+  .org-mission {
+    width: 75%;
+  }
+  .event-comment-input {
+    width: 60% !important;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 1199px) {
+  .org-info {
+    display: flex;
+    justify-content: space-between;
+  }
+  .org-mission {
+    width: 60%;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .org-mission {
+    width: 100%;
+  }
+  .org-sections {
+    padding: 16px;
+  }
+  .project-add {
+    display: flex;
+    a {
+      font-size: 16px;
+      align-items: center;
+      margin-top: 4px;
+    }
+  }
 }

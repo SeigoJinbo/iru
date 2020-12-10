@@ -10,7 +10,6 @@
         <div class="org-banner-text ml-3">
           <h1><span class="maize-text"><%= @organization.name %> </span></h1>
           <p><span class="ivory-text">Since <%= @organization.establishment_year %></span></p>
-          <i class="fas fa-phone icon"></i> <span class="ivory-text"><%= @organization.phone_number %></span>
           <div class="hp-links">
             <i class="fas fa-home"></i>
             <i class="fab fa-facebook-square"></i>
@@ -100,15 +99,12 @@
                     </div>
                   </div>
                 </div>
-              </div>
-
-
-              <div class="new-members-box">
-                <div class="mt-3">
-                  <a href="" class="iru-btn " data-toggle="modal" data-target="#modalContactForm">
-                    Join us?</a>
-                </div>
-              </div>
+								<div class="new-members-box">
+									<div class="mt-3">
+										<a href="" class="iru-btn " data-toggle="modal" data-target="#modalContactForm">
+											Join us?</a>
+									</div>
+								</div>
               <% end %>
             </div>
           </div>
@@ -117,146 +113,133 @@
       <!---------------------PROJECTS--------------------->
       <div class="tab-pane fade" id="event" role="tabpanel" aria-labelledby="event-tab">
         <div class="org-sections">
-
           <div class="event-title">
             <h4>Projects</h4>
-            <% if @organization.users.include?(current_user) %>
-            <%= link_to new_organization_event_path(@organization) do %>
-            <i class="fas fa-plus"></i> project
-            <% end %>
-            <% end %>
+
+            <div class="project-add">
+              <% if @organization.users.include?(current_user) %>
+                <%= link_to new_organization_event_path(@organization) do %>
+                  <i class="fas fa-plus"></i> project
+                <% end %>
+              <% end %>
+            </div>
           </div>
           <!---------------------Volunteer Event--------------------->
           <h5>Volunteers</h5>
           <div class="round-box">
-            <div class="event-box">
-
-              <% if @volunteer_events.empty? %>
+            <% if @volunteer_events.empty? %>
               <p>No volunteer event yet...</p>
-              <% else %>
-              <% @volunteer_events.each do |event| %>
-
-              <li class="event-card">
-
-                <div class="event-card-contents">
-                  <%= link_to event_path(event) do  %>
-                  <div class="event-card-pic"
-                    style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path event.photo.key, height: 240, width: 360, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
-                    <h4><%= event.title %></h4>
-                  </div>
-                  <div class="card-info">
-                    <p><i class="far fa-calendar-alt"></i> <%= event.start_time.strftime("%d of %B, %Y") %></p>
-                    <p><i class="far fa-clock"></i> <%= event.start_time.strftime("%I:%M %p")%> -
-                      <%= event.end_time.strftime("%I:%M %p")%></p>
-                    <p>Volunteers: <%= event.enrollments.where(status: "Approved").count %>/<%= event.target %> people
-                    </p>
-                    <div>
-                      <% event.enrollments.where(status: "Approved").each do |enrollment| %>
-                      <%= link_to user_path(enrollment.user) do %>
-                      <%= cl_image_tag enrollment.user.photos.first.key, height: 40, width: 40, crop: :fill , class: "avatar-sm"%>
-                      <% end %>
+            <% else %>
+              <div class="event-box">
+                <% @volunteer_events.each do |event| %>
+                  <li class="event-card">
+                    <div class="event-card-contents">
+                      <%= link_to event_path(event) do  %>
+                        <div class="event-card-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path event.photo.key, height: 240, width: 360, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+                          <h4><%= event.title %></h4>
+                        </div>
+                        <div class="card-info">
+                          <p><i class="far fa-calendar-alt"></i> <%= event.start_time.strftime("%d of %B, %Y") %></p>
+                          <p><i class="far fa-clock"></i> <%= event.start_time.strftime("%I:%M %p")%> - <%= event.end_time.strftime("%I:%M %p")%></p>
+                          <p>Volunteers: <%= event.enrollments.where(status: "Approved").count %>/<%= event.target %> people</p>
+                          <div>
+                            <% event.enrollments.where(status: "Approved").each do |enrollment| %>
+                              <%= link_to user_path(enrollment.user) do %>
+                                <%= cl_image_tag enrollment.user.photos.first.key, height: 40, width: 40, crop: :fill , class: "avatar-sm"%>
+                              <% end %>
+                            <% end %>
+                          </div>
+                          <br>
+                          <!-- ------Event owner edit / delete -->
+                          <% if event.owner == current_user || current_user.admin %>
+                            <%#= link_to "Edit", event_path(event), class: 'btn btn-primary' %>
+                            <%#= link_to "Delete", event_path(event), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete #{event.title}?" } %>
+                          <% end %>
+                      </div>
                       <% end %>
                     </div>
-                    <br>
-                    <!-- ------Event owner edit / delete -->
-                    <% if event.owner == current_user || current_user.admin %>
-                    <%#= link_to "Edit", event_path(event), class: 'btn btn-primary' %>
-                    <%#= link_to "Delete", event_path(event), class: 'btn btn-primary', method: :delete, data: { confirm: "Delete #{event.title}?" } %>
-                    <% end %>
-                  </div>
-                  <% end %>
-                </div>
-              </li>
-              <% end %>
-              <% end %>
-            </div>
+                  </li>
+                <% end %>
+              </div>
+            <% end %>     
           </div>
           <!---------------------Donation Event--------------------->
           <h5>Donations</h5>
-          <div class="round-box">
-            <div class="event-box">
-              <% if @donation_events.empty? %>
+          <div class="round-box">       
+            <% if @donation_events.empty? %>
               <p>No donation event yet...</p>
-              <% else %>
+            <% else %>
+              <div class="event-box">
+                <% @donation_events.each do |event| %>
+                  <li class="event-card">
+                    <div class="event-card-contents">
+                      <%= link_to event_path(event) do  %>
+                        <div class="event-card-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+                          <h4><%= event.title %></h4>
+                        </div>
+                        <div class="card-info">
+                          <h5><span class="seaweed-text font-weight-bold"><%= (Date.today...event.end_time).count %> days left</span></h5>
+                          <p><i class="fas fa-bullseye"></i> <%= event.target %> <%= event.item %></p>
+                          <p><i class="fas fa-signal"></i> <%= (event.raised.to_f / event.target.to_f * 100).to_i %>% collected</p>
 
-              <% @donation_events.each do |event| %>
-              <li class="event-card">
-                <div class="event-card-contents">
-                  <%= link_to event_path(event) do  %>
-                  <div class="event-card-pic"
-                    style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
-                    <h4><%= event.title %></h4>
-                  </div>
-                  <div class="card-info">
-                    <h5><span class="seaweed-text font-weight-bold"><%= (Date.today...event.end_time).count %> days
-                        left</span></h5>
-                    <p><i class="fas fa-bullseye"></i> <%= event.target %> <%= event.item %></p>
-                    <p><i class="fas fa-signal"></i> <%= (event.raised.to_f / event.target.to_f * 100).to_i %>%
-                      collected</p>
-
-                    <div class="card-meter mt-2">
-                      <% if event.raised.nil? %>
-                      <span style="width:0%;"><span class="card-progress"></span></span>
-                      <% else %>
-                      <% if event.category == "Volunteer" %>
-                      <% raised_amount = ((event.enrollments.where(status: "Approved").count.to_f / event.target.to_f) * 100).to_i %>
-                      <% else %>
-                      <% raised_amount = ((event.raised.to_f / event.target.to_f) * 100).to_i %>
-                      <% end %>
-                      <span style="width:<%= raised_amount %>%;"><span class="card-progress"></span></span>
+                          <div class="card-meter mt-2">
+                            <% if event.raised.nil? %>
+                              <span style="width:0%;"><span class="card-progress"></span></span>
+                            <% else %>
+                              <% if event.category == "Volunteer" %>
+                                <% raised_amount = ((event.enrollments.where(status: "Approved").count.to_f / event.target.to_f) * 100).to_i %>
+                              <% else %>
+                                <% raised_amount = ((event.raised.to_f / event.target.to_f) * 100).to_i %>
+                              <% end %>
+                                <span style="width:<%= raised_amount %>%;"><span class="card-progress"></span></span>
+                            <% end %>
+                          </div>
+                        </div>
                       <% end %>
                     </div>
-                  </div>
-                  <% end %>
-                </div>
-              </li>
-              <% end %>
-
-              <% end %>
-            </div>
+                  </li>
+                <% end %>
+              </div>
+            <% end %>
           </div>
           <!---------------------Fundraiser Event-------------------->
           <h5>Fundraiser</h5>
           <div class="round-box">
-            <div class="event-box">
-              <% if @fundraiser_events.empty? %>
+            <% if @fundraiser_events.empty? %>
               <p>No fundraiser event yet...</p>
-              <% else %>
-              <% @fundraiser_events.each do |event| %>
-              <li class="event-card">
-                <div class="event-card-contents">
-                  <%= link_to event_path(event) do  %>
-                  <div class="event-card-pic"
-                    style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
-                    <h4><%= event.title %></h4>
-                  </div>
-                  <div class="card-info">
-                    <h5><span class="seaweed-text font-weight-bold"><%= (Date.today...event.end_time).count %> days
-                        left</span></h5>
-                    <p><i class="fas fa-hand-holding-usd"></i> <%= humanized_money_with_symbol(event.raised) %> /
-                      <%= humanized_money_with_symbol(event.target) %></p>
-                    <p><i class="fas fa-signal"></i> <%= (event.raised.to_f / event.target.to_f * 100).to_i %>%
-                      collected</p>
+            <% else %>
+              <div class="event-box">
+                <% @fundraiser_events.each do |event| %>
+                  <li class="event-card">
+										<div class="event-card-contents">
+											<%= link_to event_path(event) do  %>
+												<div class="event-card-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+													<h4><%= event.title %></h4>
+												</div>
+												<div class="card-info">
+													<h5><span class="seaweed-text font-weight-bold"><%= (Date.today...event.end_time).count %> days left</span></h5>
+													<p><i class="fas fa-hand-holding-usd"></i> <%= humanized_money_with_symbol(event.raised) %> / <%= humanized_money_with_symbol(event.target) %></p>
+													<p><i class="fas fa-signal"></i> <%= (event.raised.to_f / event.target.to_f * 100).to_i %>% collected</p>
 
-                    <div class="card-meter mt-2">
-                      <% if event.raised.nil? %>
-                      <span style="width:0%;"><span class="card-progress"></span></span>
-                      <% else %>
-                      <% if event.category == "Volunteer" %>
-                      <% raised_amount = ((event.enrollments.where(status: "Approved").count.to_f / event.target.to_f) * 100).to_i %>
-                      <% else %>
-                      <% raised_amount = ((event.raised.to_f / event.target.to_f) * 100).to_i %>
-                      <% end %>
-                      <span style="width:<%= raised_amount %>%;"><span class="card-progress"></span></span>
-                      <% end %>
-                    </div>
-                  </div>
-                  <% end %>
-                </div>
-              </li>
-              <% end %>
-              <% end %>
-            </div>
+													<div class="card-meter mt-2">
+														<% if event.raised.nil? %>
+															<span style="width:0%;"><span class="card-progress"></span></span>
+														<% else %>
+															<% if event.category == "Volunteer" %>
+																<% raised_amount = ((event.enrollments.where(status: "Approved").count.to_f / event.target.to_f) * 100).to_i %>
+															<% else %>
+																<% raised_amount = ((event.raised.to_f / event.target.to_f) * 100).to_i %>
+															<% end %>
+																<span style="width:<%= raised_amount %>%;"><span class="card-progress"></span></span>
+														<% end %>
+													</div>
+												</div>
+											<% end %>
+										</div>
+									</li>
+                <% end %>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>
@@ -434,8 +417,8 @@
           </div>
           <div class="event-comment-input">
             <%= simple_form_for [@organization, @organization_comment] do |f| %>
-            <%= f.input :content, label: 'Feel free to ask anything to the organizers or leave your thoughts!' %>
-            <%= f.button :submit, 'Comment', remote: true, class: "btn btn-primary btn-block" %>
+              <%= f.input :content, label: 'Feel free to ask anything to the organizers or leave your thoughts!' %>
+              <%= f.button :submit, 'Comment', remote: true, class: "btn btn-primary" %>
             <% end %>
           </div>
         </div>
