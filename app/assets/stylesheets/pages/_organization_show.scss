@@ -249,6 +249,9 @@ p {
   .org-mission {
     width: 75%;
   }
+  .event-comment-input {
+    width: 60% !important;
+  }
 }
 @media only screen and (min-width: 768px) and (max-width: 1199px) {
   .org-info {
@@ -265,5 +268,13 @@ p {
   }
   .org-sections {
     padding: 16px;
+  }
+  .project-add {
+    display: flex;
+    a {
+      font-size: 16px;
+      align-items: center;
+      margin-top: 4px;
+    }
   }
 }
