@@ -27,7 +27,7 @@
   <% @events = [Event.find_by(title: "Book Donation"), Event.find_by(title: "Foodbank fundraiser"), Event.find_by(title: "Presents for Kids"), Event.find_by(title: "Keep the forests clean")] %>
   <% @event = Event.first %>
   <div class="page-box d-flex justify-content-around mt-4" id="home-projects">
-    <div class='featured-recommended m-4 p-3'>
+    <div class='featured-recommended'>
       <div class="featured mx-4">
         <h2>Today's Featured Project</h2>
         <%= link_to event_path(@event) do %>
@@ -81,7 +81,7 @@
             <%  @events.each do |event| %>
               <div class='recommended-card m-2'>
                 <%= link_to event_path(event) do  %>
-                  <%= cl_image_tag event.photo.key, height: 180, width: 280, crop: :fill, class: "org-avata-home-event" %>
+                  <%= cl_image_tag event.photo.key, class: "org-avata-home-event" %>
                 <% end %>
                 <div class="recommended-line1 d-flex justify-content-between flex-grow-*">
                   <div>
@@ -105,17 +105,17 @@
     </div>
   </div>
   <!------------------------------TOP ORGANIZATIONS-------------------->
-  <div class="page-box mt-4">
-    <h2 class="ml-4">Top Organizations</h2>
-    <div class='page-box-home-info d-flex justify-content-between m-4'>
+  <div class="page-box top-org mt-4">
+    <h2 class="ml-4 mb-0">Top Organizations</h2>
+    <div class='page-box-home-info d-flex justify-content-between pb-3 mx-4'>
       <% @organizations.each do |organization| %>
         <div class='m-2'>
           <%= link_to organization_path(organization) do%>
             <div class="top-org-logo"
-					style="background-image:url('<%= cl_image_path organization.photos.first.key, height: 160, width: 160, crop: :fill%>');">
+					style="background-image:url('<%= cl_image_path organization.photos.first.key%>');">
             </div>
           <% end %>
-          <h6 class="mt-3 text-center"><%= organization.name %></h6>
+          <h6 class="top-org-name mt-3 text-center"><%= organization.name %></h6>
         </div>
       <% end %>
     </div>
