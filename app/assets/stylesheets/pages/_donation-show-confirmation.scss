@@ -97,6 +97,7 @@
 .recs-results {
 	display: flex;
 	align-items: flex-start;
+  overflow: scroll;
 }
 
 .back-button {
@@ -133,3 +134,52 @@
 // Meter end
 
 //Meter end
+
+@media only screen and (min-width: 1200px) {
+
+}
+@media only screen and (min-width: 768px) and (max-width: 1199px) {
+  .confirmation-pic {
+    width: 300px;
+    height: 250px;
+    margin-right: 16px;
+  }
+  .inner-padding-box {
+    padding: 8px 24px 24px 24px;
+  }
+  .confirmation-instructions-container {
+    margin: 0;
+  }
+  .confirmation-title {
+    margin: 0;
+  }
+  .instructions-box {
+    margin: 8px 0 8px 0;
+    padding: 16px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .confirmation-pic {
+    display: none;
+  }
+  .inner-padding-box {
+    padding: 4px 16px 16px 16px;
+  }
+  .confirmation-instructions-container {
+    margin: 0;
+  }
+  .confirmation-title {
+    margin: 0;
+  }
+  .instructions-box {
+    margin: 8px 0 8px 0;
+    padding: 16px;
+  }
+  .confirmation-header {
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+
+}
