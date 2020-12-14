@@ -261,6 +261,9 @@ p {
   .org-mission {
     width: 60%;
   }
+  .org-title {
+    width: 70%;
+  }
 }
 @media only screen and (max-width: 767px) {
   .org-mission {
@@ -277,4 +280,38 @@ p {
       margin-top: 4px;
     }
   }
+  .tabbable .nav-tabs {
+   overflow-x: auto;
+   overflow-y:hidden;
+   flex-wrap: nowrap;
+  }
+  .tabbable .nav-tabs .nav-link {
+    white-space: nowrap;
+  }
+  .org-title {
+    width: 40%;
+    h1 {
+      font-size: 30px;
+    }
+  }
+  .hp-links {
+  font-size: 16px;
+  right: 8px;
+  bottom: 4px;
+  }
+  .org-banner {
+    .org-banner-items {
+      padding-left: 32px;
+    }
+  }
 }
+
+@media only screen and (max-width: 480px) {
+  .org-title {
+    width: 20%;
+    h1 {
+      font-size: 24px;
+    }
+  }
+}
+

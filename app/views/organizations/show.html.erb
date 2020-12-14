@@ -8,7 +8,9 @@
       <div class="org-banner-items">
         <%= cl_image_tag @organization.photos.first.key, height: 100, width: 100, crop: :fill, class: "org-avatar" %>
         <div class="org-banner-text ml-3">
-          <h1><span class="maize-text"><%= @organization.name %> </span></h1>
+          <div class="org-title">
+            <h1><span class="maize-text"><%= @organization.name %> </span></h1>
+          </div>
           <p><span class="ivory-text">Since <%= @organization.establishment_year %></span></p>
           <div class="hp-links">
             <i class="fas fa-home"></i>
@@ -20,30 +22,32 @@
       </div>
     </div>
     <!---------------------Tabs bar--------------------->
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-      <li class="nav-item">
-        <a class="nav-link <%= "show active" unless params[:tab] == "comments" %>" id="info-tab" data-toggle="tab"
-          href="#info" role="tab" aria-controls="info" aria-selected="true">Organization Info</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="event-tab" data-toggle="tab" href="#event" role="tab" aria-controls="event"
-          aria-selected="false">Projects</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="calendar-tab" data-toggle="tab" href="#calendar" role="tab" aria-controls="calendar"
-          aria-selected="false">Calendar</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link <%= "active" if params[:tab] == "comments" %>" id="comment-tab" data-toggle="tab"
-          href="#comment" role="tab" aria-controls="comment" aria-selected="false">Comments</a>
-      </li>
-      <% if @organization.memberships.where(status: "Active").include?(Membership.find_by(organization: @organization, user: current_user)) %>
-      <li class="nav-item">
-        <a class="nav-link" id="pending-volunteer-tab" data-toggle="tab" href="#pending-volunteer" role="tab"
-          aria-controls="pending-volunteer" aria-selected="false">Management</a>
-      </li>
-      <% end %>
-    </ul>
+    <nav class="tabbable">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link <%= "show active" unless params[:tab] == "comments" %>" id="info-tab" data-toggle="tab"
+            href="#info" role="tab" aria-controls="info" aria-selected="true">Organization Info</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="event-tab" data-toggle="tab" href="#event" role="tab" aria-controls="event"
+            aria-selected="false">Projects</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="calendar-tab" data-toggle="tab" href="#calendar" role="tab" aria-controls="calendar"
+            aria-selected="false">Calendar</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <%= "active" if params[:tab] == "comments" %>" id="comment-tab" data-toggle="tab"
+            href="#comment" role="tab" aria-controls="comment" aria-selected="false">Comments</a>
+        </li>
+        <% if @organization.memberships.where(status: "Active").include?(Membership.find_by(organization: @organization, user: current_user)) %>
+        <li class="nav-item">
+          <a class="nav-link" id="pending-volunteer-tab" data-toggle="tab" href="#pending-volunteer" role="tab"
+            aria-controls="pending-volunteer" aria-selected="false">Management</a>
+        </li>
+        <% end %>
+      </ul>
+    </nav>
 
     <!---------------------Tabs page--------------------->
     <div class="tab-content" id="myTabContent">
@@ -164,11 +168,11 @@
                   </li>
                 <% end %>
               </div>
-            <% end %>     
+            <% end %>
           </div>
           <!---------------------Donation Event--------------------->
           <h5>Donations</h5>
-          <div class="round-box">       
+          <div class="round-box">
             <% if @donation_events.empty? %>
               <p>No donation event yet...</p>
             <% else %>
