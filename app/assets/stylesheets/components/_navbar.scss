@@ -13,6 +13,13 @@
 .navbar-lewagon {
   padding: 0.3rem 24px;
 }
+
+.nav-list {
+  list-style-type: none;
+  margin-bottom: 0;
+  display: flex;
+
+}
 .dropdown-menu {
 	background-color: $sage;
 

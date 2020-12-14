@@ -278,7 +278,7 @@
 	<!-------------------------UPCOMING EVENTS------------------------>
   <div class='contributed'>
     <h4>Upcoming Events</h4>
-    
+
     <% if current_user == @user %>
       <div class='contributed-scroll'>
         <div>
@@ -409,7 +409,7 @@
         </div>
       </div>
     <% end %>
-    
+
   </div>
 </div>
 
@@ -437,7 +437,6 @@
       </div>
     <% end %>
   </div>
-
 			<!------------------------------ORIGINAL DASHBOARD--------------------------------->
 			<% if current_user == @user %>
 			<div class="events px-3">
@@ -570,13 +569,13 @@
 											</div>
 											<div class="card-info">
 												<h6><%= organization.tag_list %></h6>
-                        
+
                         <% if organization.description.nil? %>
                           <p><%= organization.name %> is an organization registered by <%= organization.users.first.nickname %></p>
                         <% else %>
                           <p><%= organization.description.truncate(90, separator: ' ') %></p>
                         <% end %>
-                        
+
 											</div>
 										<% end %>
 									</div>

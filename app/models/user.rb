@@ -24,7 +24,7 @@ class User < ApplicationRecord
 	has_many_attached :photos
 	validates :nickname, :gender, :address, :photos, presence: true
 
-	def events
-		enrollment_events + order_events + donation_events
-	end
+  def events
+    enrollment_events + order_events + donation_events
+  end
 end
