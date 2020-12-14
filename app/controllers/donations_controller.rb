@@ -8,7 +8,7 @@ class DonationsController < ApplicationController
 	end
 
 	def new
-    @donation = Donation.new
+        @donation = Donation.new
     @event = Event.find(params[:event_id])
     authorize @donation
   end
