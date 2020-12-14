@@ -58,3 +58,10 @@
 	display: flex;
 	justify-content: space-between;
 }
+
+@media only screen and (max-width: 480px) {
+.dropdown-menu-right {
+    right: -80px;
+    left: auto;
+  }
+}
