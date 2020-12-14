@@ -27,7 +27,6 @@ p {
   position: relative;
 }
 .org-banner-text {
-  width: 880px;
 }
 .sections {
   padding: 48px;
@@ -262,7 +261,7 @@ p {
     width: 60%;
   }
   .org-title {
-    width: 70%;
+    width: 80%;
   }
 }
 @media only screen and (max-width: 767px) {
@@ -289,7 +288,7 @@ p {
     white-space: nowrap;
   }
   .org-title {
-    width: 40%;
+    width: 80%;
     h1 {
       font-size: 30px;
     }
