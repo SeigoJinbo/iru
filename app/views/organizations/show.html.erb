@@ -317,7 +317,7 @@
               <% if @volunteer_events.any? %>
                 <% @volunteer_events.each do |event| %>
                   <h5>- <%= event.title %></h5>
-                  <div class="round-box d-flex">
+                  <div class="d-flex">
                     <div class="pending-info">
                       <p><%= event.start_time.strftime("%d of %B, %Y") %></p>
                       <p><%= event.start_time.strftime("%I:%M %p")%> - <%= event.end_time.strftime("%I:%M %p")%></p>
@@ -367,7 +367,7 @@
               <% if @donation_events.any? %>
                 <% @donation_events.each do |event| %>
                 <h5>- <%= event.title %></h5>
-                <div class="round-box d-flex">
+                <div class="d-flex">
                   <div class="pending-info">
                     <p>Donations: <%= event.donations.where(status: "Recieved").count %>/<%= event.target %> items</p>
                     <%= (Date.today...event.end_time).count %> days left</span></h3>
