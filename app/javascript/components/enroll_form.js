@@ -11,7 +11,7 @@ const showEnrollForm = () => {
 
       event.currentTarget.style.display = "none";
     });
-  });
+});
 };
 
 export { showEnrollForm };
