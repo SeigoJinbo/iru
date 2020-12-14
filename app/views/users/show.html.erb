@@ -278,7 +278,7 @@
 	<!-------------------------UPCOMING EVENTS------------------------>
   <div class='contributed'>
     <h4>Upcoming Events</h4>
-    
+
     <% if current_user == @user %>
       <div class='contributed-scroll'>
         <div>
@@ -409,7 +409,7 @@
         </div>
       </div>
     <% end %>
-    
+
   </div>
 </div>
 
@@ -442,6 +442,7 @@
 				<div class="events px-3">
 					<h3>My Events</h3>
 					<div class="user-box">
+              <% @user.events.each do |event| %>
 								<div class="upcomming-card">
 									<div class="upcomming-card-contents">
 										<%= link_to event_path(event) do  %>
@@ -461,7 +462,7 @@
 										<% end %>
 									</div>
 								</div>
-
+                <% end %>
 
 								<% end %>
 								<% if @current_enrollments.any? %>
@@ -736,13 +737,13 @@
 											</div>
 											<div class="card-info">
 												<h6><%= organization.tag_list %></h6>
-                        
+
                         <% if organization.description.nil? %>
                           <p><%= organization.name %> is an organization registered by <%= organization.users.first.nickname %></p>
                         <% else %>
                           <p><%= organization.description.truncate(90, separator: ' ') %></p>
                         <% end %>
-                        
+
 											</div>
 										<% end %>
 									</div>

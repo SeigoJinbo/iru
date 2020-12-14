@@ -21,6 +21,6 @@ class User < ApplicationRecord
   validates :nickname, :gender, :address, :photos, presence: true
 
   def events
-    enrollment_events + order_events + donation_event
+    enrollment_events + order_events + donation_events
   end
 end
