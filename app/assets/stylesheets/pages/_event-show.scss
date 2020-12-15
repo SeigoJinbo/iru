@@ -189,7 +189,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 16px;
-  padding: 16px;
+	padding: 16px;
+	height: 100%;
 }
 
 // .simple_form label {
@@ -381,13 +382,22 @@
 		}
 	}
 
+	.event-show-organization {
+		display: block;
+		width: 100%;
+	}
+
 	.organizer-details {
-		width: 400px;
+		width: 100%;
 		height: 100%;
 	}
 
 	.other-events {
 		margin-top: 16px;
+	}
+
+	.other-events-box {
+		height: 100%;
 	}
 
 	.event-comment {
@@ -405,7 +415,7 @@
 	}
 }
 
-//-----------------------------------------------------TABLET---------------------------------------------------------------
+//-----------------------------------------------------LARGE SCREEN---------------------------------------------------------------
 
 @media only screen and (min-width: 1200px) {
 	.event-photo-img {
@@ -434,5 +444,10 @@
 	.organizer-details {
 		width: 400px;
 		height: 300px;
+	}
+
+	.event-show-organization {
+		display: flex;
+		justify-content: space-between;
 	}
 }
