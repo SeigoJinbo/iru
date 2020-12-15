@@ -1,10 +1,26 @@
-<h1>Organizations#new</h1>
-<p>Find me in app/views/organizations/new.html.erb</p>
-<%= simple_form_for(@organization) do |f| %>
-<%= f.input :name %>
-<%= f.input :email %>
-<%= f.input :description %>
-<%= f.input :phone_number %>
-<%= f.input :hp_url, label: "Homepage url" %>
-<%= f.button :submit, class: "btn btn-primary btn-block" %>
-<% end %>
+<div class="page">
+  <div class="row justify-content-md-center">
+    <div class="col-8 center">
+      <div class="page-box">
+        <div class="sections">
+          <h2>New Organization</h2>
+          <div class="form-inputs">
+            <%= simple_form_for(@organization) do |f| %>
+            <%= f.input :name %>
+            <%= f.input :description %>
+            <%= f.input :tag_list, as: :check_boxes, label: 'Organization Category:', collection: ["Animals/Wildlife", "Children/Youth", "Disasters", "Education", "Environment/Agriculture", "Health", "Women", "Seniors/Disabilities", "Other"],
+                      input_html: { class: "tag-selector" },
+                      item_wrapper_class: 'tag-item' %>
+            <%= f.input :establishment_year %>
+            <%= f.input :phone_number %>
+            <%= f.input :email %>
+            <%= f.input :hp_url, label: "Homepage url" %>
+            <%= f.button :submit, 'Create the organization', class: "btn btn-primary btn-block" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -28,7 +28,7 @@
     					<%= link_to "#", class: "avatar dropdown-toggle text-white", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false do %>
     						<i class="fas fa-users"></i>
     					<% end %>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+              <div id="org-dropdown" class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 <% current_user.organizations.each do |organization| %>
     						<div class="dropdown-box">
                   <%= link_to organization_path(organization), class: "dropdown-item" do%>

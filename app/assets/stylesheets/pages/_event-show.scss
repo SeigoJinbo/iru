@@ -26,17 +26,29 @@
 }
 
 .event-title {
-  display: flex;
+	display: flex;
   .event-title-details {
-    width: 560px;
+    // width: 560px;
   }
   .event-title-photo {
     margin-right: 40px;
-  }
+	}
+
   .event-form-box {
     margin-top: 16px;
     margin-bottom: 16px;
   }
+  .event-social-container {
+    display: flex;
+    flex-direction: row-reverse;
+	}
+	.event-location-category {
+		display: flex;
+		margin-top: 4px;
+	}
+	.event-location-text {
+		margin-right: 4px;
+	}
 }
 
 .no-input {
@@ -45,6 +57,11 @@
 
 .event-small-info {
   font-size: smaller;
+}
+
+.time-left-container {
+  display: flex;
+  justify-content: space-between;
 }
 
 // Meter CSS & animation
@@ -93,6 +110,11 @@
   margin: 16px;
 }
 
+.event-about-header {
+	display: flex;
+	justify-content: space-between;
+}
+
 .event-show-organization {
   display: flex;
   justify-content: space-between;
@@ -100,7 +122,18 @@
 
 .event-show-organization-details {
   width: 640px;
-  padding: 0 48px 16px 0;
+	padding: 0 48px 16px 0;
+	.event-show-organization-title {
+		display: flex;
+	}
+	.event-show-organization-title-text {
+		margin-left: 16px;
+		display: flex;
+		align-items: center;
+	}
+	.event-show-organization-description {
+		margin-top: 16px;
+	}
 }
 
 .organizer-details {
@@ -125,6 +158,21 @@
 .event-comment-container {
   margin-top: 16px;
   width: auto;
+}
+
+.event-comment-contents {
+	display: flex;
+	padding: 2px 2px;
+}
+
+.event-comment-name {
+	display: flex;
+	align-items: center;
+}
+
+.event-comment-text {
+	padding: 2px;
+	margin: 4px 0 4px 16px;
 }
 
 .event-comment {
@@ -162,3 +210,106 @@
 // .simple_form div.input {
 //   margin-bottom: 10px;
 // }
+
+// ----------------------------------------------------PHONE------------------------------------------------------------
+@media only screen and (max-width: 767px) {
+  .page-box {
+    margin: 0 12px 12px 12px !important;
+	}
+	
+	#event-show {
+		padding: 16px;
+	}
+
+	.event-title {
+		display: block;
+	}
+
+	.event-title-text {
+		font-size: 24px;
+		a {
+			font-size: 24px;
+		}		
+	}
+
+	.event-photo-img {
+		width: 100%;
+	}
+
+	.event-small-info {
+		.social_share_btn {
+			width: auto;
+			display: block;
+		}
+	}
+
+	.event-social-container {
+		display: block;
+	}
+
+	.event-show-organization {
+		display: block;
+	}
+
+	.event-show-box {
+		padding: 0;
+		margin: 16px 0;
+	}
+
+	.event-show-organization-details {
+		width: 300px;
+		padding: 0;
+		margin-bottom: 16px;
+	}
+
+	.organizer-details {
+		width: 300px;
+		margin: 16px 0;
+	}
+
+	.border-box {
+		margin: 0;
+	}
+
+	.other-events {
+		margin-top: 16px;
+		.other-events-box {
+			margin: 0 auto;
+			overflow-x: scroll;
+			padding: 8px;
+			height: 100%;
+		}
+	}
+
+	.event-comment-container {
+		margin: 0 auto;
+	}
+
+	.event-comment {
+		padding: 16px;
+		.event-comment-text {
+			display: flex;
+			align-items: center;
+		}
+	}
+
+	.event-comment-input {
+		margin: 0 auto;
+		width: 80vw;
+	}
+}
+
+//-----------------------------------------------------large---------------------------------------------------------------
+@media only screen and (min-width: 768px) {
+	.event-photo-img {
+		height: 300px;
+		width: 400px;
+	}
+}
+
+@media only screen and (min-width: 1200px) {
+	.event-photo-img {
+		height: 300px;
+		width: 400px;
+	}
+}

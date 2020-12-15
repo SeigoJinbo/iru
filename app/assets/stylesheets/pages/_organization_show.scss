@@ -26,9 +26,6 @@ p {
   }
   position: relative;
 }
-.org-banner-text {
-  width: 880px;
-}
 .sections {
   padding: 48px;
 }
@@ -215,6 +212,7 @@ p {
 .pending-info {
   width: 200px;
   border-right: solid 1px rgba(0, 0, 0, 0.3);
+  margin-right: 8px;
 }
 .social_share_btn {
   width: 400px;
@@ -252,6 +250,9 @@ p {
   .event-comment-input {
     width: 60% !important;
   }
+  .org-title {
+    width: 100%;
+  }
 }
 @media only screen and (min-width: 768px) and (max-width: 1199px) {
   .org-info {
@@ -274,7 +275,44 @@ p {
     a {
       font-size: 16px;
       align-items: center;
-      margin-top: 4px;
     }
   }
+  .tabbable .nav-tabs {
+   overflow-x: auto;
+   overflow-y:hidden;
+   flex-wrap: nowrap;
+  }
+  .tabbable .nav-tabs .nav-link {
+    white-space: nowrap;
+  }
+  .org-title {
+    h1 {
+      font-size: 30px;
+    }
+  }
+  .hp-links {
+  font-size: 16px;
+  right: 8px;
+  bottom: 4px;
+  }
+  .org-banner {
+    .org-banner-items {
+      padding-left: 32px;
+    }
+  }
+  #calendar-tab {
+    display: none;
+  }
 }
+
+@media only screen and (max-width: 480px) {
+  .org-title {
+    h1 {
+      font-size: 24px;
+    }
+  }
+  #calendar-tab {
+    display: none;
+  }
+}
+
