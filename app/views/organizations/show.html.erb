@@ -75,7 +75,7 @@
                 <%= membership.user.nickname %>
               </div>
               <% end %>
-              <h6 class="blinking">We need more members!</h6>
+              <%# <h6 class="blinking">We need more members!</h6> %>
               <!-----------------------------------MEMBERS---------------------------->
               <% unless @organization.users.include?(current_user) %>
                 <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"

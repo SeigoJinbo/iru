@@ -177,6 +177,12 @@ p {
   .calendar-date {
     font-weight: bolder;
   }
+  .calendar-heading {
+    font-size: 24px;
+  }
+  .calendar-title {
+    font-weight: bolder;
+  }
 }
 .calendar-link-0 {
   background: $honeydew;
@@ -262,6 +268,10 @@ p {
   .org-mission {
     width: 60%;
   }
+
+  .calendar-box {
+    overflow: scroll;
+  }
 }
 @media only screen and (max-width: 767px) {
   .org-mission {
@@ -315,4 +325,3 @@ p {
     display: none;
   }
 }
-
