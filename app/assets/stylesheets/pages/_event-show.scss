@@ -26,14 +26,6 @@
 }
 
 .event-title {
-	display: flex;
-  .event-title-details {
-    // width: 560px;
-  }
-  .event-title-photo {
-    margin-right: 40px;
-	}
-
   .event-form-box {
     margin-top: 16px;
     margin-bottom: 16px;
@@ -137,7 +129,7 @@
 }
 
 .organizer-details {
-  width: 400px;
+	width: 400px;
 }
 
 .border-box {
@@ -225,11 +217,26 @@
 		display: block;
 	}
 
+	.event-title-details {
+		display: block;
+	}
+
 	.event-title-text {
 		font-size: 24px;
+		margin: 0;
 		a {
 			font-size: 24px;
+			margin: 0;
 		}		
+	}
+
+	.target-meter {
+		margin: 16px 0;
+	}
+
+	.event-form-box {
+		margin: 16px 0;
+		padding: 16px;
 	}
 
 	.event-photo-img {
@@ -249,22 +256,43 @@
 
 	.event-show-organization {
 		display: block;
+		width: 100%;
+	}
+
+	.event-show-organization-title-text {
+		h5 {
+			font-size: 16px;
+		}
+		a {
+			font-size: 20px;
+		}
 	}
 
 	.event-show-box {
 		padding: 0;
-		margin: 16px 0;
+		h3 {
+			font-size: 20px;
+		}
 	}
 
 	.event-show-organization-details {
-		width: 300px;
+		width: auto;
 		padding: 0;
 		margin-bottom: 16px;
 	}
 
 	.organizer-details {
-		width: 300px;
+		width: auto;
 		margin: 16px 0;
+	}
+
+	.organizer-details-title {
+		h4 {
+			font-size: 20px;
+		}
+		h5 {
+			font-size: 16px;
+		}
 	}
 
 	.border-box {
@@ -287,6 +315,9 @@
 
 	.event-comment {
 		padding: 16px;
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
 		.event-comment-text {
 			display: flex;
 			align-items: center;
@@ -297,13 +328,80 @@
 		margin: 0 auto;
 		width: 80vw;
 	}
+
+	.event-comment-user {
+		margin: 0 auto;
+    width: auto;
+    text-align: center;
+		h5 {
+			font-size: 16px;
+		}
+	}
 }
 
 //-----------------------------------------------------large---------------------------------------------------------------
 @media only screen and (min-width: 768px) {
+	.event-title-text {
+		font-size: 32px;
+		a {
+			font-size: 32px;
+		}		
+	}
+
 	.event-photo-img {
-		height: 300px;
+		height: 200px;
+		width: 300px;
+	}
+
+	.event-title {
+		display: flex;
+		.event-title-details {
+			display: flex;
+			margin-top: 16px;
+		}
+		.event-title-photo {
+			margin-right: 16px;
+		}
+	}
+
+	.goals-container {
+		margin-left: 24px;
+	}
+
+	.target-container {
+		h3 {
+			font-size: 24px;
+		}
+	}
+
+	.event-small-info {
+		.social_share_btn {
+			width: auto;
+			display: block;
+		}
+	}
+
+	.organizer-details {
 		width: 400px;
+		height: auto;
+	}
+
+	.other-events {
+		margin-top: 16px;
+	}
+
+	.event-comment {
+		padding: 16px;
+		width: 100%;
+		.event-comment-text {
+			display: flex;
+			align-items: center;
+			margin: 0 32px;
+		}
+	}
+
+	.yes-btn {
+		width: 160px;
 	}
 }
 
@@ -311,5 +409,28 @@
 	.event-photo-img {
 		height: 300px;
 		width: 400px;
+	}
+
+	.event-title {
+		display: flex;
+		.event-title-details {
+			width: 100%;
+			display: flex;
+			justify-content: space-around;
+		}
+	}
+
+	.goals-container {
+		width: 800px;
+		margin-left: 32px;
+	}
+
+	.yes-btn {
+		width: 160px;
+	}
+
+	.organizer-details {
+		width: 400px;
+		height: 300px;
 	}
 }
