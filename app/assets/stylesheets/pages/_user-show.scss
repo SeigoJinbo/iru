@@ -4,15 +4,17 @@
   padding: 0;
   text-decoration: none;
 }
-
+.user-banner-title {
+  display: flex;
+}
+.banner-headers {
+  display: flex;
+}
 .bio {
   background-color: $beige;
   border-radius: 24px;
-  width: 300px !important;
-  height: 500px;
   margin: 4px, 4px;
   padding: 24px;
-  overflow: scroll;
   p {
     color: black;
   }
@@ -23,7 +25,7 @@
   border-radius: 24px;
   padding: 24px;
   margin: 4px, 4px;
-  width: 820px;
+
 }
 .feed-scroll {
   //width: 800px;
@@ -40,18 +42,22 @@
   padding: 24px;
   // margin-left: 32px;
 }
+.feed-comment-poster {
+  align-items: center;
+   .feed-comment-org {
+      align-items: center;
+      display: flex;
+    }
+  }
+
+
 .contributed {
   padding: 24px;
   margin: 4px, 4px;
   background-color: $beige;
   border-radius: 24px;
-  width: 300px;
-  height: 500px;
 }
-.upcomming {
-  height: 400px;
-  overflow: scroll;
-}
+
 
 .upcomming-card {
   list-style: none;
@@ -116,14 +122,7 @@
   }
 }
 
-.user-banner-items {
-  padding: 0 48px 0 48px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-  width: 100%;
-}
+
 
 .user-box {
   background-color: $darker-ivory;
@@ -235,7 +234,274 @@
 .numbers {
   width: 120px;
 }
-.badges {
-  width: 140px;
-  height: 140;
+
+
+//---------------------------PHONE----------------------------
+@media only screen and (max-width: 767px) {
+
+  .user-sections {
+    padding-bottom: 4px;
+  }
+  .user-banner-items {
+    padding: 0 auto 0 auto;
+    align-items: center;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    width: 100%;
+  }
+
+  .banner-headers {
+    margin: 0 auto;
+  }
+  .user-banner-title {
+    margin: 0 24px;
+  }
+   .numbers {
+    margin: 10px;
+   }
+
+  .profile-mid {
+    display: block;
+  }
+  .bio {
+    margin: 0 auto;
+    padding: 16px;
+  }
+
+  .feed {
+    margin: 8px auto;
+    padding: 16px;
+  }
+
+  .feed-comment-content{
+    padding: 12px;
+  }
+
+  .feedback-img {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .feed-comment-poster {
+  display: block;
+  }
+
+  .contributed {
+    overflow: scroll;
+    padding: 16px;
+    margin-bottom: 8px;
+
+  }
+  .upcomming {
+    display: flex;
+
+    overflow: scroll;
+    overflow-y: hidden;
+  }
+  .upcomming-card {
+    list-style: none;
+    background-color: $beige;
+    margin: 8px;
+    display: inline-block;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    width: 240px;
+    height: 280px;
+
+    .upcomming-card-contents {
+      width: 240px;
+      height: 280px;
+    }
+    .upcomming-card-pic {
+      border-radius: 5px 5px 0 0;
+      margin-bottom: 4px;
+      color: white;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+      padding: 24px;
+      height: 120px;
+    }
+    .card-info {
+      padding: 16px;
+    }
+  }
+
+  .organizations-history {
+    .user-box {
+      overflow: scroll;
+    }
+  }
+
+  .badges {
+    width: 70px;
+    height: 140;
+  }
+
+  .events {
+    .user-box {
+      overflow: scroll;
+    }
+  }
 }
+@media only screen and (min-width: 768px) and (max-width: 1199px) {
+    .user-sections {
+    padding-bottom: 4px;
+  }
+  .user-banner-items {
+    padding: 0 auto 0 auto;
+    align-items: center;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    width: 100%;
+  }
+
+  .banner-headers {
+    margin: 0 auto;
+  }
+  .user-banner-title {
+    margin: 0 24px;
+  }
+   .numbers {
+    margin: 10px;
+   }
+
+  .profile-mid {
+    display: block;
+  }
+  .bio {
+    margin: 0 auto;
+    padding: 16px;
+  }
+
+  .feed {
+    margin: 8px auto;
+    padding: 16px;
+  }
+
+  .feed-comment-content{
+    padding: 12px;
+  }
+
+  .feedback-img {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .feed-comment-poster {
+  display: block;
+  }
+
+  .contributed {
+    overflow: scroll;
+    padding: 16px;
+    margin-bottom: 8px;
+
+  }
+  .upcomming {
+    display: flex;
+
+    overflow: scroll;
+    overflow-y: hidden;
+  }
+  .upcomming-card {
+    list-style: none;
+    background-color: $beige;
+    margin: 8px;
+    display: inline-block;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    width: 240px;
+      height: 280px;
+
+    .upcomming-card-contents {
+      width: 240px;
+      height: 280px;
+    }
+    .upcomming-card-pic {
+      border-radius: 5px 5px 0 0;
+      margin-bottom: 4px;
+      color: white;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+      padding: 24px;
+      height: 120px;
+    }
+    .card-info {
+      padding: 16px;
+    }
+  }
+
+  .organizations-history {
+    .user-box {
+      overflow: scroll;
+    }
+  }
+
+  .badges {
+    width: 100px;
+    height: 140;
+  }
+
+  .events {
+    .user-box {
+      overflow: scroll;
+    }
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .user-banner-items {
+    padding: 0 48px 0 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    width: 100%;
+  }
+  .banner-headers {
+    justify-content: space-between;
+  }
+  .profile-mid {
+    display: flex;
+  }
+  .feed {
+    margin: 12px 0;
+    width: 820px !important;
+    height: 500px;
+  }
+
+  .feedback-img {
+    width: 530px;
+  }
+
+  .feed-comment-poster {
+  display: flex;
+  }
+  .upcomming {
+  height: 400px;
+  overflow: scroll;
+  .upcomming-card-pic {
+    height: 120px;
+  }
+  }
+  .user-banner-title {
+    margin-right: 5px;
+  }
+  .bio {
+    height: 500px;
+    width: 300px;
+    overflow: scroll;
+    margin: 12px 0;
+  }
+  .contributed {
+    width: 300px;
+    height: 500px;
+    margin: 12px 0;
+  }
+  .badges {
+    width: 140px;
+    height: 140;
+  }
+}
+
