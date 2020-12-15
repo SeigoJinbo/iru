@@ -6,7 +6,7 @@
 		<div class="user-banner"
 			style="background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= cl_image_path User.second.photos.second.key, height: 200, width: 1200, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
 			<div class="user-banner-items">
-        <div class="d-flex align-items-center mr-5">
+        <div class="user-banner-title">
           <% if @user.photos.first %>
     			 <%= cl_image_tag @user.photos.first.key, height: 100, width: 100, crop: :fill, class: "user-avatar" %>
           <% else %>
@@ -16,7 +16,7 @@
           <h1 class="ml-3"><span class="maize-text"><%= @user.nickname %>'s</span> <span class="ivory-text">Profile</span></h1>
         </div>
         <div class="user-banner-text ml-3">
-          <div class='banner-headers d-flex justify-content-between'>
+          <div class='banner-headers'>
               <% if @user.nickname == "Liz" %>
                 <div class="numbers">
                   <h1>126</h1>
@@ -54,7 +54,7 @@
 			<%# -----------------User Dashboard--------------- %>
 
 
-			<div class="profile-mid d-flex m-3">
+			<div class="profile-mid m-3">
 				<div class="bio">
 					<!--------------------------BIO-------------------->
 					<div>
@@ -69,229 +69,238 @@
 
 					<div>
 						<% if @user.nickname == "Liz" %>
-						<div class="my-4">
-							<div class="d-flex align-items-center justify-content-between">
-								<h4>Connections</h4>
-								<p><%= link_to "View all", "#"  %></p>
-							</div>
-							<div>
-								<% @users.each do |user| %>
-								<%= cl_image_tag user.photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
-								<% end %>
-							</div>
-						</div>
+  						<div class="my-4">
+  							<div class="d-flex align-items-center justify-content-between">
+  								<h4>Connections</h4>
+  								<%# <p><%= link_to "View all", "#"  %>
+  							</div>
+  							<div>
+  								<% @users.each do |user| %>
+  								  <%= cl_image_tag user.photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
+  								<% end %>
+  							</div>
+  						</div>
 						<% else %>
-						<div class="my-4">
-							<div class="d-flex align-items-center justify-content-between">
-								<h4>Connections</h4>
-							</div>
-							<div>
-								<p>None yet!</p>
-							</div>
-						</div>
+  						<div class="my-4">
+  							<div class="d-flex align-items-center justify-content-between">
+  								<h4>Connections</h4>
+  							</div>
+  							<div>
+  								<p>None yet!</p>
+  							</div>
+  						</div>
 						<% end %>
 						<!----------------------SUPPORTED ------------------------>
 						<div>
 
 							<% if @user.nickname == "Liz" %>
-							<div class="d-flex align-items-center justify-content-between">
-								<h4>Supported</h4>
-								<p><%= link_to "View all", "#"  %></p>
-							</div>
-							<div>
-								<% @organizations[1..4].each do |organization| %>
-								<%= cl_image_tag organization.photos.first.key, height: 80, width: 80, crop: :fill, class: "avatar"%>
-								<% end %>
-							</div>
-							<% elsif @user.organizations.any? %>
-							<div class="d-flex align-items-center justify-content-between">
-								<h4>Supported</h4>
-							</div>
-							<div>
-								<% @user.organizations.each do |organization| %>
-								<%= link_to organization_path(organization) do  %>
-								<%= cl_image_tag organization.photos.first.key, height: 80, width: 80, crop: :fill, class: "avatar"%>
-								<% end %>
-								<% end %>
-							</div>
-							<% else %>
-							<div class="d-flex align-items-center justify-content-between">
-								<h4>Supported</h4>
-							</div>
-							<div>
-								<p>None yet!</p>
-							</div>
+  							<div class="d-flex align-items-center justify-content-between">
+  								<h4>Supported</h4>
+  								<%# <p><%= link_to "View all", "#"  %>
+  							</div>
+  							<div>
+  								<% @organizations[1..4].each do |organization| %>
+  								<%= cl_image_tag organization.photos.first.key, height: 80, width: 80, crop: :fill, class: "avatar"%>
+  								<% end %>
+  							</div>
+  						<% elsif @user.organizations.any? %>
+  							<div class="d-flex align-items-center justify-content-between">
+  								<h4>Supported</h4>
+  							</div>
+  							<div>
+  								<% @user.organizations.each do |organization| %>
+  								<%= link_to organization_path(organization) do  %>
+  								<%= cl_image_tag organization.photos.first.key, height: 80, width: 80, crop: :fill, class: "avatar"%>
+  								<% end %>
+  								<% end %>
+  							</div>
+  						<% else %>
+  							<div class="d-flex align-items-center justify-content-between">
+  								<h4>Supported</h4>
+  							</div>
+  							<div>
+  								<p>None yet!</p>
+  							</div>
 							<% end %>
 						</div>
 					</div>
 				</div>
 				<!-------------------------FEED------------------------>
 				<% if @user.nickname == "Liz" %>
-				<div class='feed mx-3'>
-					<h4 class='feed-title'><%= @user.nickname %>'s Feed</h4>
-					<div class="feed-scroll">
+  				<div class='feed'>
+  					<h4 class='feed-title'><%= @user.nickname %>'s Feed</h4>
+  					<div class="feed-scroll">
 
-						<% if @user.last_name.nil? %>
-						<div class="feed-comment my-2">
-							<div class="feed-comment-content">
-								<div class="d-flex align-items-center ">
-									<%= cl_image_tag Organization.find_by(name: "Colabo").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
-									<div class="ml-2">
-										<h5>Colabo</h5>
-									</div>
-									<div>
-										<p class='ml-3 pb-1'>Thank you so much for the blankets, Liz! They're going to a
-											good cause.</p>
-									</div>
-								</div>
-								<div class="pb-3">
-									<img src=https://cdn2.creativecirclemedia.com/ptleader/original/20181126-222144-25178be8b550118fe3b27f41b6b7a6b0.jpg
-										style="width: 530px" alt="">
-								</div>
-							</div>
-						</div>
+  						<% if @user.last_name.nil? %>
+  						  <div class="feed-comment my-2">
+  							  <div class="feed-comment-content">
+  							    <div class="feed-comment-poster">
+                      <div class="feed-comment-org">
+    									  <%= cl_image_tag Organization.find_by(name: "Colabo").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
+    									  <div class="ml-2">
+    										  <h5>Colabo</h5>
+    									  </div>
+                      </div>
+  									  <div>
+  										  <p class='ml-3 pb-1'>Thank you so much for the blankets, Liz! They're going to a
+  											good cause.</p>
+  									  </div>
+  								  </div>
+  								  <div class="pb-3">
+  									<img src=https://cdn2.creativecirclemedia.com/ptleader/original/20181126-222144-25178be8b550118fe3b27f41b6b7a6b0.jpg
+  										class="feedback-img" alt="">
+  								  </div>
+  							  </div>
+  						  </div>
 
-						<% else %>
+  						<% else %>
 
-						<div class="feed-comment my-2">
-							<div class="feed-comment-content">
-								<div class="d-flex align-items-center ">
-									<%= cl_image_tag Organization.find_by(name: "Colabo").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
-									<div class="ml-2">
-										<h5>Colabo</h5>
-									</div>
-									<div>
-										<p class='ml-3 pb1'>Mitsuki really enjoyed your blanket!</p>
-									</div>
-								</div>
-								<div class="d-flex align-items-center">
-									<img src=https://media.pri.org/s3fs-public/styles/open_graph/public/japan-tsunami-aid-effort-2011-03-17.jpg?itok=F3RNopiP
-										style="width: 530px" alt="">
-								</div>
-							</div>
-						</div>
+  						<div class="feed-comment my-2">
+  							<div class="feed-comment-content">
+  								<div class="feed-comment-poster">
+                    <div class="feed-comment-org">
+    									<%= cl_image_tag Organization.find_by(name: "Colabo").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
+    									<div class="ml-2">
+    										<h5>Colabo</h5>
+    									</div>
+                    </div>
+  									<div>
+  										<p class='ml-3 pb1'>Mitsuki really enjoyed your blanket!</p>
+  									</div>
+  								</div>
+  								<div class="d-flex align-items-center">
+  									<img src=https://media.pri.org/s3fs-public/styles/open_graph/public/japan-tsunami-aid-effort-2011-03-17.jpg?itok=F3RNopiP
+  										class="feedback-img" alt="">
+  								</div>
+  							</div>
+  						</div>
 
-						<% end %>
-
-
-						<div class="feed-comment my-2">
-							<div class="feed-comment-content flex-box">
-								<div class="d-flex align-items-center mb-2">
-									<%= cl_image_tag Organization.find_by(name: "Mirai no Mori").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
-									<div class="ml-2">
-										<h5>Mirai no Mori</h5>
-									</div>
-									<div>
-										<p class='ml-3 p-1'>Thanks for helping out!</p>
-									</div>
-								</div>
-								<div class="pb-3 user-page-pics">
-									<img src="https://resources.realestate.co.jp/wp-content/uploads/2020/01/volunteering-tokyo-park-cleanup-1020x500.jpg"
-										style="width: 530px" alt="">
-								</div>
-							</div>
-						</div>
+  						<% end %>
 
 
-						<div class="feed-comment my-2">
-							<div class="feed-comment-content flex-box">
-								<div class="d-flex align-items-center mb-2">
-									<%= cl_image_tag Organization.find_by(name: "Helping Hands").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
-									<div class="ml-2">
-										<h5>Mirai no Mori</h5>
-									</div>
-									<div>
-										<p class='ml-3 p-1'>It was really nice walking again...</p>
-									</div>
+  						<div class="feed-comment my-2">
+  							<div class="feed-comment-content">
+  								<div class="feed-comment-poster">
+                    <div class="feed-comment-org">
+    									<%= cl_image_tag Organization.find_by(name: "Mirai no Mori").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
+    									<div class="ml-2">
+    										<h5>Mirai no Mori</h5>
+    									</div>
+                    </div>
+  									<div>
+  										<p class='ml-3 p-1'>Thanks for helping out!</p>
+  									</div>
+  								</div>
+  								<div class="pb-3 user-page-pics">
+  									<img src="https://resources.realestate.co.jp/wp-content/uploads/2020/01/volunteering-tokyo-park-cleanup-1020x500.jpg"
+  										class="feedback-img" alt="">
+  								</div>
+  							</div>
+  						</div>
 
-								</div>
-								<div class="pb-3">
-									<%= image_tag "senior.png", width: 530 %>
-								</div>
-							</div>
-						</div>
 
-						<div class="feed-comment my-2">
-							<div class="feed-comment-content flex-box">
-								<div class="d-flex align-items-center mb-2">
-									<%= cl_image_tag Organization.find_by(name: "Unicef").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
-									<div class="ml-2">
-										<h5>World Wildlife Day</h5>
-									</div>
-									<div>
-										<p class='ml-3 p-1'>Your book taught Kana to read!</p>
-									</div>
-								</div>
-								<div class="pb-3">
-									<img src="https://www.readingrockets.org/sites/default/files/field/image/hp_kidsbooks.jpg"
-										width="500" alt="">
-								</div>
-							</div>
-						</div>
+  						<div class="feed-comment my-2">
+  							<div class="feed-comment-content">
+  								<div class="feed-comment-poster">
+                    <div class="feed-comment-org">
+    									<%= cl_image_tag Organization.find_by(name: "Helping Hands").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
+    									<div class="ml-2">
+    										<h5>Mirai no Mori</h5>
+    									</div>
+                    </div>
+  									<div>
+  										<p class='ml-3 p-1'>It was really nice walking again...</p>
+  									</div>
 
-						<div class="feed-comment my-2">
-							<div class="feed-comment-content flex-box">
-								<div class="d-flex align-items-center mb-2">
-									<%= cl_image_tag Organization.find_by(name: "World Wildlife Day ").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
-									<div class="ml-2">
-										<h5>World Wildlife Day</h5>
-									</div>
-									<div>
-										<p class='ml-3 p-1'>The dog you saved had puppies!</p>
-									</div>
-								</div>
-								<div class="pb-3">
-									<img src="https://static.fox29.com/www.fox29.com/content/uploads/2019/06/PSPCA_dog_generic_01.jpg"
-										width="500" alt="">
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+  								</div>
+  								<div class="pb-3">
+  									<%= image_tag "senior.png",class: "feedback-img"%>
+  								</div>
+  							</div>
+  						</div>
+
+  						<div class="feed-comment my-2">
+  							<div class="feed-comment-content">
+  								<div class="feed-comment-poster">
+                    <div class="feed-comment-org">
+    									<%= cl_image_tag Organization.find_by(name: "Unicef").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
+    									<div class="ml-2">
+    										<h5>World Wildlife Day</h5>
+    									</div>
+                    </div>
+  									<div>
+  										<p class='ml-3 p-1'>Your book taught Kana to read!</p>
+  									</div>
+  								</div>
+  								<div class="pb-3">
+  									<img src="https://www.readingrockets.org/sites/default/files/field/image/hp_kidsbooks.jpg"
+  										class="feedback-img" alt="">
+  								</div>
+  							</div>
+  						</div>
+
+  						<div class="feed-comment my-2">
+  							<div class="feed-comment-content">
+  								<div class="feed-comment-poster">
+                    <div class="feed-comment-org">
+    									<%= cl_image_tag Organization.find_by(name: "World Wildlife Day ").photos.first.key, height: 100, width: 100, crop: :fill, class: "avatar" %>
+    									<div class="ml-2">
+    										<h5>World Wildlife Day</h5>
+    									</div>
+                    </div>
+  									<div>
+  										<p class='ml-3 p-1'>The dog you saved had puppies!</p>
+  									</div>
+  								</div>
+  								<div class="pb-3">
+  									<img src="https://static.fox29.com/www.fox29.com/content/uploads/2019/06/PSPCA_dog_generic_01.jpg"
+  										class="feedback-img" alt="">
+  								</div>
+  							</div>
+  						</div>
+  					</div>
+  				</div>
 				<% else %>
-				<div class='feed mx-3'>
-					<h4 class='feed-title'><%= @user.nickname %>'s Feed</h4>
-					<div class="feed-scroll">
-
-						<%# comment content starts here %>
-						<div class="feed-comment my-2">
-							<div class="feed-comment-content">
-								<div class="d-flex align-items-center ">
-									<div class="ml-2">
-										<h5>None to show!</h5>
-									</div>
-									<div>
-										<% if @user == current_user %>
-										<p class='ml-3 pb1'>Organizations may leave their thanks after you
-											<%= link_to "help them out!", map_path %></p>
-										<% end %>
-									</div>
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-		</div>
-	<% end %>
+				  <div class='feed'>
+					  <h4 class='feed-title'><%= @user.nickname %>'s Feed</h4>
+				    <div class="feed-scroll">
+					<%# comment content starts here %>
+					    <div class="feed-comment my-2">
+						    <div class="feed-comment-content">
+							    <div class="d-flex align-items-center ">
+								    <div class="ml-2">
+									    <h5>None to show!</h5>
+								    </div>
+								    <div>
+									    <% if @user == current_user %>
+									    <p class='ml-3 pb1'>Organizations may leave their thanks after you
+										    <%= link_to "help them out!", map_path %></p>
+									    <% end %>
+								    </div>
+							    </div>
+						    </div>
+					    </div>
+				    </div>
+				  </div>
+	      <% end %>
 
 	<!-------------------------UPCOMING EVENTS------------------------>
-  <div class='contributed'>
+        <div class='contributed'>
     <h4>Upcoming Events</h4>
 
     <% if current_user == @user %>
       <div class='contributed-scroll'>
         <div>
 
-            <div class="upcomming">
-              <% current_user.events_as_owner.sort_by{|event| event.created_at}.reverse.each do |event| %>
+          <div class="upcomming">
+            <% current_user.events_as_owner.sort_by{|event| event.created_at}.reverse.each do |event| %>
 
 
               <div class="upcomming-card">
                   <div class="upcomming-card-contents">
                     <%= link_to event_path(event) do  %>
                       <div class="upcomming-card-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path event.photo.key, height: 240, width: 360, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
-                        <h4><%= event.title %></h4>
+                        <h4><%= event.title.truncate(30, separator: ' ') %></h4>
                       </div>
                       <div class="card-info">
                         <p><i class="far fa-calendar-alt"></i> <%= event.start_time.strftime("%d of %B, %Y") %></p>
@@ -299,410 +308,412 @@
                         <%# status badge!! %>
                         <%# status badge!! %>
                         <br>
-                    </div>
+                      </div>
                     <% end %>
                   </div>
               </div>
+            <% end %>
+            <% if @current_enrollments.any? %>
 
-
-              <% end %>
-              <% if @current_enrollments.any? %>
-
-                <%  @current_enrollments.each do |enrollment| %>
-                  <% if enrollment.event.category == "Volunteer" %>
-                    <div class="upcomming-card">
-                      <div class="upcomming-card-contents">
-                        <%= link_to event_path(enrollment.event) do  %>
-                          <div class="upcomming-card-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path enrollment.event.photo.key, height: 240, width: 360, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
-                            <h4><%= enrollment.event.title %></h4>
+              <%  @current_enrollments.each do |enrollment| %>
+                <% if enrollment.event.category == "Volunteer" %>
+                  <div class="upcomming-card">
+                    <div class="upcomming-card-contents">
+                      <%= link_to event_path(enrollment.event) do  %>
+                        <div class="upcomming-card-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path enrollment.event.photo.key, height: 240, width: 360, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+                          <h4><%= enrollment.event.title.truncate(30, separator: ' ') %></h4>
+                        </div>
+                        <div class="card-info">
+                          <p><i class="far fa-calendar-alt"></i> <%= enrollment.event.start_time.strftime("%d of %B, %Y") %></p>
+                          <p><i class="far fa-clock"></i> <%= enrollment.event.start_time.strftime("%I:%M %p")%> - <%= enrollment.event.end_time.strftime("%I:%M %p")%></p>
+                          <p>Volunteers: <%= enrollment.event.enrollments.where(status: "Approved").count %>/<%= enrollment.event.target %> people</p>
+                          <%# status badge!! %>
+                          <h6 class='status-badge-<%=enrollment.status%>'><%=enrollment.status%></h6>
+                          <%# status badge!! %>
+                          <div>
+                            <% enrollment.event.enrollments.where(status: "Approved").each do |enrollment| %>
+                              <%= link_to user_path(enrollment.user) do %>
+                                <%= cl_image_tag enrollment.user.photos.first.key, height: 40, width: 40, crop: :fill , class: "avatar-sm"%>
+                              <% end %>
+                            <% end %>
                           </div>
-                          <div class="card-info">
-                            <p><i class="far fa-calendar-alt"></i> <%= enrollment.event.start_time.strftime("%d of %B, %Y") %></p>
-                            <p><i class="far fa-clock"></i> <%= enrollment.event.start_time.strftime("%I:%M %p")%> - <%= enrollment.event.end_time.strftime("%I:%M %p")%></p>
-                            <p>Volunteers: <%= enrollment.event.enrollments.where(status: "Approved").count %>/<%= enrollment.event.target %> people</p>
+                          <br>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+                <% elsif enrollment.event.category == "Donation" %>
+                  <li class="event-card">
+                    <div class="event-card-contents">
+                      <%= link_to event_path(enrollment.event) do  %>
+                        <div class="event-card-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path enrollment.event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+                          <h4><%= enrollment.event.title.truncate(20, separator: ' ') %></h4>
+                        </div>
+                        <div class="card-info">
+                          <h5><span class="seaweed-text font-weight-bold"><%= (Date.today...event.end_time).count %> days left</span></h5>
+                          <p><i class="fas fa-bullseye"></i> <%= enrollment.event.target %> <%= enrollment.event.item %></p>
+                          <p><i class="fas fa-signal"></i> <%= (enrollment.event.raised.to_f / enrollment.event.target.to_f * 100).to_i %>% collected</p>
+
+                          <div class="card-meter mt-2">
+                            <% if enrollment.event.raised.nil? %>
+                              <span style="width:0%;"><span class="card-progress"></span></span>
+                            <% else %>
+                              <% if enrollment.event.category == "Volunteer" %>
+                                <% raised_amount = ((enrollment.event.enrollments.where(status: "Approved").count.to_f / enrollment.event.target.to_f) * 100).to_i %>
+                              <% else %>
+                                <% raised_amount = ((enrollment.event.raised.to_f / enrollment.event.target.to_f) * 100).to_i %>
+                              <% end %>
+                                <span style="width:<%= raised_amount %>%;"><span class="card-progress"></span></span>
+                            <% end %>
                             <%# status badge!! %>
                             <h6 class='status-badge-<%=enrollment.status%>'><%=enrollment.status%></h6>
                             <%# status badge!! %>
-                            <div>
-                              <% enrollment.event.enrollments.where(status: "Approved").each do |enrollment| %>
-                                <%= link_to user_path(enrollment.user) do %>
-                                  <%= cl_image_tag enrollment.user.photos.first.key, height: 40, width: 40, crop: :fill , class: "avatar-sm"%>
-                                <% end %>
-                              <% end %>
-                            </div>
-                            <br>
-
+                          </div>
                         </div>
-                        <% end %>
-                      </div>
+                      <% end %>
                     </div>
-                  <% elsif enrollment.event.category == "Donation" %>
-                    <li class="event-card">
-                      <div class="event-card-contents">
-                        <%= link_to event_path(enrollment.event) do  %>
-                          <div class="event-card-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path enrollment.event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
-                            <h4><%= enrollment.event.title %></h4>
-                          </div>
-                          <div class="card-info">
-                            <h5><span class="seaweed-text font-weight-bold"><%= (Date.today...event.end_time).count %> days left</span></h5>
-                            <p><i class="fas fa-bullseye"></i> <%= enrollment.event.target %> <%= enrollment.event.item %></p>
-                            <p><i class="fas fa-signal"></i> <%= (enrollment.event.raised.to_f / enrollment.event.target.to_f * 100).to_i %>% collected</p>
+                  </li>
+                <% elsif enrollment.event.category == "Fundraiser" %>
+                  <li class="event-card">
+                    <div class="event-card-contents">
+                      <%= link_to event_path(enrollment.event) do  %>
+                        <div class="event-card-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path enrollment.event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+                          <h4><%= enrollment.event.title.truncate(20, separator: ' ') %></h4>
+                        </div>
+                        <div class="card-info">
+                          <h5><span class="seaweed-text font-weight-bold"><%= (Date.today...enrollment.event.end_time).count %> days left</span></h5>
+                          <p><i class="fas fa-hand-holding-usd"></i> <%= humanized_money_with_symbol(enrollment.event.raised) %> / <%= humanized_money_with_symbol(enrollment.event.target) %></p>
+                          <p><i class="fas fa-signal"></i> <%= (enrollment.event.raised.to_f / enrollment.event.target.to_f * 100).to_i %>% collected</p>
 
-                            <div class="card-meter mt-2">
-                              <% if enrollment.event.raised.nil? %>
-                                <span style="width:0%;"><span class="card-progress"></span></span>
+                          <div class="card-meter mt-2">
+                            <% if enrollment.event.raised.nil? %>
+                              <span style="width:0%;"><span class="card-progress"></span></span>
+                            <% else %>
+                              <% if enrollment.event.category == "Volunteer" %>
+                                <% raised_amount = ((enrollment.event.enrollments.where(status: "Approved").count.to_f / enrollment.event.target.to_f) * 100).to_i %>
                               <% else %>
-                                <% if enrollment.event.category == "Volunteer" %>
-                                  <% raised_amount = ((enrollment.event.enrollments.where(status: "Approved").count.to_f / enrollment.event.target.to_f) * 100).to_i %>
-                                <% else %>
-                                  <% raised_amount = ((enrollment.event.raised.to_f / enrollment.event.target.to_f) * 100).to_i %>
-                                <% end %>
-                                  <span style="width:<%= raised_amount %>%;"><span class="card-progress"></span></span>
+                                <% raised_amount = ((enrollment.event.raised.to_f / enrollment.event.target.to_f) * 100).to_i %>
                               <% end %>
-                              <%# status badge!! %>
-                              <h6 class='status-badge-<%=enrollment.status%>'><%=enrollment.status%></h6>
-                              <%# status badge!! %>
-                            </div>
+                                <span style="width:<%= raised_amount %>%;"><span class="card-progress"></span></span>
+                            <% end %>
+                            <%# status badge!! %>
+                            <h6 class='status-badge-<%=enrollment.status%>'><%=enrollment.status%></h6>
+                            <%# status badge!! %>
                           </div>
-                        <% end %>
-                      </div>
-                    </li>
-                  <% elsif enrollment.event.category == "Fundraiser" %>
-                    <li class="event-card">
-                      <div class="event-card-contents">
-                        <%= link_to event_path(enrollment.event) do  %>
-                          <div class="event-card-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path enrollment.event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
-                            <h4><%= enrollment.event.title %></h4>
-                          </div>
-                          <div class="card-info">
-                            <h5><span class="seaweed-text font-weight-bold"><%= (Date.today...enrollment.event.end_time).count %> days left</span></h5>
-                            <p><i class="fas fa-hand-holding-usd"></i> <%= humanized_money_with_symbol(enrollment.event.raised) %> / <%= humanized_money_with_symbol(enrollment.event.target) %></p>
-                            <p><i class="fas fa-signal"></i> <%= (enrollment.event.raised.to_f / enrollment.event.target.to_f * 100).to_i %>% collected</p>
-
-                            <div class="card-meter mt-2">
-                              <% if enrollment.event.raised.nil? %>
-                                <span style="width:0%;"><span class="card-progress"></span></span>
-                              <% else %>
-                                <% if enrollment.event.category == "Volunteer" %>
-                                  <% raised_amount = ((enrollment.event.enrollments.where(status: "Approved").count.to_f / enrollment.event.target.to_f) * 100).to_i %>
-                                <% else %>
-                                  <% raised_amount = ((enrollment.event.raised.to_f / enrollment.event.target.to_f) * 100).to_i %>
-                                <% end %>
-                                  <span style="width:<%= raised_amount %>%;"><span class="card-progress"></span></span>
-                              <% end %>
-                              <%# status badge!! %>
-                              <h6 class='status-badge-<%=enrollment.status%>'><%=enrollment.status%></h6>
-                              <%# status badge!! %>
-                            </div>
-                          </div>
-                        <% end %>
-                      </div>
-                    </li>
-                  <% end %>
+                        </div>
+                      <% end %>
+                    </div>
+                  </li>
                 <% end %>
-              <% else %>
-                <p>None yet! <%= link_to "Find an organization?", map_path %></p>
               <% end %>
-            </div>
+            <% else %>
+              <p>None yet! <%= link_to "Find an organization?", map_path %></p>
+            <% end %>
+          </div>
+
+
 
 
         </div>
       </div>
     <% end %>
-
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 
 <!------------------------------BADGE--------------------------------->
-  <h3 class="pl-3">Badges</h3>
-  <div class='user-page-box mx-3'>
+<h3 class="pl-3">Badges</h3>
+<div class='user-page-box mx-3'>
 
-    <% if @user.nickname == "Liz" %>
-      <div class="d-flex justify-content-around">
-        <%= image_tag "b-1.png", class: "badges" %>
-        <%= image_tag "bg-2.png", class: "badges" %>
-        <%= image_tag "b-3.png", class: "badges" %>
-        <%= image_tag "bg-4.png", class: "badges" %>
-        <%= image_tag "b-5.png", class: "badges" %>
-        <%= image_tag "bs-8.png", class: "badges" %>
-      </div>
-    <% else %>
-      <div class="d-flex justify-content-around">
-        <%= image_tag "b-1.png", class: "badges" %>
-        <%= image_tag "b-2.png", class: "badges" %>
-        <%= image_tag "b-3.png", class: "badges" %>
-        <%= image_tag "b-4.png", class: "badges" %>
-        <%= image_tag "b-5.png", class: "badges" %>
-        <%= image_tag "b-6.png", class: "badges" %>
-      </div>
-    <% end %>
+  <% if @user.nickname == "Liz" %>
+    <div class="badge-box">
+      <%= image_tag "b-1.png", class: "badges" %>
+      <%= image_tag "bg-2.png", class: "badges" %>
+      <%= image_tag "b-3.png", class: "badges" %>
+      <%= image_tag "bg-4.png", class: "badges" %>
+      <%= image_tag "b-5.png", class: "badges" %>
+      <%= image_tag "bs-8.png", class: "badges" %>
+    </div>
+  <% else %>
+    <div class="badge-box">
+      <%= image_tag "b-1.png", class: "badges" %>
+      <%= image_tag "b-2.png", class: "badges" %>
+      <%= image_tag "b-3.png", class: "badges" %>
+      <%= image_tag "b-4.png", class: "badges" %>
+      <%= image_tag "b-5.png", class: "badges" %>
+      <%= image_tag "b-6.png", class: "badges" %>
+      <%= image_tag "b-7.png", class: "badges" %>
+      <%= image_tag "b-8.png", class: "badges" %>
+      <%= image_tag "b-9.png", class: "badges" %>
+
+
+    </div>
+  <% end %>
+</div>
+		<!------------------------------ORIGINAL DASHBOARD--------------------------------->
+<% if current_user == @user %>
+	<div class="events px-3">
+		<h3>My Events</h3>
+		<div class="user-box">
+
+			<% if @current_enrollments.any? %>
+			  <%  @current_enrollments.each do |enrollment| %>
+			    <% if enrollment.event.category == "Volunteer" %>
+			      <li class="event-card">
+  				    <div class="event-card-contents">
+  					    <%= link_to event_path(enrollment.event) do  %>
+  					      <div class="event-card-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path enrollment.event.photo.key, height: 240, width: 360, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+  						      <h4><%= enrollment.event.title.truncate(30, separator: ' ') %></h4>
+  					      </div>
+  					      <div class="card-info">
+  						      <p><i class="far fa-calendar-alt"></i>
+  							    <%= enrollment.event.start_time.strftime("%d of %B, %Y") %></p>
+  						      <p><i class="far fa-clock"></i> <%= enrollment.event.start_time.strftime("%I:%M %p")%> -
+  							    <%= enrollment.event.end_time.strftime("%I:%M %p")%></p>
+  						      <p>Volunteers:
+  							    <%= enrollment.event.enrollments.where(status: "Approved").count %>/<%= enrollment.event.target %>
+  							    people</p>
+  						      <%# status badge!! %>
+  						      <h6 class='status-badge-<%=enrollment.status%>'><%=enrollment.status%></h6>
+  						      <%# status badge!! %>
+        						<div>
+        							<% enrollment.event.enrollments.where(status: "Approved").each do |enrollment| %>
+          							<%= link_to user_path(enrollment.user) do %>
+          							 <%= cl_image_tag enrollment.user.photos.first.key, height: 40, width: 40, crop: :fill , class: "avatar-sm"%>
+          							<% end %>
+        							<% end %>
+        						</div>
+  						      <br>
+  					      </div>
+  					    <% end %>
+  				    </div>
+			      </li>
+			    <% elsif enrollment.event.category == "Donation" %>
+				    <li class="event-card">
+					    <div class="event-card-contents">
+						    <%= link_to event_path(enrollment.event) do  %>
+						      <div class="event-card-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path enrollment.event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+							      <h4><%= enrollment.event.title %></h4>
+						      </div>
+						      <div class="card-info">
+							      <h5><span class="seaweed-text font-weight-bold"><%= (Date.today...event.end_time).count %>
+									  days left</span></h5>
+							      <p><i class="fas fa-bullseye"></i> <%= enrollment.event.target %>
+								    <%= enrollment.event.item %></p>
+							      <p><i class="fas fa-signal"></i>
+								    <%= (enrollment.event.raised.to_f / enrollment.event.target.to_f * 100).to_i %>%
+								    collected</p>
+
+      							<div class="card-meter mt-2">
+      								<% if enrollment.event.raised.nil? %>
+      									<span style="width:0%;"><span class="card-progress"></span></span>
+      								<% else %>
+      									<% if enrollment.event.category == "Volunteer" %>
+      									  <% raised_amount = ((enrollment.event.enrollments.where(status: "Approved").count.to_f / enrollment.event.target.to_f) * 100).to_i %>
+      									<% else %>
+      									  <% raised_amount = ((enrollment.event.raised.to_f / enrollment.event.target.to_f) * 100).to_i %>
+      									<% end %>
+      									<span style="width:<%= raised_amount %>%;"><span class="card-progress"></span></span>
+      								<% end %>
+      								<%# status badge!! %>
+      								<h6 class='status-badge-<%=enrollment.status%>'><%=enrollment.status%></h6>
+      								<%# status badge!! %>
+      							</div>
+
+						      </div>
+						    <% end %>
+					    </div>
+				    </li>
+			    <% elsif enrollment.event.category == "Fundraiser" %>
+				    <li class="event-card">
+    					<div class="event-card-contents">
+    						<%= link_to event_path(enrollment.event) do  %>
+    							<div class="event-card-pic"
+    								style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path enrollment.event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+    								<h4><%= enrollment.event.title %></h4>
+    							</div>
+    							<div class="card-info">
+    								<h5><span
+    										class="seaweed-text font-weight-bold"><%= (Date.today...enrollment.event.end_time).count %>
+    										days left</span></h5>
+    								<p><i class="fas fa-hand-holding-usd"></i>
+    									<%= humanized_money_with_symbol(enrollment.event.raised) %> /
+    									<%= humanized_money_with_symbol(enrollment.event.target) %></p>
+    								<p><i class="fas fa-signal"></i>
+    									<%= (enrollment.event.raised.to_f / enrollment.event.target.to_f * 100).to_i %>%
+    									collected</p>
+
+    								<div class="card-meter mt-2">
+    									<% if enrollment.event.raised.nil? %>
+    									  <span style="width:0%;"><span class="card-progress"></span></span>
+    									<% else %>
+    									  <% if enrollment.event.category == "Volunteer" %>
+    									    <% raised_amount = ((enrollment.event.enrollments.where(status: "Approved").count.to_f / enrollment.event.target.to_f) * 100).to_i %>
+    									  <% else %>
+    									    <% raised_amount = ((enrollment.event.raised.to_f / enrollment.event.target.to_f) * 100).to_i %>
+    									  <% end %>
+    									  <span style="width:<%= raised_amount %>%;"><span class="card-progress"></span></span>
+    									<% end %>
+    									<%# status badge!! %>
+    									<h6 class='status-badge-<%=enrollment.status%>'><%=enrollment.status%></h6>
+    									<%# status badge!! %>
+    								</div>
+    							</div>
+    						<% end %>
+    					</div>
+				    </li>
+		      <% end %>
+		    <% end %>
+		  <% else %>
+			  <p>None yet! <%= link_to "Find an organization?", map_path %></p>
+	    <% end %>
+    </div>
   </div>
-			<!------------------------------ORIGINAL DASHBOARD--------------------------------->
-			<% if current_user == @user %>
-			<div class="events px-3">
-				<h3>My Events</h3>
-				<div class="user-box">
+<% end %>
+  <!-- </div> -->
 
-					<% if @current_enrollments.any? %>
-					<%  @current_enrollments.each do |enrollment| %>
-					<% if enrollment.event.category == "Volunteer" %>
-					<li class="event-card">
-						<div class="event-card-contents">
-							<%= link_to event_path(enrollment.event) do  %>
-							<div class="event-card-pic"
-								style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path enrollment.event.photo.key, height: 240, width: 360, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
-								<h4><%= enrollment.event.title %></h4>
-							</div>
-							<div class="card-info">
-								<p><i class="far fa-calendar-alt"></i>
-									<%= enrollment.event.start_time.strftime("%d of %B, %Y") %></p>
-								<p><i class="far fa-clock"></i> <%= enrollment.event.start_time.strftime("%I:%M %p")%> -
-									<%= enrollment.event.end_time.strftime("%I:%M %p")%></p>
-								<p>Volunteers:
-									<%= enrollment.event.enrollments.where(status: "Approved").count %>/<%= enrollment.event.target %>
-									people</p>
-								<%# status badge!! %>
-								<h6 class='status-badge-<%=enrollment.status%>'><%=enrollment.status%></h6>
-								<%# status badge!! %>
-								<div>
-									<% enrollment.event.enrollments.where(status: "Approved").each do |enrollment| %>
-									<%= link_to user_path(enrollment.user) do %>
-									<%= cl_image_tag enrollment.user.photos.first.key, height: 40, width: 40, crop: :fill , class: "avatar-sm"%>
-									<% end %>
-									<% end %>
-								</div>
-								<br>
-
-							</div>
-							<% end %>
-						</div>
-					</li>
-					<% elsif enrollment.event.category == "Donation" %>
-					<li class="event-card">
-						<div class="event-card-contents">
-							<%= link_to event_path(enrollment.event) do  %>
-							<div class="event-card-pic"
-								style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path enrollment.event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
-								<h4><%= enrollment.event.title %></h4>
-							</div>
-							<div class="card-info">
-								<h5><span
-										class="seaweed-text font-weight-bold"><%= (Date.today...event.end_time).count %>
-										days left</span></h5>
-								<p><i class="fas fa-bullseye"></i> <%= enrollment.event.target %>
-									<%= enrollment.event.item %></p>
-								<p><i class="fas fa-signal"></i>
-									<%= (enrollment.event.raised.to_f / enrollment.event.target.to_f * 100).to_i %>%
-									collected</p>
-
-								<div class="card-meter mt-2">
-									<% if enrollment.event.raised.nil? %>
-									<span style="width:0%;"><span class="card-progress"></span></span>
-									<% else %>
-									<% if enrollment.event.category == "Volunteer" %>
-									<% raised_amount = ((enrollment.event.enrollments.where(status: "Approved").count.to_f / enrollment.event.target.to_f) * 100).to_i %>
-									<% else %>
-									<% raised_amount = ((enrollment.event.raised.to_f / enrollment.event.target.to_f) * 100).to_i %>
-									<% end %>
-									<span style="width:<%= raised_amount %>%;"><span
-											class="card-progress"></span></span>
-									<% end %>
-									<%# status badge!! %>
-									<h6 class='status-badge-<%=enrollment.status%>'><%=enrollment.status%></h6>
-									<%# status badge!! %>
-								</div>
-							</div>
-							<% end %>
-						</div>
-					</li>
-					<% elsif enrollment.event.category == "Fundraiser" %>
-					<li class="event-card">
-						<div class="event-card-contents">
-							<%= link_to event_path(enrollment.event) do  %>
-							<div class="event-card-pic"
-								style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path enrollment.event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
-								<h4><%= enrollment.event.title %></h4>
-							</div>
-							<div class="card-info">
-								<h5><span
-										class="seaweed-text font-weight-bold"><%= (Date.today...enrollment.event.end_time).count %>
-										days left</span></h5>
-								<p><i class="fas fa-hand-holding-usd"></i>
-									<%= humanized_money_with_symbol(enrollment.event.raised) %> /
-									<%= humanized_money_with_symbol(enrollment.event.target) %></p>
-								<p><i class="fas fa-signal"></i>
-									<%= (enrollment.event.raised.to_f / enrollment.event.target.to_f * 100).to_i %>%
-									collected</p>
-
-								<div class="card-meter mt-2">
-									<% if enrollment.event.raised.nil? %>
-									<span style="width:0%;"><span class="card-progress"></span></span>
-									<% else %>
-									<% if enrollment.event.category == "Volunteer" %>
-									<% raised_amount = ((enrollment.event.enrollments.where(status: "Approved").count.to_f / enrollment.event.target.to_f) * 100).to_i %>
-									<% else %>
-									<% raised_amount = ((enrollment.event.raised.to_f / enrollment.event.target.to_f) * 100).to_i %>
-									<% end %>
-									<span style="width:<%= raised_amount %>%;"><span
-											class="card-progress"></span></span>
-									<% end %>
-									<%# status badge!! %>
-									<h6 class='status-badge-<%=enrollment.status%>'><%=enrollment.status%></h6>
-									<%# status badge!! %>
-								</div>
-							</div>
-							<% end %>
-						</div>
-					</li>
-					<% end %>
-					<% end %>
-					<% else %>
-					<p>None yet! <%= link_to "Find an organization?", map_path %></p>
-					<% end %>
-						<div class="user-box">
-							<% @user.organizations.each do |organization| %>
-								<li class="event-card">
-									<div class="event-card-contents">
-										<%= link_to organization_path(organization) do  %>
-											<div class="event-card-pic" style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path organization.photos.first.key, height: 240, width: 360, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
-												<h4><%= organization.name %></h4>
-											</div>
-											<div class="card-info">
-												<h6><%= organization.tag_list %></h6>
-
-                        <% if organization.description.nil? %>
-                          <p><%= organization.name %> is an organization registered by <%= organization.users.first.nickname %></p>
-                        <% else %>
-                          <p><%= organization.description.truncate(90, separator: ' ') %></p>
-                        <% end %>
-
-											</div>
-										<% end %>
-									</div>
-								</li>
-							<% end %>
-						</div>
-					</li>
-					<% end %>
-				</div>
-			</div>
-
-			<div class="organizations-history">
-				<h3>Volunteering History</h3>
-				<div class="user-box" id="history-box">
-					<% if @past_enrollments.any? %>
-					<% @past_enrollments.each do |enrollment| %>
-					<% if enrollment.event.category == "Volunteer" %>
-					<li class="event-card">
-						<div class="event-card-contents">
-							<%= link_to event_path(enrollment.event) do  %>
-							<div class="event-card-pic"
-								style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path enrollment.event.photo.key, height: 240, width: 360, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
-								<h4><%= enrollment.event.title %></h4>
-							</div>
-							<div class="card-info">
-								<p><i class="far fa-calendar-alt"></i>
-									<%= enrollment.event.start_time.strftime("%d of %B, %Y") %></p>
-								<p><i class="far fa-clock"></i> <%= enrollment.event.start_time.strftime("%I:%M %p")%> -
-									<%= enrollment.event.end_time.strftime("%I:%M %p")%></p>
-								<p>Volunteers:
-									<%= enrollment.event.enrollments.where(status: "Approved").count %>/<%= enrollment.event.target %>
-									people</p>
-								<div>
-									<% enrollment.event.enrollments.where(status: "Approved").each do |enrollment| %>
-									<%= link_to user_path(enrollment.user) do %>
-									<%= cl_image_tag enrollment.user.photos.first.key, height: 40, width: 40, crop: :fill , class: "avatar-sm"%>
-									<% end %>
-									<% end %>
-								</div>
-								<br>
-							</div>
-							<% end %>
-						</div>
-					</li>
-					<% elsif enrollment.event.category == "Donation" %>
-					<li class="event-card">
-						<div class="event-card-contents">
-							<%= link_to event_path(enrollment.event) do  %>
-							<div class="event-card-pic"
-								style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path enrollment.event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
-								<h4><%= enrollment.event.title %></h4>
-							</div>
-							<div class="card-info">
-								<h5><span
-										class="seaweed-text font-weight-bold"><%= (Date.today...event.end_time).count %>
-										days left</span></h5>
-								<p><i class="fas fa-bullseye"></i> <%= enrollment.event.target %>
-									<%= enrollment.event.item %></p>
-								<p><i class="fas fa-signal"></i>
-									<%= (enrollment.event.raised.to_f / enrollment.event.target.to_f * 100).to_i %>%
-									collected</p>
-
-								<div class="card-meter mt-2">
-									<% if enrollment.event.raised.nil? %>
-									<span style="width:0%;"><span class="card-progress"></span></span>
-									<% else %>
-									<% if enrollment.event.category == "Volunteer" %>
-									<% raised_amount = ((enrollment.event.enrollments.where(status: "Approved").count.to_f / enrollment.event.target.to_f) * 100).to_i %>
-									<% else %>
-									<% raised_amount = ((enrollment.event.raised.to_f / enrollment.event.target.to_f) * 100).to_i %>
-									<% end %>
-									<span style="width:<%= raised_amount %>%;"><span
-											class="card-progress"></span></span>
-									<% end %>
-								</div>
-							</div>
-							<% end %>
-						</div>
-					</li>
-					<% elsif enrollment.event.category == "Fundraiser" %>
-					<li class="event-card">
-						<div class="event-card-contents">
-							<%= link_to event_path(enrollment.event) do  %>
-							<div class="event-card-pic"
-								style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path enrollment.event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
-								<h4><%= enrollment.event.title %></h4>
-							</div>
-							<div class="card-info">
-								<h5><span
-										class="seaweed-text font-weight-bold"><%= (Date.today...enrollment.event.end_time).count %>
-										days left</span></h5>
-								<p><i class="fas fa-hand-holding-usd"></i>
-									<%= humanized_money_with_symbol(enrollment.event.raised) %> /
-									<%= humanized_money_with_symbol(enrollment.event.target) %></p>
-								<p><i class="fas fa-signal"></i>
-									<%= (enrollment.event.raised.to_f / enrollment.event.target.to_f * 100).to_i %>%
-									collected</p>
-
-								<div class="card-meter mt-2">
-									<% if enrollment.event.raised.nil? %>
-									<span style="width:0%;"><span class="card-progress"></span></span>
-									<% else %>
-									<% if enrollment.event.category == "Volunteer" %>
-									<% raised_amount = ((enrollment.event.enrollments.where(status: "Approved").count.to_f / enrollment.event.target.to_f) * 100).to_i %>
-									<% else %>
-									<% raised_amount = ((enrollment.event.raised.to_f / enrollment.event.target.to_f) * 100).to_i %>
-									<% end %>
-									<span style="width:<%= raised_amount %>%;"><span
-											class="card-progress"></span></span>
-									<% end %>
-								</div>
-							</div>
-							<% end %>
-						</div>
-					</li>
-					<% end %>
-					<% end %>
-					<% else %>
-					<p>None yet!</p>
-					<% end %>
-				</div>
-			</div>
-			<%# Interests etc. %>
-			<%# <div class="interests"></div> %>
-			<%# <div class="badges"></div> %>
+<div class="user-profile px-3">
+  <%# -------------Organizations------------------%>
+  <div class="organizations-history">
+    <% if current_user == @user %>
+      <h3>My Organizations</h3>
+    <% else %>
+      <h3><%= @user.nickname %>'s Organizations</h3>
+    <% end %>
+    <div class="user-box">
+      <% @user.organizations.each do |organization| %>
+        <li class="event-card">
+          <div class="event-card-contents">
+            <%= link_to organization_path(organization) do  %>
+              <div class="event-card-pic"
+                style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path organization.photos.first.key, height: 240, width: 360, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+                <h4><%= organization.name %></h4>
+              </div>
+              <div class="card-info">
+                <h6><%= organization.tag_list %></h6>
+                <p><%= organization.description.truncate(90, separator: ' ') %></p>
+              </div>
+						<% end %>
+					</div>
+				</li>
+			<% end %>
 		</div>
 	</div>
+
+	<div class="organizations-history">
+		<h3>Volunteering History</h3>
+		<div class="user-box" id="history-box">
+			<% if @past_enrollments.any? %>
+			<% @past_enrollments.each do |enrollment| %>
+			<% if enrollment.event.category == "Volunteer" %>
+			<li class="event-card">
+				<div class="event-card-contents">
+					<%= link_to event_path(enrollment.event) do  %>
+					<div class="event-card-pic"
+						style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path enrollment.event.photo.key, height: 240, width: 360, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+						<h4><%= enrollment.event.title %></h4>
+					</div>
+					<div class="card-info">
+						<p><i class="far fa-calendar-alt"></i>
+							<%= enrollment.event.start_time.strftime("%d of %B, %Y") %></p>
+						<p><i class="far fa-clock"></i> <%= enrollment.event.start_time.strftime("%I:%M %p")%> -
+							<%= enrollment.event.end_time.strftime("%I:%M %p")%></p>
+						<p>Volunteers:
+							<%= enrollment.event.enrollments.where(status: "Approved").count %>/<%= enrollment.event.target %>
+							people</p>
+						<div>
+							<% enrollment.event.enrollments.where(status: "Approved").each do |enrollment| %>
+							<%= link_to user_path(enrollment.user) do %>
+							<%= cl_image_tag enrollment.user.photos.first.key, height: 40, width: 40, crop: :fill , class: "avatar-sm"%>
+							<% end %>
+							<% end %>
+						</div>
+						<br>
+					</div>
+					<% end %>
+				</div>
+			</li>
+			<% elsif enrollment.event.category == "Donation" %>
+			<li class="event-card">
+				<div class="event-card-contents">
+					<%= link_to event_path(enrollment.event) do  %>
+					<div class="event-card-pic"
+						style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path enrollment.event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+						<h4><%= enrollment.event.title %></h4>
+					</div>
+					<div class="card-info">
+						<h5><span
+								class="seaweed-text font-weight-bold"><%= (Date.today...event.end_time).count %>
+								days left</span></h5>
+						<p><i class="fas fa-bullseye"></i> <%= enrollment.event.target %>
+							<%= enrollment.event.item %></p>
+						<p><i class="fas fa-signal"></i>
+							<%= (enrollment.event.raised.to_f / enrollment.event.target.to_f * 100).to_i %>%
+							collected</p>
+
+						<div class="card-meter mt-2">
+							<% if enrollment.event.raised.nil? %>
+							<span style="width:0%;"><span class="card-progress"></span></span>
+							<% else %>
+							<% if enrollment.event.category == "Volunteer" %>
+							<% raised_amount = ((enrollment.event.enrollments.where(status: "Approved").count.to_f / enrollment.event.target.to_f) * 100).to_i %>
+							<% else %>
+							<% raised_amount = ((enrollment.event.raised.to_f / enrollment.event.target.to_f) * 100).to_i %>
+							<% end %>
+							<span style="width:<%= raised_amount %>%;"><span
+									class="card-progress"></span></span>
+							<% end %>
+						</div>
+					</div>
+					<% end %>
+				</div>
+			</li>
+			<% elsif enrollment.event.category == "Fundraiser" %>
+			<li class="event-card">
+				<div class="event-card-contents">
+					<%= link_to event_path(enrollment.event) do  %>
+					<div class="event-card-pic"
+						style="background-image:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(<%= cl_image_path enrollment.event.photo.key, height: 380, width: 480, crop: :fill %>); background-repeat: norepeat; background-size: cover;">
+						<h4><%= enrollment.event.title %></h4>
+					</div>
+					<div class="card-info">
+						<h5><span
+								class="seaweed-text font-weight-bold"><%= (Date.today...enrollment.event.end_time).count %>
+								days left</span></h5>
+						<p><i class="fas fa-hand-holding-usd"></i>
+							<%= humanized_money_with_symbol(enrollment.event.raised) %> /
+							<%= humanized_money_with_symbol(enrollment.event.target) %></p>
+						<p><i class="fas fa-signal"></i>
+							<%= (enrollment.event.raised.to_f / enrollment.event.target.to_f * 100).to_i %>%
+							collected</p>
+
+						<div class="card-meter mt-2">
+							<% if enrollment.event.raised.nil? %>
+							<span style="width:0%;"><span class="card-progress"></span></span>
+							<% else %>
+							<% if enrollment.event.category == "Volunteer" %>
+							<% raised_amount = ((enrollment.event.enrollments.where(status: "Approved").count.to_f / enrollment.event.target.to_f) * 100).to_i %>
+							<% else %>
+							<% raised_amount = ((enrollment.event.raised.to_f / enrollment.event.target.to_f) * 100).to_i %>
+							<% end %>
+							<span style="width:<%= raised_amount %>%;"><span
+									class="card-progress"></span></span>
+							<% end %>
+						</div>
+					</div>
+					<% end %>
+				</div>
+			</li>
+			<% end %>
+			<% end %>
+			<% else %>
+			<p>None yet!</p>
+			<% end %>
+		</div>
+	</div>
+	<%# Interests etc. %>
+	<%# <div class="interests"></div> %>
+	<%# <div class="badges"></div> %>
 </div>
-</div>
-</div>
+
