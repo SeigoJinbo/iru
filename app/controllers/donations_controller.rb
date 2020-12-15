@@ -1,14 +1,14 @@
 class DonationsController < ApplicationController
-  before_action :set_donation, only: [:update, :destroy, :show]
-	
-	def show
-		authorize current_user
-    @donation = current_user.donations.find(params[:id])
-		@event = @donation.event
-	end
+  before_action :set_donation, only: %i[update destroy show]
 
-	def new
-        @donation = Donation.new
+  def show
+    authorize current_user
+    @donation = current_user.donations.find(params[:id])
+    @event = @donation.event
+  end
+
+  def new
+    @donation = Donation.new
     @event = Event.find(params[:event_id])
     authorize @donation
   end
