@@ -19,10 +19,12 @@ class User < ApplicationRecord
 	has_many :order_events, through: :orders, source: :event
 	has_many :donation_events, through: :donations, source: :event
 
-	geocoded_by :address
-	after_validation :geocode, if: :will_save_change_to_address?
-	has_many_attached :photos
-	validates :nickname, :gender, :address, :photos, presence: true
+
+  geocoded_by :address
+  after_validation :geocode, if: :will_save_change_to_address?
+  has_many_attached :photos
+  validates :nickname, :gender, :address, presence: true
+
 
 	def events
 		enrollment_events + order_events + donation_events
