@@ -23,20 +23,17 @@ create a .env file and include the following api keys
 
 ```bash
 MAPBOX_API_KEY=YOUR_API_KEY
-
 CLOUDINARY_URL=YOUR_API_KEY
-
 STRIPE_PUBLISHABLE_KEY=YOUR_API_KEY
 STRIPE_SECRET_KEY=YOUR_API_KEY
 STRIPE_WEBHOOK_SECRET_KEY=YOUR_API_KEY
-
-
 ```
 
 
 ## Contributors
-
-links
+https://github.com/ensvo
+https://github.com/yupingkuei
+https://github.com/SeigoJinbo/
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
