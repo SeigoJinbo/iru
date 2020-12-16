@@ -13,10 +13,14 @@ Iru is a rails appy for ....
 ## Installation
 
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+Only if you don't have bundler or yarn
 
 ```bash
 yarn install
+brew install
+```
+then
+```bash
 bundle install
 ```
 create a .env file and include the following api keys
