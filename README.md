@@ -17,7 +17,7 @@ Only if you don't have bundler or yarn
 
 ```bash
 yarn install
-brew install
+brew install yarn
 ```
 then
 ```bash
