@@ -4,11 +4,11 @@ Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/ra
 Iru is a rails appy for ....
 
 ## Init a new project
-1. Clone the repository ```bash git clone git@github.com:SeigoJinbo/iru.git NAME_OF_YOUR_PROJECT```
-2. Move into the directory ```bash cd NAME_OF_YOUR_PROJECT```
-3. Remove template ```bash git rm -rf .git```
-4. Start a new git repo ```bash git init```
-5. Create repo on Github ```bash hub create```
+1. Clone the repository ```git clone git@github.com:SeigoJinbo/iru.git NAME_OF_YOUR_PROJECT```
+2. Move into the directory ```cd NAME_OF_YOUR_PROJECT```
+3. Remove template ```git rm -rf .git```
+4. Start a new git repo ```git init```
+5. Create repo on Github ```hub create```
 
 ## Installation
 
